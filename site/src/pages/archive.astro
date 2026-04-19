@@ -1,0 +1,183 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const papers = (await getCollection('papers', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
+
+// Group by "Month YYYY"
+const groups = new Map<string, typeof papers>();
+for (const paper of papers) {
+  const key = paper.data.publishedDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+  });
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(paper);
+}
+
+function shortDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function authorLine(authors: string[]): string {
+  if (authors.length === 0) return '';
+  if (authors.length === 1) return authors[0];
+  if (authors.length === 2) return authors.join(' & ');
+  return `${authors[0]} et al.`;
+}
+
+function slugFor(entry: typeof papers[number]): string {
+  return entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+---
+
+<Base title="Archive" description={`All ${papers.length} papers, chronologically.`}>
+  <section class="archive">
+    <div class="reading-container">
+      <header class="archive-header">
+        <p class="kicker">Archive</p>
+        <h1 class="archive-title">Every paper, chronologically</h1>
+        <p class="archive-sub">
+          {papers.length} paper{papers.length === 1 ? '' : 's'}, since the beginning.
+        </p>
+      </header>
+
+      {Array.from(groups.entries()).map(([monthLabel, monthPapers]) => (
+        <section class="month-group">
+          <h2 class="month-heading">{monthLabel}</h2>
+          <ul class="archive-list">
+            {monthPapers.map((paper) => (
+              <li class="archive-item">
+                <a href={`/papers/${slugFor(paper)}`} class="archive-link">
+                  <span class="archive-date">
+                    {shortDate(paper.data.publishedDate)}
+                  </span>
+                  <span class="archive-body">
+                    <span class="archive-category">{paper.data.primaryCategory}</span>
+                    <span class="archive-title-text">{paper.data.title}</span>
+                    <span class="archive-authors">{authorLine(paper.data.authors)}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .archive { padding-top: var(--space-7); }
+
+  .archive-header {
+    margin-bottom: var(--space-7);
+  }
+
+  .archive-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: var(--space-3) 0 var(--space-3);
+  }
+
+  .archive-sub {
+    color: var(--ink-muted);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+
+  .month-group {
+    margin-bottom: var(--space-6);
+  }
+
+  .month-heading {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: var(--space-4);
+    padding: 0;
+    border: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .archive-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .archive-item {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .archive-item:first-child {
+    border-top: 1px solid var(--rule);
+  }
+
+  .archive-link {
+    display: flex;
+    gap: var(--space-5);
+    padding: var(--space-4) 0;
+    text-decoration: none;
+    color: inherit;
+    align-items: baseline;
+  }
+
+  .archive-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    min-width: 4.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .archive-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .archive-category {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    margin-bottom: 2px;
+  }
+
+  .archive-title-text {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+
+  .archive-link:hover .archive-title-text {
+    color: var(--accent);
+  }
+
+  .archive-authors {
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 600px) {
+    .archive-link {
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .archive-date { min-width: auto; }
+  }
+</style>

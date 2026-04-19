@@ -1,0 +1,95 @@
+name: Daily Paper
+
+on:
+  schedule:
+    # 7:00 AM IST = 01:30 UTC
+    - cron: "30 1 * * *"
+  workflow_dispatch:  # Manual trigger for testing
+
+permissions:
+  contents: write  # Needed to commit the new paper back to the repo
+
+concurrency:
+  group: daily-paper
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    name: Generate today's paper
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Generate daily paper
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: python agent/run_daily.py
+        continue-on-error: false
+
+      - name: Commit new paper + history
+        run: |
+          git config user.name "daily-paper-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add site/src/content/papers/ history/
+          if git diff --staged --quiet; then
+            echo "No new paper to commit (agent may have exited early)."
+            exit 0
+          fi
+          git commit -m "daily: $(date -u +%Y-%m-%d) paper"
+          git push
+
+  # Deploy runs as a separate job triggered by the commit from the job above.
+  # Cloudflare Pages (or Vercel/Netlify) will auto-deploy on push.
+  # If you prefer GitHub Pages, uncomment the deploy-pages job below.
+
+  # deploy-pages:
+  #   name: Build & deploy to GitHub Pages
+  #   needs: generate
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     pages: write
+  #     id-token: write
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         ref: main  # make sure we pick up the commit from `generate`
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: "20"
+  #         cache: npm
+  #         cache-dependency-path: site/package-lock.json
+  #     - name: Install site deps
+  #       run: cd site && npm ci
+  #     - name: Build site
+  #       env:
+  #         SITE_URL: ${{ secrets.SITE_URL }}
+  #       run: cd site && npm run build
+  #     - name: Upload Pages artifact
+  #       uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: site/dist
+  #     - name: Deploy to Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4

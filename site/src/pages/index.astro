@@ -1,0 +1,342 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const papers = (await getCollection('papers', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
+
+const [latest, ...rest] = papers;
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+function shortDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function authorLine(authors: string[]): string {
+  if (authors.length === 0) return '';
+  if (authors.length === 1) return authors[0];
+  if (authors.length === 2) return authors.join(' & ');
+  return `${authors[0]} et al.`;
+}
+
+function slugFor(entry: typeof papers[number]): string {
+  // Strip the YYYY-MM-DD- prefix from the filename slug for cleaner URLs
+  return entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+---
+
+<Base title="The Daily Paper">
+  <section class="hero">
+    <div class="container">
+      <p class="kicker hero-kicker">
+        <span class="hero-ornament">¶</span> One paper, every morning, explained properly
+      </p>
+      <h1 class="hero-title">
+        The Daily <span class="hero-italic">Paper</span>
+      </h1>
+      <p class="hero-sub">
+        A working engineer's reading list. Each morning, one freshly-published
+        paper from arXiv — chosen for depth, not buzz — gets a thorough
+        reimplementation-grade write-up. No summaries. No thought-leader takes.
+        Just the paper, explained.
+      </p>
+    </div>
+  </section>
+
+  {latest && (
+    <section class="featured">
+      <div class="reading-container">
+        <a href={`/papers/${slugFor(latest)}`} class="featured-link">
+          <div class="featured-meta">
+            <span class="kicker">Today · {formatDate(latest.data.publishedDate)}</span>
+            <span class="featured-category">{latest.data.primaryCategory}</span>
+          </div>
+          <h2 class="featured-title">{latest.data.title}</h2>
+          <p class="featured-authors">{authorLine(latest.data.authors)}</p>
+          <p class="featured-tldr">{latest.data.tldr}</p>
+          <span class="featured-cta">Read the explainer →</span>
+        </a>
+      </div>
+    </section>
+  )}
+
+  {rest.length > 0 && (
+    <section class="archive-preview">
+      <div class="reading-container">
+        <hr class="fine-rule" />
+        <h3 class="archive-heading">Recent entries</h3>
+        <ul class="archive-list">
+          {rest.slice(0, 30).map((paper) => (
+            <li class="archive-item">
+              <a href={`/papers/${slugFor(paper)}`} class="archive-link">
+                <span class="archive-date">
+                  {shortDate(paper.data.publishedDate)}
+                </span>
+                <span class="archive-body">
+                  <span class="archive-category">
+                    {paper.data.primaryCategory}
+                  </span>
+                  <span class="archive-title">{paper.data.title}</span>
+                  <span class="archive-authors">
+                    {authorLine(paper.data.authors)}
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        {rest.length > 30 && (
+          <p class="archive-more">
+            <a href="/archive">See all {papers.length} entries in the archive →</a>
+          </p>
+        )}
+      </div>
+    </section>
+  )}
+
+  {papers.length === 0 && (
+    <section class="empty">
+      <div class="reading-container">
+        <p class="empty-text">
+          No papers yet. Check back tomorrow morning — or{' '}
+          <a href="/about">read about how this works</a>.
+        </p>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .hero {
+    padding: var(--space-8) 0 var(--space-7);
+    text-align: left;
+  }
+
+  .hero-kicker {
+    margin-bottom: var(--space-4);
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .hero-ornament {
+    font-family: var(--font-display);
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    margin-bottom: var(--space-5);
+    color: var(--ink);
+  }
+
+  .hero-italic {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 36rem;
+    margin: 0;
+  }
+
+  .featured {
+    padding: var(--space-6) 0 var(--space-7);
+  }
+
+  .featured-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: var(--space-6) var(--space-5);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg-subtle);
+    transition: background 160ms, border-color 160ms;
+  }
+
+  .featured-link:hover {
+    background: var(--bg);
+    border-color: var(--accent);
+  }
+
+  .featured-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+
+  .featured-category {
+    color: var(--ink-muted);
+    border: 1px solid var(--rule);
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .featured-title {
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: var(--space-3);
+    color: var(--ink);
+  }
+
+  .featured-link:hover .featured-title {
+    color: var(--accent);
+  }
+
+  .featured-authors {
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: var(--space-4);
+    font-size: 0.95rem;
+  }
+
+  .featured-tldr {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: var(--space-4);
+  }
+
+  .featured-cta {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+
+  .archive-preview {
+    padding: var(--space-5) 0;
+  }
+
+  .archive-heading {
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    color: var(--ink-muted);
+    margin-bottom: var(--space-5);
+  }
+
+  .archive-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .archive-item {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .archive-item:first-child {
+    border-top: 1px solid var(--rule);
+  }
+
+  .archive-link {
+    display: flex;
+    gap: var(--space-5);
+    padding: var(--space-4) 0;
+    text-decoration: none;
+    color: inherit;
+    align-items: baseline;
+    transition: color 120ms;
+  }
+
+  .archive-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    min-width: 4.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .archive-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    flex: 1;
+  }
+
+  .archive-category {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+
+  .archive-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+
+  .archive-link:hover .archive-title {
+    color: var(--accent);
+  }
+
+  .archive-authors {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+  }
+
+  .archive-more {
+    margin-top: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .archive-more a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+  }
+
+  .empty {
+    padding: var(--space-8) 0;
+  }
+
+  .empty-text {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .archive-link {
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .archive-date { min-width: auto; }
+  }
+</style>

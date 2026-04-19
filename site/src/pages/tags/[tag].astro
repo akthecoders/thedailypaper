@@ -1,0 +1,146 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const papers = await getCollection('papers', ({ data }) => !data.draft);
+
+  const tagSet = new Set<string>();
+  for (const p of papers) {
+    for (const tag of p.data.tags) tagSet.add(tag);
+  }
+
+  return Array.from(tagSet).map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      papers: papers
+        .filter((p) => p.data.tags.includes(tag))
+        .sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()),
+    },
+  }));
+}
+
+interface Props {
+  tag: string;
+  papers: Awaited<ReturnType<typeof getCollection<'papers'>>>;
+}
+
+const { tag, papers } = Astro.props;
+
+function shortDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function authorLine(authors: string[]): string {
+  if (authors.length === 0) return '';
+  if (authors.length === 1) return authors[0];
+  if (authors.length === 2) return authors.join(' & ');
+  return `${authors[0]} et al.`;
+}
+
+function slugFor(entry: typeof papers[number]): string {
+  return entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+---
+
+<Base title={`#${tag}`} description={`Papers tagged #${tag}.`}>
+  <section class="tag-page">
+    <div class="reading-container">
+      <header class="tag-header">
+        <p class="kicker">Tag</p>
+        <h1 class="tag-title">#{tag}</h1>
+        <p class="tag-sub">
+          {papers.length} paper{papers.length === 1 ? '' : 's'} tagged with this.
+        </p>
+      </header>
+
+      <ul class="archive-list">
+        {papers.map((paper) => (
+          <li class="archive-item">
+            <a href={`/papers/${slugFor(paper)}`} class="archive-link">
+              <span class="archive-date">{shortDate(paper.data.publishedDate)}</span>
+              <span class="archive-body">
+                <span class="archive-category">{paper.data.primaryCategory}</span>
+                <span class="archive-title-text">{paper.data.title}</span>
+                <span class="archive-authors">{authorLine(paper.data.authors)}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tag-page { padding-top: var(--space-7); }
+
+  .tag-header { margin-bottom: var(--space-7); }
+
+  .tag-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--accent);
+    margin: var(--space-3) 0;
+  }
+
+  .tag-sub {
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  .archive-list { list-style: none; padding: 0; margin: 0; }
+  .archive-item { border-bottom: 1px solid var(--rule); }
+  .archive-item:first-child { border-top: 1px solid var(--rule); }
+
+  .archive-link {
+    display: flex;
+    gap: var(--space-5);
+    padding: var(--space-4) 0;
+    text-decoration: none;
+    color: inherit;
+    align-items: baseline;
+  }
+
+  .archive-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    min-width: 6rem;
+  }
+
+  .archive-body { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+
+  .archive-category {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+  }
+
+  .archive-title-text {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+
+  .archive-link:hover .archive-title-text { color: var(--accent); }
+
+  .archive-authors {
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 600px) {
+    .archive-link { flex-direction: column; gap: var(--space-2); }
+    .archive-date { min-width: auto; }
+  }
+</style>

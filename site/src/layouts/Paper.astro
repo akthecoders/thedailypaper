@@ -1,0 +1,227 @@
+---
+import Base from './Base.astro';
+import MermaidRenderer from '../components/MermaidRenderer.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  paper: CollectionEntry<'papers'>;
+}
+
+const { paper } = Astro.props;
+const d = paper.data;
+
+const formattedDate = d.publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const authorsDisplay =
+  d.authors.length > 3
+    ? `${d.authors.slice(0, 3).join(', ')}, +${d.authors.length - 3} more`
+    : d.authors.join(', ');
+
+const categoryLabel = d.primaryCategory;
+---
+
+<Base
+  title={d.title}
+  description={d.tldr}
+  articleDate={d.publishedDate}
+  articleTags={d.tags}
+>
+  <article class="paper">
+    <header class="paper-header reading-container">
+      <div class="paper-meta">
+        <span class="kicker">Daily Paper · {formattedDate}</span>
+        <a
+          class="category-tag"
+          href={`/categories/${categoryLabel.replace('.', '-')}`}
+        >
+          {categoryLabel}
+        </a>
+      </div>
+
+      <h1 class="paper-title">{d.title}</h1>
+
+      <p class="paper-authors">
+        By <span class="authors">{authorsDisplay}</span>
+      </p>
+
+      <div class="paper-links">
+        <a href={d.absUrl} class="paper-link">arXiv</a>
+        <span class="sep">·</span>
+        <a href={d.pdfUrl} class="paper-link">PDF</a>
+        <span class="sep">·</span>
+        <span class="paper-id">{d.arxivId}</span>
+      </div>
+
+      <div class="pick-reason">
+        <span class="pick-reason-label">Why this paper today</span>
+        <p>{d.pickReason}</p>
+      </div>
+    </header>
+
+    <div class="prose reading-container">
+      <slot />
+    </div>
+
+    <footer class="paper-footer reading-container">
+      <hr class="fine-rule" />
+      <div class="paper-tags">
+        {d.tags.map((tag) => (
+          <a href={`/tags/${tag}`} class="tag">#{tag}</a>
+        ))}
+      </div>
+      <p class="paper-outro">
+        That's today's paper. <a href="/">See the latest</a> or browse the
+        <a href="/archive">archive</a>.
+      </p>
+    </footer>
+  </article>
+
+  <MermaidRenderer />
+</Base>
+
+<style>
+  .paper {
+    padding-top: var(--space-7);
+  }
+
+  .paper-header {
+    margin-bottom: var(--space-6);
+  }
+
+  .paper-meta {
+    display: flex;
+    gap: var(--space-4);
+    align-items: baseline;
+    margin-bottom: var(--space-4);
+  }
+
+  .category-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    padding: 2px 8px;
+    border-radius: 2px;
+    transition: border-color 120ms, color 120ms;
+  }
+
+  .category-tag:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .paper-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    margin-bottom: var(--space-4);
+    color: var(--ink);
+  }
+
+  .paper-authors {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: var(--space-3);
+    font-size: 1.05rem;
+  }
+
+  .paper-authors .authors {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .paper-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    margin-bottom: var(--space-5);
+  }
+
+  .paper-link {
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-decoration-color: var(--ink-muted);
+    text-underline-offset: 3px;
+  }
+
+  .paper-link:hover { color: var(--accent); }
+
+  .sep { opacity: 0.5; }
+
+  .paper-id {
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 2px;
+  }
+
+  .pick-reason {
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    background: var(--bg-subtle);
+    border-left: 2px solid var(--accent);
+    border-radius: 2px;
+  }
+
+  .pick-reason-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .pick-reason p {
+    margin: 0;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .paper-footer {
+    margin-top: var(--space-7);
+  }
+
+  .paper-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    text-decoration: none;
+    padding: 2px 8px;
+    border-radius: 2px;
+    transition: color 120ms, background 120ms;
+  }
+
+  .tag:hover {
+    color: var(--accent);
+    background: var(--bg-subtle);
+  }
+
+  .paper-outro {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+  }
+</style>

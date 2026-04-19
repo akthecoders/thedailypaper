@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Node
+node_modules/
+dist/
+.astro/
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Secrets
+config/config.yaml
+!config/config.example.yaml
+config/interests.md
+!config/interests.example.md
+
+# Local analysis artefacts
+graphify-out/

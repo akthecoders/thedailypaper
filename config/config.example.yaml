@@ -1,0 +1,34 @@
+# Daily papers agent config
+# Copy to config.yaml and fill in the blanks.
+
+arxiv_categories:
+  - cs.LG
+  - cs.AI
+  - cs.CL
+  - cs.DS
+  - q-fin.TR
+  - q-fin.CP
+  - stat.ML
+
+# Where to put generated .md files — inside the Astro content collection
+site_root: "./site"
+site_url: "https://thedailypaper.akshaykumar.me"   # or your custom domain
+
+# Your interests file (markdown) — agent reads it every run
+interests_path: "./config/interests.md"
+
+# Where to track already-picked papers (prevent re-picks)
+history_path: "./history/history.json"
+
+# Telegram (prefer env vars: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
+telegram_bot_token: ""
+telegram_chat_id: ""
+
+# Models — every call goes through OpenRouter.
+# Use OpenRouter model slugs (https://openrouter.ai/models).
+# ranker_model: cheap + fast (20-paper shortlist picker, ~500 tokens).
+# explainer_model: high-quality for the 20-min deep explainer.
+# video_model: reserved for Phase 2 Manim script generation.
+ranker_model: "anthropic/claude-haiku-4.5"
+explainer_model: "anthropic/claude-opus-4.1"
+video_model: "anthropic/claude-opus-4.1"

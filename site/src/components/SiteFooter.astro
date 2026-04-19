@@ -1,0 +1,53 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <hr class="fine-rule" />
+    <div class="footer-inner">
+      <p class="footer-line">
+        <span class="kicker">The Daily Paper</span>
+        <span>·</span>
+        <span>One technical paper, explained properly, every morning.</span>
+      </p>
+      <p class="footer-meta">
+        © {year} · Explainers generated with Claude ·
+        <a href="/rss.xml">RSS</a> ·
+        <a href="/about">Colophon</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-9);
+    padding-bottom: var(--space-7);
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+  .footer-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: baseline;
+    margin: 0;
+  }
+  .footer-meta {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+  .footer-meta a {
+    color: var(--ink-muted);
+  }
+  .footer-meta a:hover {
+    color: var(--accent);
+  }
+</style>

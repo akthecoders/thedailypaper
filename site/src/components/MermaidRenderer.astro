@@ -1,0 +1,80 @@
+---
+// Client-side Mermaid renderer. Imports on demand, respects theme.
+---
+
+<script>
+  import mermaid from 'mermaid';
+
+  function getTheme() {
+    const stored = document.documentElement.getAttribute('data-theme');
+    if (stored) return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function initMermaid() {
+    const isDark = getTheme() === 'dark';
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: isDark
+        ? {
+            background: '#23201a',
+            primaryColor: '#2a271f',
+            primaryTextColor: '#f2ece0',
+            primaryBorderColor: '#3a362e',
+            lineColor: '#8a857a',
+            secondaryColor: '#2a271f',
+            tertiaryColor: '#1a1814',
+            fontFamily: 'Newsreader, Georgia, serif',
+          }
+        : {
+            background: '#efe9df',
+            primaryColor: '#f7f3ec',
+            primaryTextColor: '#1a1814',
+            primaryBorderColor: '#d9d1c3',
+            lineColor: '#7a756d',
+            secondaryColor: '#efe9df',
+            tertiaryColor: '#f7f3ec',
+            fontFamily: 'Newsreader, Georgia, serif',
+          },
+    });
+  }
+
+  async function renderMermaidBlocks() {
+    // Find <pre><code class="language-mermaid">...</code></pre> blocks
+    // emitted by the markdown renderer and convert them to .mermaid divs.
+    const codeBlocks = document.querySelectorAll('pre > code.language-mermaid');
+    codeBlocks.forEach((codeEl, i) => {
+      const pre = codeEl.parentElement;
+      if (!pre) return;
+      const div = document.createElement('div');
+      div.className = 'mermaid';
+      div.id = `mermaid-${i}`;
+      div.textContent = codeEl.textContent || '';
+      pre.replaceWith(div);
+    });
+
+    initMermaid();
+    await mermaid.run({ querySelector: '.mermaid' });
+  }
+
+  document.addEventListener('DOMContentLoaded', renderMermaidBlocks);
+
+  // Re-render on theme toggle
+  const observer = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.attributeName === 'data-theme') {
+        // Clear existing SVGs and re-run
+        document.querySelectorAll('.mermaid svg').forEach((s) => s.remove());
+        document.querySelectorAll('.mermaid').forEach((el) => {
+          const raw = el.getAttribute('data-raw');
+          if (raw) el.textContent = raw;
+          else el.setAttribute('data-raw', el.textContent || '');
+        });
+        renderMermaidBlocks();
+        break;
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true });
+</script>

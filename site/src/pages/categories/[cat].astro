@@ -1,0 +1,179 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const papers = await getCollection('papers', ({ data }) => !data.draft);
+
+  // Build unique categories (with dot→dash conversion for URL)
+  const categorySet = new Set<string>();
+  for (const p of papers) {
+    categorySet.add(p.data.primaryCategory);
+  }
+
+  return Array.from(categorySet).map((cat) => ({
+    params: { cat: cat.replace('.', '-') },
+    props: {
+      categoryId: cat,
+      papers: papers
+        .filter((p) => p.data.primaryCategory === cat)
+        .sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()),
+    },
+  }));
+}
+
+interface Props {
+  categoryId: string;
+  papers: Awaited<ReturnType<typeof getCollection<'papers'>>>;
+}
+
+const { categoryId, papers } = Astro.props;
+
+const categoryNames: Record<string, string> = {
+  'cs.LG': 'Machine Learning',
+  'cs.AI': 'Artificial Intelligence',
+  'cs.CL': 'Computation and Language',
+  'cs.DS': 'Data Structures & Algorithms',
+  'q-fin.TR': 'Trading & Market Microstructure',
+  'q-fin.CP': 'Computational Finance',
+  'stat.ML': 'Machine Learning (Statistics)',
+};
+
+const categoryName = categoryNames[categoryId] || categoryId;
+
+function shortDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function authorLine(authors: string[]): string {
+  if (authors.length === 0) return '';
+  if (authors.length === 1) return authors[0];
+  if (authors.length === 2) return authors.join(' & ');
+  return `${authors[0]} et al.`;
+}
+
+function slugFor(entry: typeof papers[number]): string {
+  return entry.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+---
+
+<Base
+  title={`${categoryName} · Archive`}
+  description={`All papers in the ${categoryName} (${categoryId}) category.`}
+>
+  <section class="category-page">
+    <div class="reading-container">
+      <header class="category-header">
+        <p class="kicker">Category</p>
+        <h1 class="category-title">{categoryName}</h1>
+        <p class="category-sub">
+          <code>{categoryId}</code> · {papers.length} paper{papers.length === 1 ? '' : 's'}
+        </p>
+      </header>
+
+      <ul class="archive-list">
+        {papers.map((paper) => (
+          <li class="archive-item">
+            <a href={`/papers/${slugFor(paper)}`} class="archive-link">
+              <span class="archive-date">{shortDate(paper.data.publishedDate)}</span>
+              <span class="archive-body">
+                <span class="archive-title-text">{paper.data.title}</span>
+                <span class="archive-authors">{authorLine(paper.data.authors)}</span>
+                <span class="archive-tldr">{paper.data.tldr}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .category-page { padding-top: var(--space-7); }
+
+  .category-header { margin-bottom: var(--space-7); }
+
+  .category-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: var(--space-3) 0;
+  }
+
+  .category-sub {
+    color: var(--ink-muted);
+    font-size: 1rem;
+  }
+
+  .category-sub code {
+    background: var(--code-bg);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 0.9em;
+    margin-right: var(--space-2);
+  }
+
+  .archive-list { list-style: none; padding: 0; margin: 0; }
+
+  .archive-item {
+    border-bottom: 1px solid var(--rule);
+  }
+  .archive-item:first-child { border-top: 1px solid var(--rule); }
+
+  .archive-link {
+    display: flex;
+    gap: var(--space-5);
+    padding: var(--space-5) 0;
+    text-decoration: none;
+    color: inherit;
+    align-items: baseline;
+  }
+
+  .archive-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    min-width: 6rem;
+    letter-spacing: 0.05em;
+  }
+
+  .archive-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex: 1;
+  }
+
+  .archive-title-text {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+
+  .archive-link:hover .archive-title-text {
+    color: var(--accent);
+  }
+
+  .archive-authors {
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 0.92rem;
+  }
+
+  .archive-tldr {
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin-top: var(--space-1);
+  }
+
+  @media (max-width: 600px) {
+    .archive-link { flex-direction: column; gap: var(--space-2); }
+    .archive-date { min-width: auto; }
+  }
+</style>
