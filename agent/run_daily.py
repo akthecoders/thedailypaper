@@ -56,26 +56,38 @@ def main() -> int:
     args = parser.parse_args()
 
     cfg = load_config()
-    target_date = (
-        datetime.strptime(args.date, "%Y-%m-%d").date()
-        if args.date
-        else (datetime.now(timezone.utc) - timedelta(days=1)).date()
-    )
-    log.info(f"Starting run for target date: {target_date}")
-
     history_path = Path(cfg["history_path"])
 
-    # 1. Fetch
-    log.info("Fetching arXiv...")
-    candidates = fetch_recent_papers(
-        categories=cfg["arxiv_categories"],
-        target_date=target_date,
-        max_per_category=100,
-    )
-    candidates = [p for p in candidates if not already_picked(p["arxiv_id"], history_path)]
-    log.info(f"{len(candidates)} candidates after dedup")
+    # 1. Fetch — walk back up to LOOKBACK_DAYS until we find papers.
+    # arXiv doesn't publish on weekends, so Monday's run (looking at Sunday)
+    # and Sunday's run (looking at Saturday) would otherwise exit empty.
+    if args.date:
+        candidate_dates = [datetime.strptime(args.date, "%Y-%m-%d").date()]
+    else:
+        today_utc = datetime.now(timezone.utc).date()
+        LOOKBACK_DAYS = 4
+        candidate_dates = [today_utc - timedelta(days=d) for d in range(1, LOOKBACK_DAYS + 1)]
+
+    log.info(f"Fetching arXiv (will try dates: {[str(d) for d in candidate_dates]})")
+    candidates = []
+    target_date = candidate_dates[0]
+    for d in candidate_dates:
+        log.info(f"Trying {d}...")
+        batch = fetch_recent_papers(
+            categories=cfg["arxiv_categories"],
+            target_date=d,
+            max_per_category=100,
+        )
+        batch = [p for p in batch if not already_picked(p["arxiv_id"], history_path)]
+        if batch:
+            candidates = batch
+            target_date = d
+            break
+        log.info(f"  → no candidates on {d}, trying earlier date")
+
+    log.info(f"{len(candidates)} candidates after dedup (target date: {target_date})")
     if not candidates:
-        log.warning("No candidates — exiting")
+        log.warning(f"No candidates across {len(candidate_dates)} days — exiting")
         return 0
 
     # 2. Signal pre-filter → top 20
