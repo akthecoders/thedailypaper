@@ -119,7 +119,112 @@ Every LLM call goes through `agent/llm.py::call_llm(model, messages)` → OpenRo
 ```yaml
 ranker_model: "google/gemini-2.5-flash"         # cheap, fast 20-paper picker
 explainer_model: "anthropic/claude-opus-4.1"    # deep 20-min explainer
-video_model: "anthropic/claude-opus-4.1"        # Phase 2 Manim generation
+video_model: "anthropic/claude-opus-4.1"        # Manim script generator
 ```
 
 No code change needed. OpenRouter model catalogue: https://openrouter.ai/models
+
+---
+
+## 6. On-demand video generation (Phase 2)
+
+Videos are **opt-in per paper** via a Telegram command. The flow:
+
+```
+Telegram: /video <arxiv_id>
+    │
+    ▼
+Cloudflare Worker (webhook)
+    │  (validates chat allowlist, parses command)
+    ▼
+GitHub API: workflow_dispatch → video.yml
+    │
+    ▼
+generate_video.py → Claude writes Manim CE script → manim -qm
+    │                 (retry up to 3× on compile errors)
+    ▼
+upload_video.py → MP4 to R2, stamps `videoUrl` into paper frontmatter
+    │
+    ▼
+git push → Dokploy rebuilds → <video> tag appears on the paper page
+    │
+    ▼
+Telegram reply: "✅ Video ready: <url>"
+```
+
+### 6a. R2 bucket setup
+
+1. Cloudflare dashboard → **R2** → **Create bucket**: `thedailypaper-videos`.
+2. Bucket settings → **Public access** → enable (or bind a custom domain like `videos.thedailypaper.akshaykumar.me`).
+3. Copy the public URL base (e.g. `https://pub-<hash>.r2.dev`).
+4. Dashboard → **R2 → Manage R2 API Tokens** → create a token with **Object Read & Write** scoped to that bucket. Save the Access Key ID + Secret Access Key.
+
+### 6b. GitHub Actions secrets (add to existing list)
+
+Add these at https://github.com/akthecoders/thedailypaper/settings/secrets/actions in addition to the 4 agent secrets:
+
+| Name | Value |
+|---|---|
+| `R2_ACCOUNT_ID` | From Cloudflare dashboard URL |
+| `R2_ACCESS_KEY_ID` | From step 6a.4 |
+| `R2_SECRET_ACCESS_KEY` | From step 6a.4 |
+| `R2_BUCKET` | `thedailypaper-videos` |
+| `R2_PUBLIC_BASE_URL` | e.g. `https://pub-<hash>.r2.dev` or your custom domain |
+
+### 6c. Deploy the Telegram webhook Worker
+
+```bash
+cd workers/telegram-video
+npm install
+npx wrangler login                 # one-time
+npx wrangler deploy                # deploys to <name>.workers.dev
+```
+
+Then set the Worker's secrets (these are separate from GitHub secrets — they live in Cloudflare):
+
+```bash
+npx wrangler secret put TELEGRAM_BOT_TOKEN         # paste bot token
+npx wrangler secret put TELEGRAM_WEBHOOK_SECRET    # random string, e.g. `openssl rand -hex 32`
+npx wrangler secret put GH_TOKEN                   # PAT with `repo` scope, https://github.com/settings/tokens
+npx wrangler secret put GH_OWNER                   # akthecoders
+npx wrangler secret put GH_REPO                    # thedailypaper
+npx wrangler secret put ALLOWED_CHAT_IDS           # comma-separated, e.g. 1812483114
+```
+
+### 6d. Register the Telegram webhook
+
+One-off curl. Replace `<TOKEN>`, `<WORKER_URL>`, `<WEBHOOK_SECRET>`:
+
+```bash
+curl -sS "https://api.telegram.org/bot<TOKEN>/setWebhook" \
+  -d "url=<WORKER_URL>" \
+  -d "secret_token=<WEBHOOK_SECRET>"
+```
+
+Test it:
+
+```
+You → bot: /video 2604.14885
+Bot → you: 🎬 Queued video render for 2604.14885 (quality=m). Takes ~5–10 min.
+   ...5–10 min pass...
+Bot → you: 🎬 Video ready for 2604.14885. It will appear on https://thedailypaper.akshaykumar.me after the site redeploys (~60s).
+```
+
+### 6e. Manually triggering a video
+
+If the Worker isn't set up yet (or you prefer the UI), trigger directly from GitHub:
+
+1. https://github.com/akthecoders/thedailypaper/actions → **Generate Video** → **Run workflow**
+2. Fill `arxiv_id` (e.g. `2604.14885`), leave `quality` as `m`, optional `notify_chat_id`.
+3. Watch the run. ~7 min total (install ~2min + render ~3–5min + upload+commit).
+
+### 6f. Costs
+
+| Item | Rough cost |
+|---|---|
+| Claude Opus for Manim script (~8k tokens/run × retries) | ~$0.30/video |
+| GitHub Actions minutes | ~6 min/video; 2000 free/month = ~300 videos/month headroom |
+| R2 storage + egress | 10GB free tier; each MP4 ~5MB = 2000 videos before paying |
+| Cloudflare Worker | 100k requests/day free — more than enough |
+
+Practical ceiling: ~300 videos/month on pure free tier, bounded by Claude spend at ~$90/month if you render all of them at Opus quality. Drop to `anthropic/claude-haiku-4.5` for `video_model` to roughly halve that.
