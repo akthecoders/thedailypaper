@@ -28,3 +28,8 @@ config/interests.md
 
 # Local analysis artefacts
 graphify-out/
+
+# Video render work directory (temporary scripts, logs, and intermediate MP4s)
+.video-work/
+site/public/videos/*.mp4
+
