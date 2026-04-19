@@ -2,13 +2,26 @@
 # Copy to config.yaml and fill in the blanks.
 
 arxiv_categories:
-  - cs.LG
-  - cs.AI
-  - cs.CL
-  - cs.DS
-  - q-fin.TR
-  - q-fin.CP
-  - stat.ML
+  # Core ML/AI
+  - cs.LG           # Machine learning
+  - cs.AI           # Artificial intelligence (agents, reasoning, planning)
+  - cs.CL           # Computation and language (LLMs, NLP)
+  - cs.CV           # Computer vision (multimodal, diffusion)
+  - cs.NE           # Neural and evolutionary computing
+  - stat.ML         # Statistical machine learning
+  # Applied AI / systems
+  - cs.IR           # Information retrieval (RAG, search)
+  - cs.MA           # Multi-agent systems (AI agents)
+  - cs.RO           # Robotics (embodied AI, RL)
+  - cs.DC           # Distributed computing (LLM serving, training at scale)
+  - cs.SE           # Software engineering (code generation, verification)
+  - cs.CR           # Cryptography and security (adversarial ML, alignment)
+  # Fundamental CS
+  - cs.DS           # Data structures and algorithms
+  - cs.IT           # Information theory (foundations)
+  # Quant / market microstructure
+  - q-fin.TR        # Trading and market microstructure
+  - q-fin.CP        # Computational finance
 
 # Where to put generated .md files — inside the Astro content collection
 site_root: "./site"
