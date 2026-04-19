@@ -19,7 +19,7 @@ from rank_papers import prefilter_by_signal, llm_pick_winner
 from generate_explainer import generate_deep_explainer
 from write_post import write_post
 from notify_telegram import send_ping
-from config_loader import load_config
+from config_loader import load_config, REPO_ROOT
 
 logging.basicConfig(
     level=logging.INFO,
@@ -40,6 +40,11 @@ def record_pick(paper: dict, history_path: Path) -> None:
     history = []
     if history_path.exists():
         history = json.loads(history_path.read_text())
+        # Safety net: keep the previous version as a rolling backup so a bad
+        # write (disk full, interrupted CI, etc.) can be recovered by hand.
+        history_path.with_suffix(history_path.suffix + ".prev").write_text(
+            json.dumps(history, indent=2)
+        )
     history.append({
         "date": datetime.now(timezone.utc).isoformat(),
         "arxiv_id": paper["arxiv_id"],
@@ -47,6 +52,36 @@ def record_pick(paper: dict, history_path: Path) -> None:
     })
     history_path.parent.mkdir(parents=True, exist_ok=True)
     history_path.write_text(json.dumps(history, indent=2))
+
+
+def archive_shortlist(shortlist: list[dict], target_date, repo_root: Path) -> None:
+    """Persist the day's scored shortlist to history/candidates/YYYY-MM-DD.json.
+
+    This is the foundation for Phase 2 backlog-aware picking: once we have a
+    week of archived shortlists, we can compare today's top candidate against
+    unpicked candidates from prior days and pick from the backlog when today
+    is weak. No LLM cost — just the deterministic scores we already compute.
+    """
+    archive_dir = repo_root / "history" / "candidates"
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    archive_path = archive_dir / f"{target_date}.json"
+    trimmed = []
+    for p in shortlist:
+        trimmed.append({
+            "arxiv_id": p["arxiv_id"],
+            "title": p["title"],
+            "authors": p.get("authors", [])[:5],
+            "primary_category": p.get("primary_category"),
+            "abstract": p.get("abstract", "")[:1000],
+            "pdf_url": p.get("pdf_url"),
+            "abs_url": p.get("abs_url"),
+            "published": p.get("published"),
+            "score": p.get("_score"),
+            "citation_count": (p.get("_ss") or {}).get("citationCount"),
+            "influential_citation_count": (p.get("_ss") or {}).get("influentialCitationCount"),
+        })
+    archive_path.write_text(json.dumps(trimmed, indent=2))
+    log.info(f"Archived {len(trimmed)} scored candidates to {archive_path.relative_to(repo_root)}")
 
 
 def main() -> int:
@@ -94,6 +129,10 @@ def main() -> int:
     log.info("Pre-filtering by engagement signal...")
     shortlist = prefilter_by_signal(candidates, top_k=20)
     log.info(f"Shortlist: {len(shortlist)} papers")
+
+    # Phase 1 of the backlog system: archive the scored shortlist before we
+    # narrow down to a single winner. Foundation for future backlog-aware picks.
+    archive_shortlist(shortlist, target_date, REPO_ROOT)
 
     # 3. Ranker model picks winner against interests
     interests = Path(cfg["interests_path"]).read_text()
