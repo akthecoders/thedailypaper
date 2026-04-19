@@ -37,11 +37,12 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             libcairo2-dev libpango1.0-dev ffmpeg \
             texlive-latex-base texlive-latex-extra texlive-fonts-recommended \
-            texlive-science dvipng texlive-extra-utils
-          # texlive-extra-utils provides dvisvgm which Manim needs for MathTex/Tex.
-          # Without it, the first render attempt always fails and Claude has to
-          # retry with plain Text (no real math rendering).
-          which dvisvgm && dvisvgm --version | head -1
+            texlive-science dvipng dvisvgm
+          # dvisvgm is its own standalone package on Ubuntu 24.04+
+          # (previously bundled in texlive-extra-utils). Manim needs it to
+          # render MathTex/Tex — without it, every LaTeX animation fails
+          # and Claude has to retry with plain Text (no real math).
+          echo "dvisvgm: $(dvisvgm --version 2>&1 | head -1 || echo NOT INSTALLED)"
 
       - uses: actions/setup-python@v5
         with:
