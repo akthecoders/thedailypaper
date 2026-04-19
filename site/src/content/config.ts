@@ -16,6 +16,8 @@ const papers = defineCollection({
     authors: z.array(z.string()),
     tags: z.array(z.string()),
     draft: z.boolean().optional().default(false),
+    videoUrl: z.string().url().optional(),
+    videoPoster: z.string().url().optional(),
   }),
 });
 

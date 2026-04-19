@@ -62,6 +62,23 @@ const categoryLabel = d.primaryCategory;
       </div>
     </header>
 
+    {d.videoUrl && (
+      <section class="paper-video reading-container">
+        <figure>
+          <video
+            controls
+            preload="metadata"
+            poster={d.videoPoster}
+            src={d.videoUrl}
+          >
+            Your browser does not support embedded video.
+            <a href={d.videoUrl}>Download the MP4</a>.
+          </video>
+          <figcaption>Animated explainer · ~1 min</figcaption>
+        </figure>
+      </section>
+    )}
+
     <div class="prose reading-container">
       <slot />
     </div>
@@ -190,6 +207,32 @@ const categoryLabel = d.primaryCategory;
     color: var(--ink);
     font-size: 1.02rem;
     line-height: 1.55;
+  }
+
+  .paper-video {
+    margin: 2rem auto;
+  }
+
+  .paper-video figure {
+    margin: 0;
+    background: var(--color-surface, #0e0e10);
+    border: 1px solid var(--color-border, #2a2a2e);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .paper-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #000;
+  }
+
+  .paper-video figcaption {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    color: var(--color-muted, #9a9aa2);
+    letter-spacing: 0.02em;
   }
 
   .paper-footer {
