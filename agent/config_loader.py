@@ -26,9 +26,19 @@ def _resolve(p: str) -> str:
 
 
 def load_config() -> dict:
+    # Prefer the user's config.yaml; fall back to the committed example so
+    # GitHub Actions (where config.yaml is gitignored) can still run.
     config_path = REPO_ROOT / "config" / "config.yaml"
+    if not config_path.exists():
+        config_path = REPO_ROOT / "config" / "config.example.yaml"
     with open(config_path) as f:
         cfg = yaml.safe_load(f)
+
+    # Same fallback for interests.md → interests.example.md (also gitignored).
+    interests_default = cfg.get("interests_path", "./config/interests.md")
+    interests_abs = Path(_resolve(interests_default))
+    if not interests_abs.exists():
+        cfg["interests_path"] = "./config/interests.example.md"
 
     cfg["telegram_bot_token"] = os.environ.get(
         "TELEGRAM_BOT_TOKEN", cfg.get("telegram_bot_token", "")
