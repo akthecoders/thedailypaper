@@ -54,6 +54,81 @@ def record_pick(paper: dict, history_path: Path) -> None:
     history_path.write_text(json.dumps(history, indent=2))
 
 
+def merge_backlog(
+    today_shortlist: list[dict],
+    history_path: Path,
+    repo_root: Path,
+    days: int = 7,
+    keep_top: int = 20,
+) -> list[dict]:
+    """Pull unpicked candidates from the last `days` of archives, merge with
+    today's shortlist, and return the highest-scoring `keep_top` rows.
+
+    Prevents strong papers from being lost when they happened to share a day
+    with an even-stronger paper. Costs nothing at the LLM level — the merge
+    is a pure score-sort over data we've already archived.
+    """
+    today_ids = {p["arxiv_id"] for p in today_shortlist}
+    picked_ids = set()
+    if history_path.exists():
+        try:
+            picked_ids = {e["arxiv_id"] for e in json.loads(history_path.read_text())}
+        except Exception as e:
+            log.warning(f"History read failed, skipping backlog merge: {e}")
+            return today_shortlist
+
+    archive_dir = repo_root / "history" / "candidates"
+    if not archive_dir.exists():
+        return today_shortlist
+
+    archives = sorted(archive_dir.glob("*.json"), reverse=True)[:days]
+    backlog: list[dict] = []
+    for path in archives:
+        try:
+            rows = json.loads(path.read_text())
+        except Exception:
+            continue
+        for r in rows:
+            aid = r.get("arxiv_id")
+            if not aid or aid in today_ids or aid in picked_ids:
+                continue
+            backlog.append(r)
+            today_ids.add(aid)  # dedupe across archive files
+
+    if not backlog:
+        return today_shortlist
+
+    log.info(f"Backlog merge: {len(backlog)} unpicked candidates from last {days} days")
+
+    # Merge and re-sort. Archive rows use "score" key; fresh shortlist uses "_score".
+    combined = []
+    for p in today_shortlist:
+        combined.append((p.get("_score", 0.0), p))
+    for b in backlog:
+        # Rehydrate the archive row into the shape prefilter_by_signal produces
+        # so downstream code (ranker, explainer) can use it without special cases.
+        rehydrated = {
+            "arxiv_id": b["arxiv_id"],
+            "title": b["title"],
+            "authors": b.get("authors", []),
+            "primary_category": b.get("primary_category", ""),
+            "abstract": b.get("abstract", ""),
+            "pdf_url": b.get("pdf_url", ""),
+            "abs_url": b.get("abs_url", ""),
+            "published": b.get("published", ""),
+            "_score": b.get("score", 0.0),
+            "_ss": {
+                "citationCount": b.get("citation_count"),
+                "influentialCitationCount": b.get("influential_citation_count"),
+            },
+            "_from_backlog": True,
+        }
+        combined.append((b.get("score", 0.0), rehydrated))
+
+    combined.sort(key=lambda t: t[0], reverse=True)
+    return [p for _, p in combined[:keep_top]]
+
+
 def archive_shortlist(shortlist: list[dict], target_date, repo_root: Path) -> None:
     """Persist the day's scored shortlist to history/candidates/YYYY-MM-DD.json.
 
@@ -131,8 +206,15 @@ def main() -> int:
     log.info(f"Shortlist: {len(shortlist)} papers")
 
     # Phase 1 of the backlog system: archive the scored shortlist before we
-    # narrow down to a single winner. Foundation for future backlog-aware picks.
+    # narrow down to a single winner.
     archive_shortlist(shortlist, target_date, REPO_ROOT)
+
+    # 2b. Backlog-aware augmentation: pull the best unpicked candidates from
+    # the last 7 days' archives so today's LLM ranker sees a richer pool.
+    # A strong paper that lost to an even-stronger paper on its original day
+    # doesn't get silently dropped forever.
+    shortlist = merge_backlog(shortlist, history_path, REPO_ROOT, days=7, keep_top=20)
+    log.info(f"After backlog merge: {len(shortlist)} papers considered")
 
     # 3. Ranker model picks winner against interests
     interests = Path(cfg["interests_path"]).read_text()
