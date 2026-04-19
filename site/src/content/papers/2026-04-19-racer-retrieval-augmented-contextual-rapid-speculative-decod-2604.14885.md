@@ -22,6 +22,7 @@ tags:
   - speculative-decoding
   - transformer-efficiency
   - retrieval-augmentation
+videoUrl: "https://videos.tdp.akshaykumar.me/videos/2604.14885.mp4"
 ---
 
 ## TL;DR
