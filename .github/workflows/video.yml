@@ -1,0 +1,117 @@
+name: Generate Video
+
+on:
+  workflow_dispatch:
+    inputs:
+      arxiv_id:
+        description: "arXiv ID of a published paper, e.g. 2604.14885"
+        required: true
+      quality:
+        description: "Manim quality: l (480p fast), m (720p default), h (1080p slow)"
+        required: false
+        default: "m"
+      notify_chat_id:
+        description: "(optional) Telegram chat_id to notify on completion. Defaults to TELEGRAM_CHAT_ID secret."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  # One render at a time per arxiv_id; different papers can run concurrently.
+  group: video-${{ inputs.arxiv_id }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40  # Manim + LaTeX install ≈ 3min, render up to 3× ≈ 30min
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: System deps (Manim + LaTeX + ffmpeg)
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            libcairo2-dev libpango1.0-dev ffmpeg \
+            texlive-latex-base texlive-latex-extra texlive-fonts-recommended \
+            texlive-science dvipng
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Python deps
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-video.txt
+
+      - name: Render MP4
+        id: render
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python agent/generate_video.py "${{ inputs.arxiv_id }}" --quality "${{ inputs.quality }}"
+          ls -lh "site/public/videos/" || true
+
+      - name: Upload to R2 + stamp frontmatter
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_PUBLIC_BASE_URL: ${{ secrets.R2_PUBLIC_BASE_URL }}
+        run: |
+          SAFE=$(echo "${{ inputs.arxiv_id }}" | tr -c 'a-zA-Z0-9' '_')
+          python agent/upload_video.py "${{ inputs.arxiv_id }}" "site/public/videos/${SAFE}.mp4"
+
+      - name: Commit frontmatter update
+        id: commit
+        run: |
+          git config user.name "daily-paper-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add site/src/content/papers/
+          if git diff --staged --quiet; then
+            echo "No frontmatter changes to commit."
+            echo "committed=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "video: add videoUrl for ${{ inputs.arxiv_id }}"
+            git push
+            echo "committed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Telegram reply (success)
+        if: success()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          FALLBACK_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NOTIFY_CHAT: ${{ inputs.notify_chat_id }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          ARXIV_ID: ${{ inputs.arxiv_id }}
+        run: |
+          CHAT="${NOTIFY_CHAT:-$FALLBACK_CHAT}"
+          if [ -z "$CHAT" ] || [ -z "$TELEGRAM_BOT_TOKEN" ]; then
+            echo "No Telegram credentials; skipping notify"
+            exit 0
+          fi
+          TEXT="🎬 Video ready for ${ARXIV_ID}. It will appear on ${SITE_URL} after the site redeploys (~60s)."
+          curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="$CHAT" -d text="$TEXT" > /dev/null || true
+
+      - name: Telegram reply (failure)
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          FALLBACK_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NOTIFY_CHAT: ${{ inputs.notify_chat_id }}
+          ARXIV_ID: ${{ inputs.arxiv_id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          CHAT="${NOTIFY_CHAT:-$FALLBACK_CHAT}"
+          [ -z "$CHAT" ] || [ -z "$TELEGRAM_BOT_TOKEN" ] && exit 0
+          TEXT="❌ Video generation failed for ${ARXIV_ID}. See logs: ${RUN_URL}"
+          curl -sS -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="$CHAT" -d text="$TEXT" > /dev/null || true

@@ -1,0 +1,11 @@
+name = "telegram-video"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+
+# All sensitive values are set via `wrangler secret put <NAME>` after deploy.
+# See src/index.ts for the full list of required secrets.
+
+# Optional: custom routes if you want to serve the webhook on a subdomain.
+# [[routes]]
+# pattern = "bot.thedailypaper.akshaykumar.me/*"
+# custom_domain = true

@@ -1,0 +1,5 @@
+# Extra dependencies used only by the on-demand video workflow.
+# Installed in .github/workflows/video.yml — kept separate from requirements.txt
+# so daily paper runs don't pay the Manim/LaTeX/boto3 install cost.
+manim>=0.18.0
+boto3>=1.34.0
