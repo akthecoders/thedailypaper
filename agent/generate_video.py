@@ -33,7 +33,9 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 
-MANIM_PROMPT = """You are generating a Manim Community Edition (v0.18+) Python script that renders a short technical explainer video for a research paper. The script must produce a single `Scene` subclass named `Explainer` that compiles cleanly with `manim -qm`.
+MANIM_PROMPT = """You are writing a Manim Community Edition (v0.18+) Python script that renders a long, substantive research paper explainer. Target a 5–10 minute video (300–600 seconds of animation) that actually teaches the method — not a teaser, not a highlight reel.
+
+The script must produce a single `Scene` subclass named `Explainer` that compiles cleanly with `manim -qm`.
 
 # Paper context
 
@@ -44,39 +46,71 @@ Hook: {hook}
 
 # Source material
 
-Below are extracted sections from the paper's explainer. Use them to drive the video — do not invent claims not supported here.
+Below are extracted sections from the paper's explainer. Use them as the substantive source — do not invent claims not supported here. Extract the real equations, real numbers, real failure modes. Do not summarize into platitudes.
 
 ---
 {excerpt}
 ---
 
+# What this video must be
+
+A **5–10 minute technical explainer** that a strong ML/SWE reader would rewatch for the visual derivation. It should feel like a whiteboard walkthrough, not a LinkedIn promo. Specifically:
+
+- **No generic intro** beyond a 3–5s title card (title + arxiv id).
+- **No "thanks for watching"**, no URLs, no "reference", no outro animation. End on the last substantive frame with a 2s hold.
+- **Every beat teaches.** If a beat exists only for polish or transition, cut it.
+
+# Structural plan (aim for this — adjust chapter count to fit the paper)
+
+1. **Title card** (3–5s) — title + arxiv id, nothing else.
+2. **The problem** (45–75s) — show *concretely* what breaks in the status quo. Use a diagram (boxes + arrows) or a small worked example. Name the specific failure mode with a number if the paper gives one.
+3. **Background setup** (45–75s) — the 2–3 prior works this builds on. One-line visual identity per prior work (a box with its name + key idea + its specific limitation), then group them to show the landscape.
+4. **Core idea** (60–90s) — the central insight in one visual metaphor. Build it up in pieces with `FadeIn` / `Transform`. The viewer should be able to pause here and explain the paper in one sentence.
+5. **Method part 1** (60–90s) — first technical component. Use `MathTex` to write the key equation, then `Transform` or `ReplacementTransform` to derive / simplify / annotate terms. Color-code variables. Show a concrete numeric example if the paper has one.
+6. **Method part 2** (60–90s) — second technical component. Same visual discipline. Often this is the algorithm's loop or the loss function.
+7. **How it fits together** (45–75s) — unified diagram showing parts 1 and 2 combined. Use `VGroup` to re-arrange previously shown boxes into the final pipeline.
+8. **Key result** (45–60s) — visualize the main quantitative gain. Show a bar chart built with `Rectangle`s + labels, or a before/after comparison. Put real numbers from the paper.
+9. **Honest scope** (20–40s) — one ablation or limitation. Don't omit: it makes the video credible.
+10. *(Optional)* **Decision heuristic** (15–30s) — one sentence on when a reader would and wouldn't use this method.
+
+Total `self.wait(...)` + animation run_time should sum to **300–600 seconds**. Aim for the middle (~420s / 7 min).
+
 # Hard requirements
 
-1. **Scene name must be `Explainer`** (e.g. `class Explainer(Scene):`).
-2. Target runtime: **60–90 seconds**, 5–7 beats:
-   - Title + author beat (~5s)
-   - Problem statement beat (~15s)
-   - Core idea / intuition beat (~15s)
-   - Key equation or algorithm beat with math animation (~20s)
-   - Result beat (~10s)
-   - Closing tagline / URL (~5s)
-3. Use **only vanilla Manim CE classes**: `Text`, `Tex`, `MathTex`, `VGroup`, `Rectangle`, `Arrow`, `Line`, `Dot`, `Circle`, `Write`, `Create`, `Transform`, `FadeIn`, `FadeOut`, `ReplacementTransform`.
-4. **Do not import anything beyond `from manim import *`** and standard library.
-5. Every `Tex`/`MathTex` must compile with a vanilla TeX Live install — no custom packages. Stick to `\\frac`, `\\sum`, `\\int`, `\\mathbb{{}}`, `\\mathcal{{}}`, `\\hat{{}}`, and standard operators. Escape braces in Python strings (`\\{{` and `\\}}` or use raw strings `r"..."`).
-6. Keep text short. Use at most ~8 words on screen at a time. Wrap with `Text(...).scale(0.6)` if needed.
-7. Position elements with `.to_edge(UP)`, `.next_to(...)`, or `.move_to(ORIGIN)` — do not hardcode coordinates.
-8. Use `self.wait(seconds)` between beats, total wait time should sum to roughly 60–90s.
-9. **No external assets** — no images, no SVGs, no audio.
-10. End with `self.wait(1)` after the last element.
+1. **Scene class name is `Explainer`**.
+2. **Only** these Manim classes: `Text`, `Tex`, `MathTex`, `VGroup`, `Rectangle`, `RoundedRectangle`, `Square`, `Circle`, `Arrow`, `DoubleArrow`, `Line`, `Dot`, `Write`, `Create`, `Transform`, `ReplacementTransform`, `FadeIn`, `FadeOut`, `Indicate`, `Flash`, `Brace`, `SurroundingRectangle`, `NumberLine`.
+3. `from manim import *` — no other imports except standard library (`math`, `itertools`). No `numpy` unless essential.
+4. `MathTex` must compile with vanilla TeX Live + dvisvgm. Allowed: `\\frac`, `\\sum`, `\\int`, `\\prod`, `\\mathbb{{}}`, `\\mathcal{{}}`, `\\hat{{}}`, `\\bar{{}}`, `\\tilde{{}}`, `\\vec{{}}`, `\\arg\\max`, `\\arg\\min`, `\\log`, `\\ln`, `\\exp`, `\\leq`, `\\geq`, `\\neq`, `\\approx`, `\\cdot`, `\\times`, `\\to`, `\\in`, `\\subset`, `\\partial`, `\\nabla`, Greek letters, subscripts, superscripts. **No `\\text` macros inside `MathTex`** — use `Tex` or `Text` for words. **Escape Python braces** with `{{` and `}}` or use raw strings.
+5. **Color discipline:** define at the top of the Scene:
+   ```
+   PALETTE = {{'primary': BLUE, 'accent': YELLOW, 'ok': GREEN, 'bad': RED, 'muted': GREY_B}}
+   ```
+   and reuse those 5 colors throughout. Same concept = same color across scenes.
+6. **Text readability:** body `Text(...).scale(0.55)` max, chapter headings `Text(...).scale(0.8)`. `MathTex(...)` keep default scale unless it overflows.
+7. **Position with layout primitives**: `.to_edge(UP/DOWN/LEFT/RIGHT, buff=0.7)`, `.next_to(other, direction, buff=0.4)`, `VGroup(...).arrange(RIGHT, buff=0.5)`. Do not hardcode coordinates unless essential.
+8. **Clear between chapters:** at the end of each chapter, `FadeOut` or `ReplacementTransform` stale elements before introducing the next chapter's anchor object. The screen should not carry leftover text across chapter boundaries.
+9. **Camera is static** — no `MovingCameraScene`.
+10. **No external assets** — no images, audio, SVG, LaTeX packages beyond the above.
+11. End with `self.wait(2)` after the last substantive element. **No closing text card.**
 
-# Quality guidance
+# Animation density expectations
 
-- Prefer one tight animation over many cluttered ones.
-- For the equation beat, `Write` the equation, then `ReplacementTransform` highlights or annotations — do not just stack static text.
-- Colors: use `BLUE`, `YELLOW`, `GREEN`, `RED`, `WHITE`, `GREY_B`. No hex.
-- Keep the camera static (no `MovingCameraScene`).
+- On-screen at any time: ≥3 visual elements after the 15s mark (title card alone is fine up to that point).
+- Equations should be **animated**: `Write` to introduce, then `ReplacementTransform` to show at least one derivation step or annotation per equation.
+- Diagrams should be **assembled**, not dropped: add boxes/arrows piece by piece with `Create`, `FadeIn`.
+- Every `self.wait(t)` beyond 3s should be justified by something visually changing — either a label update, a color highlight via `Indicate`, or a `Transform`.
 
-Output ONLY the Python code — no markdown fences, no explanation, no preamble. The file will be written to disk and run directly.
+# Anti-patterns — DO NOT DO THESE
+
+- Single static title card that lingers >5s.
+- Long lists of bullet-point `Text` lines (this isn't a slideshow).
+- "Introduction" or "Outro" or "Thanks for watching" slides.
+- Repeating the TL;DR at the end.
+- Adding arxiv/pdf URLs as on-screen text.
+- Showing tables with >4 rows (use bar chart diagrams instead).
+- Pauses longer than 5 seconds without visual change.
+
+Output ONLY the Python code — no markdown fences, no prose, no explanation, no preamble. The file will be written to disk and run directly.
 """
 
 
@@ -133,14 +167,17 @@ def _parse_paper_md(path: Path) -> dict:
     }
 
 
-def _build_excerpt(body: str, max_chars: int = 6000) -> str:
+def _build_excerpt(body: str, max_chars: int = 18000) -> str:
     """Extract TL;DR, core idea, method, results sections for the LLM prompt."""
     wanted_headings = {
         "tl;dr", "tldr",
         "why this matters",
+        "background",
         "the core idea", "core idea",
         "the method", "method",
+        "architecture",
         "results",
+        "limitations",
         "key equations",
     }
     sections: list[str] = []
@@ -244,7 +281,7 @@ def generate_video(
                 error=last_error[-4000:],  # tail of error usually has the root cause
                 prev_script=script_path.read_text(),
             )}]
-        raw = call_llm(model=model, messages=messages, max_tokens=8000)
+        raw = call_llm(model=model, messages=messages, max_tokens=20000)
         script = _strip_code_fences(raw)
         script_path.write_text(script)
         log.info(f"Wrote {len(script)} chars to {script_path.relative_to(REPO_ROOT)}")

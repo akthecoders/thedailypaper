@@ -26,7 +26,7 @@ concurrency:
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 40  # Manim + LaTeX install ≈ 3min, render up to 3× ≈ 30min
+    timeout-minutes: 75  # Install ≈3min + 5–10min video × up to 3 retries
 
     steps:
       - uses: actions/checkout@v4
