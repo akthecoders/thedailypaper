@@ -54,6 +54,12 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-video.txt
 
+      - name: Cache Piper voices
+        uses: actions/cache@v4
+        with:
+          path: .piper-voices
+          key: piper-voices-v1
+
       - name: Render MP4
         id: render
         env:

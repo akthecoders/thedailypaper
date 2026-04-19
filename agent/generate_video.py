@@ -110,7 +110,40 @@ Total `self.wait(...)` + animation run_time should sum to **300–600 seconds**.
 - Showing tables with >4 rows (use bar chart diagrams instead).
 - Pauses longer than 5 seconds without visual change.
 
-Output ONLY the Python code — no markdown fences, no prose, no explanation, no preamble. The file will be written to disk and run directly.
+# Output format — STRICTLY follow this
+
+Output exactly two blocks, in this order, with the literal separator lines shown below. No markdown fences, no prose outside the narration texts, no preamble.
+
+```
+===MANIM===
+<the full Python script — must start with "from manim import *", end with "self.wait(2)">
+===NARRATION===
+<a JSON array of narration segments — see below>
+===END===
+```
+
+# Narration JSON schema
+
+Every segment matches one `self.wait(T)` block in your Manim script. Populate the `t_start` field as the cumulative seconds elapsed since the video began, at the moment the corresponding chapter starts showing visually.
+
+```
+[
+  {{"scene": 1, "chapter": "title", "t_start": 0.0, "duration": 5.0, "text": "narrator text here"}},
+  {{"scene": 2, "chapter": "the_problem", "t_start": 5.0, "duration": 60.0, "text": "..."}},
+  ...
+]
+```
+
+# Narration rules — critical for audio/video sync
+
+1. **Word budget per segment = `duration × 2.3`** (~140 WPM, unhurried technical narration). Write narration that lands at **85% of that budget** to leave a safety margin for TTS pacing variance. Example: a 60s scene gets a budget of ~138 words, so write ~117 words.
+2. Narration text is plain English. **No markdown, no equations typed out as LaTeX.** If an equation is on screen, refer to it verbally ("the ratio of accepted tokens to total drafted tokens") not typographically ("sum from i equals 1 to N").
+3. `t_start` values must be strictly increasing. `t_start + duration` of segment N must equal `t_start` of segment N+1 (or the video end).
+4. Every Manim chapter (title, problem, background, core idea, method part 1, method part 2, how-it-fits-together, key result, honest scope) gets exactly one narration segment.
+5. The narration for the title scene is ONE sentence: the paper's headline claim in the narrator's own words. Do not read the arxiv id aloud.
+6. The last narration segment ends on a substantive claim — no "thanks for watching", no "in this video we learned".
+
+Output nothing outside the three-block structure above. The parser will fail on any extra text.
 """
 
 
@@ -210,6 +243,65 @@ def _strip_code_fences(raw: str) -> str:
     return s.strip()
 
 
+def _parse_llm_output(raw: str) -> tuple[str, list[dict]]:
+    """Split LLM output into (manim_script, narration_segments).
+
+    Expected shape:
+        ===MANIM===
+        <python>
+        ===NARRATION===
+        [ {scene, chapter, t_start, duration, text}, ... ]
+        ===END===
+
+    If narration block is missing/invalid, returns (script, []) — caller can
+    still render a silent MP4.
+    """
+    import json as _json
+
+    s = raw.strip()
+    # Tolerate leading markdown fences if the model slips.
+    if s.startswith("```"):
+        s = s.split("\n", 1)[1] if "\n" in s else s
+        if s.endswith("```"):
+            s = s.rsplit("```", 1)[0]
+        s = s.strip()
+
+    # Split blocks.
+    manim_match = re.search(r"===MANIM===\s*\n(.*?)\n===NARRATION===", s, re.DOTALL)
+    narr_match = re.search(r"===NARRATION===\s*\n(.*?)\n===END===", s, re.DOTALL)
+
+    if not manim_match:
+        # Fallback: no delimiters at all — treat the whole thing as the Manim script.
+        return _strip_code_fences(s), []
+
+    script = manim_match.group(1).strip()
+    # The script itself might still have stray fences.
+    if script.startswith("```"):
+        script = _strip_code_fences(script)
+
+    segments: list[dict] = []
+    if narr_match:
+        narr_raw = narr_match.group(1).strip()
+        if narr_raw.startswith("```"):
+            narr_raw = _strip_code_fences(narr_raw)
+        try:
+            parsed = _json.loads(narr_raw)
+            if isinstance(parsed, list):
+                for seg in parsed:
+                    if all(k in seg for k in ("t_start", "duration", "text")):
+                        segments.append({
+                            "scene": seg.get("scene"),
+                            "chapter": seg.get("chapter", ""),
+                            "t_start": float(seg["t_start"]),
+                            "duration": float(seg["duration"]),
+                            "text": str(seg["text"]).strip(),
+                        })
+        except Exception as e:
+            log.warning(f"Narration JSON parse failed: {e}")
+
+    return script, segments
+
+
 def _render(script_path: Path, out_dir: Path, quality: str) -> tuple[bool, str, Path | None]:
     """Run `manim`. Returns (ok, combined_output, mp4_path_or_None)."""
     if shutil.which("manim") is None:
@@ -282,9 +374,13 @@ def generate_video(
                 prev_script=script_path.read_text(),
             )}]
         raw = call_llm(model=model, messages=messages, max_tokens=20000)
-        script = _strip_code_fences(raw)
+        script, segments = _parse_llm_output(raw)
         script_path.write_text(script)
-        log.info(f"Wrote {len(script)} chars to {script_path.relative_to(REPO_ROOT)}")
+        narration_path = workdir / "narration.json"
+        narration_path.write_text(__import__("json").dumps(segments, indent=2))
+        log.info(
+            f"Wrote {len(script)} chars of Manim + {len(segments)} narration segments"
+        )
 
         ok, output, mp4 = _render(script_path, workdir / "media", quality)
         if ok and mp4:
@@ -292,7 +388,22 @@ def generate_video(
             videos_dir.mkdir(parents=True, exist_ok=True)
             final_path = videos_dir / f"{_safe_id(arxiv_id)}.mp4"
             shutil.copy2(mp4, final_path)
-            log.info(f"✅ Rendered → {final_path.relative_to(REPO_ROOT)} ({final_path.stat().st_size // 1024} KB)")
+            log.info(f"✅ Rendered silent MP4 → {final_path.relative_to(REPO_ROOT)} ({final_path.stat().st_size // 1024} KB)")
+            # Hand off to narrator if we have narration.
+            if segments:
+                try:
+                    from narrate_video import narrate_and_mux
+                    narrate_and_mux(
+                        silent_mp4=final_path,
+                        segments=segments,
+                        voice=cfg.get("narration_voice", "en_GB-alan-medium"),
+                        workdir=workdir,
+                    )
+                    log.info(f"✅ Narrated MP4 → {final_path.relative_to(REPO_ROOT)} ({final_path.stat().st_size // 1024} KB)")
+                except Exception as e:
+                    log.warning(f"Narration failed, keeping silent MP4: {e}")
+            else:
+                log.warning("No narration segments — MP4 will be silent")
             return final_path
 
         last_error = output

@@ -33,3 +33,6 @@ graphify-out/
 .video-work/
 site/public/videos/*.mp4
 
+# Piper TTS voice models (downloaded on demand, cached on CI)
+.piper-voices/
+

@@ -45,3 +45,10 @@ telegram_chat_id: ""
 ranker_model: "anthropic/claude-haiku-4.5"
 explainer_model: "anthropic/claude-opus-4.1"
 video_model: "anthropic/claude-opus-4.1"
+
+# Piper TTS voice for video narration. Self-hosted, CPU-only, free.
+# Options: en_GB-alan-medium (British male, academic tone — default)
+#          en_US-ryan-medium  (American male, professional)
+#          en_US-lessac-medium (neutral, warm)
+#          en_US-amy-medium (American female)
+narration_voice: "en_GB-alan-medium"
