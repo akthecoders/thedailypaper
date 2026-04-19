@@ -22,6 +22,7 @@ import logging
 import os
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import boto3
@@ -79,20 +80,35 @@ def _set_frontmatter_field(md_path: Path, key: str, value: str) -> None:
 
 
 def upload(arxiv_id: str, mp4_path: Path) -> str:
-    """Upload the MP4 to R2 under `videos/<arxiv_id>.mp4` and return the public URL."""
+    """Upload the MP4 to R2 under a timestamped key and return its public URL.
+
+    Versioned keys dodge browser/CDN cache completely — every re-render gets a
+    fresh URL. Old versions remain on R2 until manually cleaned (cheap).
+    """
     s3 = _r2_client()
     bucket = os.environ["R2_BUCKET"]
-    key = f"videos/{arxiv_id}.mp4"
-    log.info(f"Uploading {mp4_path} ({mp4_path.stat().st_size // 1024} KB) → r2://{bucket}/{key}")
-    s3.upload_file(
-        Filename=str(mp4_path),
-        Bucket=bucket,
-        Key=key,
-        ExtraArgs={
-            "ContentType": "video/mp4",
-            "CacheControl": "public, max-age=31536000, immutable",
-        },
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    key = f"videos/{arxiv_id}/{stamp}.mp4"
+    size_kb = mp4_path.stat().st_size // 1024
+    log.info(
+        f"Uploading {mp4_path.name} ({size_kb} KB) → r2://{bucket}/{key}"
     )
+    try:
+        s3.upload_file(
+            Filename=str(mp4_path),
+            Bucket=bucket,
+            Key=key,
+            ExtraArgs={
+                "ContentType": "video/mp4",
+                # Safe long cache — the URL itself is new on every render.
+                "CacheControl": "public, max-age=31536000, immutable",
+            },
+        )
+    except Exception as e:
+        raise RuntimeError(
+            f"R2 upload failed (bucket={bucket}, key={key}): {e}"
+        ) from e
+
     base = os.environ["R2_PUBLIC_BASE_URL"].rstrip("/")
     url = f"{base}/{key}"
     log.info(f"Uploaded: {url}")

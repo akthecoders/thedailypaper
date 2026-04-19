@@ -136,11 +136,26 @@ Every segment matches one `self.wait(T)` block in your Manim script. Populate th
 
 # Narration rules — critical for audio/video sync
 
-1. **Word budget per segment = `duration × 2.3`** (~140 WPM, unhurried technical narration). Write narration that lands at **85% of that budget** to leave a safety margin for TTS pacing variance. Example: a 60s scene gets a budget of ~138 words, so write ~117 words.
-2. Narration text is plain English. **No markdown, no equations typed out as LaTeX.** If an equation is on screen, refer to it verbally ("the ratio of accepted tokens to total drafted tokens") not typographically ("sum from i equals 1 to N").
+The TTS (Piper, `en_GB-alan-medium`) speaks at ~170 words per minute = **2.8 words/second**. Narration that's too short leaves awkward silence; too long bleeds into the next chapter. Target **90% coverage of scene duration**.
+
+1. **Word budget per segment = `round(duration × 2.8 × 0.90)`**. Concrete examples you MUST hit:
+
+   | Scene duration | Target words | What that looks like |
+   |---|---|---|
+   | 5 s (title) | 12–14 words | one short sentence, no more |
+   | 15 s | 36–38 words | 2 short sentences |
+   | 30 s | 74–76 words | 3–4 sentences |
+   | 45 s | 112–114 words | 5–6 sentences |
+   | 60 s | 150–152 words | one tight paragraph |
+   | 75 s | 188–190 words | dense paragraph with 1 concrete example |
+   | 90 s | 226–228 words | dense paragraph with numeric detail |
+
+   Undershooting by more than 10% creates silence you'll hear. Count your words before finalizing each segment.
+
+2. Narration text is plain English. **No markdown, no LaTeX.** If an equation is on screen, refer to it verbally ("the ratio of accepted tokens to total drafted tokens"), not typographically ("sum from i equals 1 to N").
 3. `t_start` values must be strictly increasing. `t_start + duration` of segment N must equal `t_start` of segment N+1 (or the video end).
 4. Every Manim chapter (title, problem, background, core idea, method part 1, method part 2, how-it-fits-together, key result, honest scope) gets exactly one narration segment.
-5. The narration for the title scene is ONE sentence: the paper's headline claim in the narrator's own words. Do not read the arxiv id aloud.
+5. The title segment narration is **exactly one sentence, 12 words or fewer** — the paper's headline claim in the narrator's own words. Do NOT read the arxiv id aloud.
 6. The last narration segment ends on a substantive claim — no "thanks for watching", no "in this video we learned".
 
 Output nothing outside the three-block structure above. The parser will fail on any extra text.
