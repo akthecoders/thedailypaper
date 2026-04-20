@@ -237,9 +237,11 @@ for the task-by-task implementation plan.
 ### One-time setup
 
 1. **Resend** — create account at resend.com, generate an API key with Full Access.
-2. **Sending domain** — in Resend → Domains, add `thedailypaper.akshaykumar.me`.
-   Copy the SPF TXT and two DKIM CNAMEs into your DNS provider. Wait for verification.
-3. **DMARC record** — add TXT `_dmarc.thedailypaper.akshaykumar.me` with value
+2. **Sending domain** — in Resend → Domains, add `mailer.akshaykumar.me`. This
+   is a dedicated subdomain for outgoing newsletter mail (keeps deliverability
+   concerns isolated from the main site domain). Copy the SPF TXT and two DKIM
+   CNAMEs into your DNS provider. Wait for verification.
+3. **DMARC record** — add TXT `_dmarc.mailer.akshaykumar.me` with value
    `v=DMARC1; p=none; rua=mailto:akshaykumar@grainsetu.com`.
 4. **Audience** — Resend → Audiences → create "Daily Paper Readers" and copy the
    audience ID (UUID). Also create a **throwaway test audience**

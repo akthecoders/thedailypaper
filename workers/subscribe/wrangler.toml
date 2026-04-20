@@ -11,7 +11,7 @@ compatibility_date = "2026-04-01"
 # Vars (non-secret):
 [vars]
 SITE_URL = "https://thedailypaper.akshaykumar.me"
-FROM_ADDRESS = "The Daily Paper <papers@thedailypaper.akshaykumar.me>"
+FROM_ADDRESS = "The Daily Paper <papers@mailer.akshaykumar.me>"
 REPLY_TO = "akshaykumar@grainsetu.com"
 
 [[kv_namespaces]]
