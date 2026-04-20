@@ -39,3 +39,6 @@ site/public/videos/*.mp4
 # Superpowers brainstorming mockups
 .superpowers/
 
+# Cloudflare Worker local dev secrets
+workers/*/.dev.vars
+
