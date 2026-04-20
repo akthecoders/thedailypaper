@@ -1,0 +1,139 @@
+---
+// Social-proof stats: papers published, confirmed subscribers, since-month.
+// Two variants:
+//   "inline" — single-line compact, fits under the hero subhead
+//   "panel"  — 3-column slab with big serif numbers, used as a CTA break
+//
+// Data sourced at build time:
+//   - papers   : count of non-draft entries in the `papers` content collection
+//   - subs     : GET {workerUrl}/count (silently skipped if worker down)
+//   - since    : formatted month/year of the earliest published paper
+//
+// The subscriber count is suppressed (dash shown instead of 0) until at least
+// one confirmed signup — no embarrassing zero on first deploy.
+import { getCollection } from "astro:content";
+
+interface Props {
+  variant: "inline" | "panel";
+}
+const { variant } = Astro.props;
+
+const papers = await getCollection("papers", ({ data }) => !data.draft);
+const paperCount = papers.length;
+const earliest = papers
+  .map((p) => p.data.publishedDate)
+  .sort((a, b) => a.valueOf() - b.valueOf())[0];
+const sinceLabel = earliest
+  ? earliest.toLocaleDateString("en-US", { month: "long", year: "numeric" })
+  : "";
+
+const workerUrl = import.meta.env.PUBLIC_SUBSCRIBE_WORKER_URL;
+let subs: number | null = null;
+if (workerUrl) {
+  try {
+    const r = await fetch(`${workerUrl}/count`, {
+      signal: AbortSignal.timeout(5000),
+    });
+    if (r.ok) {
+      const body = (await r.json()) as { count?: number };
+      if (typeof body.count === "number" && body.count > 0) subs = body.count;
+    }
+  } catch {
+    /* silent */
+  }
+}
+const subsLabel = subs === null ? "—" : subs.toLocaleString();
+---
+
+{variant === "inline" ? (
+  <p class="stats stats--inline">
+    <span><b>{paperCount}</b> {paperCount === 1 ? "paper" : "papers"}</span>
+    <span class="stats-sep">·</span>
+    <span><b>{subsLabel}</b> {subs === 1 ? "reader" : "readers"}</span>
+    {sinceLabel && <>
+      <span class="stats-sep">·</span>
+      <span>since <b>{sinceLabel}</b></span>
+    </>}
+  </p>
+) : (
+  <section class="stats stats--panel">
+    <div class="stats-cell">
+      <div class="stats-num">{paperCount}</div>
+      <div class="stats-lbl">{paperCount === 1 ? "paper explained" : "papers explained"}</div>
+    </div>
+    <div class="stats-cell">
+      <div class="stats-num">{subsLabel}</div>
+      <div class="stats-lbl">{subs === 1 ? "reader subscribed" : "readers subscribed"}</div>
+    </div>
+    {sinceLabel && (
+      <div class="stats-cell">
+        <div class="stats-num stats-num--small">{sinceLabel}</div>
+        <div class="stats-lbl">publishing since</div>
+      </div>
+    )}
+  </section>
+)}
+
+<style>
+  .stats--inline {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+    margin: var(--space-4) 0 0;
+  }
+  .stats--inline b {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    letter-spacing: normal;
+  }
+  .stats-sep {
+    margin: 0 var(--space-2);
+    color: var(--rule);
+  }
+
+  .stats--panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+    padding: var(--space-6) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .stats-cell {
+    text-align: center;
+  }
+  .stats-num {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stats-num--small {
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 500;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  .stats-lbl {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 40rem) {
+    .stats--panel {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .stats--panel .stats-cell { padding: var(--space-3) 0; border-bottom: 1px solid var(--rule); }
+    .stats--panel .stats-cell:last-child { border-bottom: 0; }
+  }
+</style>
