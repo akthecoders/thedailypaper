@@ -15,6 +15,7 @@ REPLY_TO = "akshaykumar@grainsetu.com"
 
 [[kv_namespaces]]
 binding = "SUBSCRIBE_CACHE"
+# Run `wrangler kv:namespace create SUBSCRIBE_CACHE` and paste the returned id below.
 id = "KV_NAMESPACE_ID_HERE"
 
 # Optional: custom route

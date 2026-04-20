@@ -2,6 +2,10 @@
 // and serves subscriber count.
 import type { Env } from "./env";
 
+// CORS policy:
+//   GET /count   — wildcard origin is fine (public, read-only)
+//   POST /subscribe — Task 3 should scope Allow-Origin to env.SITE_URL;
+//                     wildcard is intentional only while placeholder returns 501.
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
