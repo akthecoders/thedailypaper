@@ -1,10 +1,14 @@
 ---
+import SubscribeForm from "./SubscribeForm.astro";
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="container">
     <hr class="fine-rule" />
+    <section class="footer-subscribe">
+      <SubscribeForm variant="footer" />
+    </section>
     <div class="footer-inner">
       <p class="footer-line">
         <span class="kicker">The Daily Paper</span>
@@ -49,5 +53,10 @@ const year = new Date().getFullYear();
   }
   .footer-meta a:hover {
     color: var(--accent);
+  }
+  .footer-subscribe {
+    max-width: var(--reading-width);
+    margin: 0 auto var(--space-6);
+    padding-top: var(--space-5);
   }
 </style>
