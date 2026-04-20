@@ -19,6 +19,7 @@ from rank_papers import prefilter_by_signal, llm_pick_winner
 from generate_explainer import generate_deep_explainer
 from write_post import write_post
 from notify_telegram import send_ping
+from send_newsletter import send_newsletter, dry_render as dry_render_newsletter
 from config_loader import load_config, REPO_ROOT
 
 logging.basicConfig(
@@ -248,8 +249,50 @@ def main() -> int:
     post_path, url_slug = write_post(winner, explainer, site_root=site_root)
     log.info(f"Post written: {post_path}")
 
-    # 5b. Telegram ping with site URL
+    # 5b. Newsletter ------------------------------------------------------
     post_url = f"{cfg['site_url'].rstrip('/')}/papers/{url_slug}"
+    date_pretty = datetime.utcnow().strftime("%b %d, %Y")
+
+    if args.dry_newsletter:
+        dry_render_newsletter(
+            winner=winner,
+            explainer=explainer,
+            post_url=post_url,
+            site_url=cfg["site_url"],
+            date_pretty=date_pretty,
+        )
+        log.info("dry-newsletter done — exiting before commit/push")
+        return 0
+
+    if cfg["newsletter_enabled"] and not args.skip_newsletter:
+        if not cfg["resend_api_key"] or not cfg["resend_audience_id"]:
+            log.warning(
+                "newsletter_enabled but RESEND_API_KEY/RESEND_AUDIENCE_ID missing — skipping send"
+            )
+        else:
+            try:
+                broadcast_id = send_newsletter(
+                    winner=winner,
+                    explainer=explainer,
+                    post_url=post_url,
+                    site_url=cfg["site_url"],
+                    date_pretty=date_pretty,
+                    api_key=cfg["resend_api_key"],
+                    audience_id=cfg["resend_audience_id"],
+                    from_address=cfg["newsletter_from"],
+                    reply_to=cfg["newsletter_reply_to"],
+                )
+                log.info("newsletter sent, broadcast_id=%s", broadcast_id)
+            except Exception as e:
+                log.error("newsletter send failed (continuing): %s", e)
+    else:
+        log.info(
+            "newsletter skipped (enabled=%s, skip=%s)",
+            cfg["newsletter_enabled"],
+            args.skip_newsletter,
+        )
+
+    # 5c. Telegram ping with site URL
     send_ping(
         winner=winner,
         explainer_tldr=explainer["tldr"],
