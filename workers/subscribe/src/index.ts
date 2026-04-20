@@ -1,6 +1,9 @@
 // Cloudflare Worker: handles newsletter signup, double-opt-in confirmation,
 // and serves subscriber count.
 import type { Env } from "./env";
+import { signToken } from "./jwt";
+import { sendEmail, contactExists } from "./resend";
+import { confirmEmailHtml, confirmEmailText } from "./confirm-email";
 
 // CORS policy:
 //   GET /count   — wildcard origin is fine (public, read-only)
@@ -21,10 +24,50 @@ export default {
     }
 
     if (request.method === "POST" && url.pathname === "/subscribe") {
-      return new Response(JSON.stringify({ status: "not_implemented" }), {
-        status: 501,
-        headers: { "Content-Type": "application/json", ...CORS_HEADERS },
-      });
+      let body: { email?: unknown; website?: unknown; turnstileToken?: unknown };
+      try {
+        body = await request.json();
+      } catch {
+        return json({ error: "invalid_body" }, 400);
+      }
+
+      // Honeypot — real users leave `website` blank.
+      if (typeof body.website === "string" && body.website.length > 0) {
+        return json({ status: "pending" }, 200); // silently drop
+      }
+
+      const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+      if (!isValidEmail(email)) return json({ error: "invalid_email" }, 400);
+
+      // Already subscribed? Don't re-send confirmation, but don't leak existence
+      // — return the same shape as a fresh signup.
+      try {
+        if (await contactExists(env, email)) {
+          return json({ status: "pending" }, 200);
+        }
+      } catch (e) {
+        console.error("contactExists failed", e);
+        // Fall through — still send confirmation. Worst case we double-confirm.
+      }
+
+      const token = await signToken(email, env.SUBSCRIPTION_SECRET);
+      const confirmUrl = `${new URL(request.url).origin}/confirm?token=${encodeURIComponent(token)}`;
+
+      try {
+        await sendEmail(env, {
+          to: email,
+          subject: "Confirm your subscription to The Daily Paper",
+          html: confirmEmailHtml(confirmUrl),
+          text: confirmEmailText(confirmUrl),
+          from: env.FROM_ADDRESS,
+          replyTo: env.REPLY_TO,
+        });
+      } catch (e) {
+        console.error("sendEmail failed", e);
+        return json({ error: "upstream_unavailable" }, 502);
+      }
+
+      return json({ status: "pending" }, 200);
     }
 
     if (request.method === "GET" && url.pathname === "/confirm") {
@@ -41,3 +84,15 @@ export default {
     return new Response("Not found", { status: 404 });
   },
 };
+
+function json(obj: unknown, status: number): Response {
+  return new Response(JSON.stringify(obj), {
+    status,
+    headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+  });
+}
+
+function isValidEmail(e: string): boolean {
+  // Purposely loose — Resend does the real validation.
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && e.length <= 254;
+}
