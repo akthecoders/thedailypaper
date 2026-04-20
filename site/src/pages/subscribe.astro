@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import SubscribeForm from "../components/SubscribeForm.astro";
+
+const title = "Subscribe — The Daily Paper";
+const description = "Get a deep-dive on one arXiv paper every Tuesday and Friday, in your inbox.";
+---
+
+<Base title={title} description={description}>
+  <article class="reading-container subscribe-page">
+    <header>
+      <h1>Get new papers in your inbox</h1>
+      <p class="lede">
+        Every Tuesday and Friday, one arXiv paper is picked against our reading
+        taste and turned into a ~3,000-word explainer with a short TL;DR.
+        Subscribe and you'll get each new explainer the moment it's published —
+        no digests, no marketing, no tracking pixels you don't consent to.
+      </p>
+    </header>
+
+    <section class="form-block">
+      <SubscribeForm variant="page" />
+    </section>
+
+    <section class="faq">
+      <h2>Questions</h2>
+      <dl>
+        <dt>How often?</dt>
+        <dd>Twice a week, Tuesday and Friday morning (7 AM IST / 01:30 UTC).</dd>
+        <dt>Can I unsubscribe?</dt>
+        <dd>Every email includes a one-click unsubscribe link. It's instant.</dd>
+        <dt>Will you share my email?</dt>
+        <dd>No. Emails live only in Resend, are used only to deliver these posts, and are never sold, shared, or used for anything else. Your address is deleted immediately on unsubscribe.</dd>
+        <dt>What if I want to reply?</dt>
+        <dd>Just hit reply. Your message goes straight to the author's inbox.</dd>
+      </dl>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .subscribe-page { padding: var(--space-7) 0 var(--space-8); }
+  .subscribe-page h1 {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    line-height: 1.15;
+    margin: 0 0 var(--space-4);
+  }
+  .lede {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 var(--space-6);
+  }
+  .form-block { margin-bottom: var(--space-8); }
+  .faq h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin: 0 0 var(--space-5);
+  }
+  .faq dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin-top: var(--space-5);
+  }
+  .faq dd {
+    margin: var(--space-2) 0 0;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+</style>

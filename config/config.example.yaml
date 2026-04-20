@@ -37,6 +37,10 @@ history_path: "./history/history.json"
 telegram_bot_token: ""
 telegram_chat_id: ""
 
+# Email newsletter (Resend). Leave unset to skip newsletter sends.
+# newsletter_from: "The Daily Paper <papers@yoursite.example.com>"
+# newsletter_reply_to: "you@yourdomain.example.com"
+
 # Models — every call goes through OpenRouter.
 # Use OpenRouter model slugs (https://openrouter.ai/models).
 # ranker_model: cheap + fast (20-paper shortlist picker, ~500 tokens).

@@ -1,0 +1,43 @@
+---
+// Build-time fetch of subscriber count from the Worker. If the fetch fails or
+// count is zero, the badge silently renders nothing — no embarrassing "Join
+// 0 readers" text on first deploy.
+
+const workerUrl = import.meta.env.PUBLIC_SUBSCRIBE_WORKER_URL;
+let count: number | null = null;
+
+if (workerUrl) {
+  try {
+    const resp = await fetch(`${workerUrl}/count`, {
+      signal: AbortSignal.timeout(5000),
+    });
+    if (resp.ok) {
+      const body = (await resp.json()) as { count?: number };
+      if (typeof body.count === "number" && body.count > 0) count = body.count;
+    }
+  } catch {
+    // swallow — badge will just not render
+  }
+}
+---
+
+{count !== null && (
+  <p class="subscriber-badge">
+    <span class="subscriber-badge__count">{count.toLocaleString()}</span>
+    <span class="subscriber-badge__label">{count === 1 ? "reader" : "readers"} subscribed</span>
+  </p>
+)}
+
+<style>
+  .subscriber-badge {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin: var(--space-3) 0 0;
+  }
+  .subscriber-badge__count {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+</style>

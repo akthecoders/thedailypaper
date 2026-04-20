@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import SubscribeForm from "../components/SubscribeForm.astro";
+import SubscriberBadge from "../components/SubscriberBadge.astro";
 
 const papers = (await getCollection('papers', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
@@ -47,6 +49,13 @@ function slugFor(entry: typeof papers[number]): string {
         reimplementation-grade write-up. No summaries. No thought-leader takes.
         Just the paper, explained.
       </p>
+    </div>
+  </section>
+
+  <section class="home-subscribe">
+    <div class="reading-container">
+      <SubscribeForm variant="hero" />
+      <SubscriberBadge />
     </div>
   </section>
 
@@ -338,5 +347,13 @@ function slugFor(entry: typeof papers[number]): string {
       gap: var(--space-2);
     }
     .archive-date { min-width: auto; }
+  }
+
+  .home-subscribe {
+    padding: var(--space-6) 0 var(--space-7);
+  }
+  .home-subscribe .reading-container {
+    max-width: 36rem;
+    margin: 0 auto;
   }
 </style>

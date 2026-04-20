@@ -1,0 +1,149 @@
+---
+// site/src/components/SubscribeForm.astro
+//
+// Reusable subscribe form. Three variants control layout + copy:
+//   - "hero"   (homepage hero — larger, with supporting copy)
+//   - "footer" (site footer — compact, single-line)
+//   - "page"   (/subscribe page — medium, with supporting copy above)
+//
+// Posts to PUBLIC_SUBSCRIBE_WORKER_URL/subscribe. Progressive enhancement:
+//   - No JS: native form POST; worker returns JSON, browser renders it
+//     (acceptable edge case; we add a plain-HTML fallback in a later task
+//     only if complaints come in).
+//   - With JS: fetch() + inline success state.
+
+interface Props {
+  variant: "hero" | "footer" | "page";
+}
+const { variant } = Astro.props;
+const workerUrl = import.meta.env.PUBLIC_SUBSCRIBE_WORKER_URL;
+const copy = {
+  hero:   { label: "A deep-dive on one arXiv paper, twice a week.", button: "Subscribe" },
+  footer: { label: "Get new papers in your inbox",                  button: "Subscribe" },
+  page:   { label: "Enter your email to subscribe.",                button: "Subscribe" },
+}[variant];
+---
+
+<form class={`subscribe subscribe--${variant}`} data-worker-url={workerUrl}>
+  <label class="subscribe__label" for={`sub-${variant}`}>{copy.label}</label>
+  <div class="subscribe__row">
+    <input
+      id={`sub-${variant}`}
+      class="subscribe__input"
+      type="email"
+      name="email"
+      placeholder="you@example.com"
+      required
+      autocomplete="email"
+    />
+    <input type="text" name="website" tabindex="-1" autocomplete="off"
+           style="position:absolute;left:-9999px;" aria-hidden="true" />
+    <button class="subscribe__button" type="submit">{copy.button}</button>
+  </div>
+  <p class="subscribe__status" data-status aria-live="polite" hidden></p>
+</form>
+
+<style>
+  .subscribe { width: 100%; }
+  .subscribe__label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-bottom: var(--space-2);
+  }
+  .subscribe__row { display: flex; gap: var(--space-2); }
+  .subscribe__input {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    border-radius: 2px;
+  }
+  .subscribe__input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .subscribe__button {
+    padding: var(--space-3) var(--space-5);
+    background: var(--accent);
+    color: var(--bg);
+    border: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .subscribe__button:hover { background: var(--accent-soft); }
+  .subscribe__status {
+    margin: var(--space-3) 0 0;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .subscribe__status[data-tone="error"] { color: var(--accent); }
+
+  /* footer variant — compact */
+  .subscribe--footer .subscribe__label { font-size: 0.85rem; }
+  .subscribe--footer .subscribe__row { max-width: 28rem; }
+
+  /* hero variant — larger */
+  .subscribe--hero .subscribe__label { font-size: 1.05rem; }
+  .subscribe--hero .subscribe__input,
+  .subscribe--hero .subscribe__button {
+    font-size: 1.05rem;
+    padding: var(--space-4) var(--space-5);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>(".subscribe").forEach((form) => {
+    const workerUrl = form.dataset.workerUrl;
+    if (!workerUrl) return;
+    const status = form.querySelector<HTMLElement>("[data-status]");
+    const btn = form.querySelector<HTMLButtonElement>(".subscribe__button");
+    if (!status || !btn) return;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (btn.disabled) return;
+      btn.disabled = true;
+      status.hidden = false;
+      status.removeAttribute("data-tone");
+      status.textContent = "Sending…";
+      const data = new FormData(form);
+      const payload = {
+        email: String(data.get("email") || ""),
+        website: String(data.get("website") || ""),
+      };
+      try {
+        const resp = await fetch(`${workerUrl}/subscribe`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const body = (await resp.json()) as { status?: string; error?: string };
+        if (resp.ok && body.status === "pending") {
+          form.querySelector<HTMLElement>(".subscribe__row")!.hidden = true;
+          form.querySelector<HTMLElement>(".subscribe__label")!.hidden = true;
+          status.textContent = "Check your inbox — we sent a confirmation link.";
+        } else {
+          status.setAttribute("data-tone", "error");
+          status.textContent =
+            body.error === "invalid_email"
+              ? "That doesn't look like a valid email."
+              : "Something went wrong. Please try again in a minute.";
+          btn.disabled = false;
+        }
+      } catch {
+        status.setAttribute("data-tone", "error");
+        status.textContent = "Network error. Please try again.";
+        btn.disabled = false;
+      }
+    });
+  });
+</script>

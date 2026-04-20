@@ -19,6 +19,7 @@ from rank_papers import prefilter_by_signal, llm_pick_winner
 from generate_explainer import generate_deep_explainer
 from write_post import write_post
 from notify_telegram import send_ping
+from send_newsletter import send_newsletter, dry_render as dry_render_newsletter
 from config_loader import load_config, REPO_ROOT
 
 logging.basicConfig(
@@ -163,6 +164,16 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--date", type=str, help="YYYY-MM-DD, backfill")
+    parser.add_argument(
+        "--dry-newsletter",
+        action="store_true",
+        help="Render newsletter HTML+text to stdout and exit before commit. Useful for prompt-iterating the email template.",
+    )
+    parser.add_argument(
+        "--skip-newsletter",
+        action="store_true",
+        help="Run the full pipeline but skip the newsletter send step.",
+    )
     args = parser.parse_args()
 
     cfg = load_config()
@@ -238,8 +249,55 @@ def main() -> int:
     post_path, url_slug = write_post(winner, explainer, site_root=site_root)
     log.info(f"Post written: {post_path}")
 
-    # 5b. Telegram ping with site URL
+    # 5b. Newsletter ------------------------------------------------------
     post_url = f"{cfg['site_url'].rstrip('/')}/papers/{url_slug}"
+    date_pretty = datetime.now(timezone.utc).strftime("%b %d, %Y")
+
+    if args.dry_newsletter:
+        dry_render_newsletter(
+            winner=winner,
+            explainer=explainer,
+            post_url=post_url,
+            site_url=cfg["site_url"],
+            date_pretty=date_pretty,
+        )
+        log.info("dry-newsletter done — exiting before commit/push")
+        return 0
+
+    if cfg["newsletter_enabled"] and not args.skip_newsletter:
+        required = {
+            "RESEND_API_KEY": cfg["resend_api_key"],
+            "RESEND_AUDIENCE_ID": cfg["resend_audience_id"],
+            "NEWSLETTER_FROM": cfg["newsletter_from"],
+            "NEWSLETTER_REPLY_TO": cfg["newsletter_reply_to"],
+        }
+        missing = [k for k, v in required.items() if not v]
+        if missing:
+            log.warning("newsletter_enabled but missing: %s — skipping send", ", ".join(missing))
+        else:
+            try:
+                broadcast_id = send_newsletter(
+                    winner=winner,
+                    explainer=explainer,
+                    post_url=post_url,
+                    site_url=cfg["site_url"],
+                    date_pretty=date_pretty,
+                    api_key=cfg["resend_api_key"],
+                    audience_id=cfg["resend_audience_id"],
+                    from_address=cfg["newsletter_from"],
+                    reply_to=cfg["newsletter_reply_to"],
+                )
+                log.info("newsletter sent, broadcast_id=%s", broadcast_id)
+            except Exception as e:
+                log.error("newsletter send failed (continuing): %s", e)
+    else:
+        log.info(
+            "newsletter skipped (enabled=%s, skip=%s)",
+            cfg["newsletter_enabled"],
+            args.skip_newsletter,
+        )
+
+    # 5c. Telegram ping with site URL
     send_ping(
         winner=winner,
         explainer_tldr=explainer["tldr"],

@@ -47,6 +47,19 @@ def load_config() -> dict:
         "TELEGRAM_CHAT_ID", cfg.get("telegram_chat_id", "")
     )
     cfg["site_url"] = os.environ.get("SITE_URL", cfg.get("site_url", ""))
+    cfg["resend_api_key"] = os.environ.get("RESEND_API_KEY", cfg.get("resend_api_key", ""))
+    cfg["resend_audience_id"] = os.environ.get(
+        "RESEND_AUDIENCE_ID", cfg.get("resend_audience_id", "")
+    )
+    cfg["newsletter_enabled"] = (
+        os.environ.get("NEWSLETTER_ENABLED", "false").lower() == "true"
+    )
+    cfg["newsletter_from"] = os.environ.get(
+        "NEWSLETTER_FROM", cfg.get("newsletter_from", "")
+    )
+    cfg["newsletter_reply_to"] = os.environ.get(
+        "NEWSLETTER_REPLY_TO", cfg.get("newsletter_reply_to", "")
+    )
 
     for key in ["history_path", "interests_path", "site_root"]:
         if key in cfg:

@@ -2,12 +2,15 @@
 
 > One technical paper, explained properly, every morning.
 
+**Subscribe by email:** [thedailypaper.akshaykumar.me/subscribe](https://thedailypaper.akshaykumar.me/subscribe)
+
 A self-hosted daily technical research digest:
 
 - **Pipeline** — A Python agent that fetches new arXiv papers, picks the single best one against your interests, and generates a reimplementation-grade 3,000-word explainer.
 - **Site** — An Astro static site that renders each explainer with proper typography, LaTeX equations (via KaTeX), and Mermaid diagrams.
 - **Notifier** — A Telegram bot pings you each morning with the TL;DR and a link.
 - **Automation** — GitHub Actions runs the whole thing on a cron schedule. Free to host.
+- **Email subscriptions** — readers can subscribe at `/subscribe` and receive every new paper in the editorial email template. Double-opt-in via Resend; one-click unsubscribe; replies land in the author's inbox.
 
 ## Architecture
 

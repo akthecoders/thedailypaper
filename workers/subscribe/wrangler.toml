@@ -1,0 +1,25 @@
+name = "subscribe"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+
+# Secrets (set via `wrangler secret put <NAME>`):
+#   RESEND_API_KEY
+#   RESEND_AUDIENCE_ID
+#   SUBSCRIPTION_SECRET
+# TURNSTILE_SECRET_KEY is reserved for a future task (Astro-side widget
+# not yet implemented). Do NOT set it — the worker ignores it in v1.
+# Vars (non-secret):
+[vars]
+SITE_URL = "https://thedailypaper.akshaykumar.me"
+FROM_ADDRESS = "The Daily Paper <papers@thedailypaper.akshaykumar.me>"
+REPLY_TO = "akshaykumar@grainsetu.com"
+
+[[kv_namespaces]]
+binding = "SUBSCRIBE_CACHE"
+# Run `wrangler kv:namespace create SUBSCRIBE_CACHE` and paste the returned id below.
+id = "KV_NAMESPACE_ID_HERE"
+
+# Optional: custom route
+# [[routes]]
+# pattern = "subscribe.thedailypaper.akshaykumar.me/*"
+# custom_domain = true

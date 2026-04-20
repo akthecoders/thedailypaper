@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{title_escaped}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body style="margin:0;background:#f7f3ec;color:#1a1814;font-family:Georgia,'Iowan Old Style',serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f3ec;padding:40px 16px;">
+  <tr><td align="center">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;background:#f7f3ec;">
+      <tr><td style="padding:40px 48px 0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #d9d1c3;padding-bottom:12px;">
+          <tr>
+            <td style="font-family:Georgia,serif;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#7a756d;">
+              The Daily Paper
+            </td>
+            <td align="right" style="font-family:Georgia,serif;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#7a756d;">
+              {date_pretty}
+            </td>
+          </tr>
+        </table>
+      </td></tr>
+      <tr><td style="padding:28px 48px 0;">
+        <h1 style="font-family:Georgia,serif;font-size:28px;font-weight:600;line-height:1.15;margin:0 0 12px;color:#1a1814;">
+          {title_escaped}
+        </h1>
+        <p style="font-family:Georgia,serif;font-style:italic;font-size:14px;color:#7a756d;margin:0 0 24px;">
+          by {authors_escaped} &middot; {primary_category}
+        </p>
+      </td></tr>
+      <tr><td style="padding:0 48px 0;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#b8442e;text-transform:uppercase;margin:0 0 8px;">
+          TL;DR
+        </p>
+        <p style="font-family:Georgia,serif;font-size:17px;line-height:1.55;color:#1a1814;border-left:3px solid #b8442e;padding-left:16px;margin:0 0 28px;font-style:italic;">
+          {tldr_escaped}
+        </p>
+      </td></tr>
+      <tr><td style="padding:0 48px 0;">
+        <div style="font-family:Georgia,serif;font-size:16px;line-height:1.6;color:#1a1814;margin:0 0 28px;">
+          {hook_escaped}
+        </div>
+      </td></tr>
+      <tr><td style="padding:0 48px 32px;">
+        <a href="{post_url}" style="display:inline-block;background:#b8442e;color:#f7f3ec;padding:14px 28px;text-decoration:none;font-family:Georgia,serif;font-weight:600;font-size:15px;">
+          Read the full explainer &rarr;
+        </a>
+      </td></tr>
+      <tr><td style="padding:0 48px;">
+        <hr style="border:0;border-top:1px solid #d9d1c3;margin:0 0 28px;">
+      </td></tr>
+      <tr><td style="padding:0 48px 40px;">
+        <p style="font-family:Georgia,serif;font-size:13px;color:#7a756d;line-height:1.6;margin:0 0 16px;">
+          <strong style="color:#4a4640;">Past papers:</strong> <a href="{archive_url}" style="color:#7a756d;">Browse the archive &rarr;</a><br>
+          <strong style="color:#4a4640;">Thoughts?</strong> Just reply to this email &mdash; it lands in Akshay's inbox.
+        </p>
+        <p style="font-family:Georgia,serif;font-size:12px;color:#7a756d;line-height:1.6;margin:0;">
+          You're receiving this because you subscribed at <a href="{site_url}" style="color:#7a756d;">{site_host}</a>.<br>
+          <a href="{{{{RESEND_UNSUBSCRIBE_URL}}}}" style="color:#7a756d;">Unsubscribe</a>
+        </p>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>

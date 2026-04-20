@@ -227,4 +227,97 @@ If the Worker isn't set up yet (or you prefer the UI), trigger directly from Git
 | R2 storage + egress | 10GB free tier; each MP4 ~5MB = 2000 videos before paying |
 | Cloudflare Worker | 100k requests/day free — more than enough |
 
+## Email subscriptions
+
+Reader emails ship through a Cloudflare Worker (`workers/subscribe`) backed by
+Resend Audiences. See `docs/superpowers/specs/2026-04-20-email-subscriptions-design.md`
+for full architecture and `docs/superpowers/plans/2026-04-20-email-subscriptions.md`
+for the task-by-task implementation plan.
+
+### One-time setup
+
+1. **Resend** — create account at resend.com, generate an API key with Full Access.
+2. **Sending domain** — in Resend → Domains, add `thedailypaper.akshaykumar.me`.
+   Copy the SPF TXT and two DKIM CNAMEs into your DNS provider. Wait for verification.
+3. **DMARC record** — add TXT `_dmarc.thedailypaper.akshaykumar.me` with value
+   `v=DMARC1; p=none; rua=mailto:akshaykumar@grainsetu.com`.
+4. **Audience** — Resend → Audiences → create "Daily Paper Readers" and copy the
+   audience ID (UUID). Also create a **throwaway test audience**
+   "Daily Paper Readers (test)" — used for the first live send.
+5. **Worker KV namespace** — from `workers/subscribe/`:
+   ```bash
+   npx wrangler kv:namespace create SUBSCRIBE_CACHE
+   ```
+   Paste the returned `id` into `workers/subscribe/wrangler.toml` replacing
+   `KV_NAMESPACE_ID_HERE`.
+6. **Subscription secret** — generate: `openssl rand -hex 32`
+7. **Deploy the Worker:**
+   ```bash
+   cd workers/subscribe
+   npx wrangler secret put RESEND_API_KEY
+   npx wrangler secret put RESEND_AUDIENCE_ID        # use the TEST audience ID at first
+   npx wrangler secret put SUBSCRIPTION_SECRET
+   npx wrangler deploy
+   ```
+   Copy the returned worker URL (e.g. `https://subscribe.<subdomain>.workers.dev`).
+
+8. **Astro site env** — set `PUBLIC_SUBSCRIBE_WORKER_URL=<worker URL>` in:
+   - `site/.env` for local dev
+   - Dokploy environment variables for production
+
+9. **GitHub Actions:**
+    - Repo Settings → Secrets:
+      - `RESEND_API_KEY`
+      - `RESEND_AUDIENCE_ID` (TEST audience ID at first)
+      - `NEWSLETTER_FROM` (e.g. `The Daily Paper <papers@yourdomain>`)
+      - `NEWSLETTER_REPLY_TO` (email that should receive reader replies)
+    - Repo Settings → Variables: `NEWSLETTER_ENABLED=false` (flip to `true` when ready)
+
+### Spam protection (v1 → v2)
+
+v1 relies on the form's honeypot field and Cloudflare's platform-level rate
+limiting (configure a rule in the CF dashboard: "Rate limiting rules" on the
+Worker: 10 req/min per client IP on the `/subscribe` path). A visible
+Turnstile challenge widget on the form is deferred to a future task. The
+Worker's `TURNSTILE_SECRET_KEY` binding remains reserved for v2 — do not set
+it.
+
+### Capacity note
+
+Resend free tier: **3,000 emails/month, 100/day**. With Tue+Fri cadence and N
+subscribers, monthly send volume ≈ 8N. Free tier supports ~350 subscribers with
+the monthly cap, but the daily cap will bite first — upgrade the Resend plan
+before your audience crosses ~100 subscribers so a single Tue or Fri send
+doesn't hit the 100/day ceiling.
+
+### Rollout
+
+1. Deploy worker with the TEST audience ID.
+2. Sign up your own email via the form, confirm — proves the end-to-end signup
+   flow works. `curl $WORKER_URL/count` should return `{"count":1}`.
+3. Set `NEWSLETTER_ENABLED=true` in GitHub Actions variables.
+4. Trigger a manual workflow run with `--dry-newsletter` to inspect the HTML:
+   ```bash
+   gh workflow run "Daily Paper"
+   ```
+   (Dry-newsletter requires passing the flag through the workflow; easiest is to
+   run locally for the dry render:
+   `python agent/run_daily.py --date YYYY-MM-DD --dry-newsletter > email.html`
+   and paste the HTML into https://www.mail-tester.com/ — aim for ≥ 8/10.)
+5. First live send: keep `RESEND_AUDIENCE_ID` pointing at the test audience.
+   Trigger the workflow, verify the email lands in your inbox with correct subject,
+   from address, reply-to, and unsubscribe link.
+6. Promote to real audience: update `RESEND_AUDIENCE_ID` in both the Worker
+   secret (`wrangler secret put RESEND_AUDIENCE_ID`, then `wrangler deploy`) and
+   the GitHub Actions secret. Announce the `/subscribe` URL.
+
+### Local dev
+
+For local worker testing:
+- Create `workers/subscribe/.dev.vars` with placeholder values (gitignored).
+  The bypass logic skips Turnstile when the secret is `"test"` or empty.
+- `cd workers/subscribe && npx wrangler dev --local --port 8787` to run locally.
+- Astro: `cd site && npm run dev` — the SubscribeForm will POST to whatever
+  `PUBLIC_SUBSCRIBE_WORKER_URL` points at.
+
 Practical ceiling: ~300 videos/month on pure free tier, bounded by Claude spend at ~$90/month if you render all of them at Opus quality. Drop to `anthropic/claude-haiku-4.5` for `video_model` to roughly halve that.
