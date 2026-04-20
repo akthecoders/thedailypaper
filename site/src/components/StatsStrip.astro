@@ -30,7 +30,9 @@ const sinceLabel = earliest
 // Subscriber count is fetched client-side from the worker. Dokploy's build
 // container often can't reach external hosts, so build-time fetch leaves the
 // count as a placeholder dash. The <script> at the bottom hydrates it on load.
-const workerUrl = import.meta.env.PUBLIC_SUBSCRIBE_WORKER_URL;
+const workerUrl =
+  import.meta.env.PUBLIC_SUBSCRIBE_WORKER_URL ||
+  "https://subscribe.akthecoder.workers.dev";
 const subs: number | null = null;
 const subsLabel = "—";
 ---

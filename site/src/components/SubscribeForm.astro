@@ -16,7 +16,9 @@ interface Props {
   variant: "hero" | "footer" | "page";
 }
 const { variant } = Astro.props;
-const workerUrl = import.meta.env.PUBLIC_SUBSCRIBE_WORKER_URL;
+const workerUrl =
+  import.meta.env.PUBLIC_SUBSCRIBE_WORKER_URL ||
+  "https://subscribe.akthecoder.workers.dev";
 const copy = {
   hero:   { label: "A deep-dive on one arXiv paper, twice a week.", button: "Subscribe" },
   footer: { label: "Get new papers in your inbox",                  button: "Subscribe" },

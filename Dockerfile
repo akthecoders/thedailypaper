@@ -19,6 +19,12 @@ COPY site/ ./
 ARG SITE_URL
 ENV SITE_URL=${SITE_URL}
 
+# PUBLIC_SUBSCRIBE_WORKER_URL is baked into the subscribe form + subscriber
+# count hydration at build time. Must be passed as a Docker build arg
+# (Dokploy: Build → Build Args) — runtime env vars don't reach the Astro build.
+ARG PUBLIC_SUBSCRIBE_WORKER_URL
+ENV PUBLIC_SUBSCRIBE_WORKER_URL=${PUBLIC_SUBSCRIBE_WORKER_URL}
+
 RUN npm run build
 
 
