@@ -1,9 +1,10 @@
 // Cloudflare Worker: handles newsletter signup, double-opt-in confirmation,
 // and serves subscriber count.
 import type { Env } from "./env";
-import { signToken } from "./jwt";
-import { sendEmail, contactExists } from "./resend";
+import { signToken, verifyToken } from "./jwt";
+import { sendEmail, contactExists, createContact } from "./resend";
 import { confirmEmailHtml, confirmEmailText } from "./confirm-email";
+import { successPage, expiredPage, errorPage } from "./confirm-page";
 
 // CORS policy:
 //   GET /count      → PUBLIC_CORS (wildcard; public read-only)
@@ -80,7 +81,22 @@ export default {
     }
 
     if (request.method === "GET" && url.pathname === "/confirm") {
-      return new Response("Not implemented", { status: 501 });
+      const token = url.searchParams.get("token") || "";
+      const html = (body: string, status = 200) =>
+        new Response(body, { status, headers: { "Content-Type": "text/html; charset=utf-8" } });
+
+      const v = await verifyToken(token, env.SUBSCRIPTION_SECRET);
+      if (!v.ok) return html(expiredPage(env.SITE_URL), 400);
+
+      try {
+        await createContact(env, v.email);
+        // Invalidate cached count so the badge picks up the new subscriber within 10min.
+        await env.SUBSCRIBE_CACHE.delete("count");
+        return html(successPage(env.SITE_URL), 200);
+      } catch (e) {
+        console.error("createContact failed", e);
+        return html(errorPage(), 502);
+      }
     }
 
     if (request.method === "GET" && url.pathname === "/count") {
