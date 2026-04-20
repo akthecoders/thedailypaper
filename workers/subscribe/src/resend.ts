@@ -33,7 +33,7 @@ export async function sendEmail(env: Env, p: SendEmailParams): Promise<void> {
   });
   if (!resp.ok) {
     const body = await resp.text();
-    throw new Error(`Resend /emails ${resp.status}: ${body}`);
+    throw new Error(`Resend /emails ${resp.status}: ${body.slice(0, 200)}`);
   }
 }
 
@@ -55,17 +55,19 @@ export async function createContact(
   if (resp.ok) return { created: true, alreadyExisted: false };
   if (resp.status === 409) return { created: false, alreadyExisted: true };
   const body = await resp.text();
-  throw new Error(`Resend contacts ${resp.status}: ${body}`);
+  throw new Error(`Resend contacts ${resp.status}: ${body.slice(0, 200)}`);
 }
 
 export async function contactExists(env: Env, email: string): Promise<boolean> {
   const resp = await fetch(
     `${BASE}/audiences/${env.RESEND_AUDIENCE_ID}/contacts/${encodeURIComponent(email)}`,
-    {
-      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
-    },
+    { headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` } },
   );
-  return resp.ok;
+  if (resp.ok) return true;
+  if (resp.status === 404) return false;
+  // Any other non-ok status is an upstream issue — let the caller's try/catch
+  // log it and fall through so we send the confirm anyway.
+  throw new Error(`contactExists unexpected ${resp.status}`);
 }
 
 export async function listContacts(env: Env): Promise<Array<{ unsubscribed: boolean }>> {

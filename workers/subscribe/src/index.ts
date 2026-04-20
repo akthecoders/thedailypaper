@@ -6,21 +6,30 @@ import { sendEmail, contactExists } from "./resend";
 import { confirmEmailHtml, confirmEmailText } from "./confirm-email";
 
 // CORS policy:
-//   GET /count   — wildcard origin is fine (public, read-only)
-//   POST /subscribe — Task 3 should scope Allow-Origin to env.SITE_URL;
-//                     wildcard is intentional only while placeholder returns 501.
-const CORS_HEADERS = {
+//   GET /count      → PUBLIC_CORS (wildcard; public read-only)
+//   POST /subscribe → siteCors(env.SITE_URL) (origin-scoped to prevent
+//                     third-party form embedding)
+const PUBLIC_CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
 };
+
+function siteCors(siteUrl: string) {
+  return {
+    "Access-Control-Allow-Origin": siteUrl,
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Vary": "Origin",
+  };
+}
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
     if (request.method === "OPTIONS") {
-      return new Response(null, { headers: CORS_HEADERS });
+      return new Response(null, { headers: PUBLIC_CORS });
     }
 
     if (request.method === "POST" && url.pathname === "/subscribe") {
@@ -28,22 +37,22 @@ export default {
       try {
         body = await request.json();
       } catch {
-        return json({ error: "invalid_body" }, 400);
+        return json({ error: "invalid_body" }, 400, siteCors(env.SITE_URL));
       }
 
       // Honeypot — real users leave `website` blank.
       if (typeof body.website === "string" && body.website.length > 0) {
-        return json({ status: "pending" }, 200); // silently drop
+        return json({ status: "pending" }, 200, siteCors(env.SITE_URL)); // silently drop
       }
 
       const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
-      if (!isValidEmail(email)) return json({ error: "invalid_email" }, 400);
+      if (!isValidEmail(email)) return json({ error: "invalid_email" }, 400, siteCors(env.SITE_URL));
 
       // Already subscribed? Don't re-send confirmation, but don't leak existence
       // — return the same shape as a fresh signup.
       try {
         if (await contactExists(env, email)) {
-          return json({ status: "pending" }, 200);
+          return json({ status: "pending" }, 200, siteCors(env.SITE_URL));
         }
       } catch (e) {
         console.error("contactExists failed", e);
@@ -51,7 +60,7 @@ export default {
       }
 
       const token = await signToken(email, env.SUBSCRIPTION_SECRET);
-      const confirmUrl = `${new URL(request.url).origin}/confirm?token=${encodeURIComponent(token)}`;
+      const confirmUrl = `${url.origin}/confirm?token=${encodeURIComponent(token)}`;
 
       try {
         await sendEmail(env, {
@@ -60,14 +69,14 @@ export default {
           html: confirmEmailHtml(confirmUrl),
           text: confirmEmailText(confirmUrl),
           from: env.FROM_ADDRESS,
-          replyTo: env.REPLY_TO,
+          replyTo: env.REPLY_TO || undefined,
         });
       } catch (e) {
         console.error("sendEmail failed", e);
-        return json({ error: "upstream_unavailable" }, 502);
+        return json({ error: "upstream_unavailable" }, 502, siteCors(env.SITE_URL));
       }
 
-      return json({ status: "pending" }, 200);
+      return json({ status: "pending" }, 200, siteCors(env.SITE_URL));
     }
 
     if (request.method === "GET" && url.pathname === "/confirm") {
@@ -77,7 +86,7 @@ export default {
     if (request.method === "GET" && url.pathname === "/count") {
       return new Response(JSON.stringify({ count: 0 }), {
         status: 200,
-        headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+        headers: { "Content-Type": "application/json", ...PUBLIC_CORS },
       });
     }
 
@@ -85,10 +94,10 @@ export default {
   },
 };
 
-function json(obj: unknown, status: number): Response {
+function json(obj: unknown, status: number, corsHeaders: Record<string, string>): Response {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: { "Content-Type": "application/json", ...CORS_HEADERS },
+    headers: { "Content-Type": "application/json", ...corsHeaders },
   });
 }
 
