@@ -40,7 +40,7 @@ const copy = {
            style="position:absolute;left:-9999px;" aria-hidden="true" />
     <button class="subscribe__button" type="submit">{copy.button}</button>
   </div>
-  <p class="subscribe__status" data-status hidden></p>
+  <p class="subscribe__status" data-status aria-live="polite" hidden></p>
 </form>
 
 <style>
@@ -105,9 +105,13 @@ const copy = {
   document.querySelectorAll<HTMLFormElement>(".subscribe").forEach((form) => {
     const workerUrl = form.dataset.workerUrl;
     if (!workerUrl) return;
-    const status = form.querySelector<HTMLElement>("[data-status]")!;
+    const status = form.querySelector<HTMLElement>("[data-status]");
+    const btn = form.querySelector<HTMLButtonElement>(".subscribe__button");
+    if (!status || !btn) return;
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (btn.disabled) return;
+      btn.disabled = true;
       status.hidden = false;
       status.removeAttribute("data-tone");
       status.textContent = "Sending…";
@@ -133,10 +137,12 @@ const copy = {
             body.error === "invalid_email"
               ? "That doesn't look like a valid email."
               : "Something went wrong. Please try again in a minute.";
+          btn.disabled = false;
         }
       } catch {
         status.setAttribute("data-tone", "error");
         status.textContent = "Network error. Please try again.";
+        btn.disabled = false;
       }
     });
   });
