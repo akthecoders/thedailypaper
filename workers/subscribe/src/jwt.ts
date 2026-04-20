@@ -9,8 +9,9 @@ interface Claims {
 }
 
 function b64urlEncode(bytes: Uint8Array): string {
-  let s = btoa(String.fromCharCode(...bytes));
-  return s.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  let s = "";
+  for (const b of bytes) s += String.fromCharCode(b);
+  return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
 function b64urlDecode(s: string): Uint8Array {
@@ -69,8 +70,9 @@ export async function verifyToken(
   } catch {
     return { ok: false, reason: "bad_claims" };
   }
+  if (typeof claims.iat !== "number") return { ok: false, reason: "bad_claims" };
   const age = Math.floor(Date.now() / 1000) - claims.iat;
-  if (age < 0 || age > TTL_SECONDS) return { ok: false, reason: "expired" };
+  if (age < 0 || age >= TTL_SECONDS) return { ok: false, reason: "expired" };
   if (typeof claims.email !== "string" || !claims.email.includes("@")) {
     return { ok: false, reason: "bad_email" };
   }
