@@ -51,14 +51,20 @@ export default {
         const token = typeof body.turnstileToken === "string" ? body.turnstileToken : "";
         if (!token) return json({ error: "turnstile_missing" }, 400, siteCors(env.SITE_URL));
         const ip = request.headers.get("CF-Connecting-IP") || "";
-        const verifyResp = await fetch(
-          "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token, remoteip: ip }),
-          },
-        );
+        let verifyResp: Response;
+        try {
+          verifyResp = await fetch(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token, remoteip: ip }),
+            },
+          );
+        } catch (e) {
+          console.error("Turnstile siteverify failed", e);
+          return json({ error: "upstream_unavailable" }, 502, siteCors(env.SITE_URL));
+        }
         const verifyJson = (await verifyResp.json()) as { success: boolean };
         if (!verifyJson.success) return json({ error: "turnstile_failed" }, 400, siteCors(env.SITE_URL));
       }
@@ -123,7 +129,11 @@ export default {
     if (request.method === "GET" && url.pathname === "/count") {
       const cached = await env.SUBSCRIBE_CACHE.get("count");
       if (cached !== null) {
-        return json({ count: Number(cached) }, 200, PUBLIC_CORS);
+        const n = Number(cached);
+        if (Number.isFinite(n)) {
+          return json({ count: n }, 200, PUBLIC_CORS);
+        }
+        // Corrupted value — fall through to re-fetch + overwrite.
       }
 
       try {
