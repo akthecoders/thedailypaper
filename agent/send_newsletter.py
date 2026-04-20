@@ -68,7 +68,7 @@ def render_newsletter(
     authors = _format_authors(winner.get("authors", []))
     hook = _hook_from_explainer(explainer.get("body", ""))
     host = urlparse(site_url).hostname or site_url
-    archive_url = f"{site_url.rstrip('/')}/papers"
+    archive_url = f"{site_url.rstrip('/')}/archive/"
 
     html_body = html_tpl.format(
         title_escaped=_brace_escape(html.escape(winner["title"])),

@@ -73,7 +73,10 @@ def write_post(
     # Slug convention: date-title-id — sorts chronologically in filesystem,
     # but URL uses just title-id (cleaner)
     filename = f"{today}-{title_slug}-{paper['arxiv_id']}.md"
-    url_slug = f"{title_slug}-{paper['arxiv_id']}"
+    # Astro strips dots from content-collection slugs, so the arxiv id
+    # `2604.15694` becomes `260415694` in the URL. Mirror that here so the
+    # post_url we emit actually resolves.
+    url_slug = f"{title_slug}-{paper['arxiv_id'].replace('.', '')}"
 
     target_dir = site_root / "src" / "content" / "papers"
     target_dir.mkdir(parents=True, exist_ok=True)

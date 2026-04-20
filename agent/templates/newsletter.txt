@@ -14,4 +14,4 @@ Read: {post_url}
 ---
 Archive: {archive_url}
 Reply to this email with thoughts.
-Unsubscribe: {{{{RESEND_UNSUBSCRIBE_URL}}}}
+Unsubscribe: {{{{{{RESEND_UNSUBSCRIBE_URL}}}}}}
