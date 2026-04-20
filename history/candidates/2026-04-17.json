@@ -1,0 +1,366 @@
+[
+  {
+    "arxiv_id": "2604.16242",
+    "title": "Detecting and Suppressing Reward Hacking with Gradient Fingerprints",
+    "authors": [
+      "Songtao Wang",
+      "Quang Hieu Pham",
+      "Fangcong Yin",
+      "Xinpeng Wang",
+      "Jocelyn Qiaochu Chen"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Reinforcement learning with verifiable rewards (RLVR) typically optimizes for outcome rewards without imposing constraints on intermediate reasoning. This leaves training susceptible to reward hacking, where models exploit loopholes (e.g., spurious patterns in training data) in the reward function to achieve high scores without solving the intended task. These reward-hacking behaviors are often implicit, as the intermediate chain-of-thought (CoT) may appear plausible on the surface, limiting the effectiveness of purely text-based monitoring. We propose Gradient Fingerprint (GRIFT), a method for detecting reward hacking using models' internal computations. Given a prompt and a model-generated CoT, GRIFT computes gradients of the CoT conditioned on the prompt and compresses them into a compact representation, which is then used to assess whether the CoT reflects reward hacking behavior. Across verifiable reasoning benchmarks spanning math, code, and logical reasoning, GRIFT substantially",
+    "pdf_url": "https://arxiv.org/pdf/2604.16242v1",
+    "abs_url": "https://arxiv.org/abs/2604.16242",
+    "published": "2026-04-17T17:01:24Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15694",
+    "title": "Neural Continuous-Time Markov Chain: Discrete Diffusion via Decoupled Jump Timing and Direction",
+    "authors": [
+      "Jingyuan Li",
+      "Xiaoyi Jiang",
+      "Fukang Wen",
+      "Wei Liu",
+      "Renqian Luo"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Discrete diffusion models based on continuous-time Markov chains (CTMCs) have shown strong performance on language and discrete data generation, yet existing approaches typically parameterize the reverse rate matrix as a single object -- via concrete scores, clean-data predictions ($x_0$-parameterization), or denoising distributions -- rather than aligning the parameterization with the intrinsic CTMC decomposition into jump timing and jump direction. Since a CTMC is fundamentally a Poisson process fully determined by these two quantities, decomposing along this structure is closer to first principles and naturally leads to our formulation. We propose \\textbf{Neural CTMC}, which separately parameterizes the reverse process through an \\emph{exit rate} (when to jump) and a \\emph{jump distribution} (where to jump) using two dedicated network heads. We show that the evidence lower bound (ELBO) differs from a path-space KL divergence between the true and learned reverse processes by a $\u03b8$-in",
+    "pdf_url": "https://arxiv.org/pdf/2604.15694v1",
+    "abs_url": "https://arxiv.org/abs/2604.15694",
+    "published": "2026-04-17T04:40:19Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15839",
+    "title": "Discover and Prove: An Open-source Agentic Framework for Hard Mode Automated Theorem Proving in Lean 4",
+    "authors": [
+      "Chengwu Liu",
+      "Yichun Yin",
+      "Ye Yuan",
+      "Jiaxuan Xie",
+      "Botao Li"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Most ATP benchmarks embed the final answer within the formal statement -- a convention we call \"Easy Mode\" -- a design that simplifies the task relative to what human competitors face and may lead to optimistic estimates of model capability. We call the stricter, more realistic setting \"Hard Mode\": the system must independently discover the answer before constructing a formal proof. To enable Hard Mode research, we make two contributions. First, we release MiniF2F-Hard and FIMO-Hard, expert-reannotated Hard Mode variants of two widely-used ATP benchmarks. Second, we introduce Discover And Prove (DAP), an agentic framework that uses LLM natural-language reasoning with explicit self-reflection to discover answers, then rewrites Hard Mode statements into Easy Mode ones for existing ATP provers. DAP sets the state of the art: on CombiBench it raises solved problems from 7 (previous SOTA, Pass@16) to 10; on PutnamBench it is the first system to formally prove 36 theorems in Hard Mode -- whi",
+    "pdf_url": "https://arxiv.org/pdf/2604.15839v1",
+    "abs_url": "https://arxiv.org/abs/2604.15839",
+    "published": "2026-04-17T08:40:48Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15741",
+    "title": "Learning Uncertainty from Sequential Internal Dispersion in Large Language Models",
+    "authors": [
+      "Ponhvoan Srey",
+      "Xiaobao Wu",
+      "Cong-Duy Nguyen",
+      "Anh Tuan Luu"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Uncertainty estimation is a promising approach to detect hallucinations in large language models (LLMs). Recent approaches commonly depend on model internal states to estimate uncertainty. However, they suffer from strict assumptions on how hidden states should evolve across layers, and from information loss by solely focusing on last or mean tokens. To address these issues, we present Sequential Internal Variance Representation (SIVR), a supervised hallucination detection framework that leverages token-wise, layer-wise features derived from hidden states. SIVR adopts a more basic assumption that uncertainty manifests in the degree of dispersion or variance of internal representations across layers, rather than relying on specific assumptions, which makes the method model and task agnostic. It additionally aggregates the full sequence of per-token variance features, learning temporal patterns indicative of factual errors and thereby preventing information loss. Experimental results dem",
+    "pdf_url": "https://arxiv.org/pdf/2604.15741v1",
+    "abs_url": "https://arxiv.org/abs/2604.15741",
+    "published": "2026-04-17T06:31:29Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15998",
+    "title": "SCHK-HTC: Sibling Contrastive Learning with Hierarchical Knowledge-Aware Prompt Tuning for Hierarchical Text Classification",
+    "authors": [
+      "Ke Xiong",
+      "Qian Wu",
+      "Wangjie Gan",
+      "Yuke Li",
+      "Xuhong Zhang"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Few-shot Hierarchical Text Classification (few-shot HTC) is a challenging task that involves mapping texts to a predefined tree-structured label hierarchy under data-scarce conditions. While current approaches utilize structural constraints from the label hierarchy to maintain parent-child prediction consistency, they face a critical bottleneck, the difficulty in distinguishing semantically similar sibling classes due to insufficient domain knowledge. We introduce an innovative method named Sibling Contrastive Learning with Hierarchical Knowledge-aware Prompt Tuning for few-shot HTC tasks (SCHK-HTC). Our work enhances the model's perception of subtle differences between sibling classes at deeper levels, rather than just enforcing hierarchical rules. Specifically, we propose a novel framework featuring two core components: a hierarchical knowledge extraction module and a sibling contrastive learning mechanism. This design guides model to encode discriminative features at each hierarchy ",
+    "pdf_url": "https://arxiv.org/pdf/2604.15998v1",
+    "abs_url": "https://arxiv.org/abs/2604.15998",
+    "published": "2026-04-17T12:22:48Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15756",
+    "title": "TTL: Test-time Textual Learning for OOD Detection with Pretrained Vision-Language Models",
+    "authors": [
+      "Jinlun Ye",
+      "Jiang Liao",
+      "Runhe Lai",
+      "Xinhua Lu",
+      "Jiaxin Zhuang"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Vision-language models (VLMs) such as CLIP exhibit strong Out-of-distribution (OOD) detection capabilities by aligning visual and textual representations. Recent CLIP-based test-time adaptation methods further improve detection performance by incorporating external OOD labels. However, such labels are finite and fixed, while the real OOD semantic space is inherently open-ended. Consequently, fixed labels fail to represent the diverse and evolving OOD semantics encountered in test streams. To address this limitation, we introduce Test-time Textual Learning (TTL), a framework that dynamically learns OOD textual semantics from unlabeled test streams, without relying on external OOD labels. TTL updates learnable prompts using pseudo-labeled test samples to capture emerging OOD knowledge. To suppress noise introduced by pseudo-labels, we introduce an OOD knowledge purification strategy that selects reliable OOD samples for adaptation while suppressing noise. In addition, TTL maintains an OO",
+    "pdf_url": "https://arxiv.org/pdf/2604.15756v1",
+    "abs_url": "https://arxiv.org/abs/2604.15756",
+    "published": "2026-04-17T06:59:50Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15706",
+    "title": "Target-Oriented Pretraining Data Selection via Neuron-Activated Graph",
+    "authors": [
+      "Zijun Wang",
+      "Haoqin Tu",
+      "Weidong Zhou",
+      "Yiyang Zhou",
+      "Xiaohuan Zhou"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Everyday tasks come with a target, and pretraining models around this target is what turns them into experts. In this paper, we study target-oriented language model (LM) pretraining by introducing Neuron-Activated Graph Ranking (NAG-based Ranking), a training-free and interpretable framework for target pretraining data selection. Rather than using black-box representations, our approach directly characterizes each target input by a sparse set of high-impact neurons in any off-the-shelf LLMs. Concretely, we quantify neuron impact and select the most influential neurons across layers into a compact Neuron-Activated Graph (NAG), and rank candidate data by NAG similarity to target examples. We conduct experiments across six benchmarks, where our NAG-based Ranking improves target-oriented pretraining by 4.9% on average over random sampling, and also outperforms state-of-the-art baselines by 5.3% accuracy on HellaSwag. It also remains effective under a more applicable multi-target setting, w",
+    "pdf_url": "https://arxiv.org/pdf/2604.15706v1",
+    "abs_url": "https://arxiv.org/abs/2604.15706",
+    "published": "2026-04-17T05:27:03Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.16084",
+    "title": "Unveiling Stochasticity: Universal Multi-modal Probabilistic Modeling for Traffic Forecasting",
+    "authors": [
+      "Weijiang Xiong",
+      "Robert Fonod",
+      "Nikolas Geroliminis"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Traffic forecasting is a challenging spatio-temporal modeling task and a critical component of urban transportation management. Current studies mainly focus on deterministic predictions, with limited considerations on the uncertainty and stochasticity in traffic dynamics. Therefore, this paper proposes an elegant yet universal approach that transforms existing models into probabilistic predictors by replacing only the final output layer with a novel Gaussian Mixture Model (GMM) layer. The modified model requires no changes to the training pipeline and can be trained using only the Negative Log-Likelihood (NLL) loss, without any auxiliary or regularization terms. Experiments on multiple traffic datasets show that our approach generalizes from classic to modern model architectures while preserving deterministic performance. Furthermore, we propose a systematic evaluation procedure based on cumulative distributions and confidence intervals, and demonstrate that our approach is considerabl",
+    "pdf_url": "https://arxiv.org/pdf/2604.16084v1",
+    "abs_url": "https://arxiv.org/abs/2604.16084",
+    "published": "2026-04-17T14:10:16Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15833",
+    "title": "Modern Structure-Aware Simplicial Spatiotemporal Neural Network",
+    "authors": [
+      "Zhaobo Hu",
+      "Vincent Gauthier",
+      "Mehdi Naima"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Spatiotemporal modeling has evolved beyond simple time series analysis to become fundamental in structural time series analysis. While current research extensively employs graph neural networks (GNNs) for spatial feature extraction with notable success, these networks are limited to capturing only pairwise relationships, despite real-world networks containing richer topological relationships. Additionally, GNN-based models face computational challenges that scale with graph complexity, limiting their applicability to large networks. To address these limitations, we present Modern Structure-Aware Simplicial SpatioTemporal neural network (ModernSASST), the first approach to leverage simplicial complex structures for spatiotemporal modeling. Our method employs spatiotemporal random walks on high-dimensional simplicial complexes and integrates parallelizable Temporal Convolutional Networks to capture high-order topological structures while maintaining computational efficiency. Our source c",
+    "pdf_url": "https://arxiv.org/pdf/2604.15833v1",
+    "abs_url": "https://arxiv.org/abs/2604.15833",
+    "published": "2026-04-17T08:35:34Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15664",
+    "title": "Stargazer: A Scalable Model-Fitting Benchmark Environment for AI Agents under Astrophysical Constraints",
+    "authors": [
+      "Xinge Liu",
+      "Terry Jingchen Zhang",
+      "Bernhard Sch\u00f6lkopf",
+      "Zhijing Jin",
+      "Kristen Menou"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "The rise of autonomous AI agents suggests that dynamic benchmark environments with built-in feedback on scientifically grounded tasks are needed to evaluate the capabilities of these agents in research work. We introduce Stargazer, a scalable environment for evaluating AI agents on dynamic, iterative physics-grounded model-fitting tasks using inference on radial-velocity (RV) time series data. Stargazer comprises 120 tasks across three difficulty tiers, including 20 real archival cases, covering diverse scenarios ranging from high-SNR single-planet systems to complex multi-planetary configurations requiring involved low-SNR analysis. Our evaluation of eight frontier agents reveals a gap between numerical optimization and adherence to physical constraints: although agents often achieve a good statistical fit, they frequently fail to recover correct physical system parameters, a limitation that persists even when agents are equipped with vanilla skills. Furthermore, increasing test-time ",
+    "pdf_url": "https://arxiv.org/pdf/2604.15664v1",
+    "abs_url": "https://arxiv.org/abs/2604.15664",
+    "published": "2026-04-17T03:38:50Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15645",
+    "title": "PINNACLE: An Open-Source Computational Framework for Classical and Quantum PINNs",
+    "authors": [
+      "Shimon Pisnoy",
+      "Hemanth Chandravamsi",
+      "Ziv Chen",
+      "Aaron Goldgewert",
+      "Gal Shaviner"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "We present PINNACLE, an open-source computational framework for physics-informed neural networks (PINNs) that integrates modern training strategies, multi-GPU acceleration, and hybrid quantum-classical architectures within a unified modular workflow. The framework enables systematic evaluation of PINN performance across benchmark problems including 1D hyperbolic conservation laws, incompressible flows, and electromagnetic wave propagation. It supports a range of architectural and training enhancements, including Fourier feature embeddings, random weight factorization, strict boundary condition enforcement, adaptive loss balancing, curriculum training, and second-order optimization strategies, with extensibility to additional methods. We provide a comprehensive benchmark study quantifying the impact of these methods on convergence, accuracy, and computational cost, and analyze distributed data parallel scaling in terms of runtime and memory efficiency. In addition, we extend the framewo",
+    "pdf_url": "https://arxiv.org/pdf/2604.15645v1",
+    "abs_url": "https://arxiv.org/abs/2604.15645",
+    "published": "2026-04-17T02:42:08Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.16286",
+    "title": "ASMR-Bench: Auditing for Sabotage in ML Research",
+    "authors": [
+      "Eric Gan",
+      "Aryan Bhatt",
+      "Buck Shlegeris",
+      "Julian Stastny",
+      "Vivek Hebbar"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "As AI systems are increasingly used to conduct research autonomously, misaligned systems could introduce subtle flaws that produce misleading results while evading detection. We introduce ASMR-Bench (Auditing for Sabotage in ML Research), a benchmark for evaluating the ability of auditors to detect sabotage in ML research codebases. ASMR-Bench consists of 9 ML research codebases with sabotaged variants that produce qualitatively different experimental results. Each sabotage modifies implementation details, such as hyperparameters, training data, or evaluation code, while preserving the high-level methodology described in the paper. We evaluated frontier LLMs and LLM-assisted human auditors on ASMR-Bench and found that both struggled to reliably detect sabotage: the best performance was an AUROC of 0.77 and a top-1 fix rate of 42%, achieved by Gemini 3.1 Pro. We also tested LLMs as red teamers and found that LLM-generated sabotages were weaker than human-generated ones but still sometim",
+    "pdf_url": "https://arxiv.org/pdf/2604.16286v1",
+    "abs_url": "https://arxiv.org/abs/2604.16286",
+    "published": "2026-04-17T17:47:32Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15760",
+    "title": "KWBench: Measuring Unprompted Problem Recognition in Knowledge Work",
+    "authors": [
+      "Ankit Maloo"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "We introduce the first version of KWBench (Knowledge Work Bench), a benchmark for unprompted problem recognition in large language models: can an LLM identify a professional scenario before attempting to solve it. Existing frontier benchmarks have saturated, and most knowledge-work evaluations to date reduce to extraction or task completion against a specification. KWBench targets the step before that: recognizing the governing structure of the situation from raw inputs alone.   The benchmark contains 223 tasks sourced from practitioners across acquisitions, contract negotiations, clinical pharmacy, organizational politics, fraud analysis, and incentive design. Each task encodes a formal game-theoretic pattern (principal-agent conflict, signaling, mechanism design failure, strategic omission, coalitional dynamics, strategic interdependence) and carries structured ground truth recording the expert reading of the situation and the anticipated failure modes. Models receive raw data and a ",
+    "pdf_url": "https://arxiv.org/pdf/2604.15760v1",
+    "abs_url": "https://arxiv.org/abs/2604.15760",
+    "published": "2026-04-17T07:04:54Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15709",
+    "title": "Bilevel Optimization of Agent Skills via Monte Carlo Tree Search",
+    "authors": [
+      "Chenyi Huang",
+      "Haoting Zhang",
+      "Jingxu Xu",
+      "Zeyu Zheng",
+      "Yunduan Lin"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Agent \\texttt{skills} are structured collections of instructions, tools, and supporting resources that help large language model (LLM) agents perform particular classes of tasks. Empirical evidence shows that the design of \\texttt{skills} can materially affect agent task performance, yet systematically optimizing \\texttt{skills} remains challenging. Since a \\texttt{skill} comprises instructions, tools, and supporting resources in a structured way, optimizing it requires jointly determining both the structure of these components and the content each component contains. This gives rise to a complex decision space with strong interdependence across structure and components. We therefore represent these two coupled decisions as \\texttt{skill} structure and component content, and formulate \\texttt{skill} optimization as a bilevel optimization problem. We propose a bilevel optimization framework in which an outer loop employs Monte Carlo Tree Search to determine the \\texttt{skill} structure,",
+    "pdf_url": "https://arxiv.org/pdf/2604.15709v1",
+    "abs_url": "https://arxiv.org/abs/2604.15709",
+    "published": "2026-04-17T05:31:40Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15718",
+    "title": "NeuroLip: An Event-driven Spatiotemporal Learning Framework for Cross-Scene Lip-Motion-based Visual Speaker Recognition",
+    "authors": [
+      "Junguang Yao",
+      "Wenye Liu",
+      "Stjepan Picek",
+      "Yue Zheng"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Visual speaker recognition based on lip motion offers a silent, hands-free, and behavior-driven biometric solution that remains effective even when acoustic cues are unavailable. Compared to traditional methods that rely heavily on appearance-dependent representations, lip motion encodes subject-specific behavioral dynamics driven by consistent articulation patterns and muscle coordination, offering inherent stability across environmental changes. However, capturing these robust, fine-grained dynamics is challenging for conventional frame-based cameras due to motion blur and low dynamic range. To exploit the intrinsic stability of lip motion and address these sensing limitations, we propose NeuroLip, an event-based framework that captures fine-grained lip dynamics under a strict yet practical cross-scene protocol: training is performed under a single controlled condition, while recognition must generalize to unseen viewing and lighting conditions. NeuroLip features a 1) Temporal-aware ",
+    "pdf_url": "https://arxiv.org/pdf/2604.15718v1",
+    "abs_url": "https://arxiv.org/abs/2604.15718",
+    "published": "2026-04-17T05:42:17Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.16234",
+    "title": "A Two-Stage, Object-Centric Deep Learning Framework for Robust Exam Cheating Detection",
+    "authors": [
+      "Van-Truong Le",
+      "Le-Khanh Nguyen",
+      "Trong-Doanh Nguyen"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Academic integrity continues to face the persistent challenge of examination cheating. Traditional invigilation relies on human observation, which is inefficient, costly, and prone to errors at scale. Although some existing AI-powered monitoring systems have been deployed and trusted, many lack transparency or require multi-layered architectures to achieve the desired performance. To overcome these challenges, we propose an improvement over a simple two-stage framework for exam cheating detection that integrates object detection and behavioral analysis using well-known technologies. First, the state-of-the-art YOLOv8n model is used to localize students in exam-room images. Each detected region is cropped and preprocessed, then classified by a fine-tuned RexNet-150 model as either normal or cheating behavior. The system is trained on a dataset compiled from 10 independent sources with a total of 273,897 samples, achieving 0.95 accuracy, 0.94 recall, 0.96 precision, and 0.95 F1-score - a",
+    "pdf_url": "https://arxiv.org/pdf/2604.16234v1",
+    "abs_url": "https://arxiv.org/abs/2604.16234",
+    "published": "2026-04-17T16:53:08Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15856",
+    "title": "Robust Multispectral Semantic Segmentation under Missing or Full Modalities via Structured Latent Projection",
+    "authors": [
+      "Irem Ulku",
+      "Erdem Akag\u00fcnd\u00fcz",
+      "\u00d6mer \u00d6zg\u00fcr Tanr\u0131\u00f6ver"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Multimodal remote sensing data provide complementary information for semantic segmentation, but in real-world deployments, some modalities may be unavailable due to sensor failures, acquisition issues, or challenging atmospheric conditions. Existing multimodal segmentation models typically address missing modalities by learning a shared representation across inputs. However, this approach can introduce a trade-off by compromising modality-specific complementary information and reducing performance when all modalities are available. In this paper, we tackle this limitation with CBC-SLP, a multimodal semantic segmentation model designed to preserve both modality-invariant and modality-specific information. Inspired by the theoretical results on modality alignment, which state that perfectly aligned multimodal representations can lead to sub-optimal performance in downstream prediction tasks, we propose a novel structured latent projection approach as an architectural inductive bias. Rath",
+    "pdf_url": "https://arxiv.org/pdf/2604.15856v1",
+    "abs_url": "https://arxiv.org/abs/2604.15856",
+    "published": "2026-04-17T09:05:22Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.16256",
+    "title": "Do Vision-Language Models Truly Perform Vision Reasoning? A Rigorous Study of the Modality Gap",
+    "authors": [
+      "Yige Xu",
+      "Yongjie Wang",
+      "Zizhuo Wu",
+      "Kaisong Song",
+      "Jun Lin"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Reasoning in vision-language models (VLMs) has recently attracted significant attention due to its broad applicability across diverse downstream tasks. However, it remains unclear whether the superior performance of VLMs stems from genuine vision-grounded reasoning or relies predominantly on the reasoning capabilities of their textual backbones. To systematically measure this, we introduce CrossMath, a novel multimodal reasoning benchmark designed for controlled cross-modal comparisons. Specifically, we construct each problem in text-only, image-only, and image+text formats guaranteeing identical task-relevant information, verified by human annotators. This rigorous alignment effectively isolates modality-specific reasoning differences while eliminating confounding factors such as information mismatch. Extensive evaluation of state-of-the-art VLMs reveals a consistent phenomenon: a substantial performance gap between textual and visual reasoning. Notably, VLMs excel with text-only inpu",
+    "pdf_url": "https://arxiv.org/pdf/2604.16256v1",
+    "abs_url": "https://arxiv.org/abs/2604.16256",
+    "published": "2026-04-17T17:15:18Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.15736",
+    "title": "RefereeBench: Are Video MLLMs Ready to be Multi-Sport Referees",
+    "authors": [
+      "Yichen Xu",
+      "Yuanhang Liu",
+      "Chuhan Wang",
+      "Zihan Zhao",
+      "jinghan luo"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "While Multimodal Large Language Models (MLLMs) excel at generic video understanding, their ability to support specialized, rule-grounded decision-making remains insufficiently explored. In this paper, we introduce RefereeBench, the first large-scale benchmark for evaluating MLLMs as automatic sports referees. Spanning 11 sports with 925 curated videos and 6,475 QA pairs, RefereeBench evaluates five core officiating abilities: foul existence, foul and penalty classification, foul and penalty reasoning, entity perception, and temporal grounding. The benchmark is fully human-annotated to ensure high-quality annotations grounded in authentic officiating logic and multimodal evidence. Extensive evaluations of state-of-the-art MLLMs show that even the strongest models, such as Doubao-Seed-1.8 and Gemini-3-Pro, achieve only around 60% accuracy, while the strongest open-source model, Qwen3-VL, reaches only 47%. These results indicate that current models remain far from being reliable sports re",
+    "pdf_url": "https://arxiv.org/pdf/2604.15736v1",
+    "abs_url": "https://arxiv.org/abs/2604.15736",
+    "published": "2026-04-17T06:22:41Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.16240",
+    "title": "CollideNet: Hierarchical Multi-scale Video Representation Learning with Disentanglement for Time-To-Collision Forecasting",
+    "authors": [
+      "Nishq Poorav Desai",
+      "Ali Etemad",
+      "Michael Greenspan"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Time-to-Collision (TTC) forecasting is a critical task in collision prevention, requiring precise temporal prediction and comprehending both local and global patterns encapsulated in a video, both spatially and temporally. To address the multi-scale nature of video, we introduce a novel spatiotemporal hierarchical transformer-based architecture called CollideNet, specifically catered for effective TTC forecasting. In the spatial stream, CollideNet aggregates information for each video frame simultaneously at multiple resolutions. In the temporal stream, along with multi-scale feature encoding, CollideNet also disentangles the non-stationarity, trend, and seasonality components. Our method achieves state-of-the-art performance in comparison to prior works on three commonly used public datasets, setting a new state-of-the-art by a considerable margin. We conduct cross-dataset evaluations to analyze the generalization capabilities of our method, and visualize the effects of disentanglemen",
+    "pdf_url": "https://arxiv.org/pdf/2604.16240v1",
+    "abs_url": "https://arxiv.org/abs/2604.16240",
+    "published": "2026-04-17T17:00:03Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]
