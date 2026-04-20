@@ -12,7 +12,7 @@ compatibility_date = "2026-04-01"
 [vars]
 SITE_URL = "https://thedailypaper.akshaykumar.me"
 FROM_ADDRESS = "The Daily Paper <papers@mailer.akshaykumar.me>"
-REPLY_TO = "akshaykumar@grainsetu.com"
+REPLY_TO = "akthecoder@gmail.com"
 
 [[kv_namespaces]]
 binding = "SUBSCRIBE_CACHE"
