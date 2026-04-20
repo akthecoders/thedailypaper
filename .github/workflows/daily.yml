@@ -46,6 +46,9 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SITE_URL: ${{ secrets.SITE_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+          NEWSLETTER_ENABLED: ${{ vars.NEWSLETTER_ENABLED || 'false' }}
         run: |
           if [ -n "${{ inputs.date }}" ]; then
             python agent/run_daily.py --date "${{ inputs.date }}"
