@@ -2,7 +2,7 @@
 // and serves subscriber count.
 import type { Env } from "./env";
 import { signToken, verifyToken } from "./jwt";
-import { sendEmail, contactExists, createContact } from "./resend";
+import { sendEmail, contactExists, createContact, listContacts } from "./resend";
 import { confirmEmailHtml, confirmEmailText } from "./confirm-email";
 import { successPage, expiredPage, errorPage } from "./confirm-page";
 
@@ -104,10 +104,27 @@ export default {
     }
 
     if (request.method === "GET" && url.pathname === "/count") {
-      return new Response(JSON.stringify({ count: 0 }), {
-        status: 200,
-        headers: { "Content-Type": "application/json", ...PUBLIC_CORS },
-      });
+      const cached = await env.SUBSCRIBE_CACHE.get("count");
+      if (cached !== null) {
+        return json({ count: Number(cached) }, 200, PUBLIC_CORS);
+      }
+
+      try {
+        const contacts = await listContacts(env);
+        const count = contacts.filter((c) => !c.unsubscribed).length;
+        await env.SUBSCRIBE_CACHE.put("count", String(count), { expirationTtl: 600 });
+        return new Response(JSON.stringify({ count }), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "public, max-age=600",
+            ...PUBLIC_CORS,
+          },
+        });
+      } catch (e) {
+        console.error("listContacts failed", e);
+        return json({ error: "upstream_unavailable" }, 502, PUBLIC_CORS);
+      }
     }
 
     return new Response("Not found", { status: 404 });
