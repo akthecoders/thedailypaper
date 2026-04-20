@@ -1,0 +1,17 @@
+THE DAILY PAPER — {date_pretty}
+
+{title}
+by {authors} · {primary_category}
+
+— TL;DR —
+{tldr}
+
+— Why it's interesting —
+{hook}
+
+Read: {post_url}
+
+---
+Archive: {archive_url}
+Reply to this email with thoughts.
+Unsubscribe: {{{{RESEND_UNSUBSCRIBE_URL}}}}
