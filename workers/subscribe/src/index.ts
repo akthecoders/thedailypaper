@@ -90,13 +90,17 @@ export default {
 
       try {
         await createContact(env, v.email);
-        // Invalidate cached count so the badge picks up the new subscriber within 10min.
-        await env.SUBSCRIBE_CACHE.delete("count");
-        return html(successPage(env.SITE_URL), 200);
       } catch (e) {
         console.error("createContact failed", e);
         return html(errorPage(), 502);
       }
+      // Best-effort cache invalidation — failure is non-fatal.
+      try {
+        await env.SUBSCRIBE_CACHE.delete("count");
+      } catch (kvErr) {
+        console.error("KV delete failed (non-fatal)", kvErr);
+      }
+      return html(successPage(env.SITE_URL), 200);
     }
 
     if (request.method === "GET" && url.pathname === "/count") {
