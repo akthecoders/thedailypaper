@@ -265,10 +265,15 @@ def main() -> int:
         return 0
 
     if cfg["newsletter_enabled"] and not args.skip_newsletter:
-        if not cfg["resend_api_key"] or not cfg["resend_audience_id"]:
-            log.warning(
-                "newsletter_enabled but RESEND_API_KEY/RESEND_AUDIENCE_ID missing — skipping send"
-            )
+        required = {
+            "RESEND_API_KEY": cfg["resend_api_key"],
+            "RESEND_AUDIENCE_ID": cfg["resend_audience_id"],
+            "NEWSLETTER_FROM": cfg["newsletter_from"],
+            "NEWSLETTER_REPLY_TO": cfg["newsletter_reply_to"],
+        }
+        missing = [k for k, v in required.items() if not v]
+        if missing:
+            log.warning("newsletter_enabled but missing: %s — skipping send", ", ".join(missing))
         else:
             try:
                 broadcast_id = send_newsletter(

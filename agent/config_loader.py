@@ -55,12 +55,10 @@ def load_config() -> dict:
         os.environ.get("NEWSLETTER_ENABLED", "false").lower() == "true"
     )
     cfg["newsletter_from"] = os.environ.get(
-        "NEWSLETTER_FROM",
-        cfg.get("newsletter_from", "The Daily Paper <papers@thedailypaper.akshaykumar.me>"),
+        "NEWSLETTER_FROM", cfg.get("newsletter_from", "")
     )
     cfg["newsletter_reply_to"] = os.environ.get(
-        "NEWSLETTER_REPLY_TO",
-        cfg.get("newsletter_reply_to", "akshaykumar@grainsetu.com"),
+        "NEWSLETTER_REPLY_TO", cfg.get("newsletter_reply_to", "")
     )
 
     for key in ["history_path", "interests_path", "site_root"]:

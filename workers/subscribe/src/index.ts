@@ -34,7 +34,7 @@ export default {
     }
 
     if (request.method === "POST" && url.pathname === "/subscribe") {
-      let body: { email?: unknown; website?: unknown; turnstileToken?: unknown };
+      let body: { email?: unknown; website?: unknown };
       try {
         body = await request.json();
       } catch {
@@ -46,28 +46,9 @@ export default {
         return json({ status: "pending" }, 200, siteCors(env.SITE_URL)); // silently drop
       }
 
-      // Turnstile (skipped if secret key is the test placeholder)
-      if (env.TURNSTILE_SECRET_KEY && env.TURNSTILE_SECRET_KEY !== "test") {
-        const token = typeof body.turnstileToken === "string" ? body.turnstileToken : "";
-        if (!token) return json({ error: "turnstile_missing" }, 400, siteCors(env.SITE_URL));
-        const ip = request.headers.get("CF-Connecting-IP") || "";
-        let verifyResp: Response;
-        try {
-          verifyResp = await fetch(
-            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token, remoteip: ip }),
-            },
-          );
-        } catch (e) {
-          console.error("Turnstile siteverify failed", e);
-          return json({ error: "upstream_unavailable" }, 502, siteCors(env.SITE_URL));
-        }
-        const verifyJson = (await verifyResp.json()) as { success: boolean };
-        if (!verifyJson.success) return json({ error: "turnstile_failed" }, 400, siteCors(env.SITE_URL));
-      }
+      // Turnstile verification — deferred to a future task. v1 relies on the honeypot
+      // above plus Cloudflare's platform-level rate limiting configured via the
+      // dashboard (per-IP rule on POST /subscribe).
 
       const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
       if (!isValidEmail(email)) return json({ error: "invalid_email" }, 400, siteCors(env.SITE_URL));

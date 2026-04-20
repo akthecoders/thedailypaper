@@ -244,33 +244,43 @@ for the task-by-task implementation plan.
 4. **Audience** — Resend → Audiences → create "Daily Paper Readers" and copy the
    audience ID (UUID). Also create a **throwaway test audience**
    "Daily Paper Readers (test)" — used for the first live send.
-5. **Turnstile** — Cloudflare dashboard → Turnstile → create a site for
-   `thedailypaper.akshaykumar.me`, copy sitekey + secret key.
-6. **Worker KV namespace** — from `workers/subscribe/`:
+5. **Worker KV namespace** — from `workers/subscribe/`:
    ```bash
    npx wrangler kv:namespace create SUBSCRIBE_CACHE
    ```
    Paste the returned `id` into `workers/subscribe/wrangler.toml` replacing
    `KV_NAMESPACE_ID_HERE`.
-7. **Subscription secret** — generate: `openssl rand -hex 32`
-8. **Deploy the Worker:**
+6. **Subscription secret** — generate: `openssl rand -hex 32`
+7. **Deploy the Worker:**
    ```bash
    cd workers/subscribe
    npx wrangler secret put RESEND_API_KEY
    npx wrangler secret put RESEND_AUDIENCE_ID        # use the TEST audience ID at first
    npx wrangler secret put SUBSCRIPTION_SECRET
-   npx wrangler secret put TURNSTILE_SECRET_KEY
    npx wrangler deploy
    ```
    Copy the returned worker URL (e.g. `https://subscribe.<subdomain>.workers.dev`).
 
-9. **Astro site env** — set `PUBLIC_SUBSCRIBE_WORKER_URL=<worker URL>` in:
+8. **Astro site env** — set `PUBLIC_SUBSCRIBE_WORKER_URL=<worker URL>` in:
    - `site/.env` for local dev
    - Dokploy environment variables for production
 
-10. **GitHub Actions:**
-    - Repo Settings → Secrets: `RESEND_API_KEY`, `RESEND_AUDIENCE_ID` (test audience at first)
+9. **GitHub Actions:**
+    - Repo Settings → Secrets:
+      - `RESEND_API_KEY`
+      - `RESEND_AUDIENCE_ID` (TEST audience ID at first)
+      - `NEWSLETTER_FROM` (e.g. `The Daily Paper <papers@yourdomain>`)
+      - `NEWSLETTER_REPLY_TO` (email that should receive reader replies)
     - Repo Settings → Variables: `NEWSLETTER_ENABLED=false` (flip to `true` when ready)
+
+### Spam protection (v1 → v2)
+
+v1 relies on the form's honeypot field and Cloudflare's platform-level rate
+limiting (configure a rule in the CF dashboard: "Rate limiting rules" on the
+Worker: 10 req/min per client IP on the `/subscribe` path). A visible
+Turnstile challenge widget on the form is deferred to a future task. The
+Worker's `TURNSTILE_SECRET_KEY` binding remains reserved for v2 — do not set
+it.
 
 ### Capacity note
 

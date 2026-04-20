@@ -6,7 +6,8 @@ compatibility_date = "2026-04-01"
 #   RESEND_API_KEY
 #   RESEND_AUDIENCE_ID
 #   SUBSCRIPTION_SECRET
-#   TURNSTILE_SECRET_KEY
+# TURNSTILE_SECRET_KEY is reserved for a future task (Astro-side widget
+# not yet implemented). Do NOT set it — the worker ignores it in v1.
 # Vars (non-secret):
 [vars]
 SITE_URL = "https://thedailypaper.akshaykumar.me"

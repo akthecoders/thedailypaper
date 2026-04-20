@@ -49,6 +49,8 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
           NEWSLETTER_ENABLED: ${{ vars.NEWSLETTER_ENABLED || 'false' }}
+          NEWSLETTER_FROM: ${{ secrets.NEWSLETTER_FROM }}
+          NEWSLETTER_REPLY_TO: ${{ secrets.NEWSLETTER_REPLY_TO }}
         run: |
           if [ -n "${{ inputs.date }}" ]; then
             python agent/run_daily.py --date "${{ inputs.date }}"
