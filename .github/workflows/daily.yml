@@ -2,8 +2,8 @@ name: Daily Paper
 
 on:
   schedule:
-    # 7:00 AM IST = 01:30 UTC
-    - cron: "30 1 * * *"
+    # 7:00 AM IST = 01:30 UTC, Tuesdays and Fridays
+    - cron: "30 1 * * 2,5"
   workflow_dispatch:
     inputs:
       date:
