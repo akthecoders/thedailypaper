@@ -163,6 +163,16 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--date", type=str, help="YYYY-MM-DD, backfill")
+    parser.add_argument(
+        "--dry-newsletter",
+        action="store_true",
+        help="Render newsletter HTML+text to stdout and exit before commit. Useful for prompt-iterating the email template.",
+    )
+    parser.add_argument(
+        "--skip-newsletter",
+        action="store_true",
+        help="Run the full pipeline but skip the newsletter send step.",
+    )
     args = parser.parse_args()
 
     cfg = load_config()
