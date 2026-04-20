@@ -251,7 +251,7 @@ def main() -> int:
 
     # 5b. Newsletter ------------------------------------------------------
     post_url = f"{cfg['site_url'].rstrip('/')}/papers/{url_slug}"
-    date_pretty = datetime.utcnow().strftime("%b %d, %Y")
+    date_pretty = datetime.now(timezone.utc).strftime("%b %d, %Y")
 
     if args.dry_newsletter:
         dry_render_newsletter(

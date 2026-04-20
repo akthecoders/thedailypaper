@@ -47,6 +47,15 @@ def _format_authors(authors: list[str]) -> str:
     return f"{authors[0]}, {authors[1]} et al."
 
 
+def _brace_escape(s: str) -> str:
+    """Escape literal `{` and `}` in content so str.format() treats them as text.
+
+    ML paper titles and bodies routinely contain set/interval notation like
+    `{k}` or `{n, m}`. Without this, .format() raises KeyError/ValueError.
+    """
+    return s.replace("{", "{{").replace("}", "}}")
+
+
 def render_newsletter(
     winner: dict,
     explainer: dict,
@@ -62,11 +71,11 @@ def render_newsletter(
     archive_url = f"{site_url.rstrip('/')}/papers"
 
     html_body = html_tpl.format(
-        title_escaped=html.escape(winner["title"]),
-        authors_escaped=html.escape(authors),
-        primary_category=html.escape(winner.get("primary_category", "")),
-        tldr_escaped=html.escape(explainer.get("tldr", "")),
-        hook_escaped=html.escape(hook).replace("\n", "<br>"),
+        title_escaped=_brace_escape(html.escape(winner["title"])),
+        authors_escaped=_brace_escape(html.escape(authors)),
+        primary_category=_brace_escape(html.escape(winner.get("primary_category", ""))),
+        tldr_escaped=_brace_escape(html.escape(explainer.get("tldr", ""))),
+        hook_escaped=_brace_escape(html.escape(hook).replace("\n", "<br>")),
         post_url=post_url,
         archive_url=archive_url,
         site_url=site_url,
@@ -74,11 +83,11 @@ def render_newsletter(
         date_pretty=date_pretty,
     )
     text_body = text_tpl.format(
-        title=winner["title"],
-        authors=authors,
-        primary_category=winner.get("primary_category", ""),
-        tldr=explainer.get("tldr", ""),
-        hook=hook,
+        title=_brace_escape(winner["title"]),
+        authors=_brace_escape(authors),
+        primary_category=_brace_escape(winner.get("primary_category", "")),
+        tldr=_brace_escape(explainer.get("tldr", "")),
+        hook=_brace_escape(hook),
         post_url=post_url,
         archive_url=archive_url,
         date_pretty=date_pretty,
@@ -126,7 +135,12 @@ def send_newsletter(
         raise RuntimeError(
             f"Resend broadcasts.create failed: {create_resp.status_code} {create_resp.text[:300]}"
         )
-    broadcast_id = create_resp.json()["id"]
+    try:
+        broadcast_id = create_resp.json()["id"]
+    except (KeyError, ValueError) as exc:
+        raise RuntimeError(
+            f"Resend broadcasts.create: unexpected response body: {create_resp.text[:300]}"
+        ) from exc
 
     # Step 2: send it.
     send_resp = requests.post(
