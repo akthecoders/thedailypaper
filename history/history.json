@@ -8,5 +8,10 @@
     "date": "2026-04-20T02:29:00.727911+00:00",
     "arxiv_id": "2604.15694",
     "title": "Neural Continuous-Time Markov Chain: Discrete Diffusion via Decoupled Jump Timing and Direction"
+  },
+  {
+    "date": "2026-04-21T02:28:05.289523+00:00",
+    "arxiv_id": "2604.17739",
+    "title": "Tool Learning Needs Nothing More Than a Free 8B Language Model"
   }
 ]

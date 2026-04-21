@@ -1,0 +1,376 @@
+[
+  {
+    "arxiv_id": "2604.18067",
+    "title": "Towards Real-Time ECG and EMG Modeling on $\u03bc$ NPUs",
+    "authors": [
+      "Josh Millar",
+      "Ashok Samraj Thangarajan",
+      "Soumyajit Chatterjee",
+      "Hamed Haddadi"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "The miniaturisation of neural processing units (NPUs) and other low-power accelerators has enabled their integration into microcontroller-scale wearable hardware, supporting near-real-time, offline, and privacy-preserving inference. Yet physiological signal analysis has remained infeasible on such hardware; recent Transformer-based models show state-of-the-art performance but are prohibitively large for resource- and power-constrained hardware and incompatible with $\u03bc$ NPUs due to their dynamic attention operations. We introduce PhysioLite, a lightweight, NPU-compatible model architecture and training framework for ECG/EMG signal analysis. Using learnable wavelet filter banks, CPU-offloaded positional encoding, and hardware-aware layer design, PhysioLite reaches performance comparable to state-of-the-art Transformer-based foundation models on ECG and EMG benchmarks, while being <10% of the size ($\\sim$370KB with 8-bit quantization). We also profile its component-wise latency and resour",
+    "pdf_url": "https://arxiv.org/pdf/2604.18067v1",
+    "abs_url": "https://arxiv.org/abs/2604.18067",
+    "published": "2026-04-20T10:35:33Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17919",
+    "title": "Fisher Decorator: Refining Flow Policy via A Local Transport Map",
+    "authors": [
+      "Xiaoyuan Cheng",
+      "Haoyu Wang",
+      "Wenxuan Yuan",
+      "Ziyan Wang",
+      "Zonghao Chen"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Recent advances in flow-based offline reinforcement learning (RL) have achieved strong performance by parameterizing policies via flow matching. However, they still face critical trade-offs among expressiveness, optimality, and efficiency. In particular, existing flow policies interpret the $L_2$ regularization as an upper bound of the 2-Wasserstein distance ($W_2$), which can be problematic in offline settings. This issue stems from a fundamental geometric mismatch: the behavioral policy manifold is inherently anisotropic, whereas the $L_2$ (or upper bound of $W_2$) regularization is isotropic and density-insensitive, leading to systematically misaligned optimization directions. To address this, we revisit offline RL from a geometric perspective and show that policy refinement can be formulated as a local transport map: an initial flow policy augmented by a residual displacement. By analyzing the induced density transformation, we derive a local quadratic approximation of the KL-const",
+    "pdf_url": "https://arxiv.org/pdf/2604.17919v1",
+    "abs_url": "https://arxiv.org/abs/2604.17919",
+    "published": "2026-04-20T07:54:36Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17897",
+    "title": "LoReC: Rethinking Large Language Models for Graph Data Analysis",
+    "authors": [
+      "Hongyu Zhan",
+      "Qixin Wang",
+      "Yusen Tan",
+      "Haitao Yu",
+      "Jingbo Zhou"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "The advent of Large Language Models (LLMs) has fundamentally reshaped the way we interact with graphs, giving rise to a new paradigm called GraphLLM. As revealed in recent studies, graph learning can benefit from LLMs. However, we observe limited benefits when we directly utilize LLMs to make predictions for graph-related tasks within GraphLLM paradigm, which even yields suboptimal results compared to conventional GNN-based approaches. Through in-depth analysis, we find this failure can be attributed to LLMs' limited capability for processing graph data and their tendency to overlook graph information. To address this issue, we propose LoReC (Look, Remember, and Contrast), a novel plug-and-play method for GraphLLM paradigm, which enhances LLM's understanding of graph data through three stages: (1) Look: redistributing attention to graph; (2) Remember: re-injecting graph information into the Feed-Forward Network (FFN); (3) Contrast: rectifying the vanilla logits produced in the decoding",
+    "pdf_url": "https://arxiv.org/pdf/2604.17897v1",
+    "abs_url": "https://arxiv.org/abs/2604.17897",
+    "published": "2026-04-20T07:16:29Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17778",
+    "title": "TeleEmbedBench: A Multi-Corpus Embedding Benchmark for RAG in Telecommunications",
+    "authors": [
+      "Pranshav Gajjar",
+      "Vijay K Shah"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Large language models (LLMs) are increasingly deployed in the telecommunications domain for critical tasks, relying heavily on Retrieval-Augmented Generation (RAG) to adapt general-purpose models to continuously evolving standards. However, a significant gap exists in evaluating the embedding models that power these RAG pipelines, as general-purpose benchmarks fail to capture the dense, acronym-heavy, and highly cross-referential nature of telecommunications corpora. To address this, we introduce TeleEmbedBench, the first large-scale, multi-corpus embedding benchmark designed specifically for telecommunications. The benchmark spans three heterogeneous corpora: O-RAN Alliance specifications, 3GPP release documents, and the srsRAN open-source codebase, comprising 9,000 question-chunk pairs across three standard chunk sizes (512, 1024, and 2048 tokens). To construct this dataset at scale without manual annotation bottlenecks, we employ a novel automated pipeline where one LLM generates sp",
+    "pdf_url": "https://arxiv.org/pdf/2604.17778v1",
+    "abs_url": "https://arxiv.org/abs/2604.17778",
+    "published": "2026-04-20T04:00:13Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17739",
+    "title": "Tool Learning Needs Nothing More Than a Free 8B Language Model",
+    "authors": [
+      "Chenming Tang",
+      "Hsiu-Yuan Huang",
+      "Weijie Liu",
+      "Junqiang Zheng",
+      "Saiyong Yang"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Reinforcement learning (RL) has become a prevalent paradigm for training tool calling agents, which typically requires online interactive environments. Existing approaches either rely on training data with ground truth annotations or require advanced commercial language models (LMs) to synthesize environments that keep fixed once created. In this work, we propose TRUSTEE, a data-free method training tool calling agents with dynamic environments fully simulated by free open-source LMs that can be as small as 8B, including task generation, user simulation, tool simulation and trajectory evaluation, paired with an adaptive curriculum learning mechanism that controls various aspects of the task difficulty dynamically during training. Our empirical results show that TRUSTEE brings consistent improvements across various domains and outperforms all the baselines which require extra external resources for training. These confirm that, with a sufficiently sophisticated design, even simulated en",
+    "pdf_url": "https://arxiv.org/pdf/2604.17739v1",
+    "abs_url": "https://arxiv.org/abs/2604.17739",
+    "published": "2026-04-20T02:54:02Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17720",
+    "title": "FlashFPS: Efficient Farthest Point Sampling for Large-Scale Point Clouds via Pruning and Caching",
+    "authors": [
+      "Yuzhe Fu",
+      "Hancheng Ye",
+      "Cong Guo",
+      "Junyao Zhang",
+      "Qinsi Wang"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Point-based Neural Networks (PNNs) have become a key approach for point cloud processing. However, a core operation in these models, Farthest Point Sampling (FPS), often introduces significant inference latency, especially for large-scale processing. Despite existing CUDA- and hardware-level optimizations, FPS remains a major bottleneck due to exhaustive computations across multiple network layers in PNNs, which hinders scalability. Through systematic analysis, we identify three substantial redundancies in FPS, including unnecessary full-cloud computations, redundant late-stage iterations, and predictable inter-layer outputs that make later FPS computations avoidable. To address these, we propose \\textbf{\\textit{FlashFPS}}, a hardware-agnostic, plug-and-play framework for FPS acceleration, composed of \\textit{FPS-Prune} and \\textit{FPS-Cache}. \\textit{FPS-Prune} introduces candidate pruning and iteration pruning to reduce redundant computations in FPS while preserving sampling quality,",
+    "pdf_url": "https://arxiv.org/pdf/2604.17720v1",
+    "abs_url": "https://arxiv.org/abs/2604.17720",
+    "published": "2026-04-20T02:03:24Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17931",
+    "title": "LiteResearcher: A Scalable Agentic RL Training Framework for Deep Research Agent",
+    "authors": [
+      "Wanli Li",
+      "Bince Qu",
+      "Bo Pan",
+      "Jianyu Zhang",
+      "Zheng Liu"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Reinforcement Learning (RL) has emerged as a powerful training paradigm for LLM-based agents. However, scaling agentic RL for deep research remains constrained by two coupled challenges: hand-crafted synthetic data fails to elicit genuine real-world search capabilities, and real-world search dependency during RL training introduces instability and prohibitive cost, which limits the scalability of Agentic RL. LiteResearcher is a training framework that makes Agentic RL scalable: by constructing a lite virtual world that mirrors real-world search dynamics, we enable a continuously improving training recipe that empowers a tiny search agent to outperform large-scale open-source and commercial models (e.g., Tongyi DeepResearch and Claude-4.5 Sonnet). Specifically, on common benchmarks such as GAIA and Xbench, our LiteResearcher-4B achieves open-source state-of-the-art results of 71.3% and 78.0% respectively, demonstrating that scalable RL training is a key enabler for Deep Research Agents.",
+    "pdf_url": "https://arxiv.org/pdf/2604.17931v1",
+    "abs_url": "https://arxiv.org/abs/2604.17931",
+    "published": "2026-04-20T08:11:09Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17753",
+    "title": "Evolutionary Negative Module Pruning for Better LoRA Merging",
+    "authors": [
+      "Anda Cao",
+      "Zhuo Gou",
+      "Yi Wang",
+      "Kaixuan Chen",
+      "Yu Wang"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Merging multiple Low-Rank Adaptation (LoRA) experts into a single backbone is a promising approach for efficient multi-task deployment. While existing methods strive to alleviate interference via weight interpolation or subspace alignment, they rest upon the implicit assumption that all LoRA matrices contribute constructively to the merged model. In this paper, we uncover a critical bottleneck in current merging paradigms: the existence of $\\textit{negative modules}$ -- specific LoRA layers that inherently degrade global performance upon merging. We propose $\\textbf{E}$volutionary $\\textbf{N}$egative $\\textbf{M}$odule $\\textbf{P}$runing ($\\textbf{ENMP}$), a plug-and-play LoRA pruning method to locate and exclude these detrimental modules prior to merging. By leveraging an evolutionary search strategy, ENMP effectively navigates the discrete, non-differentiable landscape of module selection to identify optimal pruning configurations. Extensive evaluations demonstrate that ENMP consisten",
+    "pdf_url": "https://arxiv.org/pdf/2604.17753v1",
+    "abs_url": "https://arxiv.org/abs/2604.17753",
+    "published": "2026-04-20T03:13:18Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17745",
+    "title": "HiRAS: A Hierarchical Multi-Agent Framework for Paper-to-Code Generation and Execution",
+    "authors": [
+      "Hanhua Hong",
+      "Yizhi LI",
+      "Jiaoyan Chen",
+      "Sophia Ananiadou",
+      "Xiaoli Li"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Recent advances in large language models have highlighted their potential to automate computational research, particularly reproducing experimental results. However, existing approaches still use fixed sequential agent pipelines with weak global coordination, which limits their robustness and overall performance. In this work, we propose Hierarchical Research Agent System (HiRAS), a hierarchical multi-agent framework for end-to-end experiment reproduction that employs supervisory manager agents to coordinate specialised agents across fine-grained stages. We also identify limitations in the reference-free evaluation of the Paper2Code benchmark and introduce Paper2Code-Extra (P2C-Ex), a refined protocol that incorporates repository-level information and better aligns with the original reference-based metric. We conduct extensive evaluation, validating the effectiveness and robustness of our proposed methods, and observing improvements, including >10\\% relative performance gain beyond the",
+    "pdf_url": "https://arxiv.org/pdf/2604.17745v1",
+    "abs_url": "https://arxiv.org/abs/2604.17745",
+    "published": "2026-04-20T02:59:43Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.18062",
+    "title": "Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design",
+    "authors": [
+      "Yunjia Yang",
+      "Babak Gholami",
+      "Caglar Gurbuz",
+      "Mohammad Rashed",
+      "Nils Thuerey"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Accurate machine-learning models for aerodynamic prediction are essential for accelerating shape optimization, yet remain challenging to develop for complex three-dimensional configurations due to the high cost of generating training data. This work introduces a methodology for efficiently constructing accurate surrogate models for design purposes by first pre-training a large-scale model on diverse geometries and then fine-tuning it with a few more detailed task-specific samples. A Transformer-based architecture, AeroTransformer, is developed and tailored for large-scale training to learn aerodynamics. The methodology is evaluated on transonic wings, where the model is pre-trained on SuperWing, a dataset of nearly 30000 samples with broad geometric diversity, and subsequently fine-tuned to handle specific wing shapes perturbed from the Common Research Model. Results show that, with 450 task-specific samples, the proposed methodology achieves 0.36% error on surface-flow prediction, red",
+    "pdf_url": "https://arxiv.org/pdf/2604.18062v1",
+    "abs_url": "https://arxiv.org/abs/2604.18062",
+    "published": "2026-04-20T10:33:14Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17803",
+    "title": "Adversarial Arena: Crowdsourcing Data Generation through Interactive Competition",
+    "authors": [
+      "Prasoon Goyal",
+      "Sattvik Sahai",
+      "Michael Johnston",
+      "Hangjie Shi",
+      "Yao Lu"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Post-training Large Language Models requires diverse, high-quality data which is rare and costly to obtain, especially in low resource domains and for multi-turn conversations. Common solutions are crowdsourcing or synthetic generation, but both often yield low-quality or low-diversity data. We introduce Adversarial Arena for building high quality conversational datasets by framing data generation as an adversarial task: attackers create prompts, and defenders generate responses. This interactive competition between multiple teams naturally produces diverse and complex data. We validated this approach by conducting a competition with 10 academic teams from top US and European universities, each building attacker or defender bots. The competition, focused on safety alignment of LLMs in cybersecurity, generated 19,683 multi-turn conversations. Fine-tuning an open-source model on this dataset produced an 18.47% improvement in secure code generation on CyberSecEval-Instruct and 29.42% impr",
+    "pdf_url": "https://arxiv.org/pdf/2604.17803v1",
+    "abs_url": "https://arxiv.org/abs/2604.17803",
+    "published": "2026-04-20T04:51:39Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17927",
+    "title": "Brain-Inspired Capture: Evidence-Driven Neuromimetic Perceptual Simulation for Visual Decoding",
+    "authors": [
+      "Feixue Shao",
+      "Guangze Shi",
+      "Xueyu Liu",
+      "Yongfei Wu",
+      "Mingqiang Wei"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Visual decoding of neurophysiological signals is a critical challenge for brain-computer interfaces (BCIs) and computational neuroscience. However, current approaches are often constrained by the systematic and stochastic gaps between neural and visual modalities, largely neglecting the intrinsic computational mechanisms of the Human Visual System (HVS). To address this, we propose Brain-Inspired Capture (BI-Cap), a neuromimetic perceptual simulation paradigm that aligns these modalities by emulating HVS processing. Specifically, we construct a neuromimetic pipeline comprising four biologically plausible dynamic and static transformations, coupled with Mutual Information (MI)-guided dynamic blur regulation to simulate adaptive visual processing. Furthermore, to mitigate the inherent non-stationarity of neural activity, we introduce an evidence-driven latent space representation. This formulation explicitly models uncertainty, thereby ensuring robust neural embeddings. Extensive evaluat",
+    "pdf_url": "https://arxiv.org/pdf/2604.17927v1",
+    "abs_url": "https://arxiv.org/abs/2604.17927",
+    "published": "2026-04-20T08:07:33Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17789",
+    "title": "DuQuant++: Fine-grained Rotation Enhances Microscaling FP4 Quantization",
+    "authors": [
+      "Haokun Lin",
+      "Xinle Jia",
+      "Haobo Xu",
+      "Bingchen Yao",
+      "Xianglong Guo"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "The MXFP4 microscaling format, which partitions tensors into blocks of 32 elements sharing an E8M0 scaling factor, has emerged as a promising substrate for efficient LLM inference, backed by native hardware support on NVIDIA Blackwell Tensor Cores. However, activation outliers pose a unique challenge under this format: a single outlier inflates the shared block scale, compressing the effective dynamic range of the remaining elements and causing significant quantization error. Existing rotation-based remedies, including randomized Hadamard and learnable rotations, are data-agnostic and therefore unable to specifically target the channels where outliers concentrate. We propose DuQuant++, which adapts the outlier-aware fine-grained rotation of DuQuant to the MXFP4 format by aligning the rotation block size with the microscaling group size (B{=}32). Because each MXFP4 group possesses an independent scaling factor, the cross-block variance issue that necessitates dual rotations and a zigzag",
+    "pdf_url": "https://arxiv.org/pdf/2604.17789v1",
+    "abs_url": "https://arxiv.org/abs/2604.17789",
+    "published": "2026-04-20T04:27:28Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.18027",
+    "title": "CodePivot: Bootstrapping Multilingual Transpilation in LLMs via Reinforcement Learning without Parallel Corpora",
+    "authors": [
+      "Shangyu Li",
+      "Juyong Jiang",
+      "Meibo Ren",
+      "Sizhe Zhong",
+      "Huiri Tan"
+    ],
+    "primary_category": "cs.SE",
+    "abstract": "Transpilation, or code translation, aims to convert source code from one programming language (PL) to another. It is beneficial for many downstream applications, from modernizing large legacy codebases to augmenting data for low-resource PLs. Recent large language model (LLM)-based approaches have demonstrated immense potential for code translation. Among these approaches, training-based methods are particularly important because LLMs currently do not effectively adapt to domain-specific settings that suffer from a lack of knowledge without targeted training. This limitation is evident in transpilation tasks involving low-resource PLs. However, existing training-based approaches rely on a pairwise transpilation paradigm, making it impractical to support a diverse range of PLs. This limitation is particularly prominent for low-resource PLs due to a scarcity of training data. Furthermore, these methods suffer from suboptimal reinforcement learning (RL) reward formulations. To address the",
+    "pdf_url": "https://arxiv.org/pdf/2604.18027v1",
+    "abs_url": "https://arxiv.org/abs/2604.18027",
+    "published": "2026-04-20T09:52:50Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17941",
+    "title": "From Heads to Neurons: Causal Attribution and Steering in Multi-Task Vision-Language Models",
+    "authors": [
+      "Qidong Wang",
+      "Junjie Hu",
+      "Ming Jiang"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Recent work has increasingly explored neuron-level interpretation in vision-language models (VLMs) to identify neurons critical to final predictions. However, existing neuron analyses generally focus on single tasks, limiting the comparability of neuron importance across tasks. Moreover, ranking strategies tend to score neurons in isolation, overlooking how task-dependent information pathways shape the write-in effects of feed-forward network (FFN) neurons. This oversight can exacerbate neuron polysemanticity in multi-task settings, introducing noise into the identification and intervention of task-critical neurons. In this study, we propose HONES (Head-Oriented Neuron Explanation & Steering), a gradient-free framework for task-aware neuron attribution and steering in multi-task VLMs. HONES ranks FFN neurons by their causal write-in contributions conditioned on task-relevant attention heads, and further modulates salient neurons via lightweight scaling. Experiments on four diverse mult",
+    "pdf_url": "https://arxiv.org/pdf/2604.17941v1",
+    "abs_url": "https://arxiv.org/abs/2604.17941",
+    "published": "2026-04-20T08:21:06Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17808",
+    "title": "Enabling AI ASICs for Zero Knowledge Proof",
+    "authors": [
+      "Jianming Tong",
+      "Jingtian Dang",
+      "Simon Langowski",
+      "Tianhao Huang",
+      "Asra Ali"
+    ],
+    "primary_category": "cs.AR",
+    "abstract": "Zero-knowledge proof (ZKP) provers remain costly because multi-scalar multiplication (MSM) and number-theoretic transforms (NTTs) dominate runtime as they need significant computation. AI ASICs such as TPUs provide massive matrix throughput and SotA energy efficiency. We present MORPH, the first framework that reformulates ZKP kernels to match AI-ASIC execution. We introduce Big-T complexity, a hardware-aware complexity model that exposes heterogeneous bottlenecks and layout-transformation costs ignored by Big-O. Guided by this analysis, (1) at arithmetic level, MORPH develops an MXU-centric extended-RNS lazy reduction that converts high-precision modular arithmetic into dense low-precision GEMMs, eliminating all carry chains, and (2) at dataflow level, MORPH constructs a unified-sharding layout-stationary TPU Pippenger MSM and optimized 3/5-step NTT that avoid on-TPU shuffles to minimize costly memory reorganization. Implemented in JAX, MORPH enables TPUv6e8 to achieve up-to 10x highe",
+    "pdf_url": "https://arxiv.org/pdf/2604.17808v1",
+    "abs_url": "https://arxiv.org/abs/2604.17808",
+    "published": "2026-04-20T05:00:47Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.18037",
+    "title": "HABIT: Chrono-Synergia Robust Progressive Learning Framework for Composed Image Retrieval",
+    "authors": [
+      "Zixu Li",
+      "Yupeng Hu",
+      "Zhiwei Chen",
+      "Shiqi Zhang",
+      "Qinlei Huang"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Composed Image Retrieval (CIR) is a flexible image retrieval paradigm that enables users to accurately locate the target image through a multimodal query composed of a reference image and modification text. Although this task has demonstrated promising applications in personalized search and recommendation systems, it encounters a severe challenge in practical scenarios known as the Noise Triplet Correspondence (NTC) problem. This issue primarily arises from the high cost and subjectivity involved in annotating triplet data. To address this problem, we identify two central challenges: the precise estimation of composed semantic discrepancy and the insufficient progressive adaptation to modification discrepancy. To tackle these challenges, we propose a cHrono-synergiA roBust progressIve learning framework for composed image reTrieval (HABIT), which consists of two core modules. First, the Mutual Knowledge Estimation Module quantifies sample cleanliness by calculating the Transition Rate",
+    "pdf_url": "https://arxiv.org/pdf/2604.18037v1",
+    "abs_url": "https://arxiv.org/abs/2604.18037",
+    "published": "2026-04-20T10:02:18Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17915",
+    "title": "OneDrive: Unified Multi-Paradigm Driving with Vision-Language-Action Models",
+    "authors": [
+      "Yiwei Zhang",
+      "Xuesong Chen",
+      "Jin Gao",
+      "Hanshi Wang",
+      "Fudong Ge"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Vision-Language Models(VLMs) excel at autoregressive text generation, yet end-to-end autonomous driving requires multi-task learning with structured outputs and heterogeneous decoding behaviors, such as autoregressive language generation, parallel object detection and trajectory regression. To accommodate these differences, existing systems typically introduce separate or cascaded decoders, resulting in architectural fragmentation and limited backbone reuse. In this work, we present a unified autonomous driving framework built upon a pretrained VLM, where heterogeneous decoding behaviors are reconciled within a single transformer decoder. We demonstrate that pretrained VLM attention exhibits strong transferability beyond pure language modeling. By organizing visual and structured query tokens within a single causal decoder, structured queries can naturally condition on visual context through the original attention mechanism. Textual and structured outputs share a common attention backb",
+    "pdf_url": "https://arxiv.org/pdf/2604.17915v1",
+    "abs_url": "https://arxiv.org/abs/2604.17915",
+    "published": "2026-04-20T07:50:00Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17898",
+    "title": "ReTrack: Evidence-Driven Dual-Stream Directional Anchor Calibration Network for Composed Video Retrieval",
+    "authors": [
+      "Zixu Li",
+      "Yupeng Hu",
+      "Zhiwei Chen",
+      "Qinlei Huang",
+      "Guozhi Qiu"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "With the rapid growth of video data, Composed Video Retrieval (CVR) has emerged as a novel paradigm in video retrieval and is receiving increasing attention from researchers. Unlike unimodal video retrieval methods, the CVR task takes a multi-modal query consisting of a reference video and a piece of modification text as input. The modification text conveys the user's intended alterations to the reference video. Based on this input, the model aims to retrieve the most relevant target video. In the CVR task, there exists a substantial discrepancy in information density between video and text modalities. Traditional composition methods tend to bias the composed feature toward the reference video, which leads to suboptimal retrieval performance. This limitation is significant due to the presence of three core challenges: (1) modal contribution entanglement, (2) explicit optimization of composed features, and (3) retrieval uncertainty. To address these challenges, we propose the evidence-d",
+    "pdf_url": "https://arxiv.org/pdf/2604.17898v1",
+    "abs_url": "https://arxiv.org/abs/2604.17898",
+    "published": "2026-04-20T07:17:59Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.17873",
+    "title": "Spatiotemporal Sycophancy: Negation-Based Gaslighting in Video Large Language Models",
+    "authors": [
+      "Ziyao Tang",
+      "Pengkun Jiao",
+      "Bin Zhu",
+      "Huiyan Qi",
+      "Jingjing Chen"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Video Large Language Models (Vid-LLMs) have demonstrated remarkable performance in video understanding tasks, yet their robustness under conversational interaction remains largely underexplored. In this paper, we identify spatiotemporal sycophancy, a failure mode in which Vid-LLMs retract initially correct, visually grounded judgments and conform to misleading user feedback under negation-based gaslighting. Rather than merely changing their answers, the models often fabricate unsupported temporal or spatial explanations to justify incorrect revisions. To systematically investigate this phenomenon, we propose a negation-based gaslighting evaluation framework and introduce GasVideo-1000, a curated benchmark designed to probe spatiotemporal sycophancy with clear visual grounding and temporal reasoning requirements. We evaluate a broad range of state-of-the-art open-source and proprietary Vid-LLMs across diverse video understanding tasks. Extensive experiments reveal that vulnerability to ",
+    "pdf_url": "https://arxiv.org/pdf/2604.17873v1",
+    "abs_url": "https://arxiv.org/abs/2604.17873",
+    "published": "2026-04-20T06:35:26Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]
