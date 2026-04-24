@@ -13,5 +13,10 @@
     "date": "2026-04-21T02:28:05.289523+00:00",
     "arxiv_id": "2604.17739",
     "title": "Tool Learning Needs Nothing More Than a Free 8B Language Model"
+  },
+  {
+    "date": "2026-04-24T02:28:31.604898+00:00",
+    "arxiv_id": "2604.17919",
+    "title": "Fisher Decorator: Refining Flow Policy via A Local Transport Map"
   }
 ]

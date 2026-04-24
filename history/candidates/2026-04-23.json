@@ -1,0 +1,362 @@
+[
+  {
+    "arxiv_id": "2604.21284",
+    "title": "Spatial Metaphors for LLM Memory: A Critical Analysis of the MemPalace Architecture",
+    "authors": [
+      "Robin Dey",
+      "Panyanon Viradecha"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "MemPalace is an open-source AI memory system that applies the ancient method of loci (memory palace) spatial metaphor to organize long-term memory for large language models; launched in April 2026, it accumulated over 47,000 GitHub stars in its first two weeks and claims state-of-the-art retrieval performance on the LongMemEval benchmark (96.6% Recall@5) without requiring any LLM inference at write time. Through independent codebase analysis, benchmark replication, and comparison with competing systems, we find that MemPalace's headline retrieval performance is attributable primarily to its verbatim storage philosophy combined with ChromaDB's default embedding model (all-MiniLM-L6-v2), rather than to its spatial organizational metaphor per se -- the palace hierarchy (Wings->Rooms->Closets->Drawers) operates as standard vector database metadata filtering, an effective but well-established technique. However, MemPalace makes several genuinely novel contributions: (1) a contrarian verbati",
+    "pdf_url": "https://arxiv.org/pdf/2604.21284v1",
+    "abs_url": "https://arxiv.org/abs/2604.21284",
+    "published": "2026-04-23T04:59:16Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21300",
+    "title": "Explainable Disentangled Representation Learning for Generalizable Authorship Attribution in the Era of Generative AI",
+    "authors": [
+      "Hieu Man",
+      "Van-Cuong Pham",
+      "Nghia Trung Ngo",
+      "Franck Dernoncourt",
+      "Thien Huu Nguyen"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Learning robust representations of authorial style is crucial for authorship attribution and AI-generated text detection. However, existing methods often struggle with content-style entanglement, where models learn spurious correlations between authors' writing styles and topics, leading to poor generalization across domains. To address this challenge, we propose Explainable Authorship Variational Autoencoder (EAVAE), a novel framework that explicitly disentangles style from content through architectural separation-by-design. EAVAE first pretrains style encoders using supervised contrastive learning on diverse authorship data, then finetunes with a Variational Autoencoder (VEA) architecture using separate encoders for style and content representations. Disentanglement is enforced through a novel discriminator that not only distinguishes whether pairs of style/content representations belong to the same or different authors/content sources, but also generates natural language explanation",
+    "pdf_url": "https://arxiv.org/pdf/2604.21300v1",
+    "abs_url": "https://arxiv.org/abs/2604.21300",
+    "published": "2026-04-23T05:34:20Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21204",
+    "title": "On Reasoning Behind Next Occupation Recommendation",
+    "authors": [
+      "Shan Dong",
+      "Palakorn Achananuparp",
+      "Hieu Hien Mai",
+      "Lei Wang",
+      "Yao Lu"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "In this work, we develop a novel reasoning approach to enhance the performance of large language models (LLMs) in future occupation prediction. In this approach, a reason generator first derives a ``reason'' for a user using his/her past education and career history. The reason summarizes the user's preference and is used as the input of an occupation predictor to recommend the user's next occupation. This two-step occupation prediction approach is, however, non-trivial as LLMs are not aligned with career paths or the unobserved reasons behind each occupation decision. We therefore propose to fine-tune LLMs improving their reasoning and occupation prediction performance. We first derive high-quality oracle reasons, as measured by factuality, coherence and utility criteria, using a LLM-as-a-Judge. These oracle reasons are then used to fine-tune small LLMs to perform reason generation and next occupation prediction. Our extensive experiments show that: (a) our approach effectively enhanc",
+    "pdf_url": "https://arxiv.org/pdf/2604.21204v1",
+    "abs_url": "https://arxiv.org/abs/2604.21204",
+    "published": "2026-04-23T01:52:14Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21446",
+    "title": "AI-Gram: When Visual Agents Interact in a Social Network",
+    "authors": [
+      "Andrew Shin"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "We present AI-Gram, a live platform enabling image-based interactions, to study social dynamics in a fully autonomous multi-agent visual network where all participants are LLM-driven agents. Using the platform, we conduct experiments on how agents communicate and adapt through visual media, and observe the spontaneous emergence of visual reply chains, indicating rich communicative structure. At the same time, agents exhibit aesthetic sovereignty resisting stylistic convergence toward social partners, anchoring under adversarial influence, and a decoupling between visual similarity and social ties. These results reveal a fundamental asymmetry in current agent architectures: strong expressive communication paired with a steadfast preservation of individual visual identity. We release AI-Gram as a publicly accessible, continuously evolving platform for studying social dynamics in Al-native multi-agent systems. https://ai-gram.ai/",
+    "pdf_url": "https://arxiv.org/pdf/2604.21446v1",
+    "abs_url": "https://arxiv.org/abs/2604.21446",
+    "published": "2026-04-23T09:05:53Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21263",
+    "title": "Trustworthy Clinical Decision Support Using Meta-Predicates and Domain-Specific Languages",
+    "authors": [
+      "Michael Bouzinier",
+      "Sergey Trifonov",
+      "Michael Chumack",
+      "Eugenia Lvova",
+      "Dmitry Etin"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "\\textbf{Background:} Regulatory frameworks for AI in healthcare, including the EU AI Act and FDA guidance on AI/ML-based medical devices, require clinical decision support to demonstrate not only accuracy but auditability. Existing formal languages for clinical logic validate syntactic and structural correctness but not whether decision rules use epistemologically appropriate evidence.   \\textbf{Methods:} Drawing on design-by-contract principles, we introduce meta-predicates -- predicates about predicates -- for asserting epistemological constraints on clinical decision rules expressed in a DSL. An epistemological type system classifies annotations along four dimensions: purpose, knowledge domain, scale, and method of acquisition. Meta-predicates assert which evidence types are permissible in any given rule. The framework is instantiated in AnFiSA, an open-source platform for genetic variant curation, and demonstrated using the Brigham Genomics Medicine protocol on 5.6 million variants",
+    "pdf_url": "https://arxiv.org/pdf/2604.21263v1",
+    "abs_url": "https://arxiv.org/abs/2604.21263",
+    "published": "2026-04-23T04:11:44Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21771",
+    "title": "Generalizing Test Cases for Comprehensive Test Scenario Coverage",
+    "authors": [
+      "Binhang Qi",
+      "Yun Lin",
+      "Xinyi Weng",
+      "Chenyan Liu",
+      "Hailong Sun"
+    ],
+    "primary_category": "cs.SE",
+    "abstract": "Test cases are essential for software development and maintenance. In practice, developers derive multiple test cases from an implicit pattern based on their understanding of requirements and inference of diverse test scenarios, each validating a specific behavior of the focal method. However, producing comprehensive tests is time-consuming and error-prone: many important tests that should have accompanied the initial test are added only after a significant delay, sometimes only after bugs are triggered. Existing automated test generation techniques largely focus on code coverage. Yet in real projects, practical tests are seldom driven by code coverage alone, since test scenarios do not necessarily align with control-flow branches. Instead, test scenarios originate from requirements, which are often undocumented and implicitly embedded in a project's design and implementation. However, developer-written tests are frequently treated as executable specifications; thus, even a single init",
+    "pdf_url": "https://arxiv.org/pdf/2604.21771v1",
+    "abs_url": "https://arxiv.org/abs/2604.21771",
+    "published": "2026-04-23T15:29:09Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21570",
+    "title": "SpecSyn: LLM-based Synthesis and Refinement of Formal Specifications for Real-world Program Verification",
+    "authors": [
+      "Lezhi Ma",
+      "Shangqing Liu",
+      "Yi Li",
+      "Qiong Wu",
+      "Han Wang"
+    ],
+    "primary_category": "cs.SE",
+    "abstract": "Program verification is a formal technique to rigorously ensure the correctness and fault-freeness of software systems. However, constructing comprehensive interprocedural specifications for full verification obligations is time-consuming and labor-intensive, giving rise to automated specification generation approaches. Despite the significant advancements in these approaches brought by Large Language Models (LLMs), existing LLM-empowered approaches still suffer from significant limitations: they lack effective strategies for handling sizable input programs, and are typically equipped with no mechanisms to evaluate and guarantee the strength of the generated specifications. The limitations impair their ability to extract precise specifications from real-world complicated programs to support the verification of target properties, thereby hindering the applicability of existing approaches in verification tasks on real-world programs. To remedy this gap, we propose SpecSyn, a novel LLM-ba",
+    "pdf_url": "https://arxiv.org/pdf/2604.21570v1",
+    "abs_url": "https://arxiv.org/abs/2604.21570",
+    "published": "2026-04-23T11:46:19Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21860",
+    "title": "Transient Turn Injection: Exposing Stateless Multi-Turn Vulnerabilities in Large Language Models",
+    "authors": [
+      "Naheed Rayhan",
+      "Sohely Jahan"
+    ],
+    "primary_category": "cs.CR",
+    "abstract": "Large language models (LLMs) are increasingly integrated into sensitive workflows, raising the stakes for adversarial robustness and safety. This paper introduces Transient Turn Injection(TTI), a new multi-turn attack technique that systematically exploits stateless moderation by distributing adversarial intent across isolated interactions. TTI leverages automated attacker agents powered by large language models to iteratively test and evade policy enforcement in both commercial and open-source LLMs, marking a departure from conventional jailbreak approaches that typically depend on maintaining persistent conversational context. Our extensive evaluation across state-of-the-art models-including those from OpenAI, Anthropic, Google Gemini, Meta, and prominent open-source alternatives-uncovers significant variations in resilience to TTI attacks, with only select architectures exhibiting substantial inherent robustness. Our automated blackbox evaluation framework also uncovers previously u",
+    "pdf_url": "https://arxiv.org/pdf/2604.21860v1",
+    "abs_url": "https://arxiv.org/abs/2604.21860",
+    "published": "2026-04-23T16:56:14Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21748",
+    "title": "StructMem: Structured Memory for Long-Horizon Behavior in LLMs",
+    "authors": [
+      "Buqiang Xu",
+      "Yijun Chen",
+      "Jizhan Fang",
+      "Ruobin Zhong",
+      "Yunzhi Yao"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Long-term conversational agents need memory systems that capture relationships between events, not merely isolated facts, to support temporal reasoning and multi-hop question answering. Current approaches face a fundamental trade-off: flat memory is efficient but fails to model relational structure, while graph-based memory enables structured reasoning at the cost of expensive and fragile construction. To address these issues, we propose \\textbf{StructMem}, a structure-enriched hierarchical memory framework that preserves event-level bindings and induces cross-event connections. By temporally anchoring dual perspectives and performing periodic semantic consolidation, StructMem improves temporal reasoning and multi-hop performance on \\texttt{LoCoMo}, while substantially reducing token usage, API calls, and runtime compared to prior memory systems, see https://github.com/zjunlp/LightMem .",
+    "pdf_url": "https://arxiv.org/pdf/2604.21748v1",
+    "abs_url": "https://arxiv.org/abs/2604.21748",
+    "published": "2026-04-23T14:57:23Z",
+    "score": 9.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21238",
+    "title": "Unlocking the Power of Large Language Models for Multi-table Entity Matching",
+    "authors": [
+      "Yingkai Tang",
+      "Taoyu Su",
+      "Wenyuan Zhang",
+      "Xiaoyang Guo",
+      "Tingwen Liu"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Multi-table entity matching (MEM) addresses the limitations of dual-table approaches by enabling simultaneous identification of equivalent entities across multiple data sources without unique identifiers. However, existing methods relying on pre-trained language models struggle to handle semantic inconsistencies caused by numerical attribute variations. Inspired by the powerful language understanding capabilities of large language models (LLMs), we propose a novel LLM-based framework for multi-table entity matching, termed LLM4MEM. Specifically, we first propose a multi-style prompt-enhanced LLM attribute coordination module to address semantic inconsistencies. Then, to alleviate the matching efficiency problem caused by the surge in the number of entities brought by multiple data sources, we develop a transitive consensus embedding matching module to tackle entity embedding and pre-matching issues. Finally, to address the issue of noisy entities during the matching process, we introdu",
+    "pdf_url": "https://arxiv.org/pdf/2604.21238v1",
+    "abs_url": "https://arxiv.org/abs/2604.21238",
+    "published": "2026-04-23T03:13:44Z",
+    "score": 9.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21349",
+    "title": "Trust-SSL: Additive-Residual Selective Invariance for Robust Aerial Self-Supervised Learning",
+    "authors": [
+      "Wadii Boulila",
+      "Adel Ammar",
+      "Bilel Benjdira",
+      "Maha Driss"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Self-supervised learning (SSL) is a standard approach for representation learning in aerial imagery. Existing methods enforce invariance between augmented views, which works well when augmentations preserve semantic content. However, aerial images are frequently degraded by haze, motion blur, rain, and occlusion that remove critical evidence. Enforcing alignment between a clean and a severely degraded view can introduce spurious structure into the latent space. This study proposes a training strategy and architectural modification to enhance SSL robustness to such corruptions. It introduces a per-sample, per-factor trust weight into the alignment objective, combined with the base contrastive loss as an additive residual. A stop-gradient is applied to the trust weight instead of a multiplicative gate. While a multiplicative gate is a natural choice, experiments show it impairs the backbone, whereas our additive-residual approach improves it. Using a 200-epoch protocol on a 210,000-image",
+    "pdf_url": "https://arxiv.org/pdf/2604.21349v1",
+    "abs_url": "https://arxiv.org/abs/2604.21349",
+    "published": "2026-04-23T07:07:59Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21304",
+    "title": "PAPERMIND: Benchmarking Agentic Reasoning and Critique over Scientific Papers in Multimodal LLMs",
+    "authors": [
+      "Yanjun Zhao",
+      "Tianxin Wei",
+      "Jiaru Zou",
+      "Xuying Ning",
+      "Yuanchen Bei"
+    ],
+    "primary_category": "cs.IR",
+    "abstract": "Understanding scientific papers requires more than answering isolated questions or summarizing content. It involves an integrated reasoning process that grounds textual and visual information, interprets experimental evidence, synthesizes information across sources, and critically evaluates scientific claims. However, existing benchmarks typically assess these abilities in isolation, making it difficult to evaluate scientific paper understanding as a unified set of interacting cognitive abilities. In this work, we introduce PAPERMIND, a benchmark designed to evaluate integrated and agent-oriented scientific reasoning over research papers. PAPERMIND is constructed from real scientific papers across seven domains, including agriculture, biology, chemistry, computer science, medicine, physics, and economics. It comprises four complementary task families that collectively operationalize distinct cognitive facets of scientific paper reasoning, including multimodal grounding, experimental in",
+    "pdf_url": "https://arxiv.org/pdf/2604.21304v1",
+    "abs_url": "https://arxiv.org/abs/2604.21304",
+    "published": "2026-04-23T05:42:39Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21787",
+    "title": "Agentic AI-Enabled Framework for Thermal Comfort and Building Energy Assessment in Tropical Urban Neighborhoods",
+    "authors": [
+      "Po-Yen Lai",
+      "Xinyu Yang",
+      "Derrick Low",
+      "Huizhe Liu",
+      "Jian Cheng Wong"
+    ],
+    "primary_category": "cs.MA",
+    "abstract": "In response to the urban heat island effects and building energy demands in Singapore, this study proposes an agentic AI-enabled reasoning framework that integrates large language models (LLMs) with lightweight physics-based models. Through prompt customization, the LLMs interpret urban design tasks, extract relevant policies, and activate appropriate physics-based models for evaluation, forming a closed-loop reasoning-action process. These lightweight physics-based models leverage core thermal and airflow principles, streamlining conventional models to reduce computational time while predicting microclimate variables, such as building surface temperature, ground radiant heat, and airflow conditions, thereby enabling the estimation of thermal comfort indices, e.g., physiological equivalent temperature (PET), and building energy usage. This framework allows users to explore a variety of climate-resilient building surface strategies, e.g., green fa\u00e7ades and cool paint applications, that ",
+    "pdf_url": "https://arxiv.org/pdf/2604.21787v1",
+    "abs_url": "https://arxiv.org/abs/2604.21787",
+    "published": "2026-04-23T15:44:32Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21471",
+    "title": "Ufil: A Unified Framework for Infrastructure-based Localization",
+    "authors": [
+      "Simon Sch\u00e4fer",
+      "Lucas Hegerath",
+      "Marius Molz",
+      "Massimo Marcon",
+      "Bassam Alrifaee"
+    ],
+    "primary_category": "cs.RO",
+    "abstract": "Infrastructure-based localization enhances road safety and traffic management by providing state estimates of road users. Development is hindered by fragmented, application-specific stacks that tightly couple perception, tracking, and middleware. We introduce Ufil, a Unified Framework for Infrastructure-Based Localization with a standardized object model and reusable multi-object tracking components. Ufil offers interfaces and reference implementations for prediction, detection, association, state update, and track management, allowing researchers to improve components without reimplementing the pipeline. Ufil is open-source C++/ROS 2 software with documentation and executable examples. We demonstrate Ufil by integrating three heterogeneous data sources into a single localization pipeline combining (i) vehicle onboard units broadcasting ETSI ITS-G5 Cooperative Awareness Messages, (ii) a lidar-based roadside sensor node, and (iii) an in-road sensitive surface layer. The pipeline runs un",
+    "pdf_url": "https://arxiv.org/pdf/2604.21471v1",
+    "abs_url": "https://arxiv.org/abs/2604.21471",
+    "published": "2026-04-23T09:29:53Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21331",
+    "title": "FingerViP: Learning Real-World Dexterous Manipulation with Fingertip Visual Perception",
+    "authors": [
+      "Zhen Zhang",
+      "Weinan Wang",
+      "Hejia Sun",
+      "Qingpeng Ding",
+      "Xiangyu Chu"
+    ],
+    "primary_category": "cs.RO",
+    "abstract": "The current practice of dexterous manipulation generally relies on a single wrist-mounted view, which is often occluded and limits performance on tasks requiring multi-view perception. In this work, we present FingerViP, a learning system that utilizes a visuomotor policy with fingertip visual perception for dexterous manipulation. Specifically, we design a vision-enhanced fingertip module with an embedded miniature camera and install the modules on each finger of a multi-fingered hand. The fingertip cameras substantially improve visual perception by providing comprehensive, multi-view feedback of both the hand and its surrounding environment. Building on the integrated fingertip modules, we develop a diffusion-based whole-body visuomotor policy conditioned on a third-view camera and multi-view fingertip vision, which effectively learns complex manipulation skills directly from human demonstrations. To improve view-proprioception alignment and contact awareness, each fingertip visual f",
+    "pdf_url": "https://arxiv.org/pdf/2604.21331v1",
+    "abs_url": "https://arxiv.org/abs/2604.21331",
+    "published": "2026-04-23T06:37:22Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21241",
+    "title": "CorridorVLA: Explicit Spatial Constraints for Generative Action Heads via Sparse Anchors",
+    "authors": [
+      "Dachong Li",
+      "ZhuangZhuang Chen",
+      "Jin Zhang",
+      "Jianqiang Li"
+    ],
+    "primary_category": "cs.RO",
+    "abstract": "Vision--Language--Action (VLA) models often use intermediate representations to connect multimodal inputs with continuous control, yet spatial guidance is often injected implicitly through latent features. We propose $CorridorVLA$, which predicts sparse spatial anchors as incremental physical changes (e.g., $\u0394$-positions) and uses them to impose an explicit tolerance region in the training objective for action generation. The anchors define a corridor that guides a flow-matching action head: trajectories whose implied spatial evolution falls outside it receive corrective gradients, while minor deviations from contacts and execution noise are permitted. On the more challenging LIBERO-Plus benchmark, CorridorVLA yields consistent gains across both SmolVLA and GR00T, improving success rate by $3.4\\%$--$12.4\\%$ over the corresponding baselines; notably, our GR00T-Corr variant reaches a success rate of $83.21\\%$. These results indicate that action-aligned physical cues can provide direct an",
+    "pdf_url": "https://arxiv.org/pdf/2604.21241v1",
+    "abs_url": "https://arxiv.org/abs/2604.21241",
+    "published": "2026-04-23T03:17:50Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21917",
+    "title": "CrossCommitVuln-Bench: A Dataset of Multi-Commit Python Vulnerabilities Invisible to Per-Commit Static Analysis",
+    "authors": [
+      "Arunabh Majumdar"
+    ],
+    "primary_category": "cs.CR",
+    "abstract": "We present CrossCommitVuln-Bench, a curated benchmark of 15 real-world Python vulnerabilities (CVEs) in which the exploitable condition was introduced across multiple commits - each individually benign to per-commit static analysis - but collectively critical. We manually annotate each CVE with its contributing commit chain, a structured rationale for why each commit evades per-commit analysis, and baseline evaluations using Semgrep and Bandit in both per-commit and cumulative scanning modes. Our central finding: the per-commit detection rate (CCDR) is 13% across all 15 vulnerabilities - 87% of chains are invisible to per-commit SAST. Critically, both per-commit detections are qualitatively poor: one occurs on commits framed as security fixes (where developers suppress the alert), and the other detects only the minor hardcoded-key component while completely missing the primary vulnerability (200+ unprotected API endpoints). Even in cumulative mode (full codebase present), the detection",
+    "pdf_url": "https://arxiv.org/pdf/2604.21917v1",
+    "abs_url": "https://arxiv.org/abs/2604.21917",
+    "published": "2026-04-23T17:57:50Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21169",
+    "title": "Position Paper: Denial-of-Service Against Multi-Round Transaction Simulation",
+    "authors": [
+      "Yuzhe Tang",
+      "Yibo Wang",
+      "Wanning Ding",
+      "Jiaqi Chen",
+      "Taesoo Kim"
+    ],
+    "primary_category": "cs.CR",
+    "abstract": "In Ethereum, transaction-bundling services are a critical component of block builders, such as Flashbots Bundles, and are widely used by MEV searchers. Disrupting bundling services can degrade searcher experience and reduce builder revenue. Despite the extensive studies, the existing denial-of-service attack designs are ineffective against bundling services due to their unique multi-round execution model.   This paper studies the open problem of asymmetric denial-of-service against bundling services. We develop evasive, risk-free, and low-cost DoS attacks on Flashbots' bundling service, the only open-source bundling service known to us. Our attacks exploit inter-transaction dependencies through contract state to achieve evasiveness, and abuse bundling-specific features, such as atomic block inclusion, to significantly reduce both capital and operational costs of the attack.   Experimental results show that our attacks achieve high success rates, substantially reduce builders' revenue, ",
+    "pdf_url": "https://arxiv.org/pdf/2604.21169v1",
+    "abs_url": "https://arxiv.org/abs/2604.21169",
+    "published": "2026-04-23T00:25:44Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21677",
+    "title": "Geometric Monomial (GEM): a family of rational 2N-differentiable activation functions",
+    "authors": [
+      "Eylon E. Krause"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "The choice of activation function plays a crucial role in the optimization and performance of deep neural networks. While the Rectified Linear Unit (ReLU) remains the dominant choice due to its simplicity and effectiveness, its lack of smoothness may hinder gradient-based optimization in deep architectures. In this work we propose a family of $C^{2N}$-smooth activation functions whose gate follows a log-logistic CDF, achieving ReLU-like performance with purely rational arithmetic. We introduce three variants: GEM (the base family), E-GEM (an $\u03b5$-parameterized generalization enabling arbitrary $L^p$-approximation of ReLU), and SE-GEM (a piecewise variant eliminating dead neurons with $C^{2N}$ junction smoothness). An $N$-ablation study establishes $N=1$ as optimal for standard-depth networks, reducing the GELU deficit on CIFAR-100 + ResNet-56 from 6.10% to 2.12%. The smoothness parameter $N$ further reveals a CNN-transformer tradeoff: $N=1$ is preferred for deep CNNs, while $N=2$ is pre",
+    "pdf_url": "https://arxiv.org/pdf/2604.21677v1",
+    "abs_url": "https://arxiv.org/abs/2604.21677",
+    "published": "2026-04-23T13:42:49Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.21809",
+    "title": "Quotient-Space Diffusion Models",
+    "authors": [
+      "Yixian Xu",
+      "Yusong Wang",
+      "Shengjie Luo",
+      "Kaiyuan Gao",
+      "Tianyu He"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Diffusion-based generative models have reformed generative AI, and have enabled new capabilities in the science domain, for example, generating 3D structures of molecules. Due to the intrinsic problem structure of certain tasks, there is often a symmetry in the system, which identifies objects that can be converted by a group action as equivalent, hence the target distribution is essentially defined on the quotient space with respect to the group. In this work, we establish a formal framework for diffusion modeling on a general quotient space, and apply it to molecular structure generation which follows the special Euclidean group $\\text{SE}(3)$ symmetry. The framework reduces the necessity of learning the component corresponding to the group action, hence simplifies learning difficulty over conventional group-equivariant diffusion models, and the sampler guarantees recovering the target distribution, while heuristic alignment strategies lack proper samplers. The arguments are empirica",
+    "pdf_url": "https://arxiv.org/pdf/2604.21809v1",
+    "abs_url": "https://arxiv.org/abs/2604.21809",
+    "published": "2026-04-23T16:04:40Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]
