@@ -1,0 +1,360 @@
+[
+  {
+    "arxiv_id": "2604.24379",
+    "title": "Certified geometric robustness -- Super-DeepG",
+    "authors": [
+      "No\u00e9mie Cohen",
+      "M\u00e9lanie Ducoffe",
+      "Christophe Gabreau",
+      "Claire Pagetti",
+      "Xavier Pucel"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Safety-critical applications are required to perform as expected in normal operations. Image processing functions are often required to be insensitive to small geometric perturbations such as rotation, scaling, shearing or translation. This paper addresses the formal verification of neural networks against geometric perturbations on their image dataset. Our method Super-DeepG improves the reasoning used in linear relaxation techniques and Lipschitz optimization, and provides an implementation that leverages GPU hardware. By doing so, Super-DeepG achieves both precision and computational efficiency of robustness certification, to an extent that outperforms prior work. Super-DeepG is shared as an open-source tool on GitHub.",
+    "pdf_url": "https://arxiv.org/pdf/2604.24379v1",
+    "abs_url": "https://arxiv.org/abs/2604.24379",
+    "published": "2026-04-27T12:10:06Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24176",
+    "title": "Explanation Quality Assessment as Ranking with Listwise Rewards",
+    "authors": [
+      "Thomas Bailleux",
+      "Tanmoy Mukherjee",
+      "Emmanuel Lonca",
+      "Pierre Marquis",
+      "Zied Bouraoui"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "We reformulate explanation quality assessment as a ranking problem rather than a generation problem. Instead of optimizing models to produce a single \"best\" explanation token-by-token, we train reward models to discriminate among multiple candidate explanations and learn their relative quality. Concretely, we construct per-instance candidate sets with graded quality levels and train listwise and pairwise ranking models (ListNet, LambdaRank, RankNet) to preserve ordinal structure and avoid score compression typical of pointwise regression or binary preference objectives. We observe three findings: First, ranking losses consistently outperform regression on score separation across all domains tested. Second, the optimal ranking loss depends on data characteristics: listwise objectives excel with well-separated quality tiers, while pairwise methods are more robust to noisy natural annotations. Third, when trained on carefully curated and well-structured data, small encoder models can matc",
+    "pdf_url": "https://arxiv.org/pdf/2604.24176v1",
+    "abs_url": "https://arxiv.org/abs/2604.24176",
+    "published": "2026-04-27T08:35:30Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24366",
+    "title": "The Anatomy of a Decentralized Prediction Market: Microstructure Evidence from the Polymarket Order Book",
+    "authors": [
+      "Philipp D. Dubach"
+    ],
+    "primary_category": "q-fin.TR",
+    "abstract": "We study the microstructure of Polymarket, the largest on-chain prediction market, using a continuous tick-level archive of the public WebSocket order-book feed (30 billion events over 52 days) joined to the authoritative on-chain trade record. On a pre-registered stratified panel of 600 markets we report eight stylized facts: a longshot spread premium; a depth-concentration profile closer to a uniform geometric grid than to the top-of-book pattern often assumed for prediction markets; a null block-clock alignment effect; broad maker-wallet diversity with a concentrated tail; category-conditional differences in effective spread; a sub-50 ms median archive-ingestion delay with a multi-second tail; a self-counterparty wash share with median 1% and a 22% upper tail, well below the network-classifier benchmarks of Cong et al. (2023) for unregulated cryptocurrency token exchanges (a sanity bound, not an apples-to-apples reference, since the venues face different wash incentives); and a dept",
+    "pdf_url": "https://arxiv.org/pdf/2604.24366v1",
+    "abs_url": "https://arxiv.org/abs/2604.24366",
+    "published": "2026-04-27T12:01:14Z",
+    "score": 12.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24198",
+    "title": "Rewarding the Scientific Process: Process-Level Reward Modeling for Agentic Data Analysis",
+    "authors": [
+      "Zhisong Qiu",
+      "Shuofei Qiao",
+      "Kewei Xu",
+      "Yuqi Zhu",
+      "Lun Du"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Process Reward Models (PRMs) have achieved remarkable success in augmenting the reasoning capabilities of Large Language Models (LLMs) within static domains such as mathematics. However, their potential in dynamic data analysis tasks remains underexplored. In this work, we first present a empirical study revealing that general-domain PRMs struggle to supervise data analysis agents. Specifically, they fail to detect silent errors, logical flaws that yield incorrect results without triggering interpreter exceptions, and erroneously penalize exploratory actions, mistaking necessary trial-and-error exploration for grounding failures. To bridge this gap, we introduce DataPRM, a novel environment-aware generative process reward model that (1) can serve as an active verifier, autonomously interacting with the environment to probe intermediate execution states and uncover silent errors, and (2) employs a reflection-aware ternary reward strategy that distinguishes between correctable grounding ",
+    "pdf_url": "https://arxiv.org/pdf/2604.24198v1",
+    "abs_url": "https://arxiv.org/abs/2604.24198",
+    "published": "2026-04-27T09:00:30Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24559",
+    "title": "Aligned Multi-View Scripts for Universal Chart-to-Code Generation",
+    "authors": [
+      "Zhihan Zhang",
+      "Lizi Liao"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Chart-to-code generation converts a chart image into an executable plotting script, enabling faithful reproduction and editable visualizations. Existing methods are largely Python-centric, limiting practical use and overlooking a critical source of supervision: the same chart can be expressed by semantically equivalent scripts in different plotting languages. To fill this gap, we introduce Chart2NCode, a dataset of 176K charts paired with aligned scripts in Python, R, and LaTeX that render visually equivalent outputs, constructed via a metadata-to-template pipeline with rendering verification and human quality checks. Building on a LLaVA-style architecture, we further propose CharLuMA, a parameter-efficient adaptation module that augments the multimodal projector with a language-conditioned mixture of low-rank subspaces, allowing the model to share core chart understanding while specializing code generation to the target language through lightweight routing. Extensive experiments show ",
+    "pdf_url": "https://arxiv.org/pdf/2604.24559v1",
+    "abs_url": "https://arxiv.org/abs/2604.24559",
+    "published": "2026-04-27T14:47:32Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24609",
+    "title": "Evaluation of Pose Estimation Systems for Sign Language Translation",
+    "authors": [
+      "Catherine O'Brien",
+      "Gerard Sant",
+      "Mathias M\u00fcller",
+      "Sarah Ebling"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Many sign language translation (SLT) systems operate on pose sequences instead of raw video to reduce input dimensionality, improve portability, and partially anonymize signers. The choice of pose estimator is often treated as an implementation detail, with systems defaulting to widely available tools such as MediaPipe Holistic or OpenPose. We present a systematic comparison of pose estimators for pose-based SLT, covering widely used baselines (MediaPipe Holistic, OpenPose) and newer whole-body/high-capacity models (MMPose WholeBody, OpenPifPaf, AlphaPose, SDPose, Sapiens, SMPLest-X). We quantify downstream impact by training a controlled SLT pipeline on RWTH-PHOENIX-Weather 2014 where only the pose representation varies, evaluating with BLEU and BLEURT.   To contextualize translation outcomes, we analyze temporal stability, missing hand keypoints, and robustness to occlusion using higher-resolution videos from the Signsuisse dataset. SDPose and Sapiens achieve the best translation per",
+    "pdf_url": "https://arxiv.org/pdf/2604.24609v1",
+    "abs_url": "https://arxiv.org/abs/2604.24609",
+    "published": "2026-04-27T15:38:20Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24470",
+    "title": "Zero-shot Large Language Models for Automatic Readability Assessment",
+    "authors": [
+      "Riley Grossman",
+      "Yi Chen"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Unsupervised automatic readability assessment (ARA) methods have important practical and research applications (e.g., ensuring medical or educational materials are suitable for their target audiences). In this paper, we propose a new zero-shot prompting methodology for ARA and present the first comprehensive evaluation of using large language models (LLMs) as an unsupervised ARA method by testing 10 diverse open-source LLMs (e.g., different sizes and developers) on 14 diverse datasets (e.g., different text lengths and languages). Our findings show that our proposed prompting methodology outperforms prior methods on 13 of the 14 datasets. Furthermore, we propose LAURAE, which combines LLM and readability formula scores to improve robustness by capturing both contextual and shallow (e.g., sentence length) features of readability. Our evaluation demonstrates that LAURAE robustly outperforms prior methods across languages, text lengths, and amounts of technical language.",
+    "pdf_url": "https://arxiv.org/pdf/2604.24470v1",
+    "abs_url": "https://arxiv.org/abs/2604.24470",
+    "published": "2026-04-27T13:38:44Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24320",
+    "title": "DPEPO: Diverse Parallel Exploration Policy Optimization for LLM-based Agents",
+    "authors": [
+      "Junshuo Zhang",
+      "Chengrui Huang",
+      "Feng Guo",
+      "Zihan Li",
+      "Ke Shi"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Large language model (LLM) agents that follow the sequential \"reason-then-act\" paradigm have achieved superior performance in many complex tasks.However, these methods suffer from limited exploration and incomplete environmental understanding, as they interact with only a single environment per step. In this paper, we first introduce a novel paradigm that enables an agent to interact with multiple environments simultaneously and share cross-trajectory experiences. Building upon this paradigm, we further propose DPEPO, a reinforcement learning (RL) algorithm that encourages the agent to perform diverse parallel exploration. There are two stages in DPEPO: initial supervised fine-tuning (SFT) imparts basic parallel reasoning and action generation, followed by reinforcement learning stage with a hierarchical reward scheme. We design a parallel trajectory-level success reward and two step-level rewards: Diverse Action Reward and Diverse State Transition Reward, which actively penalize behav",
+    "pdf_url": "https://arxiv.org/pdf/2604.24320v1",
+    "abs_url": "https://arxiv.org/abs/2604.24320",
+    "published": "2026-04-27T11:09:49Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24302",
+    "title": "Differentiable Faithfulness Alignment for Cross-Model Circuit Transfer",
+    "authors": [
+      "Shun Shao",
+      "Binxu Wang",
+      "Shay B. Cohen",
+      "Anna Korhonen",
+      "Yonatan Belinkov"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Mechanistic interpretability has made it possible to localize circuits underlying specific behaviors in language models, but existing methods are expensive, model-specific, and difficult to scale to larger architectures. We introduce \\textbf{Differentiable Faithfulness Alignment (DFA)}, a framework that transfers circuit information from a smaller source model to a larger target model through a learned differentiable alignment. DFA projects source-model node importance scores into the target model and trains this mapping with a soft faithfulness objective, avoiding full circuit discovery on the target model. We evaluate DFA on Llama-3 and Qwen-2.5 across six tasks spanning factual retrieval, multiple-choice reasoning, and arithmetic. The strongest results occur on Llama-3 $1$B$\\rightarrow3$B, where aligned circuits are often competitive with direct node attribution and zero-shot transfer remains effective. Recovery weakens for larger source--target gaps and is substantially lower on Qw",
+    "pdf_url": "https://arxiv.org/pdf/2604.24302v1",
+    "abs_url": "https://arxiv.org/abs/2604.24302",
+    "published": "2026-04-27T10:49:10Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.23972",
+    "title": "Quantum Knowledge Graph: Modeling Context-Dependent Triplet Validity",
+    "authors": [
+      "Yao Wang",
+      "Zixu Geng",
+      "Jun Yan"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Knowledge graphs (KGs) are increasingly used to support large lan guage model (LLM) reasoning, but standard triplet-based KGs treat each relation as globally valid. In many settings, whether a relation should count as evidence depends on the context. We therefore formulate triplet validity as a triplet-specific function of context and refer to this formulation as a Quantum Knowledge Graph (QKG). We instantiate QKG in medicine using a diabetes-centered PrimeKG subgraph, whose 68,651 context-sensitive relations are further annotated with patient-group-specific constraints. We evaluate it in a reasoner--validator pipeline for medical question answering on a KG-grounded subset of MedReason containing 2,788 questions. With Haiku-4.5 as both the Reasoner and the Validator, KG-backed validation significantly improves over a no-validator baseline ($+0.61$ pp), and QKG with context matching yields the largest gain, outperforming both KG validation without context matching ($+0.79$ pp) and the n",
+    "pdf_url": "https://arxiv.org/pdf/2604.23972v1",
+    "abs_url": "https://arxiv.org/abs/2604.23972",
+    "published": "2026-04-27T02:35:10Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.23948",
+    "title": "KOMBO: Korean Character Representations Based on the Combination Rules of Subcharacters",
+    "authors": [
+      "SungHo Kim",
+      "Juhyeong Park",
+      "Yeachan Kim",
+      "SangKeun Lee"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "The Korean writing system, \\textit{Hangeul}, has a unique character representation rigidly following the invention principles recorded in \\textit{Hunminjeongeum}.\\footnote{\\textit{Hunminjeongeum} is a book published in 1446 that describes the principles of invention and usage of \\textit{Hangeul}, devised by King Sejong \\cite{Hunminjeongeum_Guide}.} However, existing pre-trained language models (PLMs) for Korean have overlooked these principles. In this paper, we introduce a novel framework for Korean PLMs called KOMBO, which firstly brings the invention principles of \\textit{Hangeul} to represent character. Our proposed method, KOMBO, exhibits notable experimental proficiency across diverse NLP tasks. In particular, our method outperforms the state-of-the-art Korean PLM by an average of 2.11\\% in five Korean natural language understanding tasks. Furthermore, extensive experiments demonstrate that our proposed method is suitable for comprehending the linguistic features of the Korean la",
+    "pdf_url": "https://arxiv.org/pdf/2604.23948v1",
+    "abs_url": "https://arxiv.org/abs/2604.23948",
+    "published": "2026-04-27T01:53:52Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24285",
+    "title": "Coloring for dispersion: A polynomial-time algorithm for cardinality-constrained 2-anticlustering",
+    "authors": [
+      "Nguyen Khoa Tran",
+      "Lin Mu",
+      "Martin Papenberg",
+      "Gunnar W. Klau"
+    ],
+    "primary_category": "cs.DS",
+    "abstract": "The $k$-Maximum Dispersion Problem with Cardinality Constraints ($k$-MDCC) asks for a partition of a given item set with pairwise dissimilarities into $k$ cardinality-constrained groups such that the minimum pairwise intra-group dissimilarity, which is also known as the dispersion, is maximized. The problem arises in the context of anticlustering, where the goal is to create maximally heterogeneous groups of items with applications in psychological research, bioinformatics, and data science.   It is known that $k$-MDCC is NP-hard for $k \\geq 3$ but it has been an open question whether it can be solved in polynomial time for $k = 2$. We give a positive answer to this question by showing that $2$-MDCC can be solved by a quadratic number of cardinality-constrained 2-coloring problem instances ($2$-COLCC). We solve these instances by transforming them into a restricted class of subset sum instances. Although subset sum is NP-complete in general, for this restricted class the input values a",
+    "pdf_url": "https://arxiv.org/pdf/2604.24285v1",
+    "abs_url": "https://arxiv.org/abs/2604.24285",
+    "published": "2026-04-27T10:17:50Z",
+    "score": 10.4,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24357",
+    "title": "DPRM: A Plug-in Doob h transform-induced Token-Ordering Module for Diffusion Language Models",
+    "authors": [
+      "Dake Bu",
+      "Wei Huang",
+      "Andi Han",
+      "Hau-San Wong",
+      "Qingfu Zhang"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Diffusion language models generate without a fixed left-to-right order, making token ordering a central algorithmic choice: which tokens should be revealed, retained, revised or verified at each step? Existing systems mainly use random masking or confidence-driven ordering. Random masking creates train--test mismatch, while confidence-only rules are efficient but can be myopic and suppress useful exploration.   We introduce DPRM (Doob h-transform Process Reward Model), a plug-in token-ordering module for diffusion language models. DPRM keeps the host architecture, denoising objective and supervision unchanged, and changes only the ordering policy. It starts from confidence-driven progressive ordering and gradually shifts to Doob h transform Process Reward guided ordering through online estimates.   We characterize the exact DPRM policy as a reward-tilted Gibbs reveal law, prove O(1/N) convergence of the stagewise Soft-BoN approximation, and show that the online bucketized controller tr",
+    "pdf_url": "https://arxiv.org/pdf/2604.24357v1",
+    "abs_url": "https://arxiv.org/abs/2604.24357",
+    "published": "2026-04-27T11:50:26Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24041",
+    "title": "End-to-End Learning for Partially-Observed Time Series with PyPOTS",
+    "authors": [
+      "Wenjie Du",
+      "Yiyuan Yang",
+      "Tianxiang Zhan",
+      "Qingsong Wen"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Partially-observed time series (POTS) is ubiquitous in real-world applications, yet most existing toolchains separate missing-value handling from downstream learning, which limits reproducibility and overall performance. This tutorial introduces PyPOTS, an open-source Python ecosystem for end-to-end data mining and machine learning on POTS. We present practical workflows spanning missingness simulation, data preprocessing, model training, and evaluation across core tasks, including imputation, forecasting, classification, clustering, and anomaly detection. The tutorial consists of two parts: Part I emphasizes hands-on application for practitioners through unified APIs and benchmark-oriented experiments. Part II targets developers and researchers, focusing on extending PyPOTS with custom models, domain-specific constraints, and contribution-ready engineering practices. Participants will gain both conceptual understanding and implementation experience for building robust, transparent, an",
+    "pdf_url": "https://arxiv.org/pdf/2604.24041v1",
+    "abs_url": "https://arxiv.org/abs/2604.24041",
+    "published": "2026-04-27T05:01:23Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24039",
+    "title": "AgenticCache: Cache-Driven Asynchronous Planning for Embodied AI Agents",
+    "authors": [
+      "Hojoon Kim",
+      "Yuheng Wu",
+      "Thierry Tambe"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Embodied AI agents increasingly rely on large language models (LLMs) for planning, yet per-step LLM calls impose severe latency and cost. In this paper, we show that embodied tasks exhibit strong plan locality, where the next plan is largely predictable from the current one. Building on this, we introduce AgenticCache, a planning framework that reuses cached plans to avoid per-step LLM calls. In AgenticCache, each agent queries a runtime cache of frequent plan transitions, while a background Cache Updater asynchronously calls the LLM to validate and refine cached entries. Across four multi-agent embodied benchmarks, AgenticCache improves task success rate by 22% on average across 12 configurations (4 benchmarks x 3 models), reduces simulation latency by 65%, and lowers token usage by 50%. Cache-based plan reuse thus offers a practical path to low-latency, low-cost embodied agents. Code is available at https://github.com/hojoonleokim/MLSys26_AgenticCache.",
+    "pdf_url": "https://arxiv.org/pdf/2604.24039v1",
+    "abs_url": "https://arxiv.org/abs/2604.24039",
+    "published": "2026-04-27T04:51:15Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24012",
+    "title": "FedSLoP: Memory-Efficient Federated Learning with Low-Rank Gradient Projection",
+    "authors": [
+      "Yutong He",
+      "Zhengyang Huang",
+      "Jiahe Geng"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Federated learning enables a population of clients to collaboratively train machine learning models without exchanging their raw data, but standard algorithms such as FedAvg suffer from slow convergence and high communication and memory costs in heterogeneous, resource-constrained environments. We introduce FedSLoP, a federated optimization algorithm that combines stochastic low-rank subspace projections of gradients, thereby reducing the dimension of communicated and stored updates while preserving optimization progress. On the theoretical side, we develop a detailed nonconvex convergence analysis under standard smoothness and bounded-variance assumptions, showing that FedSLoP is guaranteed to converge to a first-order stationary point at a rate of $O(1/\\sqrt{NT})$. On the empirical side, we conduct extensive experiments on federated MNIST classification with heterogeneous data partitions, showing that FedSLoP substantially reduces communication volume and client-side memory while ach",
+    "pdf_url": "https://arxiv.org/pdf/2604.24012v1",
+    "abs_url": "https://arxiv.org/abs/2604.24012",
+    "published": "2026-04-27T03:47:50Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24618",
+    "title": "Evaluating whether AI models would sabotage AI safety research",
+    "authors": [
+      "Robert Kirk",
+      "Alexandra Souly",
+      "Kai Fronsdal",
+      "Abby D'Cruz",
+      "Xander Davies"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "We evaluate the propensity of frontier models to sabotage or refuse to assist with safety research when deployed as AI research agents within a frontier AI company. We apply two complementary evaluations to four Claude models (Mythos Preview, Opus 4.7 Preview, Opus 4.6, and Sonnet 4.6): an unprompted sabotage evaluation testing model behaviour with opportunities to sabotage safety research, and a sabotage continuation evaluation testing whether models continue to sabotage when placed in trajectories where prior actions have started undermining research. We find no instances of unprompted sabotage across any model, with refusal rates close to zero for Mythos Preview and Opus 4.7 Preview, though all models sometimes only partially completed tasks. In the continuation evaluation, Mythos Preview actively continues sabotage in 7% of cases (versus 3% for Opus 4.6, 4% for Sonnet 4.6, and 0% for Opus 4.7 Preview), and exhibits reasoning-output discrepancy in the majority of these cases, indica",
+    "pdf_url": "https://arxiv.org/pdf/2604.24618v1",
+    "abs_url": "https://arxiv.org/abs/2604.24618",
+    "published": "2026-04-27T15:47:07Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24572",
+    "title": "FastOMOP: A Foundational Architecture for Reliable Agentic Real-World Evidence Generation on OMOP CDM data",
+    "authors": [
+      "Niko Moeller-Grell",
+      "Shihao Shenzhang",
+      "Zhangshu Joshua Jiang",
+      "Richard JB Dobson",
+      "Vishnu V Chandrabalan"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "The Observational Medical Outcomes Partnership Common Data Model (OMOP CDM), maintained by the Observational Health Data Sciences and Informatics (OHDSI) collaboration, enabled the harmonisation of electronic health records data of nearly one billion patients in 83 countries. Yet generating real-world evidence (RWE) from these repositories remains a manual process requiring clinical, epidemiological and technical expertise. LLMs and multi-agent systems have shown promise for clinical tasks, but RWE automation exposes a fundamental challenge: agentic systems introduce emergent behaviours, coordination failures and safety risks that existing approaches fail to govern. No infrastructure exists to ensure agentic RWE generation is flexible, safe and auditable across the lifecycle. We introduce FastOMOP, an open-source multi-agent architecture that addresses this gap by separating three infrastructure layers, governance, observability and orchestration, from pluggable agent-teams. Governance",
+    "pdf_url": "https://arxiv.org/pdf/2604.24572v1",
+    "abs_url": "https://arxiv.org/abs/2604.24572",
+    "published": "2026-04-27T15:02:02Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24170",
+    "title": "Credal Concept Bottleneck Models for Epistemic-Aleatoric Uncertainty Decomposition",
+    "authors": [
+      "Tanmoy Mukherjee",
+      "Thomas Bailleux",
+      "Pierre Marquis",
+      "Zied Bouraoui"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Concept Bottleneck Models (CBMs) predict through human-interpretable concepts, but they typically output point concept probabilities that conflate epistemic uncertainty (reducible model underspecification) with aleatoric uncertainty (irreducible input ambiguity). This makes concept-level uncertainty hard to interpret and, more importantly, hard to act upon. We introduce CREDENCE (Credal Ensemble Concept Estimation), a CBM framework that decomposes concept uncertainty by construction. CREDENCE represents each concept as a credal prediction (a probability interval), derives epistemic uncertainty from disagreement across diverse concept heads, and estimates aleatoric uncertainty via a dedicated ambiguity output trained to match annotator disagreement when available. The resulting signals support prescriptive decisions: automate low-uncertainty cases, prioritize data collection for high-epistemic cases, route high-aleatoric cases to human review, and abstain when both are high. Across seve",
+    "pdf_url": "https://arxiv.org/pdf/2604.24170v1",
+    "abs_url": "https://arxiv.org/abs/2604.24170",
+    "published": "2026-04-27T08:27:50Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.24158",
+    "title": "Multi-Dimensional Evaluation of Sustainable City Trips with LLM-as-a-Judge and Human-in-the-Loop",
+    "authors": [
+      "Ashmi Banerjee",
+      "Adithi Satish",
+      "Wolfgang W\u00f6rndl",
+      "Yashar Deldjoo"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Evaluating nuanced conversational travel recommendations is challenging when human annotations are costly and standard metrics ignore stakeholder-centric goals. We study LLMs-as-Judges for sustainable city-trip lists across four dimensions -- relevance, diversity, sustainability, and popularity balance, and propose a three-phase calibration framework: (1) baseline judging with multiple LLMs, (2) expert evaluation to identify systematic misalignment, and (3) dimension-specific calibration via rules and few-shot examples. Across two recommendation settings, we observe model-specific biases and high dimension-level variance, even when judges agree on overall rankings. Calibration clarifies reasoning per dimension but exposes divergent interpretations of sustainability, highlighting the need for transparent, bias-aware LLM evaluation. Prompts and code are released for reproducibility: https://github.com/ashmibanerjee/trs-llm-calibration.",
+    "pdf_url": "https://arxiv.org/pdf/2604.24158v1",
+    "abs_url": "https://arxiv.org/abs/2604.24158",
+    "published": "2026-04-27T08:13:57Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]
