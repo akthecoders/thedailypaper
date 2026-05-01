@@ -1,0 +1,369 @@
+[
+  {
+    "arxiv_id": "2604.28102",
+    "title": "FiLMMeD: Feature-wise Linear Modulation for Cross-Problem Multi-Depot Vehicle Routing",
+    "authors": [
+      "Arthur Corr\u00eaa",
+      "Paulo Nascimento",
+      "Samuel Moniz"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Solving practical multi-depot vehicle routing problems (MDVRP) is a challenging optimization task central to modern logistics, increasingly driven by e-commerce. To address the MDVRP's computational complexity, neural-based combinatorial optimization methods offer a promising scalable alternative to traditional approaches. However, neural-based methods typically rely on rigid architectures and input encodings tailored to specific problem formulations. In real-world settings, heterogeneous constraints create multiple MDVRP variants, limiting the applicability of such models. While multi-task learning (MTL) has begun to accelerate the development of unified neural-based solvers, prior works focus almost exclusively on single-depot VRPs, leaving the MDVRP unaddressed. To bridge this gap, we propose Feature-wise Linear Modulation for Cross-Problem Multi-Depot Vehicle Routing (FiLMMeD), a novel unified neural-based model for 24 different MDVRP variants. We introduce three main contributions",
+    "pdf_url": "https://arxiv.org/pdf/2604.28102v1",
+    "abs_url": "https://arxiv.org/abs/2604.28102",
+    "published": "2026-04-30T16:48:13Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.28075",
+    "title": "Repetition over Diversity: High-Signal Data Filtering for Sample-Efficient German Language Modeling",
+    "authors": [
+      "Ansar Aynetdinov",
+      "Patrick Haller",
+      "Alan Akbik"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Recent research has shown that filtering massive English web corpora into high-quality subsets significantly improves training efficiency. However, for high-resource non-English languages like German, French, or Japanese, aggressive filtering creates a strategic dilemma: should practitioners prioritize diversity by training once on large amounts of lightly filtered web data, or prioritize quality by strictly filtering for a high-quality core and repeating it over multiple epochs? We investigate this trade-off for German by constructing hierarchical quality filters applied to 500M web documents, comparing multi-epoch training on the filtered subsets against single-pass training on a diverse corpus. Our experiments across multiple model scales and token budgets show that repeating high-quality data consistently outperforms single-pass training on larger, less filtered sets. Notably, the performance gap persists even after 7 epochs. Our findings suggest that for non-English LLMs, semantic",
+    "pdf_url": "https://arxiv.org/pdf/2604.28075v1",
+    "abs_url": "https://arxiv.org/abs/2604.28075",
+    "published": "2026-04-30T16:21:28Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27550",
+    "title": "APPSI-139: A Parallel Corpus of English Application Privacy Policy Summarization and Interpretation",
+    "authors": [
+      "Pengyun Zhu",
+      "Qiheng Sun",
+      "Long Wen",
+      "Yanbo Wang",
+      "Yang Cao"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Privacy policies are essential for users to understand how service providers handle their personal data. However, these documents are often long and complex, as well as filled with technobabble and legalese, causing users to unknowingly accept terms that may even contradict the law. While summarizing and interpreting these privacy policies is crucial, there is a lack of high-quality English parallel corpus optimized for legal clarity and readability. To address this issue, we introduce APPSI-139, a high-quality English privacy policy corpus meticulously annotated by domain experts, specifically designed for summarization and interpretation tasks. The corpus includes 139 English privacy policies, 15,692 rewritten parallel corpora, and 36,351 fine-grained annotation labels across 11 data practice categories. Concurrently, we propose TCSI-pp-V2, a hybrid privacy policy summarization and interpretation framework that employs an alternating training strategy and coordinates multiple expert ",
+    "pdf_url": "https://arxiv.org/pdf/2604.27550v1",
+    "abs_url": "https://arxiv.org/abs/2604.27550",
+    "published": "2026-04-30T07:58:24Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27393",
+    "title": "MiniCPM-o 4.5: Towards Real-Time Full-Duplex Omni-Modal Interaction",
+    "authors": [
+      "Junbo Cui",
+      "Bokai Xu",
+      "Chongyi Wang",
+      "Tianyu Yu",
+      "Weiyue Sun"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Recent progress in multimodal large language models (MLLMs) has brought AI capabilities from static offline data processing to real-time streaming interaction, yet they still remain far from human-level multimodal interaction. The key bottlenecks are no longer modality coverage or latency alone, but the interaction paradigm itself. First, perception and response are still separated into alternating phases, preventing models from incorporating new inputs for timely adjustment during generation. Second, most current models remain reactive, responding only to explicit user requests instead of acting proactively in the evolving multimodal environment. We present MiniCPM-o 4.5, our latest effort towards human-like multimodal interaction, which mitigates these gaps by real-time full-duplex omni-modal interaction. It can see, listen, and speak simultaneously in real-time, while also exhibiting proactive behaviors such as issuing reminders or comments based on its continuous understanding of t",
+    "pdf_url": "https://arxiv.org/pdf/2604.27393v1",
+    "abs_url": "https://arxiv.org/abs/2604.27393",
+    "published": "2026-04-30T04:05:43Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.28070",
+    "title": "A Unified Framework of Hyperbolic Graph Representation Learning Methods",
+    "authors": [
+      "Sof\u00eda P\u00e9rez Casulo",
+      "Marcelo Fiori",
+      "Bernardo Marenco",
+      "Federico Larroca"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Hyperbolic geometry has emerged as an effective latent space for representing complex networks, owing to its ability to capture hierarchical organization and heterogeneous connectivity patterns using low-dimensional embeddings. As a result, numerous hyperbolic graph representation learning methods have been proposed in recent years. However, their practical adoption and systematic comparison remain challenging, as implementations are fragmented and shared tools for reproducible and fair evaluation are lacking. In this work, we introduce a unified open-source framework for hyperbolic graph representation learning that integrates several widely used embedding methods under a common optimization interface. The novel framework enables consistent training, visualization, and evaluation of hyperbolic embeddings, and interfaces seamlessly with standard network analysis tools. Leveraging this unified setup, we conduct an experimental study of hyperbolic embedding methods on real-world networks",
+    "pdf_url": "https://arxiv.org/pdf/2604.28070v1",
+    "abs_url": "https://arxiv.org/abs/2604.28070",
+    "published": "2026-04-30T16:17:53Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27977",
+    "title": "D3-Gym: Constructing Real-World Verifiable Environments for Data-Driven Discovery",
+    "authors": [
+      "Hanane Nour Moussa",
+      "Yifei Li",
+      "Zhuoyang Li",
+      "Yankai Yang",
+      "Cheng Tang"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Despite recent progress in language models and agents for scientific data-driven discovery, further advancing their capabilities is held back by the absence of verifiable environments representing real-world scientific tasks.To fill this gap, we introduce D3-Gym, the first automatically constructed dataset with verifiable environments for scientific Data-Driven Discovery. D3-Gym comprises (1) 565 tasks sourced from 239 real scientific repositories across four disciplines where (2) each task is equipped with a natural language instruction, an executable environment with pre-installed dependencies, input dataset and artifact previews, a reference code solution, and an automatically synthesized evaluation script. Rigorous evaluation of the quality of the verification signal in D3-Gym confirms that our evaluation scripts achieve 87.5% agreement with human-annotated gold standards and strong alignment in domain-specific evaluation logic, showing their scientific soundness. Further, training",
+    "pdf_url": "https://arxiv.org/pdf/2604.27977v1",
+    "abs_url": "https://arxiv.org/abs/2604.27977",
+    "published": "2026-04-30T15:06:56Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27673",
+    "title": "The TEA Nets framework combines AI and cognitive network science to model targets, events and actors in text",
+    "authors": [
+      "Sebastiano Franchini",
+      "Alexis Carrillo",
+      "Edoardo Sebastiano De Duro",
+      "Riccardo Improta",
+      "Ali Aghazadeh Ardebili"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "We introduce Target-Event-Agent Networks (TEA Nets) as a computational framework to extract subjects (``Agents\"), verbs (``Events\"), and objects (``Targets\") from texts. Grounded in cognitive network science and artificial intelligence, TEA Nets are implemented as an open-source Python library. We test TEA Nets in three case studies, demonstrating the framework's ability to perform interpretable emotion detection, semantic frame analyses, and linguistic inquiries across conspiracy texts and textual responses generated by LLMs. In the LOCO conspiracy corpus, TEA Nets revealed that highly conspiratorial narratives (4,227 texts) linked personal pronouns (``I\", ``you\", ``we\") with the same actions twice as frequently as low-similarity conspiracy narratives. High-conspiracy narratives connected person-focused elements (``you\", ``people\") through actions eliciting anger above the random baseline ($z = 2.63, p < .05$), a trend absent in low-similarity conspiracy narratives, which emphasized s",
+    "pdf_url": "https://arxiv.org/pdf/2604.27673v1",
+    "abs_url": "https://arxiv.org/abs/2604.27673",
+    "published": "2026-04-30T10:07:46Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27962",
+    "title": "Language Models Refine Mechanical Linkage Designs Through Symbolic Reflection and Modular Optimisation",
+    "authors": [
+      "Jo\u00e3o Pedro Gandarela",
+      "Thiago Rios",
+      "Stefan Menzel",
+      "Andr\u00e9 Freitas"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Designing mechanical linkages involves combinatorial topology selection and continuous parameter fitting. We show that language models can systematically improve linkage designs through symbolic representations. Language model agents explore discrete topologies while numerical optimisers fit continuous parameters. A symbolic lifting operator translates simulator trajectories into qualitative descriptors, motion labels, temporal predicates, and structural diagnostics that models interpret across iterative design cycles. Across six engineering-relevant motion targets and three open-source models (Llama 3.3 70B, Qwen3 4B, Qwen3 MoE 30B-A3B), the modular architecture reduces geometric error by up to 68% and improves structural validity by up to 134% over monolithic baselines. Critically, 78.6% of iterative refinement trajectories show measurable improvement, with the system correctly diagnosing overconstraint (56.3%) and underconstraint (35.6%) failure modes and proposing grounded correcti",
+    "pdf_url": "https://arxiv.org/pdf/2604.27962v1",
+    "abs_url": "https://arxiv.org/abs/2604.27962",
+    "published": "2026-04-30T14:56:13Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27776",
+    "title": "WindowsWorld: A Process-Centric Benchmark of Autonomous GUI Agents in Professional Cross-Application Environments",
+    "authors": [
+      "Jinchao Li",
+      "Yunxin Li",
+      "Chenrui Zhao",
+      "Zhenran Xu",
+      "Baotian Hu"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "While GUI agents have shown impressive capabilities in common computer-use tasks such as OSWorld, current benchmarks mainly focus on isolated and single-application tasks. This overlooks a critical real-world requirement of coordinating across multiple applications to accomplish complex profession-specific workflows. To bridge this gap, we present a computer-use benchmark in cross-application workflows, named WindowsWorld, designed to systematically assess GUI Agents on complex multi-step tasks that mirror real-world professional activities. Our methodology uses a multi-agent framework steered by 16 occupations to generate four difficulty-level tasks with intermediate inspection, which are then refined by human review and executed in a simulated environment. The resulting benchmark contains 181 tasks with an average of 5.0 sub-goals across 17 common desktop applications, of which 78% are inherently multi-application. Experimental results of leading large models and agents show that: 1)",
+    "pdf_url": "https://arxiv.org/pdf/2604.27776v1",
+    "abs_url": "https://arxiv.org/abs/2604.27776",
+    "published": "2026-04-30T12:13:27Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27691",
+    "title": "When Agents Evolve, Institutions Follow",
+    "authors": [
+      "Chao Fei",
+      "Hongcheng Guo",
+      "Yanghua Xiao"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Across millennia, complex societies have faced the same coordination problem of how to organize collective action among cognitively bounded and informationally incomplete individuals. Different civilizations developed different political institutions to answer the same basic questions of who proposes, who reviews, who executes, and how errors are corrected. We argue that multi-agent systems built on large language models face the same challenge. Their central problem is not only individual intelligence, but collective organization. Historical institutions therefore provide a structured design space for multi-agent architectures, making key trade-offs between efficiency and error correction, centralization and distribution, and specialization and redundancy empirically testable. We translate seven historical political institutions, spanning four canonical governance patterns, into executable multi-agent architectures and evaluate them under identical conditions across three large langua",
+    "pdf_url": "https://arxiv.org/pdf/2604.27691v1",
+    "abs_url": "https://arxiv.org/abs/2604.27691",
+    "published": "2026-04-30T10:30:58Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27359",
+    "title": "TIO-SHACL: Comprehensive SHACL validation for TMF Intent Ontologies",
+    "authors": [
+      "Jean Martins",
+      "Leonid Mokrushin",
+      "Marin Orlic"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Intent-based networking promises to revolutionize telecommunications network management by enabling operators to specify high-level goals rather than low-level configurations. The TM Forum Intent Ontology (tio) provides a standardized vocabulary for expressing network intents, yet lacks formal validation mechanisms to ensure intent correctness before its admission. We present tio-shacl, the first comprehensive SHACL (Shapes Constraint Language) validation framework for the TMF Intent Ontology. Our contribution includes 56 node shapes and 69 property shapes across all 15 tio v3.6.0 ontology modules, a reusable constraint library with 25 parameterized SPARQL-based constraint components, and novel validation patterns for recursive logical operators, quantity-based constraints, and cross-expectation relationships. We pursued 100% vocabulary coverage (87 classes, 109 properties, 72 functions), cross-implementation compatibility across three major SHACL engines, and validation accuracy on a ",
+    "pdf_url": "https://arxiv.org/pdf/2604.27359v1",
+    "abs_url": "https://arxiv.org/abs/2604.27359",
+    "published": "2026-04-30T03:16:46Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27685",
+    "title": "VibroML: an automated toolkit for high-throughput vibrational analysis and dynamic instability remediation of crystalline materials using machine-learned potentials",
+    "authors": [
+      "Rog\u00e9rio Almeida Gouv\u00eaa",
+      "Gian-Marco Rignanese"
+    ],
+    "primary_category": "cond-mat.mtrl-sci",
+    "abstract": "While machine-learned interatomic potentials (MLIPs) accelerate phonon dispersion calculations, merely identifying dynamical instabilities in computationally predicted materials is insufficient; automated pathways to resolve them are required. We introduce VibroML, an open-source Python toolkit driven by foundational MLIPs that shifts the paradigm from stability verification to automated structural remediation. VibroML employs an energy-guided genetic algorithm that vastly outperforms traditional soft-mode following, efficiently navigating the potential energy surface to uncover diverse, dynamically stable polymorphs. As 0 K harmonic stability does not guarantee macroscopic viability, an automated molecular dynamics workflow evaluates finite-temperature structural retention. VibroML also couples with ProtoCSP, our combinatorial structure prediction engine, to stabilize frustrated crystal topologies via targeted alloying, successfully rescuing functional perovskite networks like Cs$_2$K",
+    "pdf_url": "https://arxiv.org/pdf/2604.27685v1",
+    "abs_url": "https://arxiv.org/abs/2604.27685",
+    "published": "2026-04-30T10:20:58Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27852",
+    "title": "NeocorRAG: Less Irrelevant Information, More Explicit Evidence, and More Effective Recall via Evidence Chains",
+    "authors": [
+      "Shiyao Peng",
+      "Qianhe Zheng",
+      "Zhuodi Hao",
+      "Zichen Tang",
+      "Rongjin Li"
+    ],
+    "primary_category": "cs.IR",
+    "abstract": "Although precise recall is a core objective in Retrieval-Augmented Generation (RAG), a critical oversight persists in the field: improvements in retrieval performance do not consistently translate to commensurate gains in downstream reasoning. To diagnose this gap, we propose the Recall Conversion Rate (RCR), a novel evaluation metric to quantify the contribution of retrieval to reasoning accuracy. Our quantitative analysis of mainstream RAG methods reveals that as Recall@5 improves, the RCR exhibits a near-linear decay. We identify the neglect of retrieval quality in these methods as the underlying cause. In contrast, approaches that focus solely on quality optimization often suffer from inferior recall performance. Both categories lack a comprehensive understanding of retrieval quality optimization, resulting in a trade-off dilemma. To address these challenges, we propose comprehensive retrieval quality optimization criteria and introduce the NeocorRAG framework. This framework achie",
+    "pdf_url": "https://arxiv.org/pdf/2604.27852v1",
+    "abs_url": "https://arxiv.org/abs/2604.27852",
+    "published": "2026-04-30T13:37:01Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27643",
+    "title": "HAVEN: Hybrid Automated Verification ENgine for UVM Testbench Synthesis with LLMs",
+    "authors": [
+      "Chang-Chih Meng",
+      "Yu-Ren Lu",
+      "Guan-Yu Lin",
+      "Tsung Tai Yeh",
+      "Kai-Chiang Wu"
+    ],
+    "primary_category": "cs.AR",
+    "abstract": "Integrated Circuit (IC) verification consumes nearly 70% of the IC development cycle, and recent research leverages Large Language Models (LLMs) to automatically generate testbenches and reduce verification overhead. However, LLMs have difficulty generating testbenches correctly. Unlike high-level programming languages, Hardware Description Languages (HDLs) are extremely rare in LLMs training data, leading LLMs to produce incorrect code. To overcome challenges when using LLMs to generate Universal Verification Methodology (UVM) testbenches and sequences, wepropose HAVEN (Hybrid Automated Verification ENgine) to prevent LLMs from writing HDL directly. For UVM testbench generation, HAVEN utilizes LLM agents to analyze design specifications to produce a structured architectural plan. The HAVEN Template Engine then combines with predefined and protocol-specific templates to generate all UVM components with correct bus-handshake timing. For UVM sequence generation, HAVEN introduces a Protoc",
+    "pdf_url": "https://arxiv.org/pdf/2604.27643v1",
+    "abs_url": "https://arxiv.org/abs/2604.27643",
+    "published": "2026-04-30T09:35:32Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.28196",
+    "title": "HERMES++: Toward a Unified Driving World Model for 3D Scene Understanding and Generation",
+    "authors": [
+      "Xin Zhou",
+      "Dingkang Liang",
+      "Xiwu Chen",
+      "Feiyang Tan",
+      "Dingyuan Zhang"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Driving world models serve as a pivotal technology for autonomous driving by simulating environmental dynamics. However, existing approaches predominantly focus on future scene generation, often overlooking comprehensive 3D scene understanding. Conversely, while Large Language Models (LLMs) demonstrate impressive reasoning capabilities, they lack the capacity to predict future geometric evolution, creating a significant disparity between semantic interpretation and physical simulation. To bridge this gap, we propose HERMES++, a unified driving world model that integrates 3D scene understanding and future geometry prediction within a single framework. Our approach addresses the distinct requirements of these tasks through synergistic designs. First, a BEV representation consolidates multi-view spatial information into a structure compatible with LLMs. Second, we introduce LLM-enhanced world queries to facilitate knowledge transfer from the understanding branch. Third, a Current-to-Futur",
+    "pdf_url": "https://arxiv.org/pdf/2604.28196v1",
+    "abs_url": "https://arxiv.org/abs/2604.28196",
+    "published": "2026-04-30T17:59:58Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.28022",
+    "title": "Are DeepFakes Realistic Enough? Exploring Semantic Mismatch as a Novel Challenge",
+    "authors": [
+      "Sharayu Nilesh Deshmukh",
+      "Kailash A. Hambarde",
+      "Joana C. Costa",
+      "Hugo Proen\u00e7a",
+      "Tiago Roxo"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Current DeepFake detection scenarios are mostly binary, yet data manipulation can vary across audio, video, or both, whose variability is not captured in binary settings. Four-class audio-visual formulations address this by discriminating manipulation type, but introduce a unresolved problem: models may rely solely on data source integrity to detect DeepFakes without evaluating their semantic consistency. If the DeepFake origin is not in the data source but in its content, can semantic mismatch be assessed by the state-of-the-art? This paper proposes a new evaluation setup, extending the four-class formulation by explicitly modeling semantic-level inconsistency between authentic modalities with the introduction a new class: Real Audio-Real Video with Semantic Mismatch (RARV-SMM). We assess the robustness of state-of-the-art models in this new realistic DeepFake setting, using the FakeAVCeleb dataset, highlighting the limitations of existing approaches when faced with semantic mismatch ",
+    "pdf_url": "https://arxiv.org/pdf/2604.28022v1",
+    "abs_url": "https://arxiv.org/abs/2604.28022",
+    "published": "2026-04-30T15:40:56Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.28011",
+    "title": "Echo-\u03b1: Large Agentic Multimodal Reasoning Model for Ultrasound Interpretation",
+    "authors": [
+      "Jing Zhang",
+      "Wentao Jiang",
+      "Tao Huang",
+      "Zhiwei Wang",
+      "Jianxin Liu"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Ultrasound interpretation requires both precise lesion localization and holistic clinical reasoning, yet existing methods typically excel at only one of these capabilities: specialized detectors offer strong localization but limited reasoning, whereas multimodal large language models (MLLMs) provide flexible reasoning but weak grounding in specialized medical domains. We present Echo-\u03b1, an agentic multimodal reasoning model for ultrasound interpretation that unifies these strengths within an invoke-and-reason framework. Echo-\u03b1 is trained to coordinate organ-specific detector outputs, integrate them with global visual context, and convert the resulting evidence into grounded diagnostic decisions beyond detector-only inference. This behavior is established through a nine-task supervised curriculum and then refined by sequential reinforcement learning under different reward trade-offs, yielding Echo-\u03b1-Grounding for lesion anchoring and Echo-\u03b1-Diagnosis for final diagnosis. On multi-center",
+    "pdf_url": "https://arxiv.org/pdf/2604.28011v1",
+    "abs_url": "https://arxiv.org/abs/2604.28011",
+    "published": "2026-04-30T15:31:00Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27653",
+    "title": "FUN: A Focal U-Net Combining Reconstruction and Object Detection for Snapshot Spectral Imaging",
+    "authors": [
+      "Dahua Gao",
+      "Yubo Dong",
+      "Anqi Li",
+      "Zhenyuan Lin",
+      "Ang Gao"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Conventional push-broom hyperspectral imaging suffers from slow acquisition speeds, precluding real-time object detection; in contrast, snapshot spectral imaging enables instantaneous hyperspectral images (HSIs) capture, making real-time object detection feasible, yet its potential is often compromised by time-consuming post-capture reconstruction. To address this issue, we propose the Focal U-shaped Network (FUN), a novel end-to-end framework that jointly performs HSI reconstruction and object detection via multi-task learning. FUN employs a shared U-shaped backbone, where reconstruction provides underlying spectral information while detection guides semantic-aware priors learning, facilitating mutually beneficial task interaction. Crucially, we introduce focal modulation, an efficient alternative to self-attention that modulates spatial and spectral features while reducing quadratic computational complexity, enabling a self-attention-free architecture for joint reconstruction and det",
+    "pdf_url": "https://arxiv.org/pdf/2604.27653v1",
+    "abs_url": "https://arxiv.org/abs/2604.27653",
+    "published": "2026-04-30T09:48:38Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27596",
+    "title": "SECOS: Semantic Capture for Rigorous Classification in Open-World Semi-Supervised Learning",
+    "authors": [
+      "Hezhao Liu",
+      "Jiacheng Yang",
+      "Junlong Gao",
+      "Mengke Li",
+      "Yiqun Zhang"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "In open-world semi-supervised learning (OWSSL), a model learns from labeled data and unlabeled data containing both known and novel classes. In practical OWSSL applications, models are expected to perform rigorous classification by directly selecting the most semantically relevant label from a candidate set for each sample. Existing OWSSL methods fail to achieve this because novel samples are trained without explicit supervision, and these methods lack mechanisms to extract latent semantic information, resulting in predicted labels that have no semantic correspondence to candidate textual labels. To address this, we introduce SEmantic Capture for Open-world Semi-supervised learning (SECOS), which directly predicts textual labels from the candidate set without post-processing, meeting the requirements of practical OWSSL applications. SECOS leverages external knowledge to extract and align semantic representations across modalities for both known and novel classes, providing explicit sup",
+    "pdf_url": "https://arxiv.org/pdf/2604.27596v1",
+    "abs_url": "https://arxiv.org/abs/2604.27596",
+    "published": "2026-04-30T08:48:34Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2604.27499",
+    "title": "Towards All-Day Perception for Off-Road Driving: A Large-Scale Multispectral Dataset and Comprehensive Benchmark",
+    "authors": [
+      "Shuo Wang",
+      "Jilin Mei",
+      "Wenfei Guan",
+      "Shuai Wang",
+      "Yan Xing"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Off-road nighttime autonomous driving suffers from unreliable visible-light perception, making infrared modality crucial for accurate freespace detection. However, progress remains limited due to the scarcity of annotated infrared off-road datasets and the inter-frame inconsistencies inherent to current single-frame methods. To address these gaps, we present the IRON dataset, which, to our knowledge, is the first large-scale infrared dataset for off-road temporal freespace detection under all-day conditions, with strong support for nighttime perception. The dataset comprises 24,314 densely annotated infrared images with synchronized RGB images in diverse scenes and different light conditions. Building upon this dataset, we propose IRONet, a novel flow-free framework for temporal freespace detection that addresses inter-frame inconsistencies by aggregating historical context via a memory-attention mechanism and a carefully designed mask decoder. On our IRON dataset, IRONet achieves stat",
+    "pdf_url": "https://arxiv.org/pdf/2604.27499v1",
+    "abs_url": "https://arxiv.org/abs/2604.27499",
+    "published": "2026-04-30T06:50:25Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]

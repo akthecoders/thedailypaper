@@ -23,5 +23,10 @@
     "date": "2026-04-28T02:32:01.104661+00:00",
     "arxiv_id": "2604.24366",
     "title": "The Anatomy of a Decentralized Prediction Market: Microstructure Evidence from the Polymarket Order Book"
+  },
+  {
+    "date": "2026-05-01T02:33:34.094914+00:00",
+    "arxiv_id": "2604.17931",
+    "title": "LiteResearcher: A Scalable Agentic RL Training Framework for Deep Research Agent"
   }
 ]
