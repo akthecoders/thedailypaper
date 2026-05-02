@@ -8,7 +8,7 @@ pdfUrl: https://arxiv.org/pdf/2604.17931v1
 absUrl: https://arxiv.org/abs/2604.17931
 pickReason: LiteResearcher directly addresses agentic RL training with a novel framework that solves real-world scalability challenges through virtual environment construction, aligning with high-priority interests in agent architectures and RL methodology with strong empirical results.
 tldr: LiteResearcher trains a 4B deep research agent entirely offline using synthetic tasks and a 32M-page local corpus, matching Claude-4.5-Sonnet at 1/100th the size
-hook: First framework to achieve commercial-grade web research performance through pure offline RLâno live internet needed
+hook: First framework to achieve commercial-grade web research performance through pure offline RL—no live internet needed
 authors:
   - Wanli Li
   - Bince Qu
@@ -27,11 +27,11 @@ tags:
 
 ## TL;DR
 
-LiteResearcher demonstrates that training deep research agents via reinforcement learning becomes tractable when decoupled from the live internet through a virtual environment that mirrors real web dynamics. The framework trains a 4B parameter agent entirely offline using synthetic tasks and a 32M-page local corpus, achieving 71.3% on GAIA and 78.0% on Xbenchâmatching or exceeding commercial systems like Claude-4.5-Sonnet while using 8Ã fewer parameters than comparable open-source models.
+LiteResearcher demonstrates that training deep research agents via reinforcement learning becomes tractable when decoupled from the live internet through a virtual environment that mirrors real web dynamics. The framework trains a 4B parameter agent entirely offline using synthetic tasks and a 32M-page local corpus, achieving 71.3% on GAIA and 78.0% on Xbench—matching or exceeding commercial systems like Claude-4.5-Sonnet while using 8Ã fewer parameters than comparable open-source models.
 
 ## Why this matters
 
-Current approaches to training agentic deep research models face a fundamental scalability crisis. Systems that train directly on the live internet incur prohibitive costs ($59K-$243K for a single RL run) and suffer from non-deterministic rewards due to network latency, website changes, and API failures. Meanwhile, local retrieval systems constrained to Wikipedia or similar narrow corpora fail to capture the diverse search patterns required for real-world information seekingâthey can teach an agent to follow citations but not to cross-verify claims across multiple domains or enumerate entities from disparate sources.
+Current approaches to training agentic deep research models face a fundamental scalability crisis. Systems that train directly on the live internet incur prohibitive costs ($59K-$243K for a single RL run) and suffer from non-deterministic rewards due to network latency, website changes, and API failures. Meanwhile, local retrieval systems constrained to Wikipedia or similar narrow corpora fail to capture the diverse search patterns required for real-world information seeking—they can teach an agent to follow citations but not to cross-verify claims across multiple domains or enumerate entities from disparate sources.
 
 This work resolves the impasse by constructing a virtual training environment that maintains the structural complexity of the open web while eliminating its operational volatility. The key insight is that search capability emerges not from handcrafted reasoning templates but from scale and diversity of information sources. By continuously expanding a local corpus with real web pages fetched during data synthesis, the system creates search dynamics sufficiently rich to develop genuine research skills that transfer to online environments.
 
@@ -154,7 +154,7 @@ Training compute totals approximately 800 H100 GPU-hours for the full pipeline (
 
 The authors promise to open-source the complete framework including data synthesis pipelines, local environment infrastructure, and RL training code. The base model (Qwen3-4B-Thinking-2507) and teacher model (TongyiDeepResearch) are publicly available. BGE-M3 embeddings and Milvus are open-source and well-documented.
 
-A solo engineer could likely prototype the core system in 2-3 months but would need to significantly downscale: use a smaller seed corpus (1M pages), simpler synthesis (skip multi-hop), and shorter RL training (100 steps). The main implementation challenge is the infrastructure orchestrationâcoordinating data synthesis, corpus expansion, service deployment, and distributed RL training.
+A solo engineer could likely prototype the core system in 2-3 months but would need to significantly downscale: use a smaller seed corpus (1M pages), simpler synthesis (skip multi-hop), and shorter RL training (100 steps). The main implementation challenge is the infrastructure orchestration—coordinating data synthesis, corpus expansion, service deployment, and distributed RL training.
 
 ## Production implementation
 
@@ -175,7 +175,7 @@ A solo engineer could likely prototype the core system in 2-3 months but would n
 
 **Rollout strategy**: Shadow mode for one week comparing against current system â 1% canary with intensive monitoring â 10% for 48 hours checking for degradation â 50/50 split for statistical significance â full rollout. Instant rollback triggers: >10% increase in timeout errors, any infinite loop detection, or user complaints about factual errors exceeding baseline by 2Ã.
 
-**Cost back-of-envelope**: At $0.40/A100-hour and 20 QPS capacity, infrastructure costs ~$0.001 per query. Search API calls (if online fallback) add $0.001-0.005. Total ~$0.10 per 1K requests for pure inference. Memory and storage for 32M page corpus adds ~$500/month fixed cost. At 1M queries/day, total cost ~$3,500/month. Cost ceiling at $10K/monthâfirst lever is to reduce rollout count from 8 to 4 for non-critical queries.
+**Cost back-of-envelope**: At $0.40/A100-hour and 20 QPS capacity, infrastructure costs ~$0.001 per query. Search API calls (if online fallback) add $0.001-0.005. Total ~$0.10 per 1K requests for pure inference. Memory and storage for 32M page corpus adds ~$500/month fixed cost. At 1M queries/day, total cost ~$3,500/month. Cost ceiling at $10K/month—first lever is to reduce rollout count from 8 to 4 for non-critical queries.
 
 ## Related reading
 
@@ -191,10 +191,10 @@ A solo engineer could likely prototype the core system in 2-3 months but would n
 
 ## Key equations
 
-**Agent policy sampling**: $\tau_t \sim \pi_\theta(\cdot | H_{t-1}), \quad a_t \sim \pi_\theta(\cdot | H_{t-1}, \tau_t)$ â Defines how the agent generates interleaved thoughts and actions conditioned on interaction history.
+**Agent policy sampling**: $\tau_t \sim \pi_\theta(\cdot | H_{t-1}), \quad a_t \sim \pi_\theta(\cdot | H_{t-1}, \tau_t)$ — Defines how the agent generates interleaved thoughts and actions conditioned on interaction history.
 
-**GRPO objective**: $J_{GRPO}(\theta) = \mathbb{E}\left[ \frac{1}{K} \sum_{i=1}^K \min\left( r_i(\theta)A_i, \text{clip}(r_i(\theta), 1-\epsilon, 1+\epsilon)A_i \right) \right]$ â The clipped surrogate loss that stabilizes policy gradient training in long-horizon tasks.
+**GRPO objective**: $J_{GRPO}(\theta) = \mathbb{E}\left[ \frac{1}{K} \sum_{i=1}^K \min\left( r_i(\theta)A_i, \text{clip}(r_i(\theta), 1-\epsilon, 1+\epsilon)A_i \right) \right]$ — The clipped surrogate loss that stabilizes policy gradient training in long-horizon tasks.
 
-**Difficulty filtering criterion**: $1 \leq c \leq 7$ where $c$ is correct responses in K=8 rollouts â Ensures training data remains in the zone of proximal development.
+**Difficulty filtering criterion**: $1 \leq c \leq 7$ where $c$ is correct responses in K=8 rollouts — Ensures training data remains in the zone of proximal development.
 
-**Probability ratio**: $r_i(\theta) = \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{rollout}}(o_i|q)}$ â Corrects for distribution mismatch between rollout and training engines.
+**Probability ratio**: $r_i(\theta) = \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{rollout}}(o_i|q)}$ — Corrects for distribution mismatch between rollout and training engines.

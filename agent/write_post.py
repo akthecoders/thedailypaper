@@ -26,6 +26,14 @@ def _yaml_list(items: list[str], indent: int = 2) -> str:
 
 def _clean_str(s: str) -> str:
     """Strip C0/C1 control characters (except tab and newline) that break YAML parsers."""
+    # Fix common Mojibake from double-encoding UTF-8 as Latin-1 then back to UTF-8.
+    # Most frequent offender: em dash (U+2014) gets decoded as U+00E2 U+0080 U+0094.
+    s = s.replace("\u00e2\u0080\u0094", "\u2014")  # — (em dash)
+    s = s.replace("\u00e2\u0080\u0093", "\u2013")  # – (en dash)
+    s = s.replace("\u00e2\u0080\u009c", "\u201c")  # " (left double quote)
+    s = s.replace("\u00e2\u0080\u009d", "\u201d")  # " (right double quote)
+    s = s.replace("\u00e2\u0080\u0098", "\u2018")  # ' (left single quote)
+    s = s.replace("\u00e2\u0080\u0099", "\u2019")  # ' (right single quote)
     return re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]", "", s)
 
 

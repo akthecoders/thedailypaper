@@ -8,7 +8,7 @@ pdfUrl: https://arxiv.org/pdf/2604.24366v1
 absUrl: https://arxiv.org/abs/2604.24366
 pickReason: Directly addresses market microstructure in prediction markets with novel empirical analysis of order-book dynamics using 30B tick-level events, strongly aligning with high-priority RL for trading and algorithmic trading interests.
 tldr: "Polymarket's public feed gets trade direction wrong 40% of the time, invalidating standard microstructure measures"
-hook: "The largest prediction market's data is fundamentally broken for algorithmic tradingâhere's how to fix it"
+hook: "The largest prediction market's data is fundamentally broken for algorithmic trading—here's how to fix it"
 authors:
   - Philipp D. Dubach
 tags:
@@ -23,11 +23,11 @@ tags:
 
 ## TL;DR
 
-This paper analyzes 30 billion tick-level orderbook events from Polymarket, finding that trade direction inferred from the public feed agrees with on-chain ground truth only ~59% of the timeâbarely above random chance. The study documents eight cross-sectional patterns including a longshot spread premium and depth decay near market resolution, but the key finding is that standard microstructure measures like effective spread and Kyle's Î» require on-chain data, not the public feed.
+This paper analyzes 30 billion tick-level orderbook events from Polymarket, finding that trade direction inferred from the public feed agrees with on-chain ground truth only ~59% of the time—barely above random chance. The study documents eight cross-sectional patterns including a longshot spread premium and depth decay near market resolution, but the key finding is that standard microstructure measures like effective spread and Kyle's Î» require on-chain data, not the public feed.
 
 ## Why this matters
 
-Prediction markets are supposed to aggregate dispersed information into probability-like prices, but this aggregation happens through the microstructureâthe actual mechanics of how orders match and spreads form. If spreads are wide or trade direction is misidentified, the resulting prices become noisier and less informative. Most prediction market research has focused on price accuracy and calibration, treating the underlying market mechanics as a black box.
+Prediction markets are supposed to aggregate dispersed information into probability-like prices, but this aggregation happens through the microstructure—the actual mechanics of how orders match and spreads form. If spreads are wide or trade direction is misidentified, the resulting prices become noisier and less informative. Most prediction market research has focused on price accuracy and calibration, treating the underlying market mechanics as a black box.
 
 Polymarket has become the largest decentralized prediction market with billions in volume, yet its microstructure remains poorly understood. This paper reveals a critical measurement problem: the public WebSocket feed that researchers typically use doesn't contain enough information to determine which side initiated a trade. Without accurate trade direction, fundamental measures like effective spread, realized spread, and price impact become unreliable or entirely wrong. The paper shows that on two-thirds of liquid markets, the effective spread literally flips sign when switching from feed-inferred to on-chain trade direction.
 
@@ -43,9 +43,9 @@ Key prerequisites: A limit order book has bids (buy orders) and asks (sell order
 
 ## The core idea
 
-Think of trade direction inference like trying to figure out who started a conversation when you can only see the final positions of two people. On traditional exchanges, you see someone walk across the room (cross the spread) to start talkingâthat's your aggressor. But Polymarket's public feed only shows you a snapshot after they've already met, with a note saying "the left side of the room changed." You can guess that maybe someone from the right walked over, but you're wrong about 40% of the time.
+Think of trade direction inference like trying to figure out who started a conversation when you can only see the final positions of two people. On traditional exchanges, you see someone walk across the room (cross the spread) to start talking—that's your aggressor. But Polymarket's public feed only shows you a snapshot after they've already met, with a note saying "the left side of the room changed." You can guess that maybe someone from the right walked over, but you're wrong about 40% of the time.
 
-The paper's core insight is that this ~40% error rate isn't just noiseâit systematically corrupts every microstructure measure that depends on knowing who initiated each trade. When you get the direction wrong, you're not just adding random error; you're potentially reversing the sign of important metrics. A market might look like it has a positive spread (market makers earning money) when it actually has a negative spread (market makers losing money to informed traders).
+The paper's core insight is that this ~40% error rate isn't just noise—it systematically corrupts every microstructure measure that depends on knowing who initiated each trade. When you get the direction wrong, you're not just adding random error; you're potentially reversing the sign of important metrics. A market might look like it has a positive spread (market makers earning money) when it actually has a negative spread (market makers losing money to informed traders).
 
 The solution is conceptually simple but practically involved: instead of guessing from the public feed, get the authoritative record from the blockchain where every trade explicitly identifies both parties and who was the aggressor. The paper builds this bridge between the high-frequency orderbook feed (30 billion events) and the on-chain settlement record (255 million trades), then uses it to establish what Polymarket's microstructure actually looks like.
 
@@ -141,7 +141,7 @@ The paper's main measurement finding is that trade direction inferred from Polym
 
 Eight stylized facts characterize the market structure:
 
-1. **Longshot premium**: Spreads widen from ~400bps at 50% probability to 1,300-1,800bps below 10%âan order of magnitude wider than traditional prediction markets
+1. **Longshot premium**: Spreads widen from ~400bps at 50% probability to 1,300-1,800bps below 10%—an order of magnitude wider than traditional prediction markets
 
 2. **Depth profile**: Median depth concentration ratio of 0.137, closer to uniform distribution across price levels than concentrated at top-of-book
 
@@ -161,11 +161,11 @@ The Glosten-Harris decomposition on the top-100 stratum finds essentially zero a
 
 ## Limitations
 
-The paper measures but doesn't explain **why** the public feed lacks aggressor informationâthis appears to be an architectural choice where the feed broadcasts post-trade book state without taker identity. The 60-second sampling grid for computational tractability means Kyle's Î» estimates are fragile and vary by orders of magnitude with step size.
+The paper measures but doesn't explain **why** the public feed lacks aggressor information—this appears to be an architectural choice where the feed broadcasts post-trade book state without taker identity. The 60-second sampling grid for computational tractability means Kyle's Î» estimates are fragile and vary by orders of magnitude with step size.
 
 The wash detection provides only a lower bound (direct self-trades and immediate roundtrips), missing multi-hop patterns that network classifiers would catch. The 1-22% range can't be directly compared to the 25-70% on crypto exchanges because the incentive structures differ fundamentally.
 
-The analysis is purely cross-sectional at one point in timeâno within-market evolution or temporal dynamics. The paper doesn't separate MEV bot activity from organic flow, though the 60/40 seller/buyer asymmetry suggests non-trivial MEV presence. The CTF Exchange V1 to V2 transition isn't covered.
+The analysis is purely cross-sectional at one point in time—no within-market evolution or temporal dynamics. The paper doesn't separate MEV bot activity from organic flow, though the 60/40 seller/buyer asymmetry suggests non-trivial MEV presence. The CTF Exchange V1 to V2 transition isn't covered.
 
 Most critically, the paper establishes that standard microstructure measures fail on the public feed but doesn't provide a theory for why Polymarket designed it this way or whether this affects price efficiency.
 
@@ -230,18 +230,18 @@ Code at https://github.com/philippdubach/polymarket-microstructure with pre-buil
 
 ## Related reading
 
-- **Lee and Ready (1991)**: Original trade classification algorithm achieving ~80% accuracy on NYSEâthe benchmark showing Polymarket's 59% rate is problematic
+- **Lee and Ready (1991)**: Original trade classification algorithm achieving ~80% accuracy on NYSE—the benchmark showing Polymarket's 59% rate is problematic
 - **Hasbrouck (2007) "Empirical Market Microstructure"**: Comprehensive treatment of limit order books and why trade direction matters for measuring price discovery
-- **Cong et al. (2023)**: Documents 25-70% wash trading on crypto exchanges using network classificationâprovides context for Polymarket's 1-22% range
+- **Cong et al. (2023)**: Documents 25-70% wash trading on crypto exchanges using network classification—provides context for Polymarket's 1-22% range
 - **Glosten and Harris (1988)**: Foundational spread decomposition model separating transitory and permanent components
 - **Tsang and Yang (2026)**: Time-series analysis of single Polymarket election showing Kyle's Î» declined 10Ã as market matured
 
 ## Key equations
 
-**Effective half-spread**: $S^{eff}_{1/2} = \text{sign}_t \cdot (P_t - M_t)$ â Actual trading cost; flips sign with wrong direction
+**Effective half-spread**: $S^{eff}_{1/2} = \text{sign}_t \cdot (P_t - M_t)$ — Actual trading cost; flips sign with wrong direction
 
-**Kyle's lambda regression**: $\Delta M_t = \lambda \cdot \text{sign}_t \cdot V_t + \epsilon_t$ â Price impact per unit volume  
+**Kyle's lambda regression**: $\Delta M_t = \lambda \cdot \text{sign}_t \cdot V_t + \epsilon_t$ — Price impact per unit volume  
 
-**Glosten-Harris decomposition**: $S^{eff}_{1/2} = c + \phi$ â Splits spread into transitory ($c$) and adverse selection ($\phi$)
+**Glosten-Harris decomposition**: $S^{eff}_{1/2} = c + \phi$ — Splits spread into transitory ($c$) and adverse selection ($\phi$)
 
-**Depth decay**: $\log(\text{depth}) = 0.55 \cdot \log(\text{seconds to close}) + \text{controls}$ â Markets lose ~6% depth per 10Ã time reduction
+**Depth decay**: $\log(\text{depth}) = 0.55 \cdot \log(\text{seconds to close}) + \text{controls}$ — Markets lose ~6% depth per 10Ã time reduction
