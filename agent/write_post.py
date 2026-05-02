@@ -24,8 +24,14 @@ def _yaml_list(items: list[str], indent: int = 2) -> str:
     return "\n".join(f"{pad}- {_yaml_escape(x)}" for x in items)
 
 
+def _clean_str(s: str) -> str:
+    """Strip C0/C1 control characters (except tab and newline) that break YAML parsers."""
+    return re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]", "", s)
+
+
 def _yaml_escape(s: str) -> str:
-    """Quote strings that contain YAML-hostile chars."""
+    """Strip non-printable chars, then quote strings that contain YAML-hostile chars."""
+    s = _clean_str(s)
     if any(c in s for c in [":", "#", "'", '"', "\n", "[", "]", "{", "}"]):
         escaped = s.replace('"', '\\"')
         return f'"{escaped}"'
@@ -82,7 +88,7 @@ def write_post(
     target_dir.mkdir(parents=True, exist_ok=True)
     target = target_dir / filename
 
-    content = _frontmatter(paper, explainer) + explainer["markdown"]
+    content = _frontmatter(paper, explainer) + _clean_str(explainer["markdown"])
     target.write_text(content, encoding="utf-8")
     log.info(f"Wrote {len(content)} chars to {target}")
     return target, url_slug
