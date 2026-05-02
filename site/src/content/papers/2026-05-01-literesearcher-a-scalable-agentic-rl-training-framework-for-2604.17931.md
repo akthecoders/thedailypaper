@@ -27,7 +27,7 @@ tags:
 
 ## TL;DR
 
-LiteResearcher demonstrates that training deep research agents via reinforcement learning becomes tractable when decoupled from the live internet through a virtual environment that mirrors real web dynamics. The framework trains a 4B parameter agent entirely offline using synthetic tasks and a 32M-page local corpus, achieving 71.3% on GAIA and 78.0% on Xbench—matching or exceeding commercial systems like Claude-4.5-Sonnet while using 8Ã fewer parameters than comparable open-source models.
+LiteResearcher demonstrates that training deep research agents via reinforcement learning becomes tractable when decoupled from the live internet through a virtual environment that mirrors real web dynamics. The framework trains a 4B parameter agent entirely offline using synthetic tasks and a 32M-page local corpus, achieving 71.3% on GAIA and 78.0% on Xbench—matching or exceeding commercial systems like Claude-4.5-Sonnet while using 8× fewer parameters than comparable open-source models.
 
 ## Why this matters
 
@@ -35,7 +35,7 @@ Current approaches to training agentic deep research models face a fundamental s
 
 This work resolves the impasse by constructing a virtual training environment that maintains the structural complexity of the open web while eliminating its operational volatility. The key insight is that search capability emerges not from handcrafted reasoning templates but from scale and diversity of information sources. By continuously expanding a local corpus with real web pages fetched during data synthesis, the system creates search dynamics sufficiently rich to develop genuine research skills that transfer to online environments.
 
-The practical implications are significant: a 4B parameter model trained entirely offline at zero marginal cost can now match commercial APIs that are 100Ã larger. This suggests that the data-environment bottleneck has been constraining agent performance more than model scale, and that on-device deep research agents are now feasible.
+The practical implications are significant: a 4B parameter model trained entirely offline at zero marginal cost can now match commercial APIs that are 100× larger. This suggests that the data-environment bottleneck has been constraining agent performance more than model scale, and that on-device deep research agents are now feasible.
 
 ## Background
 
@@ -81,9 +81,9 @@ The framework generates training data through a multi-stage pipeline:
 
 The enriched corpus powers two local services:
 
-**Local Search Engine**: Uses BGE-M3 embeddings for hybrid retrieval, combining dense (1024-d) and learned sparse representations. Pages are indexed at document level (not chunked) in Milvus with DiskANN, achieving ~0.15s/query latency (10Ã faster than online search).
+**Local Search Engine**: Uses BGE-M3 embeddings for hybrid retrieval, combining dense (1024-d) and learned sparse representations. Pages are indexed at document level (not chunked) in Milvus with DiskANN, achieving ~0.15s/query latency (10× faster than online search).
 
-**Local Browse Tool**: Stores full Markdown content in PostgreSQL keyed by URL, configured for 1000 concurrent connections, returning pages at ~0.17s/page (46Ã faster than Jina Reader).
+**Local Browse Tool**: Stores full Markdown content in PostgreSQL keyed by URL, configured for 1000 concurrent connections, returning pages at ~0.17s/page (46× faster than Jina Reader).
 
 ### Reinforcement Learning
 
@@ -96,8 +96,8 @@ where $r_i(\theta) = \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{rollout}}(o_i|q)}$ is
 Key training parameters:
 - Global batch size: 128 queries
 - Learning rate: $1 \times 10^{-6}$ (constant)
-- Max response length: 32K tokens (Stage 1) â 48K tokens (Stage 2)
-- Sampling temperature: 0.7 (Stage 1) â 1.0 (Stage 2)
+- Max response length: 32K tokens (Stage 1) → 48K tokens (Stage 2)
+- Sampling temperature: 0.7 (Stage 1) → 1.0 (Stage 2)
 - No KL penalty or entropy regularization
 
 ### Curriculum Learning
@@ -121,7 +121,7 @@ graph TD
     G --> H[Enriched Corpus<br/>32M pages]
     H --> I[Local Search Engine<br/>BGE-M3 + Milvus]
     H --> J[Local Browse Tool<br/>PostgreSQL]
-    D --> K[Difficulty Filter<br/>Pass@8: 1â¤câ¤7]
+    D --> K[Difficulty Filter<br/>Pass@8: 1≤c≤7]
     K --> L[RL Training<br/>GRPO]
     I --> M[Agent Rollouts]
     J --> M
@@ -136,7 +136,7 @@ LiteResearcher-4B achieves state-of-the-art results among open-source models acr
 
 The most convincing experiments demonstrate the necessity of each component. Removing the synthetic data drops GAIA performance from 66.8% to 58.7%, confirming it captures diverse search patterns beyond simple multi-hop reasoning. The on-policy vs off-policy ablation shows that strictly on-policy training achieves 68.9% on GAIA versus 66.8% for off-policy, with on-policy maintaining stable improvement throughout training while off-policy gains plateau and decline.
 
-The two-stage curriculum proves essential for continued learning: Stage 1 saturates at 64.7% GAIA accuracy, but transitioning to Stage 2 with adjusted difficulty pushes performance to 68.3% (+3.6%). The RL stage contributes +15.7 points over the SFT baseline (71.3% vs 55.6%), with the model surpassing its teacher (TongyiDeepResearch at 70.9%) despite having 7.5Ã fewer parameters.
+The two-stage curriculum proves essential for continued learning: Stage 1 saturates at 64.7% GAIA accuracy, but transitioning to Stage 2 with adjusted difficulty pushes performance to 68.3% (+3.6%). The RL stage contributes +15.7 points over the SFT baseline (71.3% vs 55.6%), with the model surpassing its teacher (TongyiDeepResearch at 70.9%) despite having 7.5× fewer parameters.
 
 ## Limitations
 
@@ -160,9 +160,9 @@ A solo engineer could likely prototype the core system in 2-3 months but would n
 
 **Tech stack**: Python for orchestration, vLLM or SGLang for model serving, Milvus for vector search, PostgreSQL for document storage, Ray for distributed RL coordination. The inference runtime should use TensorRT-LLM for the 4B model to maximize throughput on edge deployments.
 
-**Data pipeline**: Training data flows from Wikipedia dumps â LLM synthesis â Serper enrichment â local corpus. At inference time: user query â load balancer â preprocessing (length check, safety filters) â model server â tool orchestration service â response assembly â output validation. The corpus needs monthly refresh for time-sensitive information with incremental indexing to avoid full rebuilds.
+**Data pipeline**: Training data flows from Wikipedia dumps → LLM synthesis → Serper enrichment → local corpus. At inference time: user query → load balancer → preprocessing (length check, safety filters) → model server → tool orchestration service → response assembly → output validation. The corpus needs monthly refresh for time-sensitive information with incremental indexing to avoid full rebuilds.
 
-**Deployment shape**: Online service with 50-100ms latency budget for reasoning steps, 200ms for tool calls. One A100 80GB handles ~20 QPS at batch size 8 for the 4B model. For cost-sensitive deployments, quantize to INT8 and serve on 2Ã A10G GPUs with comparable throughput.
+**Deployment shape**: Online service with 50-100ms latency budget for reasoning steps, 200ms for tool calls. One A100 80GB handles ~20 QPS at batch size 8 for the 4B model. For cost-sensitive deployments, quantize to INT8 and serve on 2× A10G GPUs with comparable throughput.
 
 **Failure modes in production**:
 - Tool timeout cascade: Set aggressive timeouts (2s search, 5s browse) with fallback to cached results
@@ -173,7 +173,7 @@ A solo engineer could likely prototype the core system in 2-3 months but would n
 
 **Evaluation plan**: Offline metrics include answer accuracy on held-out test sets and tool call efficiency (unique URLs per query). Online A/B test with 5% treatment, measuring task completion rate, user satisfaction ratings, and p50/p99 latencies. Never ship if hallucination rate exceeds 5% or if the model enters infinite tool-call loops on >1% of queries.
 
-**Rollout strategy**: Shadow mode for one week comparing against current system â 1% canary with intensive monitoring â 10% for 48 hours checking for degradation â 50/50 split for statistical significance â full rollout. Instant rollback triggers: >10% increase in timeout errors, any infinite loop detection, or user complaints about factual errors exceeding baseline by 2Ã.
+**Rollout strategy**: Shadow mode for one week comparing against current system → 1% canary with intensive monitoring → 10% for 48 hours checking for degradation → 50/50 split for statistical significance → full rollout. Instant rollback triggers: >10% increase in timeout errors, any infinite loop detection, or user complaints about factual errors exceeding baseline by 2×.
 
 **Cost back-of-envelope**: At $0.40/A100-hour and 20 QPS capacity, infrastructure costs ~$0.001 per query. Search API calls (if online fallback) add $0.001-0.005. Total ~$0.10 per 1K requests for pure inference. Memory and storage for 32M page corpus adds ~$500/month fixed cost. At 1M queries/day, total cost ~$3,500/month. Cost ceiling at $10K/month—first lever is to reduce rollout count from 8 to 4 for non-critical queries.
 

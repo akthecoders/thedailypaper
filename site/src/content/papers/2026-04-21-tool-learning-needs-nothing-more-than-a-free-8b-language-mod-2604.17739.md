@@ -54,7 +54,7 @@ Prerequisites for understanding this work include familiarity with POMDP formula
 
 Think of training a tool-calling agent like teaching someone to cook in a kitchen. Traditional approaches either give them a cookbook with fixed recipes (supervised learning on static data) or hire an expensive chef to create custom scenarios (using GPT-4 for synthesis). TRUSTEE instead creates a "holographic kitchen" where everything - the recipes, the ingredients' behavior, the taste tester, and even the difficulty of dishes - is simulated by the same AI system that's learning to cook.
 
-The key insight is that the simulator doesn't need to be perfect or even particularly sophisticated - it just needs to be consistent enough to provide learning signal, and adaptive enough to keep pace with the learner. As the agent improves at simple tasks (boiling water), the curriculum automatically advances to harder challenges (making soufflÃ©), with all components of difficulty scaling together: more tools available, more interaction turns required, vaguer user instructions, and stricter evaluation criteria.
+The key insight is that the simulator doesn't need to be perfect or even particularly sophisticated - it just needs to be consistent enough to provide learning signal, and adaptive enough to keep pace with the learner. As the agent improves at simple tasks (boiling water), the curriculum automatically advances to harder challenges (making soufflé), with all components of difficulty scaling together: more tools available, more interaction turns required, vaguer user instructions, and stricter evaluation criteria.
 
 ## The method
 
@@ -93,10 +93,10 @@ For each task $T_i$ at training step $n$:
 For each trajectory, the agent interacts with simulated components:
 
 ```
-Agent action: a_t = Ï_Î¸(o_t, F_i)
-If tool call: f_t = Î¦_tool(Ï, F_i, g_i)  
-If text response: u_t = Î¦_user(Ï, F_i, g_i, p_i)
-Update trajectory: Ï = Ï â response
+Agent action: a_t = π_θ(o_t, F_i)
+If tool call: f_t = Φ_tool(τ, F_i, g_i)  
+If text response: u_t = Φ_user(τ, F_i, g_i, p_i)
+Update trajectory: τ = τ ⊕ response
 ```
 
 The simulators $\Phi_{tool}$ and $\Phi_{user}$ are both instantiated by the same 8B LM with task-specific prompts.
@@ -127,10 +127,10 @@ Seven difficulty aspects scale with $D_n$ (range 1-100):
 1. **Number of available tools**: 1-10 tools sampled
 2. **Expected tool callings**: 1-3 calls required
 3. **Interaction turns**: 1-2 expected turns (max scales accordingly)
-4. **System prompt specificity**: Detailed instructions â generic "You are a helpful assistant"
-5. **User persona**: Expert â Beginner â Novice
-6. **Query ambiguity**: Clear â Somewhat ambiguous â Highly ambiguous  
-7. **Evaluation criteria**: Progressively stricter (intent â correct tools â no hallucination â no redundancy â efficiency)
+4. **System prompt specificity**: Detailed instructions → generic "You are a helpful assistant"
+5. **User persona**: Expert → Beginner → Novice
+6. **Query ambiguity**: Clear → Somewhat ambiguous → Highly ambiguous  
+7. **Evaluation criteria**: Progressively stricter (intent → correct tools → no hallucination → no redundancy → efficiency)
 
 To maintain diversity, each task has probability $\epsilon = 0.5$ of randomly sampling aspects within current difficulty bounds rather than using fixed values.
 
@@ -149,17 +149,17 @@ To maintain diversity, each task has probability $\epsilon = 0.5$ of randomly sa
 
 ```mermaid
 graph TD
-    A[Tool Repository F] --> B[Task Generator Î¦_task]
+    A[Tool Repository F] --> B[Task Generator Φ_task]
     C[Difficulty D_n] --> B
     B --> D[Task T_i]
-    D --> E[Agent Ï_Î¸]
+    D --> E[Agent π_θ]
     E --> F{Action Type?}
-    F -->|Tool Call| G[Tool Simulator Î¦_tool]
-    F -->|Text Response| H[User Simulator Î¦_user]
-    G --> I[Trajectory Ï]
+    F -->|Tool Call| G[Tool Simulator Φ_tool]
+    F -->|Text Response| H[User Simulator Φ_user]
+    G --> I[Trajectory τ]
     H --> I
     I --> E
-    I --> J[Verifier Î¦_reward]
+    I --> J[Verifier Φ_reward]
     J --> K[Reward r_m]
     K --> L[Policy Update GRPO]
     K --> M[Difficulty Update ACL]
@@ -175,7 +175,7 @@ TRUSTEE achieves the strongest overall performance across both single-turn and m
 
 **Multi-turn interaction**: On BFCL Multi-Turn, TRUSTEE achieves 46.4% average accuracy versus 44.5% for the next best (EnvScaler). The Simia baseline, specifically tuned for multi-turn scenarios, catastrophically fails with only 2.0% accuracy due to overfitting.
 
-**Real-world scenarios (Ï2-bench)**: TRUSTEE is the only method improving performance on all three domains (Airline: 26.0%, Retail: 45.6%, Telecom: 17.5%), while every baseline degrades on at least one domain. The Telecom domain proves particularly challenging for all baselines, with most dropping below the base model's 15.8% accuracy.
+**Real-world scenarios (τ2-bench)**: TRUSTEE is the only method improving performance on all three domains (Airline: 26.0%, Retail: 45.6%, Telecom: 17.5%), while every baseline degrades on at least one domain. The Telecom domain proves particularly challenging for all baselines, with most dropping below the base model's 15.8% accuracy.
 
 The most convincing result is TRUSTEE's consistent improvement pattern - unlike baselines that show erratic performance across different evaluation aspects, it maintains steady gains. This suggests the adaptive curriculum successfully prevents both underfitting and catastrophic forgetting.
 
@@ -209,23 +209,23 @@ A solo engineer could likely get a working prototype in 2-3 weeks, assuming fami
 **Tech stack**: Python with veRL for distributed training, vLLM for simulation serving, Ray for orchestration. Model checkpoints stored in S3 with Weights & Biases for experiment tracking. Production inference via TensorRT-LLM for the trained agent, with simulation components retired post-training.
 
 **Data pipeline**: 
-- Training time: Pull tool descriptions from versioned JSON in S3 â Task generator creates scenarios on-the-fly â Trajectories logged to distributed storage for replay/analysis
-- Inference time: User query â TensorRT-LLM agent â Tool router (maps to real APIs) â Response formatting â User
+- Training time: Pull tool descriptions from versioned JSON in S3 → Task generator creates scenarios on-the-fly → Trajectories logged to distributed storage for replay/analysis
+- Inference time: User query → TensorRT-LLM agent → Tool router (maps to real APIs) → Response formatting → User
 
 **Deployment shape**: Online service with 50ms P50 latency target for tool selection, 200ms P95 for complete response. Single A100 40GB handles ~100 QPS at batch size 8 for the 8B agent model. Simulation infrastructure only needed during retraining cycles.
 
 **Failure modes in production**:
-- Tool drift: Real APIs change faster than retraining cycles â Implement tool description versioning with fallback to semantic-similarity matching
-- Hallucinated tools: Agent invents non-existent functions â Strict validation layer rejecting any tool call not in current registry
-- Simulation artifacts: Agent expects specific response patterns from training â Add response normalization layer and diversity injection during training
-- Cost explosion from recursive tool calling â Hard limit of 10 tool calls per conversation, with exponential backoff
+- Tool drift: Real APIs change faster than retraining cycles → Implement tool description versioning with fallback to semantic-similarity matching
+- Hallucinated tools: Agent invents non-existent functions → Strict validation layer rejecting any tool call not in current registry
+- Simulation artifacts: Agent expects specific response patterns from training → Add response normalization layer and diversity injection during training
+- Cost explosion from recursive tool calling → Hard limit of 10 tool calls per conversation, with exponential backoff
 
 **Evaluation plan**: 
 - Offline: Hold-out test set with real tool execution for accuracy, plus adversarial prompts for robustness
 - Online: A/B test measuring task completion rate, user satisfaction (thumbs up/down), and tool call efficiency
 - Never ship: Agent calling privileged tools without user confirmation (payment, data deletion, etc.)
 
-**Rollout strategy**: Shadow mode for 1 week comparing to current system â 5% traffic with strict error monitoring â 25% if error rate <1% â Full rollout with automated rollback trigger on >2% error rate spike.
+**Rollout strategy**: Shadow mode for 1 week comparing to current system → 5% traffic with strict error monitoring → 25% if error rate <1% → Full rollout with automated rollback trigger on >2% error rate spike.
 
 **Cost envelope**: Training costs ~$200 per full run on cloud GPUs. Inference at $0.002 per 1K tokens translates to ~$0.01 per complex multi-turn interaction. Cost ceiling at $0.10 per user per day triggers model quantization and caching optimizations.
 
@@ -233,7 +233,7 @@ A solo engineer could likely get a working prototype in 2-3 weeks, assuming fami
 
 - **GRPO (DeepSeekMath)**: The policy optimization algorithm used, providing stable token-level RL updates
 - **ToolBench**: Source of the 16,000+ tool descriptions used for training, spanning 49 API categories
-- **Ï-bench**: Realistic multi-turn evaluation benchmark that exposed overfitting in baseline methods
+- **τ-bench**: Realistic multi-turn evaluation benchmark that exposed overfitting in baseline methods
 - **Simia-RL**: Prior work on LM-simulated tool responses, though limited to fixed task datasets
 - **veRL**: The distributed RLHF training framework that enables the agent-simulator architecture
 

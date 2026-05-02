@@ -23,7 +23,7 @@ tags:
 
 ## TL;DR
 
-This paper analyzes 30 billion tick-level orderbook events from Polymarket, finding that trade direction inferred from the public feed agrees with on-chain ground truth only ~59% of the time—barely above random chance. The study documents eight cross-sectional patterns including a longshot spread premium and depth decay near market resolution, but the key finding is that standard microstructure measures like effective spread and Kyle's Î» require on-chain data, not the public feed.
+This paper analyzes 30 billion tick-level orderbook events from Polymarket, finding that trade direction inferred from the public feed agrees with on-chain ground truth only ~59% of the time—barely above random chance. The study documents eight cross-sectional patterns including a longshot spread premium and depth decay near market resolution, but the key finding is that standard microstructure measures like effective spread and Kyle's λ require on-chain data, not the public feed.
 
 ## Why this matters
 
@@ -37,9 +37,9 @@ This isn't just an academic concern. Anyone building trading algorithms, providi
 
 The theoretical framework builds on classical market microstructure work, particularly **O'Hara (1995)** and **Hasbrouck (2007)** who formalized how limit order books aggregate information through the interaction of informed and uninformed traders. For spread decomposition, the paper uses the **Glosten-Harris (1988)** model that separates spreads into transitory (inventory/processing) and permanent (adverse selection) components.
 
-The empirical benchmark is the **Lee-Ready (1991)** algorithm for inferring trade direction from quotes, which achieves ~80% accuracy on equity markets. Prior Polymarket-specific work includes **Tsang and Yang (2026)** who studied the 2024 US election market as a single time series, finding Kyle's Î» declined by an order of magnitude as the market matured, and **Rahman et al. (2025)** who surveyed decentralized prediction market microstructure methodologically without bringing matching tick-level data.
+The empirical benchmark is the **Lee-Ready (1991)** algorithm for inferring trade direction from quotes, which achieves ~80% accuracy on equity markets. Prior Polymarket-specific work includes **Tsang and Yang (2026)** who studied the 2024 US election market as a single time series, finding Kyle's λ declined by an order of magnitude as the market matured, and **Rahman et al. (2025)** who surveyed decentralized prediction market microstructure methodologically without bringing matching tick-level data.
 
-Key prerequisites: A limit order book has bids (buy orders) and asks (sell orders) at different price levels. The spread is the gap between best bid and ask. An "aggressor" or "taker" is the trader who crosses the spread to trade immediately against resting orders. Effective spread measures the actual trading cost including price impact. Kyle's Î» measures how much prices move per unit of order flow, capturing price impact.
+Key prerequisites: A limit order book has bids (buy orders) and asks (sell orders) at different price levels. The spread is the gap between best bid and ask. An "aggressor" or "taker" is the trader who crosses the spread to trade immediately against resting orders. Effective spread measures the actual trading cost including price impact. Kyle's λ measures how much prices move per unit of order flow, capturing price impact.
 
 ## The core idea
 
@@ -68,7 +68,7 @@ The analysis combines two data sources:
 
 Pre-registered 600-market panel in two strata:
 - **Top-100**: Ranked by total USDC volume in 28-day window
-- **Random-500**: Uniform sample from markets with â¥100 trades
+- **Random-500**: Uniform sample from markets with ≥100 trades
 
 Random seed 20260424 committed before analysis. Volume range: $4.56M to $96.0M (top-100), 100 to 24,378 trades (random-500).
 
@@ -98,7 +98,7 @@ All measures computed on 60-second grid for computational tractability.
 $$S^{eff}_{1/2} = \text{sign}_t \cdot (P_t - M_t)$$
 where $P_t$ is trade price, $M_t$ is midpoint at trade time.
 
-**Kyle's Î»** (price impact):
+**Kyle's λ** (price impact):
 $$\Delta M_t = \lambda \cdot \text{sign}_t \cdot V_t + \epsilon_t$$
 Estimated via OLS regression of midpoint changes on signed volume.
 
@@ -137,7 +137,7 @@ graph TD
 
 ## Results
 
-The paper's main measurement finding is that trade direction inferred from Polymarket's public feed matches on-chain ground truth only **59% of the time** (volume-weighted, 95% CI [0.54, 0.66]), compared to ~80% accuracy for Lee-Ready on equity markets. This propagates dramatically: effective half-spread flips sign on 67% of markets when switching from feed to on-chain direction, and Kyle's Î» flips on 60%.
+The paper's main measurement finding is that trade direction inferred from Polymarket's public feed matches on-chain ground truth only **59% of the time** (volume-weighted, 95% CI [0.54, 0.66]), compared to ~80% accuracy for Lee-Ready on equity markets. This propagates dramatically: effective half-spread flips sign on 67% of markets when switching from feed to on-chain direction, and Kyle's λ flips on 60%.
 
 Eight stylized facts characterize the market structure:
 
@@ -145,23 +145,23 @@ Eight stylized facts characterize the market structure:
 
 2. **Depth profile**: Median depth concentration ratio of 0.137, closer to uniform distribution across price levels than concentrated at top-of-book
 
-3. **Block timing**: Quote updates don't cluster meaningfully at 2-second Polygon block boundaries (median 10.2% within Â±100ms of block times)
+3. **Block timing**: Quote updates don't cluster meaningfully at 2-second Polygon block boundaries (median 10.2% within ±100ms of block times)
 
 4. **Maker diversity**: Median Herfindahl index of 0.031 (~32 effective market makers), with concentrated tail where 3 makers dominate
 
-5. **Category effects**: Effective spreads vary by market category but within narrow range (Â±0.04 probability points)
+5. **Category effects**: Effective spreads vary by market category but within narrow range (±0.04 probability points)
 
 6. **Latency**: Collector ingestion shows tight 41.5ms median with multi-second p99 tail
 
 7. **Wash trading**: Median 1% self-counterparty rate, maximum 22% (vs 25-70% on unregulated crypto exchanges)
 
-8. **Resolution depth decay**: Log-log slope of 0.55 between depth and time-to-close (3% less depth per 10Ã reduction in time)
+8. **Resolution depth decay**: Log-log slope of 0.55 between depth and time-to-close (3% less depth per 10× reduction in time)
 
 The Glosten-Harris decomposition on the top-100 stratum finds essentially zero adverse selection component once proper trade direction is used, suggesting market makers aren't systematically losing to informed flow.
 
 ## Limitations
 
-The paper measures but doesn't explain **why** the public feed lacks aggressor information—this appears to be an architectural choice where the feed broadcasts post-trade book state without taker identity. The 60-second sampling grid for computational tractability means Kyle's Î» estimates are fragile and vary by orders of magnitude with step size.
+The paper measures but doesn't explain **why** the public feed lacks aggressor information—this appears to be an architectural choice where the feed broadcasts post-trade book state without taker identity. The 60-second sampling grid for computational tractability means Kyle's λ estimates are fragile and vary by orders of magnitude with step size.
 
 The wash detection provides only a lower bound (direct self-trades and immediate roundtrips), missing multi-hop patterns that network classifiers would catch. The 1-22% range can't be directly compared to the 25-70% on crypto exchanges because the incentive structures differ fundamentally.
 
@@ -178,7 +178,7 @@ Most critically, the paper establishes that standard microstructure measures fai
 
 **Key gotchas**:
 - The `change_side` field indicates which book side changed, NOT trade aggressor
-- Must filter blocks at depth â¥256 to avoid Polygon reorgs
+- Must filter blocks at depth ≥256 to avoid Polygon reorgs
 - CLOB REST API resolves all markets; Gamma API only covers ~9%
 - Trade matching uses 5-second windows due to timestamp asynchrony
 
@@ -194,16 +194,16 @@ Code at https://github.com/philippdubach/polymarket-microstructure with pre-buil
 **Tech stack**: Python data pipeline (existing codebase) feeding PostgreSQL with TimescaleDB for tick storage. Parquet files on S3 for batch analysis. Apache Flink for streaming measure computation. FastAPI service layer with Redis cache for hot paths.
 
 **Data pipeline**: 
-- Ingress: WebSocket â Kafka â Flink for deduplication and initial parsing
+- Ingress: WebSocket → Kafka → Flink for deduplication and initial parsing
 - Enrichment: On-chain scraper polls every block, joins via market_id within 5s window
 - Storage: Hot data (24h) in Redis, warm (7d) in Postgres, cold in Parquet on S3
 - Query: Materialized views for common aggregations, Presto for ad-hoc analysis
 
 **Deployment shape**: Multi-service architecture:
-- WebSocket collector: 2Ã t3.medium EC2 instances for redundancy
+- WebSocket collector: 2× t3.medium EC2 instances for redundancy
 - On-chain scraper: Kubernetes CronJob every 2 seconds
 - Measure compute: Batch EMR job daily, streaming on Kinesis Analytics for live metrics
-- API: 3Ã c5.xlarge behind ALB, 50ms p99 target for quote queries
+- API: 3× c5.xlarge behind ALB, 50ms p99 target for quote queries
 
 **Failure modes**:
 - WebSocket disconnection: Automatic reconnect with exponential backoff, gap-fill from peer collector
@@ -234,7 +234,7 @@ Code at https://github.com/philippdubach/polymarket-microstructure with pre-buil
 - **Hasbrouck (2007) "Empirical Market Microstructure"**: Comprehensive treatment of limit order books and why trade direction matters for measuring price discovery
 - **Cong et al. (2023)**: Documents 25-70% wash trading on crypto exchanges using network classification—provides context for Polymarket's 1-22% range
 - **Glosten and Harris (1988)**: Foundational spread decomposition model separating transitory and permanent components
-- **Tsang and Yang (2026)**: Time-series analysis of single Polymarket election showing Kyle's Î» declined 10Ã as market matured
+- **Tsang and Yang (2026)**: Time-series analysis of single Polymarket election showing Kyle's λ declined 10× as market matured
 
 ## Key equations
 
@@ -244,4 +244,4 @@ Code at https://github.com/philippdubach/polymarket-microstructure with pre-buil
 
 **Glosten-Harris decomposition**: $S^{eff}_{1/2} = c + \phi$ — Splits spread into transitory ($c$) and adverse selection ($\phi$)
 
-**Depth decay**: $\log(\text{depth}) = 0.55 \cdot \log(\text{seconds to close}) + \text{controls}$ — Markets lose ~6% depth per 10Ã time reduction
+**Depth decay**: $\log(\text{depth}) = 0.55 \cdot \log(\text{seconds to close}) + \text{controls}$ — Markets lose ~6% depth per 10× time reduction

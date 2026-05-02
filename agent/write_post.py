@@ -24,16 +24,32 @@ def _yaml_list(items: list[str], indent: int = 2) -> str:
     return "\n".join(f"{pad}- {_yaml_escape(x)}" for x in items)
 
 
+def _fix_mojibake(s: str) -> str:
+    """Reverse UTF-8-decoded-as-Latin-1 Mojibake.
+
+    When an LLM returns UTF-8 text but the response was decoded as Latin-1,
+    each multi-byte UTF-8 sequence becomes a run of Latin-1 chars whose code
+    points equal the original bytes.  Encoding those chars back to Latin-1 and
+    re-decoding as UTF-8 recovers the correct character.
+
+    Covers Greek letters (π, θ, …), arrows (→), math symbols (⊕), em/en
+    dashes, curly quotes, and every other Unicode char whose UTF-8 lead byte
+    falls in 0xC2–0xEF.
+    """
+    def _try(m: re.Match) -> str:
+        try:
+            return m.group(0).encode("latin-1").decode("utf-8")
+        except (UnicodeDecodeError, UnicodeEncodeError):
+            return m.group(0)
+
+    s = re.sub(r"[\xe0-\xef][\x80-\xbf]{2}", _try, s)   # 3-byte sequences
+    s = re.sub(r"[\xc2-\xdf][\x80-\xbf]", _try, s)       # 2-byte sequences
+    return s
+
+
 def _clean_str(s: str) -> str:
-    """Strip C0/C1 control characters (except tab and newline) that break YAML parsers."""
-    # Fix common Mojibake from double-encoding UTF-8 as Latin-1 then back to UTF-8.
-    # Most frequent offender: em dash (U+2014) gets decoded as U+00E2 U+0080 U+0094.
-    s = s.replace("\u00e2\u0080\u0094", "\u2014")  # — (em dash)
-    s = s.replace("\u00e2\u0080\u0093", "\u2013")  # – (en dash)
-    s = s.replace("\u00e2\u0080\u009c", "\u201c")  # " (left double quote)
-    s = s.replace("\u00e2\u0080\u009d", "\u201d")  # " (right double quote)
-    s = s.replace("\u00e2\u0080\u0098", "\u2018")  # ' (left single quote)
-    s = s.replace("\u00e2\u0080\u0099", "\u2019")  # ' (right single quote)
+    """Fix Mojibake then strip residual C0/C1 control chars that break YAML."""
+    s = _fix_mojibake(s)
     return re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]", "", s)
 
 
