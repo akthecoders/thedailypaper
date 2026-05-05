@@ -28,5 +28,10 @@
     "date": "2026-05-01T02:33:34.094914+00:00",
     "arxiv_id": "2604.17931",
     "title": "LiteResearcher: A Scalable Agentic RL Training Framework for Deep Research Agent"
+  },
+  {
+    "date": "2026-05-05T02:30:55.402905+00:00",
+    "arxiv_id": "2604.17753",
+    "title": "Evolutionary Negative Module Pruning for Better LoRA Merging"
   }
 ]

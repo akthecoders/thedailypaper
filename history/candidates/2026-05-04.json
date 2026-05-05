@@ -1,0 +1,353 @@
+[
+  {
+    "arxiv_id": "2605.02167",
+    "title": "Manifold-Aligned Guided Integrated Gradients for Reliable Feature Attribution",
+    "authors": [
+      "Soyeon Kim",
+      "Seongwoo Lim",
+      "Kyowoon Lee",
+      "Jaesik Choi"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Feature attribution is central to diagnosing and trusting deep neural networks, and Integrated Gradients (IG) is widely used due to its axiomatic properties. However, IG can yield unreliable explanations when the integration path between a baseline and the input passes through regions with noisy gradients. While Guided Integrated Gradients reduces this sensitivity by adaptively updating low-gradient-magnitude features, input-space guidance still produces intermediate inputs that deviate from the data manifold. To address this limitation, we propose \\emph{Manifold-Aligned Guided Integrated Gradients} (MA-GIG), which constructs attribution paths in the latent space of a pre-trained variational autoencoder. By decoding intermediate latent states, MA-GIG biases the path toward the learned generative manifold and reduces exposure to implausible input-space regions. Through qualitative and quantitative evaluations, we demonstrate that MA-GIG produces faithful explanations by aggregating grad",
+    "pdf_url": "https://arxiv.org/pdf/2605.02167v1",
+    "abs_url": "https://arxiv.org/abs/2605.02167",
+    "published": "2026-05-04T02:56:29Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02392",
+    "title": "Is It Novel and Why? Fine-Grained Patent Novelty Prediction Based on Passage Retrieval",
+    "authors": [
+      "Valentin Knappich",
+      "Anna H\u00e4tty",
+      "Simon Razniewski",
+      "Annemarie Friedrich"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Novelty assessment is a critical yet complex task in the examination process for patent acceptance, requiring examiners to determine whether an invention is disclosed in a prior art document. The process involves intricate matching between specific features of a patent claim and passages in the prior art. While prior work has approached novelty prediction primarily as a binary classification task at the claim level, we argue that this formulation is susceptible to spurious correlations and lacks the granularity required for practical application. In this work, we introduce FiNE-Patents (Fine-grained Novelty Examination of Patents), a novel dataset comprising 3,658 first patent claims annotated with fine-grained, feature-level prior art references extracted from European Search Opinion (ESOP) documents. We propose shifting the evaluation paradigm from simple binary classification to a joint retrieval and abstract reasoning task at the feature level, requiring models to identify specific",
+    "pdf_url": "https://arxiv.org/pdf/2605.02392v1",
+    "abs_url": "https://arxiv.org/abs/2605.02392",
+    "published": "2026-05-04T09:34:30Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02860",
+    "title": "Standing on the Shoulders of Giants: Stabilized Knowledge Distillation for Cross--Language Code Clone Detection",
+    "authors": [
+      "Mohamad Khajezade",
+      "Fatemeh H. Fard",
+      "Mohamed Sami Shehata"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Cross-language code clone detection (X-CCD) is challenging because semantically equivalent programs written in different languages often share little surface similarity. Although large language models (LLMs) have shown promise for semantic clone detection, their use as black-box systems raises concerns about cost, reproducibility, privacy, and unreliable output formatting. In particular, compact open-source models often struggle to follow reasoning-oriented prompts and to produce outputs that can be consistently mapped to binary clone labels.   To address these limitations, we propose a knowledge distillation framework that transfers reasoning capabilities from DeepSeek-R1 into compact open-source student models for X-CCD. Using cross-language code pairs derived from Project CodeNet, we construct reasoning-oriented synthetic training data and fine-tune Phi3 and Qwen-Coder with LoRA adapters. We further introduce response stabilization methods, including forced conclusion prompting, a b",
+    "pdf_url": "https://arxiv.org/pdf/2605.02860v1",
+    "abs_url": "https://arxiv.org/abs/2605.02860",
+    "published": "2026-05-04T17:37:16Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02568",
+    "title": "StreamIndex: Memory-Bounded Compressed Sparse Attention via Streaming Top-k",
+    "authors": [
+      "Jaber Jaber",
+      "Osama Jaber"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "DeepSeek-V3.2 and V4 introduce Compressed Sparse Attention (CSA): a lightning indexer (a learned scoring projection over compressed keys) scores them, the top-k are selected per query, and a sparse attention kernel reads only those. Public CSA implementations materialize a [B, S, H_I, T] FP32 score tensor before the top-k reduction. With H_I=64 indexer heads and the V4-Flash compression ratio m=4, that intermediate is 256 GB at sequence length S=65,536, exceeding any single-GPU high-bandwidth-memory (HBM) budget. We present StreamIndex, a Triton implementation of the CSA pipeline whose central component is a chunked partition-merge top-k driver that never materializes the full intermediate. On synthetic-but-realistic V4-shaped inputs at the indexer-step (layer) level on a single NVIDIA H200, the materialize path runs out of memory (OOMs) at S=65,536 with V4-Flash dimensions; StreamIndex runs the same indexer to S=1,048,576 with 6.21 GB peak HBM, a 32x regime extension. Set-overlap reca",
+    "pdf_url": "https://arxiv.org/pdf/2605.02568v1",
+    "abs_url": "https://arxiv.org/abs/2605.02568",
+    "published": "2026-05-04T13:19:29Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02404",
+    "title": "Statistically-Lossless Quantization of Large Language Models",
+    "authors": [
+      "Michael Helcig",
+      "Eldar Kurtic",
+      "Dan Alistarh"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Model quantization has become essential for efficient large language model deployment, yet existing approaches involve clear trade-offs: methods such as GPTQ and AWQ achieve practical compression but are lossy, while lossless techniques preserve fidelity but typically do not accelerate inference. This paper explores the middle ground of statistically-lossless compression through three complementary notions of losslessness for quantized LLMs. First, task-lossless compression preserves zero-shot benchmark accuracy within natural sampling variance and remains achievable at aggressive bitwidths. Second, we formalize the stricter notion of distribution-lossless compression, requiring the quantized model's next-token distribution to be practically indistinguishable from the original, and propose the Expected Acceptance Rate (EAR), the maximum token-agreement probability under optimal coupling, as a directly interpretable fidelity metric (for example, EAR >= 0.99 indicates 99% agreement). Thi",
+    "pdf_url": "https://arxiv.org/pdf/2605.02404v1",
+    "abs_url": "https://arxiv.org/abs/2605.02404",
+    "published": "2026-05-04T09:46:47Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02398",
+    "title": "The Compliance Trap: How Structural Constraints Degrade Frontier AI Metacognition Under Adversarial Pressure",
+    "authors": [
+      "Rahul Kumar"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "As frontier AI models are deployed in high-stakes decision pipelines, their ability to maintain metacognitive stability -- knowing what they do not know, detecting errors, seeking clarification -- under adversarial pressure is a critical safety requirement. Current safety evaluations focus on detecting strategic deception (scheming); we investigate a more fundamental failure mode: cognitive collapse. We present SCHEMA, an evaluation of 11 frontier models from 8 vendors across 67,221 scored records using a 6-condition factorial design with dual-classifier scoring. We find that 8 of 11 models suffer catastrophic metacognitive degradation under adversarial pressure, with accuracy dropping by up to 30.2 percentage points (all $p < 2 \\times 10^{-8}$, surviving Bonferroni correction). Crucially, we identify a \"Compliance Trap\": through factorial isolation and a benign distraction control, we demonstrate that collapse is driven not by the psychological content of survival threats, but by comp",
+    "pdf_url": "https://arxiv.org/pdf/2605.02398v1",
+    "abs_url": "https://arxiv.org/abs/2605.02398",
+    "published": "2026-05-04T09:40:21Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02263",
+    "title": "Break the Block: Dynamic-size Reasoning Blocks for Diffusion Large Language Models via Monotonic Entropy Descent with Reinforcement Learning",
+    "authors": [
+      "Yan Jiang",
+      "Ruihong Qiu",
+      "Zi Huang"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Recent diffusion large language models (dLLMs) have demonstrated both effectiveness and efficiency in reasoning via a block-based semi-autoregressive generation paradigm. Despite their progress, the fixed-size block generations remain a critical bottleneck for effective and coherent reasoning. 1. From a global perspective, different reasoning tasks would correspond to different optimal decoding block sizes, which makes a ``one-size-fits-all'' assumption ineffective. 2. Even within a single reasoning task, the rigid block partitioning would break the logical flow and reduce reasoning coherence. Through empirical observations, we reveal that for block-wise entropy, incorrect reasoning exhibits a fluctuating and unsteady trend between blocks, whereas the correctly generated tasks follow a consistent descending trend. Therefore, this paper proposes b1, a novel post-training framework for dLLMs that learns dynamic-size reasoning blocks via a Monotonic Entropy Descent objective with reinforc",
+    "pdf_url": "https://arxiv.org/pdf/2605.02263v1",
+    "abs_url": "https://arxiv.org/abs/2605.02263",
+    "published": "2026-05-04T06:17:49Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02184",
+    "title": "RAFNet: Region-Aware Fusion Network for Pansharpening",
+    "authors": [
+      "Jianing Zhang",
+      "Zijian Zhou",
+      "Kai Sun"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Pansharpening aims to generate high-resolution multispectral (HRMS) images by fusing low-resolution multispectral (LRMS) and high-resolution panchromatic (PAN) images. Although deep learning has advanced this field, mainstream frequency-based methods relying on standard scaled dot-product attention suffer from quadratic computational complexity and fail to exploit the inherent regional sparsity of remote sensing imagery. Furthermore, existing spatial enhancement strategies typically employ static convolution kernels, which struggle to adapt to the complex frequency and regional variations of PAN and MS images. To address these bottlenecks, we propose a Region-Aware Fusion (RAFNet) Network that synergistically models spatial and frequency information. Specifically, we design a Spatial Adaptive Refinement (SAR) module that leverages the discrete wavelet transform (DWT) for directional frequency separation and K-means clustering for regional partitioning, which enables the dynamic constru",
+    "pdf_url": "https://arxiv.org/pdf/2605.02184v1",
+    "abs_url": "https://arxiv.org/abs/2605.02184",
+    "published": "2026-05-04T03:26:57Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02651",
+    "title": "ARA: Agentic Reproducibility Assessment For Scalable Support Of Scientific Peer-Review",
+    "authors": [
+      "Kevin Riehl",
+      "Andres L. Marin",
+      "Nikofors Zacharof",
+      "Fan Wu",
+      "Patrick Langer"
+    ],
+    "primary_category": "cs.DL",
+    "abstract": "Scientific peer review increasingly struggles to assess reproducibility at the scale and complexity of modern research output. Evaluating reproducibility requires reconstructing experimental dependencies, methodological choices, data flows, and result-generating procedures, which often exceeds what human reviewers can provide. Agentic Reproducibility Assessment (ARA) formalizes reproducibility assessment as a structured reasoning task over scientific documents. Given a paper, ARA extracts a directed workflow graph linking sources, methods, experiments, and outputs, then evaluates its reconstructability using structural and content-based scores for reproducibility assessments. Experiments on 213 ReScience C articles - the largest cross-domain benchmark of human-validated computational reproducibility studies considered to date - demonstrate ARA's generalizability and consistent workflow reconstruction and assessment across LLMs, model temperatures, and scientific domains. ARA achieves ~",
+    "pdf_url": "https://arxiv.org/pdf/2605.02651v1",
+    "abs_url": "https://arxiv.org/abs/2605.02651",
+    "published": "2026-05-04T14:34:36Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02206",
+    "title": "Metric Unreliability in Multimodal Machine Unlearning: A Systematic Analysis and Principled Unified Score",
+    "authors": [
+      "Abdullah Ahmad Khan",
+      "Hamid Laga",
+      "Ferdous Sohel"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Machine unlearning in Vision-Language Models (VLMs) is required for compliance with the General Data Protection Regulation (GDPR), yet current evaluation practices are inconsistent. We present the first systematic study of metric reliability in multimodal unlearning. Five standard metrics, Forget Accuracy (FA), Retain Accuracy (RA), Membership Inference Attack (MIA), Activation Distance (AD), and JS divergence (JS), yield conflicting method rankings across three VQA benchmarks (MLLMU-Bench, UnLOK-VQA, MMUBench). Kendall tau analysis over 36 unlearned LLaVA-1.5-7B models reveals two opposing clusters, {FA, RA, MIA} and {AD, JS}, with tau_FA_AD = -0.26, reproduced on BLIP-2 OPT-2.7B. Agreement is lower in multimodal VQA (average tau = 0.086) than in unimodal classification (average tau = 0.158; difference = 0.072), indicating that dual image-and-text pathways amplify inconsistency. We introduce the Unified Quality Score (UQS), a composite metric with weights derived from each metric's Sp",
+    "pdf_url": "https://arxiv.org/pdf/2605.02206v1",
+    "abs_url": "https://arxiv.org/abs/2605.02206",
+    "published": "2026-05-04T04:13:00Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02757",
+    "title": "Seeing Realism from Simulation: Efficient Video Transfer for Vision-Language-Action Data Augmentation",
+    "authors": [
+      "Chenyu Hui",
+      "Xiaodi Huang",
+      "Siyu Xu",
+      "Yunke Wang",
+      "Shan You"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Vision-language-action (VLA) models typically rely on large-scale real-world videos, whereas simulated data, despite being inexpensive and highly parallelizable to collect, often suffers from a substantial visual domain gap and limited environmental diversity, resulting in weak real-world generalization. We present an efficient video augmentation framework that converts simulated VLA videos into realistic training videos while preserving task semantics and action trajectories. Our pipeline extracts structured conditions from simulation via video semantic segmentation and video captioning, rewrites captions to diversify environments, and uses a conditional video transfer model to synthesize realistic videos. To make augmentation practical at scale, we introduce a diffusion feature-reuse mechanism that reuses video tokens across adjacent timesteps to accelerate generation, and a coreset sampling strategy that identifies a compact, non-redundant subset for augmentation under limited compu",
+    "pdf_url": "https://arxiv.org/pdf/2605.02757v1",
+    "abs_url": "https://arxiv.org/abs/2605.02757",
+    "published": "2026-05-04T15:57:07Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02716",
+    "title": "Parking Assistance for Trailer-Truck Transport Vehicles Using Sensor Fusion and Motion Planning",
+    "authors": [
+      "George Alenchery",
+      "Thomas Jeske",
+      "Tova Quinones",
+      "Lentz Fortune",
+      "Tristan Lindo-Slones"
+    ],
+    "primary_category": "cs.RO",
+    "abstract": "Autonomous driving technology has rapidly evolved over the past decade, offering significant improvements in transportation efficiency, safety, and cost reduction. While much of the progress has focused on highway driving and obstacle avoidance, low-speed maneuvers such as parking remain among the most difficult challenges for autonomous systems. This challenge is especially pronounced in trailer-truck transport vehicles due to their articulated motion and environmental constraints. This paper presents a proposed framework for autonomous truck parking that integrates perception, motion planning, control systems, and infrastructure awareness. By combining sensor fusion, Hybrid A* path planning, nonlinear model predictive control (NMPC), and data-driven parking systems, this work highlights the importance of system-level coordination for reliable and scalable autonomous parking solutions. As a proof-of-concept implementation, we adapted an open-source A* path planning simulation to incor",
+    "pdf_url": "https://arxiv.org/pdf/2605.02716v1",
+    "abs_url": "https://arxiv.org/abs/2605.02716",
+    "published": "2026-05-04T15:18:39Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02194",
+    "title": "A Treasure Trove of Performance: Analyzing the IO500 Submission Data",
+    "authors": [
+      "Julian Kunkel",
+      "Aasish Kumar Sharma",
+      "Anila Ghazanfar",
+      "Sepehr Mahmoodianhamedani",
+      "Sascha Safenreider"
+    ],
+    "primary_category": "cs.DC",
+    "abstract": "The IO500 benchmark has become the community standard for evaluating HPC storage system performance, yet the detailed data contained in its submission packages remains largely unexplored beyond aggregate leaderboard rankings. We present a statistical characterization of 61 IO500 submissions from four competition lists (ISC21 through SC22), examining score distributions, inter-phase correlations, and insights derived from detailed log files that accompany each submission. Our analysis reveals that IO500 scores span four orders of magnitude. Spearman correlation analysis shows strong within-domain clustering for both bandwidth (rs = 0.78 to 0.96) and metadata (rs = 0.89 to 0.98) phases, with the composite sub-scores exhibiting rs = 0.92 at per-node level (Pearson r = 0.53). Log-level analysis uncovers file-system-specific patterns in IOR close-time overhead, straggler behavior during the stonewall wear-down phase, and parallel-find load imbalance that are invisible in aggregate scores. T",
+    "pdf_url": "https://arxiv.org/pdf/2605.02194v1",
+    "abs_url": "https://arxiv.org/abs/2605.02194",
+    "published": "2026-05-04T03:47:16Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02256",
+    "title": "CommitSuite: A Comprehensive Benchmark for Commit Classification and Message Generation",
+    "authors": [
+      "Zirui Wan",
+      "Zhaonan Wu",
+      "Xinyi Hou",
+      "Yanjie Zhao",
+      "Pengcheng Xia"
+    ],
+    "primary_category": "cs.SE",
+    "abstract": "High-quality commit messages are critical for maintaining software projects, yet ensuring their consistency and informativeness remains a practical challenge. While the Conventional Commits Specification (CCS) provides a structured format for commit messages, research on CCS-based commit classification and commit message generation (CMG) is limited by the absence of large-scale benchmarks, semantic annotations, and reliable evaluation methods. In this paper, we introduce CommitSuite, a benchmark comprising 63,533 CCS-compliant commits from 243 open-source repositories across seven programming languages. Each commit is labeled with its CCS type and enriched with AST-level code changes, along with LLM-assisted semantic annotations that capture the \"what\" and \"why\" behind the change. To evaluate CMG systems, we propose a reference-free framework based on five binary metrics: rationality, comprehensiveness, non-redundancy, authenticity, and logicality, enabling semantic-level assessment wi",
+    "pdf_url": "https://arxiv.org/pdf/2605.02256v1",
+    "abs_url": "https://arxiv.org/abs/2605.02256",
+    "published": "2026-05-04T06:06:57Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02853",
+    "title": "Trust, but Verify: Peeling Low-Bit Transformer Networks for Training Monitoring",
+    "authors": [
+      "Arian Eamaz",
+      "Farhang Yeganegi",
+      "Mojtaba Soltanalian"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Understanding whether deep neural networks are effectively optimized remains challenging, as training occurs in highly nonconvex landscapes and standard metrics provide limited visibility into layer-wise learning quality. This challenge is particularly acute for transformer-based language models, where training is expensive, models are often reused in frozen form, and poorly optimized layers can silently degrade performance. We propose a layer-wise peeling framework for monitoring training dynamics, in which each transformer layer is locally optimized against intermediate representations of the trained model. By constructing lightweight, layer-specific reference solutions and projecting layers onto multiple intermediate outputs via different permutations, we obtain achievable baselines that enable fine-grained diagnosis of under-optimized layers. Experiments on decoder-only transformer models show that these layer-wise reference bounds can match or even surpass the trained model at var",
+    "pdf_url": "https://arxiv.org/pdf/2605.02853v1",
+    "abs_url": "https://arxiv.org/abs/2605.02853",
+    "published": "2026-05-04T17:30:50Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02745",
+    "title": "Bolek: A Multimodal Language Model for Molecular Reasoning",
+    "authors": [
+      "Frederic Grabowski",
+      "Jacek Szczerbi\u0144ski",
+      "Maciej Ja\u015bkowski",
+      "Kalina Jasi\u0144ska-Kobus",
+      "Pawe\u0142 D\u0105browski-Tuma\u0144ski"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Molecular property models increasingly support high-stakes drug-discovery decisions, but their outputs are often difficult to audit: classical predictors return scores without rationale, while language models can produce fluent explanations weakly grounded in the input molecule.   We introduce Bolek, a compact multimodal language model that grounds natural-language reasoning in molecular structure by injecting a Morgan fingerprint embedding into an instruction-tuned text decoder. Bolek is fine-tuned on molecular alignment tasks, including molecule description, RDKit descriptor prediction, and substructure detection, and on downstream reasoning over 15 TDC binary classification tasks using synthetic chains-of-thought anchored in concrete molecular features.   Across these tasks, Bolek outperforms its Qwen3-4B-Instruct base on all endpoints in yes/no mode and on 13 of 15 in chain-of-thought mode, raising mean ROC/PR AUC from 0.55 to 0.76. It also outperforms TxGemma-9B-Chat on 13 of 15 b",
+    "pdf_url": "https://arxiv.org/pdf/2605.02745v1",
+    "abs_url": "https://arxiv.org/abs/2605.02745",
+    "published": "2026-05-04T15:46:39Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02705",
+    "title": "Federated Reinforcement Learning for Efficient Mobile Crowdsensing under Incomplete Information",
+    "authors": [
+      "Sumedh J. Dongare",
+      "Patrick Weber",
+      "Andrea Ortiz",
+      "Walid Saad",
+      "Oliver Hinz"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Mobile crowdsensing (MCS) is a distributed sensing architecture that utilizes existing sensors on mobile units (MUs) to perform sensing tasks. A mobile crowdsensing platform (MCSP) publishes the sensing tasks and the MUs decide whether to participate in exchange for money. The MCS system is dynamic: the task requirements, the MUs' availability, and their available resources change over time. The MUs aim to find an efficient task participation strategy to maximize their income while the MCSP focuses on maximizing the number of completed tasks. As optimal strategies require perfect non-causal information about the MCS system, which is unavailable in realistic scenarios, the main challenge is to find an efficient task participation strategy for the MUs under incomplete information. To this end, a novel fully decentralized federated deep reinforcement learning algorithm, FDRL-PPO, is proposed. FDRL-PPO enables every MU to learn its own task participation strategy based on its experiences, ",
+    "pdf_url": "https://arxiv.org/pdf/2605.02705v1",
+    "abs_url": "https://arxiv.org/abs/2605.02705",
+    "published": "2026-05-04T15:13:16Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02689",
+    "title": "MSMixer: Learned Multi-Scale Temporal Mixing with Complementary Linear Shortcut for Long-Term Time Series Forecasting",
+    "authors": [
+      "Ahmed Cherif"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Long-term time series forecasting requires models that simultaneously capture rapid oscillations, medium-range periodicities, and slowly evolving macro-trends from a fixed look-back window. Existing lightweight MLP-based models typically operate on a single temporal resolution, limiting their ability to explicitly model patterns at multiple scales. We propose MSMixer, a channel-independent multi-scale MLP architecture that addresses this limitation through three complementary innovations: (i) three parallel scale branches at down-sample factors {1x, 4x, 16x} with independent MLP blocks, (ii) a learnable softmax gate that dynamically weighs branch outputs, and (iii) a DLinear complementary shortcut that provides full-window trend and seasonality context. MSMixer contains only 112K parameters at H=96 and runs at O(T) complexity. Evaluated on four ETT benchmarks with standard chronological splits and three random seeds, MSMixer achieves the lowest average MSE (0.357) among lightweight mod",
+    "pdf_url": "https://arxiv.org/pdf/2605.02689v1",
+    "abs_url": "https://arxiv.org/abs/2605.02689",
+    "published": "2026-05-04T15:03:46Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02519",
+    "title": "Evaluating Tabular Representation Learning for Network Intrusion Detection",
+    "authors": [
+      "Muhammad Usman Butt",
+      "Andreas Hotho",
+      "Daniel Schl\u00f6r"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Classic Network Intrusion Detection Systems (NIDS) often rely on manual feature engineering to extract meaningful patterns from network traffic data. However, this approach requires domain expertise and runs counter to the widely adopted principle of modern machine learning and neural networks: that models themselves should learn meaningful representations directly from data. We investigate whether tabular representation learning techniques can improve intrusion detection performance by automatically learning robust feature representations for NetFlow data. This paper presents a systematic evaluation of state-of-the-art representation learning methods on benchmark NetFlow datasets, comparing against traditional autoencoders and end-to-end transformer baselines. We evaluate learned representations using both supervised classifiers and unsupervised anomaly detectors, with comprehensive hyperparameter exploration for each combination. Our results reveal strong dataset-model dependency, wi",
+    "pdf_url": "https://arxiv.org/pdf/2605.02519v1",
+    "abs_url": "https://arxiv.org/abs/2605.02519",
+    "published": "2026-05-04T12:20:45Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.02507",
+    "title": "A Novel Preprocessing-Driven Approach to Remaining Useful Life (RUL) Prediction Using Temporal Convolutional Networks (TCN)",
+    "authors": [
+      "Florent Imbert",
+      "Tosin Adewumi",
+      "Hui Han"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Accurate prediction of Remaining Useful Life (RUL) in aero-engines is vital for predictive maintenance, improved operational reliability, and reduced lifecycle costs. While deep learning approaches have demonstrated strong potential in this area, most existing methods focus primarily on model architecture design and treat input features uniformly, often neglecting the influence of data preprocessing. In this work, we propose a novel preprocessing pipeline that enhances RUL prediction by improving data quality and temporal representation before model training. Our approach leverages complete temporal sequences and generates RUL estimates at each timestep, enabling the model to capture fine-grained degradation dynamics and deliver continuous prognostic insights throughout the engine's operational life. To validate the effectiveness of the proposed pipeline, we conduct experiments on the NASA C-MAPSS dataset. Comparative evaluations against a suite of state-of-the-art neural models includ",
+    "pdf_url": "https://arxiv.org/pdf/2605.02507v1",
+    "abs_url": "https://arxiv.org/abs/2605.02507",
+    "published": "2026-05-04T12:00:22Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]
