@@ -1,0 +1,370 @@
+[
+  {
+    "arxiv_id": "2605.06068",
+    "title": "VibeServe: Can AI Agents Build Bespoke LLM Serving Systems?",
+    "authors": [
+      "Keisuke Kamahori",
+      "Shihang Li",
+      "Simon Peter",
+      "Baris Kasikci"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "For years, we have built LLM serving systems like any other critical infrastructure: a single general-purpose stack, hand-tuned over many engineer-years, meant to support every model and workload. In this paper, we take the opposite bet: a multi-agent loop that automatically synthesizes bespoke serving systems for different usage scenarios. We propose VibeServe, the first agentic loop that generates entire LLM serving stacks end-to-end. VibeServe uses an outer loop to plan and track the search over system designs, and an inner loop to implement candidates, check correctness, and measure performance on the target benchmark. In the standard deployment setting, where existing stacks are highly optimized, VibeServe remains competitive with vLLM, showing that generation-time specialization need not come at the cost of performance. More interestingly, in non-standard scenarios, VibeServe outperforms existing systems by exploiting opportunities that generic systems miss in six scenarios invol",
+    "pdf_url": "https://arxiv.org/pdf/2605.06068v1",
+    "abs_url": "https://arxiv.org/abs/2605.06068",
+    "published": "2026-05-07T11:54:53Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.05630",
+    "title": "One Turn Too Late: Response-Aware Defense Against Hidden Malicious Intent in Multi-Turn Dialogue",
+    "authors": [
+      "Xinjie Shen",
+      "Rongzhe Wei",
+      "Peizhi Niu",
+      "Haoyu Wang",
+      "Ruihan Wu"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Hidden malicious intent in multi-turn dialogue poses a growing threat to deployed large language models (LLMs). Rather than exposing a harmful objective in a single prompt, increasingly capable attackers can distribute their intent across multiple benign-looking turns. Recent studies show that even modern commercial models with advanced guardrails remain vulnerable to such attacks despite advances in safety alignment and external guardrails. In this work, we address this challenge by detecting the earliest turn at which delivering the candidate response would make the accumulated interaction sufficient to enable harmful action. This objective requires precise turn-level intervention that identifies the harm-enabling closure point while avoiding premature refusal of benign exploratory conversations. To further support training and evaluation, we construct the Multi-Turn Intent Dataset (MTID), which contains branching attack rollouts, matched benign hard negatives, and annotations of the",
+    "pdf_url": "https://arxiv.org/pdf/2605.05630v1",
+    "abs_url": "https://arxiv.org/abs/2605.05630",
+    "published": "2026-05-07T03:35:31Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06161",
+    "title": "Beyond Accuracy: Policy Invariance as a Reliability Test for LLM Safety Judges",
+    "authors": [
+      "Shihao Weng",
+      "Yang Feng",
+      "Xiaofei Xie"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "LLM-as-a-Judge pipelines have become the de facto evaluator for agent safety, yet existing benchmarks treat their verdicts as ground-truth proxies without checking whether the verdicts depend on the agent's behavior or merely on how the evaluation policy happens to be worded. We argue that any trustworthy safety judge must satisfy a basic property we call policy invariance, and we operationalize it as three testable principles: rubric-semantics invariance under certified-equivalent rewrites, rubric-threshold invariance under intentional strict-to-lenient shifts, and ambiguity-aware calibration so that verdict instability concentrates on genuinely ambiguous cases. Instantiating these principles as a stress-test protocol with four agent-class judges on trajectories drawn from ASSEBench and R-Judge, we surface a previously unmeasured failure mode: today's judges respond to meaningful normative shifts and to meaningless structural rewrites with comparable strength, and cannot tell the two ",
+    "pdf_url": "https://arxiv.org/pdf/2605.06161v1",
+    "abs_url": "https://arxiv.org/abs/2605.06161",
+    "published": "2026-05-07T12:49:09Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.05727",
+    "title": "LLM-Enhanced Deep Reinforcement Learning for Task Offloading in Collaborative Edge Computing",
+    "authors": [
+      "Hao Guo",
+      "Kaixiang Xv",
+      "Ziwu Ge",
+      "Lei Yang"
+    ],
+    "primary_category": "cs.DC",
+    "abstract": "Collaborative edge computing uses edge nodes in different locations to execute tasks, necessitating dynamic task offloading decisions to maintain low latency and high reliability, especially under unpredictable node failures. Although deep reinforcement learning (DRL) and large language models (LLMs) have shown promise for task offloading, DRL often suffers from high sample inefficiency and local optima, whereas LLMs struggle with real-time decision-making. To address these limitations, we propose \\textbf{LeDRL}, a hybrid decision framework that couples a \\emph{lightweight LLM} with self-attention-enhanced DRL for real-time task offloading. LeDRL constructs structured, context-aware prompts capturing node status, task semantics, and link dynamics to derive high-level strategy priors. These are selectively processed by a self-attention-based alignment module for context-aware policy optimization. A reflective evaluator distills semantic feedback from past trajectories to guide future pr",
+    "pdf_url": "https://arxiv.org/pdf/2605.05727v1",
+    "abs_url": "https://arxiv.org/abs/2605.05727",
+    "published": "2026-05-07T06:19:07Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06184",
+    "title": "Teaching LLMs Program Semantics via Symbolic Execution Traces",
+    "authors": [
+      "Jonas Bayer",
+      "Stefan Zetzsche",
+      "Olivier Bouissou",
+      "Remi Delmas",
+      "Michael Tautschnig"
+    ],
+    "primary_category": "cs.SE",
+    "abstract": "We introduce an evaluation framework of 500 C verification tasks across five property types (memory safety, overflow, termination, reachability, data races) built on SV-COMP 2025, and evaluate 14 models across six families. We find that high overall accuracy masks a critical weakness: while most models reliably confirm properties hold, violation detection varies widely and degrades sharply with program length. To close this gap, we train on formal verification artifacts: running the Soteria symbolic execution engine on generic open-source C code and using the resulting traces for continued pretraining of Qwen3-8B. Just ${\\sim}$3,000 bug traces combined with chain-of-thought reasoning at inference time improve violation detection by over 17 percentage points, producing one of the most balanced accuracy profiles among evaluated models. On violation detection, the trained 8B model outperforms the 4$\\times$ larger Qwen3-32B without thinking and approaches it in overall accuracy. The intera",
+    "pdf_url": "https://arxiv.org/pdf/2605.06184v1",
+    "abs_url": "https://arxiv.org/abs/2605.06184",
+    "published": "2026-05-07T13:01:06Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.05704",
+    "title": "SafeHarbor: Hierarchical Memory-Augmented Guardrail for LLM Agent Safety",
+    "authors": [
+      "Zhe Liu",
+      "Zonghao Ying",
+      "Wenxin Zhang",
+      "Quanchen Zou",
+      "Deyue Zhang"
+    ],
+    "primary_category": "cs.CR",
+    "abstract": "With the rapid evolution of foundation models, Large Language Model (LLM) agents have demonstrated increasingly powerful tool-use capabilities. However, this proficiency introduces significant security risks, as malicious actors can manipulate agents into executing tools to generate harmful content. While existing defensive mechanisms are effective, they frequently suffer from the over-refusal problem, where increased safety strictness compromises the agent's utility on benign tasks. To mitigate this trade-off, we propose \\textsc{SafeHarbor}, a novel framework designed to establish precise decision boundaries for LLM agents. Unlike static guidelines, \\textsc{SafeHarbor} extracts context-aware defense rules through enhanced adversarial generation. We design a local hierarchical memory system for dynamic rule injection, offering a training-free, efficient, and plug-and-play solution. Furthermore, we introduce an information entropy-based self-evolution mechanism that continuously optimiz",
+    "pdf_url": "https://arxiv.org/pdf/2605.05704v1",
+    "abs_url": "https://arxiv.org/abs/2605.05704",
+    "published": "2026-05-07T05:50:45Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06279",
+    "title": "Correct Code, Vulnerable Dependencies: A Large Scale Measurement Study of LLM-Specified Library Versions",
+    "authors": [
+      "Chengjie Wang",
+      "Jingzheng Wu",
+      "Xiang Ling",
+      "Tianyue Luo",
+      "Chen Zhao"
+    ],
+    "primary_category": "cs.SE",
+    "abstract": "Large language models (LLMs) are now largely involved in software development workflows, and the code they generate routinely includes third-party library (TPL) imports annotated with specific version identifiers. These version choices can carry security and compatibility risks, yet they have not been systematically studied.   We present the first large-scale measurement study of version-level risk in LLM-generated Python code, evaluating 10 LLMs on PinTrace, a curated benchmark of 1,000 Stack Overflow programming tasks. LLMs tend to specify version identifiers when directly prompted at 26.83%-95.18%, while down to 6.45%-59.19% in creating a manifest file directly. Among the specified versions, 36.70%-55.70% of tasks contain at least one known CVE, and 62.75%-74.51% of them carry Critical or High severity ratings. In 72.27%-91.37% of cases, the associated CVEs were publicly disclosed before the model's knowledge cutoff. The statistics show all models converge on the same small set of r",
+    "pdf_url": "https://arxiv.org/pdf/2605.06279v1",
+    "abs_url": "https://arxiv.org/abs/2605.06279",
+    "published": "2026-05-07T13:52:59Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06125",
+    "title": "Breaking, Stale, or Missing? Benchmarking Coding Agents on Project-Level Test Evolution",
+    "authors": [
+      "Ye Shang",
+      "Quanjun Zhang",
+      "Haichuan Hu",
+      "Chunrong Fang",
+      "Liang Xiao"
+    ],
+    "primary_category": "cs.SE",
+    "abstract": "As production code evolves, the test suite must co-evolve to remain effective. Existing benchmarks for test evolution operate at method-level granularity with pre-paired inputs, bypassing the task of locating affected tests from the full project and excluding the need for new tests entirely. We present TEBench, the first project-level benchmark for test evolution. Given a project repository and a code-changing commit, TEBench requires systems to autonomously identify tests requiring modification, determine where new tests are needed, and produce the corresponding test patch. We construct TEBench through a four-stage pipeline over Defects4J projects, curating 314 task instances from 10 projects with developer-written ground truth. Each instance is annotated with one or more of three evolution types: Test-Breaking (tests that fail), Test-Stale (tests that pass but no longer meaningfully validate updated behavior), and Test-Missing (new tests needed for introduced behavior). We evaluate s",
+    "pdf_url": "https://arxiv.org/pdf/2605.06125v1",
+    "abs_url": "https://arxiv.org/abs/2605.06125",
+    "published": "2026-05-07T12:31:09Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06508",
+    "title": "On the Security of Research Artifacts",
+    "authors": [
+      "Nanda Rani",
+      "Christian Rossow"
+    ],
+    "primary_category": "cs.CR",
+    "abstract": "Research artifacts are widely shared to support reproducibility, and artifact evaluation (AE) has become common at many leading conferences. However, AE mainly checks whether artifacts work as claimed and can be reproduced. It largely overlooks potential security risks. Since these artifacts are publicly released and reused, they may unintentionally create opportunities for misuse and raise concerns about safe and responsible sharing. We study 509 research artifacts from top-tier security venues and find that many contain insecure code patterns that may introduce potential attack vectors. We propose a taxonomy for context-aware security assessment to enable structured analysis of such risks. We perform static analysis and examine the resulting findings, filtering false positives and identifying real security risks. Our analysis shows that 41.60% of the prevalent findings may pose security concerns under practical usage. To support scalable analysis, we introduce SAFE (Security-Aware Fr",
+    "pdf_url": "https://arxiv.org/pdf/2605.06508v1",
+    "abs_url": "https://arxiv.org/abs/2605.06508",
+    "published": "2026-05-07T16:21:26Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.05818",
+    "title": "LeakDojo: Decoding the Leakage Threats of RAG Systems",
+    "authors": [
+      "Maosen Zhang",
+      "Jianshuo Dong",
+      "Boting Lu",
+      "Wenyue Li",
+      "Xiaoping Zhang"
+    ],
+    "primary_category": "cs.CR",
+    "abstract": "Retrieval-Augmented Generation (RAG) enables large language models (LLMs) to leverage external knowledge, but also exposes valuable RAG databases to leakage attacks. As RAG systems grow more complex and LLMs exhibit stronger instruction-following capabilities, existing studies fall short of systematically assessing RAG leakage risks. We present LeakDojo, a configurable framework for controlled evaluation of RAG leakage. Using LeakDojo, we benchmark six existing attacks across fourteen LLMs, four datasets, and diverse RAG systems. Our study reveals that (1) query generation and adversarial instructions contribute independently to leakage, with overall leakage well approximated by their product; (2) stronger instruction-following capability correlates with higher leakage risk; and (3) improvements in RAG faithfulness can introduce increased leakage risk. These findings provide actionable insights for understanding and mitigating RAG leakage in practice. Our codebase is available at https",
+    "pdf_url": "https://arxiv.org/pdf/2605.05818v1",
+    "abs_url": "https://arxiv.org/abs/2605.05818",
+    "published": "2026-05-07T07:55:02Z",
+    "score": 7.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06571",
+    "title": "CLAD: A Clustered Label-Agnostic Federated Learning Framework for Joint Anomaly Detection and Attack Classification",
+    "authors": [
+      "Iason Ofeidis",
+      "Nikos Papadis",
+      "Randeep Bhatia",
+      "Leandros Tassiulas",
+      "TV Lakshman"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "The rapid expansion of the Internet of Things (IoT) and Industrial IoT (IIoT) has created a massive, heterogeneous attack surface that challenges traditional network security mechanisms. While Federated Learning (FL) offers a privacy-preserving alternative to centralized Intrusion Detection Systems (IDS), standard approaches struggle to generalize across diverse device behaviors and typically fail to utilize the vast amounts of unlabeled data present in realistic edge environments. To bridge these gaps, we propose CLAD, a holistic framework that seamlessly incorporates Clustered Federated Learning (CFL) with a novel Dual-Mode Micro-Architecture ($\\text{DM}^2\\text{A}$). This unified approach simultaneously tackles the two primary bottlenecks of IoT security: device heterogeneity and label scarcity. The $\\text{DM}^2\\text{A}$ component features a shared encoder followed by two branches, enabling joint unsupervised anomaly detection and supervised attack classification; this allows the fra",
+    "pdf_url": "https://arxiv.org/pdf/2605.06571v1",
+    "abs_url": "https://arxiv.org/abs/2605.06571",
+    "published": "2026-05-07T17:01:19Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.05959",
+    "title": "From Coordinate Matching to Structural Alignment: Rethinking Prototype Alignment in Heterogeneous Federated Learning",
+    "authors": [
+      "Xinghao Wu",
+      "Jianwei Niu",
+      "Guogang Zhu",
+      "Xuefeng Liu",
+      "Shaojie Tang"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Heterogeneous federated learning (HtFL) aims to enable collaboration among clients that differ in both data distributions and model architectures. Prototype-based methods, which communicate class-level feature centers (prototypes) instead of full model parameters, have recently shown strong potential for HtFL. Existing prototype-based HtFL methods typically reuse the MSE-based or cosine-based alignment mechanism developed for homogeneous FL when aligning client-specific representations with global prototypes. These approaches are essentially coordinate alignment, where representations of clients are forced to match the global prototypes in the embedding space in an element-wise manner. Such alignment implicitly assumes that all clients should map their representations into the feature subspace defined by the global prototypes. This assumption is reasonable in homogeneous FL, where all clients share the same feature extractor. However, it becomes problematic in HtFL, since heterogeneous",
+    "pdf_url": "https://arxiv.org/pdf/2605.05959v1",
+    "abs_url": "https://arxiv.org/abs/2605.05959",
+    "published": "2026-05-07T10:06:26Z",
+    "score": 3.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06319",
+    "title": "Designing Capacitated Subnetworks for Shortest Path Routing",
+    "authors": [
+      "Markus Chimani",
+      "Max Ilsen"
+    ],
+    "primary_category": "cs.DS",
+    "abstract": "In pursuit of higher energy efficiency in computer networks, one subfield of green traffic engineering aims at reducing the size of a network during times of low traffic, while still guaranteeing the ability to route all occurring demands. In this setting, we have to simultaneously solve a network design problem (choosing connections to deactivate) and a routing problem (routing paths in the active subnetwork, adhering to some routing protocol). Interestingly, there seems to be no available method to tackle the problem as a whole for the simplest (and still most commonly used) routing paradigm: shortest path routing. State-of-the-art methods either do not consider capacities, or assume that the routing paths should not change when deactivating network connections, or separate the problem into its two constituents, first solving the network design problem (using some estimators in lieu of the precise routing protocol) and only then the actual routing problem. In this paper, we present a",
+    "pdf_url": "https://arxiv.org/pdf/2605.06319v1",
+    "abs_url": "https://arxiv.org/abs/2605.06319",
+    "published": "2026-05-07T14:19:08Z",
+    "score": 2.4000000000000004,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.05602",
+    "title": "Nearly Optimal Attention Coresets",
+    "authors": [
+      "Edo Liberty",
+      "Alexandr Andoni",
+      "Eldar Kleiner"
+    ],
+    "primary_category": "cs.DS",
+    "abstract": "We consider the problem of estimating the Attention mechanism in small space, and prove the existence of coresets for it of nearly optimal size. Specifically, we show that for any set of unit-norm keys and values $(K,V)$ in $\\mathbb{R}^d$, there exists a subset $(K',V')$ of size at most $O({\\sqrt{d} e^{\u03c1+o(\u03c1)}/\\varepsilon})$ such that \\[ \\left\\| \\operatorname{Attn}(q,K,V)- \\operatorname{Attn}(q,K',V') \\right\\| \\le \\varepsilon \\] simultaneously for all queries whose norm is bounded by $\u03c1$. This outperforms the best known results for this problem. We also offer an improved lower bound showing that $\\varepsilon$-coresets must have size $\u03a9({\\sqrt{d} e^\u03c1/\u03b5})$.",
+    "pdf_url": "https://arxiv.org/pdf/2605.05602v1",
+    "abs_url": "https://arxiv.org/abs/2605.05602",
+    "published": "2026-05-07T02:37:57Z",
+    "score": 2.4000000000000004,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06544",
+    "title": "CCL-Bench 1.0: A Trace-Based Benchmark for LLM Infrastructure",
+    "authors": [
+      "Eric Ding",
+      "Byungsoo Oh",
+      "Bhaskar Kataria",
+      "Kaiwen Guo",
+      "Jelena Gvero"
+    ],
+    "primary_category": "cs.DC",
+    "abstract": "Evaluative claims about LLM infrastructure -- ``workload X is fastest on hardware Y with software Z'' -- depend on a complex configuration space spanning hardware accelerators, interconnect bandwidth, software frameworks, parallelism plans, and communication libraries. Current infrastructure evaluation benchmarks publish a small set of end-to-end numbers that do not explain why one configuration outperforms another. We present CCL-Bench, a trace-based benchmark that addresses the limitations of existing benchmarks by recording reusable evidence for every ML workload. Each contributed data point in CCL-Bench packages an execution trace, a YAML workload card, and the launch scripts. We have developed a community-extensible toolkit to compute fine-grained compute, memory, and communication efficiency metrics from this evidence. Using CCL-Bench, we surface three claims that summary-statistic benchmarks cannot support: (i) higher compute-communication overlap can coincide with longer traini",
+    "pdf_url": "https://arxiv.org/pdf/2605.06544v1",
+    "abs_url": "https://arxiv.org/abs/2605.06544",
+    "published": "2026-05-07T16:40:39Z",
+    "score": 2.0999999999999996,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06534",
+    "title": "ROSE: Rollout On Serving GPUs via Cooperative Elasticity for Agentic RL",
+    "authors": [
+      "Wei Gao",
+      "Yuheng Zhao",
+      "Dilxat Muhtar",
+      "Dakai An",
+      "Xuchun Shang"
+    ],
+    "primary_category": "cs.DC",
+    "abstract": "Agentic reinforcement learning (RL) has emerged as a key driver for improving the multi-step reasoning and tool-use capabilities of LLMs. However, its efficiency is bottlenecked by long-tail rollouts with multi-turn environment interactions, making static GPU provisioning a poor fit: overprovisioning wastes GPUs on stragglers, while underprovisioning increases contention and slows training.   We observe that production serving clusters routinely leave substantial GPU compute and memory headroom. Based on this observation, we argue for cooperative elasticity: opportunistically repurposing underutilized serving GPUs to execute rollouts. Realizing cooperative elasticity is non-trivial because it must preserve serving Service Level Objectives (SLOs) under bursty traffic and minimize communication overhead. To address these challenges, we present ROSE, a cooperative, resource-elastic post-training system that safely harvests idle compute and memory on serving GPUs to accelerate agentic RL r",
+    "pdf_url": "https://arxiv.org/pdf/2605.06534v1",
+    "abs_url": "https://arxiv.org/abs/2605.06534",
+    "published": "2026-05-07T16:33:40Z",
+    "score": 2.0999999999999996,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06392",
+    "title": "ADELIA: Automatic Differentiation for Efficient Laplace Inference Approximations",
+    "authors": [
+      "Afif Boudaoud",
+      "Lisa Gaedke-Merzh\u00e4user",
+      "Alexandros Nikolaos Ziogas",
+      "Vincent Maillou",
+      "Alexandru Calotoiu"
+    ],
+    "primary_category": "cs.DC",
+    "abstract": "Spatio-temporal Bayesian inference drives environmental and health sciences using latent Gaussian models. Integrated Nested Laplace Approximations (INLA) enable inference for these models at HPC scale but rely on derivative-based optimization over $d$ hyperparameters. State-of-the-art INLA implementations approximate derivatives via central finite differences (FD), requiring $2d{+}1$ evaluations. These evaluations are embarrassingly parallel, but total work and energy grow with $d$, limiting time-to-solution under fixed budgets. Reverse-mode automatic differentiation (AD) computes exact gradients independently of $d$, but its efficient application to INLA's structured-sparse kernels is an open challenge. We present ADELIA, the first AD-enabled INLA implementation with a structure-exploiting multi-GPU backward pass leveraging model sparsity. We evaluate ADELIA on ten benchmark models, including real-world air-pollution monitoring. We achieve $4.2$--$7.9\\times$ per-gradient speedups and ",
+    "pdf_url": "https://arxiv.org/pdf/2605.06392v1",
+    "abs_url": "https://arxiv.org/abs/2605.06392",
+    "published": "2026-05-07T15:07:31Z",
+    "score": 2.0999999999999996,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06374",
+    "title": "ResiHP: Taming LLM Training Failures with Dynamic Hybrid",
+    "authors": [
+      "Tenghui Ma",
+      "Jihu Guo",
+      "Wei Gao",
+      "Sitian Lu",
+      "Zhisheng Ye"
+    ],
+    "primary_category": "cs.DC",
+    "abstract": "Hybrid parallelism underpins large-scale LLM training across tens of thousands of GPUs. At such scale, hardware failures on individual devices lead to performance skew across devices, diminishing overall training efficiency. Existing resilient systems overlook sequence length variability in datasets and device performance skew under hybrid parallelism. As a result, (1) iteration time fluctuations induced by sequence length variability can trigger spurious fail-slow detections, and (2) failures are mitigated through individual adaptations in hybrid parallelism, leading to unnecessary detection overhead and inefficient resilient training. To respond, this paper presents ResiHP, a resilient system that enables robust failure detection and fine-grained adaptation for hybrid parallel training. First, we develop a Detector to accurately identify failures. In particular, it employs a workload-aware execution time predictor that disentangles failures from iteration time fluctuations while rema",
+    "pdf_url": "https://arxiv.org/pdf/2605.06374v1",
+    "abs_url": "https://arxiv.org/abs/2605.06374",
+    "published": "2026-05-07T14:52:54Z",
+    "score": 2.0999999999999996,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.06057",
+    "title": "FalconGEMM: Surpassing Hardware Peaks with Lower-Complexity Matrix Multiplication",
+    "authors": [
+      "Honglin Zhu",
+      "Jiaping Cao",
+      "Jiang Shao",
+      "Siyuan Feng",
+      "Qian Qiu"
+    ],
+    "primary_category": "cs.DC",
+    "abstract": "Peak breaking Matrix Multiplication is a promising technique to improve the performance of DL, especially in LLM training and inference. We present FalconGEMM, a cross-platform framework that automates the deployment, optimization, and selection of Lower-Complexity Matrix Multiplication Algorithms (LCMAs) across diverse hardware. There are three key innovations: (1) a Deployment Module that enables portable execution across various hardware and input configurations through code generation; (2) an Execution Module with Group-Parallel Optimizations that maximizes on-chip data reuse, utilizes parallel resources, and reduces bandwidth overhead; and (3) a Decision Module featuring a lightweight analytical performance model to select the optimal strategy based on matrix shapes and hardware profiles. Extensive evaluation is conducted on LLM workloads across GPU (H20, A100) and CPU (ARM, x86) architectures with multiple data types. FalconGEMM succeeds in delivering peak breaking performance an",
+    "pdf_url": "https://arxiv.org/pdf/2605.06057v1",
+    "abs_url": "https://arxiv.org/abs/2605.06057",
+    "published": "2026-05-07T11:41:54Z",
+    "score": 2.0999999999999996,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.05888",
+    "title": "MoE-Hub: Taming Software Complexity for Seamless MoE Overlap with Hardware-Accelerated Communication on Multi-GPU Systems",
+    "authors": [
+      "Zhuoshan Zhou",
+      "Chen Zhang",
+      "Shuyi Zhang",
+      "Qijun Zhang",
+      "Haibo Wang"
+    ],
+    "primary_category": "cs.AR",
+    "abstract": "The Mixture-of-Experts (MoE) architecture is crucial for scaling large language models, but its scalability is severely limited by inter-GPU communication bottlenecks in multi-GPU systems. Although overlapping communication with computation is a widely recognized optimization, its effective deployment still remains challenging, both in terms of performance and programmability. In this work, we identify the root cause as a fundamental abstraction mismatch between MoE's dynamic, irregular token-to-expert mapping and the static, address-centric communication model of modern GPUs, which necessitates a complex software mediation phase to resolve addresses before data transfers, limiting performance and software flexibility. To resolve this, we propose MoE-Hub, a hardware-software co-design that introduces a destination-agnostic communication paradigm. MoE-Hub decouples data transmission from address management, allowing producers to send data immediately after routing using only a logical d",
+    "pdf_url": "https://arxiv.org/pdf/2605.05888v1",
+    "abs_url": "https://arxiv.org/abs/2605.05888",
+    "published": "2026-05-07T08:58:51Z",
+    "score": 2.0999999999999996,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]

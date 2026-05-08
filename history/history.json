@@ -33,5 +33,10 @@
     "date": "2026-05-05T02:30:55.402905+00:00",
     "arxiv_id": "2604.17753",
     "title": "Evolutionary Negative Module Pruning for Better LoRA Merging"
+  },
+  {
+    "date": "2026-05-08T02:31:06.543696+00:00",
+    "arxiv_id": "2604.16242",
+    "title": "Detecting and Suppressing Reward Hacking with Gradient Fingerprints"
   }
 ]
