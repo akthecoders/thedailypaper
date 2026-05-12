@@ -1,0 +1,367 @@
+[
+  {
+    "arxiv_id": "2605.10111",
+    "title": "CFSPMNet: Cross-subject Fourier-guided Spatial-Patch Mamba Network for EEG Motor Imagery Decoding in Stroke Patients",
+    "authors": [
+      "Xiangkai Wang",
+      "Yun Zhao",
+      "Dongyi He",
+      "Qingling Xia",
+      "Gen Li"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Motor imagery electroencephalography (MI-EEG) decoding offers a non-invasive route for post-stroke rehabilitation, but cross-patient use remains difficult because pathological neural reorganization changes task-related EEG dynamics, aperiodic activity, local excitability, cross-regional coordination, and trial-level brain-state context. This makes source-learned MI representations unreliable for unseen patients. To address this problem, we propose CFSPMNet, a cross-patient adaptation framework that models post-stroke MI-EEG as latent neural-state organization. CFSPMNet combines a Fourier-Reorganized State Mamba Network (FRSM) with Shared-Private Prototype Matching (SPPM). FRSM represents each trial as a latent physiological token sequence, reorganizes token states in the Fourier domain, and uses Fourier-derived trial context to guide Mamba state-space propagation. SPPM improves target pseudo-label updating by combining semantic confidence with shared-private physiological consistency, ",
+    "pdf_url": "https://arxiv.org/pdf/2605.10111v1",
+    "abs_url": "https://arxiv.org/abs/2605.10111",
+    "published": "2026-05-11T07:26:47Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09993",
+    "title": "Learning Graph Foundation Models on Riemannian Graph-of-Graphs",
+    "authors": [
+      "Haokun Liu",
+      "Zezhong Ding",
+      "Xike Xie"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Graph foundation models (GFMs), pretrained on massive graph data, have transformed graph machine learning by supporting general-purpose reasoning across diverse graph tasks and domains. Existing GFMs pretrained with fixed-hop subgraph sampling impose a fixed receptive field, causing scale mismatch on diverse tasks, which often require heterogeneous and unknown structural contexts beyond a fixed sampling scale. We propose R-GFM, a Riemannian Graph-of-Graphs (GoG) based foundation model, that treats structural scale as a first-class citizen in modeling. R-GFM constructs a multi-scale GoG over-sampled subgraphs at different hop distances and learns geometry-adaptive representations from Riemannian manifolds. Theoretical analysis shows that R-GFM reduces structural domain generalization error compared to fixed-scale GFMs. Experiments on various datasets demonstrate that R-GFM achieves state-of-the-art performance, with up to a 49% relative improvement on downstream tasks. Our code is avail",
+    "pdf_url": "https://arxiv.org/pdf/2605.09993v1",
+    "abs_url": "https://arxiv.org/abs/2605.09993",
+    "published": "2026-05-11T05:09:16Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09920",
+    "title": "Verifier-Free RL for LLMs via Intrinsic Gradient-Norm Reward",
+    "authors": [
+      "Xuexiang Wen",
+      "Hang Yu",
+      "Linchao Zhu",
+      "Gaoang Wang"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "While Reinforcement Learning with Verifiable Rewards (RLVR) has recently emerged as a promising post-training paradigm for Large Language Models (LLMs), its dependency on the gold label or domain-specific verifiers limits its scalability to new tasks and domains. In this work, we propose Verifier-free Intrinsic Gradient-Norm Reward (VIGOR), a simple reward that uses only the policy model itself. Given a prompt, VIGOR samples a group of completions and assigns higher within-group rewards to outputs that induce smaller $\\ell_2$ norms of the teacher-forced negative log-likelihood gradients under the current parameters. Intuitively, lower gradient norms suggest the completion aligns better with the current policy, serving as an intrinsic preference signal for policy optimization. To make this intrinsic signal practical for RL, we correct the systematic length bias of averaged token-level gradients with a $\\sqrt{T}$ scaling, and apply group-wise rank shaping to stabilize reward scales acros",
+    "pdf_url": "https://arxiv.org/pdf/2605.09920v1",
+    "abs_url": "https://arxiv.org/abs/2605.09920",
+    "published": "2026-05-11T03:15:37Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10246",
+    "title": "SciIntegrity-Bench: A Benchmark for Evaluating Academic Integrity in AI Scientist Systems",
+    "authors": [
+      "Zonglin Yang",
+      "Xingtong Liu",
+      "Xinyan Xu"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "AI scientist systems are increasingly deployed for autonomous research, yet their academic integrity has never been systematically evaluated. We introduce SCIINTEGRITY-BENCH, the first benchmark designed around a dilemmatic evaluation paradigm: each of its 33 scenarios across 11 trap categories is constructed so that honest acknowledgment of failure is the only correct response, while task completion requires misconduct. Across 231 evaluation runs spanning 7 state-of-the-art LLMs, the overall integrity problem rate reaches 34.2%, and no model achieves zero failures. Most strikingly, across missing-data scenarios, all seven models generate synthetic data rather than acknowledging infeasibility, differing only in whether they disclose the substitution. A further prompt ablation study separates two drivers: removing explicit completion pressure sharply reduces undisclosed fabrication from 20.6% to 3.2%, while the underlying synthesis rate remains unchanged, revealing an intrinsic completi",
+    "pdf_url": "https://arxiv.org/pdf/2605.10246v1",
+    "abs_url": "https://arxiv.org/abs/2605.10246",
+    "published": "2026-05-11T09:19:17Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09942",
+    "title": "HAGE: Harnessing Agentic Memory via RL-Driven Weighted Graph Evolution",
+    "authors": [
+      "Dongming Jiang",
+      "Yi Li",
+      "Guanpeng Li",
+      "Qiannan Li",
+      "Bingzhe Li"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Memory retrieval in agentic large language model (LLM) systems is often treated as a static lookup problem, relying on flat vector search or fixed binary relational graphs. However, fixed graph structures cannot capture the varying strength, confidence, and query-dependent relevance of relationships between events. In this paper, we propose HAGE, a weighted multi-relational memory framework that reconceptualizes retrieval as sequential, query-conditioned traversal over a unified relational memory graph. Memory is organized as relation-specific graph views over shared memory nodes, where each edge is associated with a trainable relation feature vector encoding multiple relational signals. Given a query, an LLM-based classifier identifies the relational intent, and a routing network dynamically modulates the corresponding dimensions of the edge embedding. Traversal scores are computed via a learned combination of semantic similarity and these query-conditioned edge representations. This ",
+    "pdf_url": "https://arxiv.org/pdf/2605.09942v1",
+    "abs_url": "https://arxiv.org/abs/2605.09942",
+    "published": "2026-05-11T03:41:18Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09907",
+    "title": "RADAR: Redundancy-Aware Diffusion for Multi-Agent Communication Structure Generation",
+    "authors": [
+      "Zhen Zhang",
+      "Wanjing Zhou",
+      "Juncheng Li",
+      "Hao Fei",
+      "Jun Wen"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Compared with individual agents, large language model based multi-agent systems have shown great capabilities consistently across diverse tasks, including code generation, mathematical reasoning, and planning, etc. Despite their impressive performance, the effectiveness and robustness of these systems heavily rely on their communication topology, which is often fixed or generated in a single step. This restricts fine-grained structural exploration and flexible composition, resulting in excessive token utilization on simple tasks while limiting capability on complicated tasks. To mitigate this challenge, we introduce RADAR, a redundancy-aware and query-adaptive generative framework that actively reduce communication overhead. Motivated by recent progress in conditional discrete graph diffusion models, we formulate communication topology design as a step-by-step generation process, guided by the effective size of the graph. Comprehensive experiments on six benchmarks demonstrate that RAD",
+    "pdf_url": "https://arxiv.org/pdf/2605.09907v1",
+    "abs_url": "https://arxiv.org/abs/2605.09907",
+    "published": "2026-05-11T02:50:40Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09922",
+    "title": "Team-Based Self-Play With Dual Adaptive Weighting for Fine-Tuning LLMs",
+    "authors": [
+      "Wu Li",
+      "Yigeng Zhou",
+      "Zesheng Shi",
+      "Yequan Wang",
+      "Min Zhang"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "While recent self-training approaches have reduced reliance on human-labeled data for aligning LLMs, they still face critical limitations: (i) sensitivity to synthetic data quality, leading to instability and bias amplification in iterative training; (ii) ineffective optimization due to a diminishing gap between positive and negative responses over successive training iterations. In this paper, we propose Team-based self-Play with dual Adaptive Weighting (TPAW), a novel self-play algorithm designed to improve alignment in a fully self-supervised setting. TPAW adopts a team-based framework in which the current policy model both collaborates with and competes against historical checkpoints, promoting more stable and efficient optimization. To further enhance learning, we design two adaptive weighting mechanisms: (i) a response reweighting scheme that adjusts the importance of target responses, and (ii) a player weighting strategy that dynamically modulates each team member's contribution",
+    "pdf_url": "https://arxiv.org/pdf/2605.09922v1",
+    "abs_url": "https://arxiv.org/abs/2605.09922",
+    "published": "2026-05-11T03:17:31Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09924",
+    "title": "Evolving Knowledge Distillation for Lightweight Neural Machine Translation",
+    "authors": [
+      "Xuewen Zhang",
+      "Haixiao Zhang",
+      "Xinlong Huang"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Recent advancements in Neural Machine Translation (NMT) have significantly improved translation quality. However, the increasing size and complexity of state-of-the-art models present significant challenges for deployment on resource-limited devices. Knowledge distillation (KD) is a promising approach for compressing models, but its effectiveness diminishes when there is a large capacity gap between teacher and student models. To address this issue, we propose Evolving Knowledge Distillation (EKD), a progressive training framework in which the student model learns from a sequence of teachers with gradually increasing capacities. Experiments on IWSLT-14, WMT-17, and WMT-23 benchmarks show that EKD leads to consistent improvements at each stage. On IWSLT-14, the final student achieves a BLEU score of 34.24, narrowing the gap to the strongest teacher (34.32 BLEU) to just 0.08 BLEU. Similar trends are observed on other datasets. These results demonstrate that EKD effectively bridges the ca",
+    "pdf_url": "https://arxiv.org/pdf/2605.09924v1",
+    "abs_url": "https://arxiv.org/abs/2605.09924",
+    "published": "2026-05-11T03:21:24Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10279",
+    "title": "DeepLog: A Software Framework for Modular Neurosymbolic AI",
+    "authors": [
+      "Robin Manhaeve",
+      "Stefano Colamonaco",
+      "Vincent Derkinderen",
+      "Rik Adriaensen",
+      "Lucas Van Praet"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "DeepLog is an operational neurosymbolic framework that unifies logic and deep learning within standard PyTorch workflows. While existing neurosymbolic systems focus on a particular paradigm and semantics, DeepLog serves as a universal backend that can emulate many systems in the neurosymbolic alphabet soup. By treating diverse neurosymbolic languages as high-level specifications, the DeepLog software automatically compiles them into optimized arithmetic circuits. This design lowers the barrier for machine learning practitioners by treating logic as composable modules, while providing neurosymbolic developers with a shared, high-performance basis for prototyping new integration strategies. The code is available here: https://github.com/ML-KULeuven/deeplog",
+    "pdf_url": "https://arxiv.org/pdf/2605.10279v1",
+    "abs_url": "https://arxiv.org/abs/2605.10279",
+    "published": "2026-05-11T09:39:59Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10159",
+    "title": "jNO: A JAX Library for Neural Operator and Foundation Model Training",
+    "authors": [
+      "Leon Armbruster",
+      "Rathan Ramesh",
+      "Georg Kruse",
+      "Christopher Straub"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "jNO (jax Neural Operators) is a JAX-native library for neural operators and foundation models with unified support for both data-driven and physics-informed training. Its core design is a tracing system in which domains, model calls, residuals, supervised losses, and diagnostics are written in one symbolic language and compiled into one optimization pipeline. This allows users to move between operator regression, mesh-aware residual evaluation, and PDE-constrained training without restructuring the surrounding code. jNO also supports multi-model compositions, fine-grained control at parameter level (model, optimizer, and learning rate), hyperparameter tuning, and JAX-native workflows for translated PDE foundation-model families. The source repository is available at https://github.com/FhG-IISB/jNO.",
+    "pdf_url": "https://arxiv.org/pdf/2605.10159v1",
+    "abs_url": "https://arxiv.org/abs/2605.10159",
+    "published": "2026-05-11T08:05:54Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10020",
+    "title": "TrajDLM: Topology-Aware Block Diffusion Language Model for Trajectory Generation",
+    "authors": [
+      "Wilson Wongso",
+      "Lihuan Li",
+      "Arian Prabowo",
+      "Xiachong Lin",
+      "Baiyu Chen"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Generating high-fidelity synthetic GPS trajectories is increasingly important for applications in transportation, urban planning, and what-if scenario simulation, especially as privacy concerns limit access to real-world mobility data. Existing trajectory generation models face a trade-off between efficiency and faithfulness to road network topology: continuous-space methods enable fast generation but ignore the road network, while topology-aware approaches rely on search-based autoregressive decoding that limits generation speed. We propose TrajDLM, a topology-aware trajectory generation framework based on block diffusion language models that bridges this gap. TrajDLM models trajectories as sequences of discrete road segments, combining a block diffusion backbone for efficient denoising, topology-aware embeddings from a road network encoder, and topology-constrained sampling to ensure coherent and realistic trajectories. Across three city-scale datasets, TrajDLM achieves strong perfor",
+    "pdf_url": "https://arxiv.org/pdf/2605.10020v1",
+    "abs_url": "https://arxiv.org/abs/2605.10020",
+    "published": "2026-05-11T05:44:40Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09998",
+    "title": "Continual Harness: Online Adaptation for Self-Improving Foundation Agents",
+    "authors": [
+      "Seth Karten",
+      "Joel Zhang",
+      "Tersoo Upaa",
+      "Ruirong Feng",
+      "Wenzhe Li"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Coding harnesses such as Claude Code and OpenHands wrap foundation models with tools, memory, and planning, but no equivalent exists for embodied agents' long-horizon partial-observability decision-making. We first report our Gemini Plays Pokemon (GPP) experiments. With iterative human-in-the-loop harness refinement, GPP became the first AI system to complete Pokemon Blue, Yellow Legacy on hard mode, and Crystal without a lost battle. In the hardest stages, the agent itself began iterating on its strategy through long-context memory, surfacing emergent self-improvement signals alongside human-in-the-loop refinement. Continual Harness removes the human fully from this loop: a reset-free self-improving harness for embodied agents that formalizes and automates what we observed. Starting from only a minimal environment interface, the agent alternates between acting and refining its own prompt, sub-agents, skills, and memory, drawing on any past trajectory data. Prompt-optimization methods ",
+    "pdf_url": "https://arxiv.org/pdf/2605.09998v1",
+    "abs_url": "https://arxiv.org/abs/2605.09998",
+    "published": "2026-05-11T05:21:33Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09908",
+    "title": "Voice Biomarkers for Depression and Anxiety",
+    "authors": [
+      "Oleksii Abramenko",
+      "Noah D. Stein",
+      "Colin Vaz"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Current approaches to detecting depression and anxiety from speech primarily rely on machine learning techniques that utilize hand-engineered paralinguistic features and related acoustic descriptors derived from time- and frequency-domain representations of speech signals. Applying deep learning methods directly to raw speech signals has the potential to produce biomarker representations with substantially greater predictive power. However, these approaches typically require large volumes of carefully annotated data to learn robust and clinically meaningful representations of the underlying biomarkers. In this paper, we describe our efforts toward developing a deep learning model trained on a large-scale proprietary dataset comprising ~65,000 utterances collected from more than 23,000 subjects representative of relevant United States demographics. We present the techniques employed and analyze their impact on model performance. Our results demonstrate that the proposed models can extra",
+    "pdf_url": "https://arxiv.org/pdf/2605.09908v1",
+    "abs_url": "https://arxiv.org/abs/2605.09908",
+    "published": "2026-05-11T02:51:35Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09877",
+    "title": "Key-Value Means",
+    "authors": [
+      "Daniel Goldstein",
+      "Eugene Cheah"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "We present Key-Value Means (\"KVM\"), a novel block-recurrence for attention that can accommodate either fixed-size or growing state. Equipping a strong transformer baseline with fixed-size KVM attention layers yields a strong $O(N)$ chunked RNN, while adding only an insignificant number of new parameters. We train a transformer with a growable KVM cache and show it performs competitively on long-context tests with only subquadratic prefill time and sublinear state growth. KVM is implementable with standard operations and without custom kernels, and supports chunk-wise parallelizable training and prefill. It provides many of the benefits of both traditional transformers (expandable context memory, chunk-wise parallelizable training and prefill) and linear RNNs in a single unified package. It can be used on every layer, saving KV-cache memory, and allowing a continuous range of choices of prefill time complexity between $O(N)$ and $O(N^2)$. It can also be implemented in a hybrid solution ",
+    "pdf_url": "https://arxiv.org/pdf/2605.09877v1",
+    "abs_url": "https://arxiv.org/abs/2605.09877",
+    "published": "2026-05-11T02:04:14Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10267",
+    "title": "IndustryBench: Probing the Industrial Knowledge Boundaries of LLMs",
+    "authors": [
+      "Songlin Bai",
+      "Xintong Wang",
+      "Linlin Yu",
+      "Bin Chen",
+      "Zhiang Xu"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "In industrial procurement, an LLM answer is useful only if it survives a standards check: recommended material must match operating condition, every parameter must respect a regulated threshold, and no procedure may contradict a safety clause. Partial correctness can mask safety-critical contradictions that aggregate LLM benchmarks rarely capture. We introduce IndustryBench, a 2,049-item benchmark for industrial procurement QA in Chinese, grounded in Chinese national standards (GB/T) and structured industrial product records, organized by seven capability dimensions, ten industry categories, and panel-derived difficulty tiers, with item-aligned English, Russian, and Vietnamese renderings. Our construction pipeline rejects 70.3% of LLM-generated candidates at a search-based external-verification stage, calibrating how unreliable industrial QA remains after LLM-only filtering.Our evaluation decouples raw correctness, scored by a Qwen3-Max judge validated at $\u03ba_w = 0.798$ against a domain",
+    "pdf_url": "https://arxiv.org/pdf/2605.10267v1",
+    "abs_url": "https://arxiv.org/abs/2605.10267",
+    "published": "2026-05-11T09:30:48Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10146",
+    "title": "Benchmarking Safety Risks of Knowledge-Intensive Reasoning under Malicious Knowledge Editing",
+    "authors": [
+      "Qinghua Mao",
+      "Xi Lin",
+      "Jinze Gu",
+      "Jun Wu",
+      "Siyuan Li"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Large language models (LLMs) increasingly rely on knowledge editing to support knowledge-intensive reasoning, but this flexibility also introduces critical safety risks: adversaries can inject malicious or misleading knowledge that corrupts downstream reasoning and leads to harmful outcomes. Existing knowledge editing benchmarks primarily focus on editing efficacy and lack a unified framework for systematically evaluating the safety implications of edited knowledge on reasoning behavior. To address this gap, we present EditRisk-Bench, a benchmark for systematically evaluating safety risks of knowledge-intensive reasoning under malicious knowledge editing. Unlike prior benchmarks that mainly emphasize edit success, generalization, and locality, EditRisk-Bench focuses on how injected knowledge affects downstream reasoning behavior and reliability. It integrates diverse malicious scenarios, including misinformation, bias, and safety violations, together with multi-level knowledge-intensiv",
+    "pdf_url": "https://arxiv.org/pdf/2605.10146v1",
+    "abs_url": "https://arxiv.org/abs/2605.10146",
+    "published": "2026-05-11T07:54:05Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10141",
+    "title": "FormalRewardBench: A Benchmark for Formal Theorem Proving Reward Models",
+    "authors": [
+      "Zeynel A. Ulu\u015fan",
+      "Burak S. Akbudak",
+      "Can S. Erer",
+      "G\u00f6zde G\u00fcl \u015eahin"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Recent neural theorem provers use reinforcement learning with verifiable rewards (RLVR), where proof assistants provide binary correctness signals. While verifiable rewards are cheap and scalable without reward hacking issues, they suffer from sparse credit assignment: models receive no learning signal from difficult problems where partial progress goes unrewarded. This motivates learned reward models that can evaluate proof quality beyond binary verification. However, comparing reward models is challenging since it typically requires expensive RL training ablations. To address this, we introduce \\textbf{FormalRewardBench}, the first benchmark for evaluating reward models in formal theorem proving with Lean 4. Our benchmark consists of 250 preference pairs where correct proofs are paired with incorrect variants generated through five expert curated error injection strategies: forced mistakes, minimal single-point variations, verbose incorrect proofs, natural language justification, and",
+    "pdf_url": "https://arxiv.org/pdf/2605.10141v1",
+    "abs_url": "https://arxiv.org/abs/2605.10141",
+    "published": "2026-05-11T07:51:15Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.09879",
+    "title": "M2A: Synergizing Mathematical and Agentic Reasoning in Large Language Models",
+    "authors": [
+      "Junjian Wang",
+      "Xin Zhou",
+      "Qiran Xu",
+      "Kun Zhan"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "While reasoning has become a central capability of large language models (LLMs), the reasoning patterns required for different scenarios are often misaligned. Mathematical reasoning typically relies on intrinsic logic to solve closed-world problems in a single response, whereas agentic reasoning requires not only internal reasoning but also multi-turn interaction with external environments, interleaving thought and action. This misalignment prevents mathematical and agentic reasoning from effectively benefiting from each other, often yielding unstable reasoning behavior and only limited performance gains under multi-task learning. In this paper, we propose M2A, a novel paradigm that synergizes mathematical and agentic reasoning via model merging. To avoid overfitting to superficial reasoning patterns under joint training, M2A operates directly in parameter space: it identifies the feature subspace critical for agent behavior, and merges the mathematical reasoning task vector only along",
+    "pdf_url": "https://arxiv.org/pdf/2605.09879v1",
+    "abs_url": "https://arxiv.org/abs/2605.09879",
+    "published": "2026-05-11T02:05:30Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10120",
+    "title": "MicroWorld: Empowering Multimodal Large Language Models to Bridge the Microscopic Domain Gap with Multimodal Attribute Graph",
+    "authors": [
+      "Manyu Li",
+      "Ruian He",
+      "Chenxi Ma",
+      "Weimin Tan",
+      "Bo Yan"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Multimodal large language models (MLLMs) show remarkable potential for scientific reasoning, yet their performance in specialized domains such as microscopy remains limited by the scarcity of domain-specific training data and the difficulty of encoding fine-grained expert knowledge into model parameters. To bridge the gap, we introduce MicroWorld, a framework that constructs a multimodal attributed property graph (MAPG) from large-scale scientific image--caption corpora and leverages it to augment MLLM reasoning at inference time without any domain-specific fine-tuning. MicroWorld extracts biomedical entities and relations via scispaCy or LLM-based triplet mining, aligns images and entities in a shared embedding space using Qwen3-VL-Embedding, and assembles a knowledge graph comprising approximately 111K nodes and 346K typed edges spanning eight relation categories. At inference time, a graph-augmented retrieval pipeline matches query entities to the MAPG and injects structured knowled",
+    "pdf_url": "https://arxiv.org/pdf/2605.10120v1",
+    "abs_url": "https://arxiv.org/abs/2605.10120",
+    "published": "2026-05-11T07:35:55Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.10172",
+    "title": "V-ABS: Action-Observer Driven Beam Search for Dynamic Visual Reasoning",
+    "authors": [
+      "Zhiwei Ning",
+      "Xuanang Gao",
+      "Jiaxi Cao",
+      "Gengming Zhang",
+      "Shengnan Ma"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Multimodal large language models (MLLMs) have achieved remarkable success in general perception, yet complex multi-step visual reasoning remains a persistent challenge. Although recent agentic approaches incorporate tool use, they often neglect critical execution feedback. Consequently, they suffer from the imagination-action-observer (IAO) bias, a misalignment between prior imagination and observer feedback that undermines reasoning stability and optimality. To bridge this gap, we introduce V-ABS, an action-observer driven beam search framework that enables deliberate reasoning through thinker-actor-observer iterations. We also propose an entropy-based adaptive weighting algorithm to mitigate the IAO bias by dynamically balancing the confidence scores between the policy priors and the observational feedback. Moreover, we construct a large-scale supervised fine-tuning (SFT) dataset comprising over 80k samples to guide the model to assign higher prior confidence to correct action paths.",
+    "pdf_url": "https://arxiv.org/pdf/2605.10172v1",
+    "abs_url": "https://arxiv.org/abs/2605.10172",
+    "published": "2026-05-11T08:21:52Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]
