@@ -1,0 +1,361 @@
+[
+  {
+    "arxiv_id": "2605.14779",
+    "title": "Peng's Q($\u03bb$) for Conservative Value Estimation in Offline Reinforcement Learning",
+    "authors": [
+      "Byeongchan Kim",
+      "Min-hwan Oh"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "We propose a model-free offline multi-step reinforcement learning (RL) algorithm, Conservative Peng's Q($\u03bb$) (CPQL). Our algorithm adapts the Peng's Q($\u03bb$) (PQL) operator for conservative value estimation as an alternative to the Bellman operator. To the best of our knowledge, this is the first work in offline RL to theoretically and empirically demonstrate the effectiveness of conservative value estimation with a \\textit{multi-step} operator by fully leveraging offline trajectories. The fixed point of the PQL operator in offline RL lies closer to the value function of the behavior policy, thereby naturally inducing implicit behavior regularization. CPQL simultaneously mitigates over-pessimistic value estimation, achieves performance greater than (or equal to) that of the behavior policy, and provides near-optimal performance guarantees -- a milestone that previous conservative approaches could not achieve. Extensive numerical experiments on the D4RL benchmark demonstrate that CPQL con",
+    "pdf_url": "https://arxiv.org/pdf/2605.14779v1",
+    "abs_url": "https://arxiv.org/abs/2605.14779",
+    "published": "2026-05-14T12:48:44Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14752",
+    "title": "Cognitive-Uncertainty Guided Knowledge Distillation for Accurate Classification of Student Misconceptions",
+    "authors": [
+      "Qirui Liu",
+      "Hao Chen",
+      "Weijie Shi",
+      "Jiajie Xu",
+      "Jia Zhu"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Accurately identifying student misconceptions is crucial for personalized education but faces three challenges: (1) data scarcity with long-tail distribution, where authentic student reasoning is difficult to synthesize; (2) fuzzy boundaries between error categories with high annotation noise; (3) deployment parado-large models overlook unconventional approaches due to pretraining bias and cannot be deployed on edge, while small models overfit to noise. Unlike traditional methods that increase diversity through large-scale data synthesis, we propose a two-stage knowledge distillation framework that mines high-value samples from existing data. The first stage performs standard distillation to transfer task capabilities. The second stage introduces a dual-layer marginal selection mechanism based on cognitive uncertainty, identifying four types of critical samples based on teacher model uncertainty and confidence differences. For different data subsets, we design difficulty-adaptive mecha",
+    "pdf_url": "https://arxiv.org/pdf/2605.14752v1",
+    "abs_url": "https://arxiv.org/abs/2605.14752",
+    "published": "2026-05-14T12:17:38Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14686",
+    "title": "ReMIA: a Powerful and Efficient Alternative to Membership Inference Attacks against Synthetic Data Generators",
+    "authors": [
+      "Davide Scassola",
+      "Andrea Coser",
+      "Sebastiano Saccani"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Tabular data sharing under privacy constraints is increasingly important for research and collaboration. Synthetic data generators (SDGs) are a promising solution, but synthetic data remains vulnerable to attacks, such as membership inference attacks (MIAs), which aim to determine whether a specific record was part of the training data. State-of-the-art MIAs are powerful but impractical: they rely on shadow modeling, requiring hundreds of SDG training runs, and need auxiliary data several times larger than the original training set. Fast proxy metrics like distance to closest record (DCR) are efficient but have limited sensitivity to MIA risk. We introduce ReMIA (Relative Membership Inference Attack), a practical privacy metric that requires only two SDG training runs and additional data no larger than the original training set. Rather than predicting whether a record was in the training set, ReMIA generates two synthetic datasets from two source datasets and measures whether a classif",
+    "pdf_url": "https://arxiv.org/pdf/2605.14686v1",
+    "abs_url": "https://arxiv.org/abs/2605.14686",
+    "published": "2026-05-14T11:02:07Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14907",
+    "title": "KGPFN: Unlocking the Potential of Knowledge Graph Foundation Model via In-Context Learning",
+    "authors": [
+      "Yisen Gao",
+      "Jiaxin Bai",
+      "Haoyu Huang",
+      "Zhongwei Xie",
+      "Yufei Li"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Knowledge graph (KG) foundation models aim to generalize across graphs with unseen entities and relations by learning transferable relational structure. However, most existing methods primarily emphasize relation-level universality, while in-context learning, the other pillar of foundation models remains under-explored for KG reasoning. In KGs, context is inherently structured and heterogeneous: effective prediction requires conditioning on the local context around the query entities as well as the global context that summarizes how a relation behaves across many instances. We propose KGPFN, a KG foundation model using Prior-data Fitted Network that unifies transferable relational regularities with inference-time in-context learning from structured context. KGPFN first learns relation representations via message passing on relation graphs to capture cross-graph relational invariances. For query-specific reasoning, it encodes local neighborhoods using a multi-layer NBFNet as local conte",
+    "pdf_url": "https://arxiv.org/pdf/2605.14907v1",
+    "abs_url": "https://arxiv.org/abs/2605.14907",
+    "published": "2026-05-14T14:41:19Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14289",
+    "title": "MetaMoE: Diversity-Aware Proxy Selection for Privacy-Preserving Mixture-of-Experts Unification",
+    "authors": [
+      "Weisen Jiang",
+      "Shuhao Chen",
+      "Sinno Jialin Pan"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Mixture-of-Experts (MoE) models scale capacity by combining specialized experts, but most existing approaches assume centralized access to training data. In practice, data are distributed across clients and cannot be shared due to privacy constraints, making unified MoE training challenging. We propose MetaMoE, a privacy-preserving framework that unifies independently trained, domain-specialized experts into a single MoE using public proxy data as surrogates for inaccessible private data. Central to MetaMoE is diversity-aware proxy selection, which selects client-domain-relevant and diverse samples from public data to effectively approximate private data distributions and supervise router learning. These proxies are further used to align expert training, improving expert coordination at unification time, while a context-aware router enhances expert selection across heterogeneous inputs. Experiments on computer vision and natural language processing benchmarks demonstrate that MetaMoE c",
+    "pdf_url": "https://arxiv.org/pdf/2605.14289v1",
+    "abs_url": "https://arxiv.org/abs/2605.14289",
+    "published": "2026-05-14T02:48:23Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14297",
+    "title": "Policy Optimization in Hybrid Discrete-Continuous Action Spaces via Mixed Gradients",
+    "authors": [
+      "Matias Alvo",
+      "Daniel Russo",
+      "Yash Kanoria"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "We study reinforcement learning in hybrid discrete-continuous action spaces, such as settings where the discrete component selects a regime (or index) and the continuous component optimizes within it -- a structure common in robotics, control, and operations problems. Standard model-free policy gradient methods rely on score-function (SF) estimators and suffer from severe credit-assignment issues in high-dimensional settings, leading to poor gradient quality. On the other hand, differentiable simulation largely sidesteps these issues by backpropagating through a simulator, but the presence of discrete actions or non-smooth dynamics yields biased or uninformative gradients. To address this, we propose Hybrid Policy Optimization (HPO), which backpropagates through the simulator wherever smoothness permits, using a mixed gradient estimator that combines pathwise and SF gradients while maintaining unbiasedness. We also show how problems with action discontinuities can be reformulated in hy",
+    "pdf_url": "https://arxiv.org/pdf/2605.14297v1",
+    "abs_url": "https://arxiv.org/abs/2605.14297",
+    "published": "2026-05-14T02:59:45Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.15016",
+    "title": "COTCAgent: Preventive Consultation via Probabilistic Chain-of-Thought Completion",
+    "authors": [
+      "Zihan Deng",
+      "Xiaozhen Zhong",
+      "Chuanzhi Xu"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "As large language models empower healthcare, intelligent clinical decision support has developed rapidly. Longitudinal electronic health records (EHR) provide essential temporal evidence for accurate clinical diagnosis and analysis. However, current large language models have critical flaws in longitudinal EHR reasoning. First, lacking fine-grained statistical reasoning, they often hallucinate clinical trends and metrics when quantitative evidence is textually implied, biasing diagnostic inference. Second, non-uniform time series and scarce labels in longitudinal EHR hinder models from capturing long-range temporal dependencies, limiting reliable clinical reasoning. To address the above limitations, this work presents the Probabilistic Chain-of-Thought Completion Agent (COTCAgent), a hierarchical reasoning framework for longitudinal electronic health records. It consists of three core modules. The Temporal-Statistics Adapter (TSA) converts analytical plans into executable code for stan",
+    "pdf_url": "https://arxiv.org/pdf/2605.15016v1",
+    "abs_url": "https://arxiv.org/abs/2605.15016",
+    "published": "2026-05-14T16:17:35Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14589",
+    "title": "EndPrompt: Efficient Long-Context Extension via Terminal Anchoring",
+    "authors": [
+      "Han Tian",
+      "Luxuan Chen",
+      "Xinran Chen",
+      "Rui Kong",
+      "Fang Wang"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Extending the context window of large language models typically requires training on sequences at the target length, incurring quadratic memory and computational costs that make long-context adaptation expensive and difficult to reproduce. We propose EndPrompt, a method that achieves effective context extension using only short training sequences. The core insight is that exposing a model to long-range relative positional distances does not require constructing full-length inputs: we preserve the original short context as an intact first segment and append a brief terminal prompt as a second segment, assigning it positional indices near the target context length. This two-segment construction introduces both local and long-range relative distances within a short physical sequence while maintaining the semantic continuity of the training text--a property absent in chunk-based simulation approaches that split contiguous context. We provide a theoretical analysis grounded in Rotary Positi",
+    "pdf_url": "https://arxiv.org/pdf/2605.14589v1",
+    "abs_url": "https://arxiv.org/abs/2605.14589",
+    "published": "2026-05-14T09:00:03Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14380",
+    "title": "Mitigating Data Scarcity in Psychological Defense Classification with Context-Aware Synthetic Augmentation",
+    "authors": [
+      "Hoang-Thuy-Duong Vu",
+      "Quoc-Cuong Pham",
+      "Huy-Hieu Pham"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Psychological defense mechanisms (PDMs) are unconscious cognitive processes that modulate how individuals perceive and respond to emotional distress. Automatically classifying PDMs from text is clinically valuable but severely hindered by data scarcity and class imbalance, challenges which generative augmentation alone cannot resolve without psychological grounding. In this work, we address these challenges in the PsyDefDetect shared task (BioNLP@ACL 2026) by proposing a context-aware synthetic augmentation framework combined with a hybrid classification model. Our hybrid model integrates contextual language representations with basic clinical features, along with 150 annotated defense items. Experiments demonstrate that definition quality in prompting directly governs generation fidelity and downstream performance. Our method surpasses DMRS Co-Pilot, reaching an accuracy of 58.26% (+40.25%) and a macro-F1 of 24.62% (+15.99%), thereby establishing a strong baseline for psychologically ",
+    "pdf_url": "https://arxiv.org/pdf/2605.14380v1",
+    "abs_url": "https://arxiv.org/abs/2605.14380",
+    "published": "2026-05-14T05:02:34Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14257",
+    "title": "What Makes Words Hard? Sakura at BEA 2026 Shared Task on Vocabulary Difficulty Prediction",
+    "authors": [
+      "Adam Nohejl",
+      "Xuanxin Wu",
+      "Yusuke Ide",
+      "Maria Angelica Riera Machin",
+      "Yi-Ning Chang"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "We describe two types of models for vocabulary difficulty prediction: a high-accuracy black-box model, which achieved the top shared task result in the open track, and an explainable model, which outperforms a fine-tuned encoder baseline. As the black-box model, we fine-tuned an LLM using a soft-target loss function for effective application to the rating task, achieving r > 0.91. The explainable model provides insights into what impacts the difficulty of each item while maintaining a strong correlation (r > 0.77). We further analyze the results, demonstrating that the difficulty of items in the British Council's Knowledge-based Vocabulary Lists (KVL) is often affected by spelling difficulty or the construction of the test items, in addition to the genuine production difficulty of the words. We make our code available online at https://github.com/adno/vocabulary-difficulty .",
+    "pdf_url": "https://arxiv.org/pdf/2605.14257v1",
+    "abs_url": "https://arxiv.org/abs/2605.14257",
+    "published": "2026-05-14T01:57:35Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.15079",
+    "title": "Croissant Baker: Metadata Generation for Discoverable, Governable, and Reusable ML Datasets",
+    "authors": [
+      "Rafi Al Attrach",
+      "Rajna Fani",
+      "Sebastian Lobentanzer",
+      "Joan Giner-Miguelez",
+      "Debanshu Das"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Croissant has emerged as the metadata standard for machine learning datasets, providing a structured, JSON-LD-based format that makes dataset discovery, automated ingestion, and reproducible analysis machine-checkable across ML platforms. Adoption has accelerated, and NeurIPS now requires Croissant metadata in every submission to its dataset tracks. Yet in practice Croissant generation usually starts with uploading data to a public platform, a path infeasible for governed and large local repositories that hold much of the high-value data ML increasingly relies on. We release Croissant Baker, a local-first, open-source command-line tool that generates validated Croissant metadata directly from a dataset directory through a modular handler registry. We evaluate Croissant Baker on over 140 datasets, scaling to MIMIC-IV at 886 million rows and 374 Parquet files. On held-out comparisons against producer-authored or standards-derived ground truth, Croissant Baker reaches 97-100% agreement ac",
+    "pdf_url": "https://arxiv.org/pdf/2605.15079v1",
+    "abs_url": "https://arxiv.org/abs/2605.15079",
+    "published": "2026-05-14T17:04:39Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14809",
+    "title": "GFMate: Empowering Graph Foundation Models with Test-time Prompt Tuning",
+    "authors": [
+      "Yan Jiang",
+      "Ruihong Qiu",
+      "Zi Huang"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Graph prompt tuning has shown great potential in graph learning by introducing trainable prompts to enhance the model performance in conventional single-domain scenarios. Recent research has extended graph prompts to improve Graph Foundation Models (GFMs) by few-shot tuning auxiliary prompts. Despite their progress, most existing methods embed source-domain information into prompts, which serve either as input to GFMs or encoded during model pre-training. Such prompt entanglement with specific source domains and GFM pre-training strategy restricts their generalisability to other domains and different GFMs. Furthermore, existing GFM prompts merely rely on few-shot tuning for adaptation, neglecting the rich information in unlabelled target domain test data. Motivated by these insights, this paper aims to empower GFMs with pre-training-agnostic test-time graph prompt tuning, named GFMate. GFMate introduces centroid and layer prompts applied after pre-training on target domains, avoiding e",
+    "pdf_url": "https://arxiv.org/pdf/2605.14809v1",
+    "abs_url": "https://arxiv.org/abs/2605.14809",
+    "published": "2026-05-14T13:22:33Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14643",
+    "title": "Unbiased and Second-Order-Free Training for High-Dimensional PDEs",
+    "authors": [
+      "Jaemin Seo",
+      "Surin Lee",
+      "Jae Yong Lee"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Deep learning methods based on backward stochastic differential equations (BSDEs) have emerged as competitive alternatives to physics-informed neural networks (PINNs) for solving high-dimensional partial differential equations (PDEs). By leveraging probabilistic representations, BSDE approaches can avoid the curse of dimensionality and often admit second-order-free training objectives that do not require explicit Hessian evaluations. It has recently been established that the commonly used Euler-Maruyama (EM) time discretization induces an intrinsic bias in BSDE training losses. While high-order schemes such as Heun can fully eliminate this bias, such schemes re-introduce second-order spatial derivatives and incur substantial computational overhead. In this work, we provide a principled analysis of EM-induced loss bias and propose an unbiased, second-order-free training framework that preserves the computational advantages of BSDE methods. Our code is available at https://github.com/seo",
+    "pdf_url": "https://arxiv.org/pdf/2605.14643v1",
+    "abs_url": "https://arxiv.org/abs/2605.14643",
+    "published": "2026-05-14T09:59:13Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.15177",
+    "title": "OpenDeepThink: Parallel Reasoning via Bradley--Terry Aggregation",
+    "authors": [
+      "Shang Zhou",
+      "Wenhao Chai",
+      "Kaiyuan Liu",
+      "Huanzhi Mao",
+      "Qiuyang Mang"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Test-time compute scaling is a primary axis for improving LLM reasoning. Existing methods primarily scale depth by extending a single reasoning trace. Scaling breadth by sampling multiple candidates in parallel is straightforward, but introduces a selection bottleneck: choosing the best candidate without a ground-truth verifier, since pointwise LLM judging is noisy and biased. To address this, we introduce OpenDeepThink, a population-based test-time compute framework that selects via pairwise Bradley-Terry comparison. Each generation, the LLM judges random pairs of candidates and aggregates votes via Bradley-Terry into a global ranking; top-ranked candidates are preserved and the top three quarters are mutated using the natural-language critiques produced during comparison; the bottom quarter is discarded. OpenDeepThink raises Gemini 3.1 Pro's effective Codeforces Elo by +405 points in eight sequential LLM-call rounds (~27 minutes wall-clock). The pipeline transfers across weaker and s",
+    "pdf_url": "https://arxiv.org/pdf/2605.15177v1",
+    "abs_url": "https://arxiv.org/abs/2605.15177",
+    "published": "2026-05-14T17:57:40Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.15040",
+    "title": "Orchard: An Open-Source Agentic Modeling Framework",
+    "authors": [
+      "Baolin Peng",
+      "Wenlin Yao",
+      "Qianhui Wu",
+      "Hao Cheng",
+      "Xiao Yu"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Agentic modeling aims to transform LLMs into autonomous agents capable of solving complex tasks through planning, reasoning, tool use, and multi-turn interaction with environments. Despite major investment, open research remains constrained by infrastructure and training gaps. Many high-performing systems rely on proprietary codebases, models, or services, while most open-source frameworks focus on orchestration and evaluation rather than scalable agent training. We present Orchard, an open-source framework for scalable agentic modeling. At its core is Orchard Env, a lightweight environment service providing reusable primitives for sandbox lifecycle management across task domains, agent harnesses, and pipeline stages. On top of Orchard Env, we build three agentic modeling recipes. Orchard-SWE targets coding agents. We distill 107K trajectories from MiniMax-M2.5 and Qwen3.5-397B, introduce credit-assignment SFT to learn from productive segments of unresolved trajectories, and apply Bala",
+    "pdf_url": "https://arxiv.org/pdf/2605.15040v1",
+    "abs_url": "https://arxiv.org/abs/2605.15040",
+    "published": "2026-05-14T16:35:12Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14381",
+    "title": "NodeSynth: Socially Aligned Synthetic Data for AI Evaluation",
+    "authors": [
+      "Qazi Mamunur Rashid",
+      "Xuan Yang",
+      "Zhengzhe Yang",
+      "Yanzhou Pan",
+      "Erin van Liemt"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Recent advancements in generative AI facilitate large-scale synthetic data generation for model evaluation. However, without targeted approaches, these datasets often lack the sociotechnical nuance required for sensitive domains. We introduce NodeSynth, an evidence-grounded methodology that generates socially relevant synthetic queries by leveraging a fine-tuned taxonomy generator (TaG) anchored in real-world evidence. Evaluated against four mainstream LLMs (e.g., Claude 4.5 Haiku), NodeSynth elicited failure rates up to five times higher than human-authored benchmarks. Ablation studies confirm that our granular taxonomic expansion significantly drives these failure rates, while independent validation reveals critical deficiencies in prominent guard models (e.g., Llama-Guard-3). We open-source our end-to-end research prototype and datasets to enable scalable, high-stakes model evaluation and targeted safety interventions (https://github.com/google-research/nodesynth).",
+    "pdf_url": "https://arxiv.org/pdf/2605.14381v1",
+    "abs_url": "https://arxiv.org/abs/2605.14381",
+    "published": "2026-05-14T05:06:50Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14379",
+    "title": "Data-Augmented Game Starts for Accelerating Self-Play Exploration in Imperfect Information Games",
+    "authors": [
+      "JB Lanier",
+      "Nathan Monette",
+      "Pierre Baldi",
+      "Roy Fox"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Finding approximate equilibria for large-scale imperfect-information competitive games such as StarCraft, Dota, and CounterStrike remains computationally infeasible due to sparse rewards and challenging exploration over long horizons. In this paper, we propose a multi-agent starting-state sampling strategy designed to substantially accelerate online exploration in regularized policy-gradient game methods for two-player zero-sum (2p0s) games. Motivated by an assumption that offline demonstrations from skilled humans can provide good coverage of high-level strategies relevant to equilibrium play, we propose the initialization of reinforcement learning data collection at intermediate states sampled from offline data to facilitate exploration of strategically relevant subgames. Referring to this method as Data-Augmented Game Starts (DAGS), we perform experiments using synthetic datasets and analytically tractable, long-horizon control variants of two-player Kuhn Poker, Goofspiel, and a cou",
+    "pdf_url": "https://arxiv.org/pdf/2605.14379v1",
+    "abs_url": "https://arxiv.org/abs/2605.14379",
+    "published": "2026-05-14T05:00:52Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14889",
+    "title": "SurgicalMamba: Dual-Path SSD with State Regramming for Online Surgical Phase Recognition",
+    "authors": [
+      "Sukju Oh",
+      "Sukkyu Sun"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Online surgical phase recognition (SPR) underpins context-aware operating-room systems and requires committing to a prediction at every frame from past context alone. Surgical video poses three demands that natural-video recognizers do not jointly address: procedures span tens of thousands of frames, time flows non-uniformly as long routine stretches are punctuated by brief phase-defining transitions, and the visual domain is narrow so backbone features are strongly correlated across channels. Existing recognizers either let per-frame cost grow with elapsed length, or hold cost bounded but advance state at a uniform rate with channel-independent dynamics, leaving the latter two demands unaddressed. We present SurgicalMamba, a causal SPR model built on Mamba2's structured state-space duality (SSD) that holds per-frame cost at O(d). It introduces three SSD-compatible components, each targeting one demand: a dual-path SSD block that separates long- and short-term regimes at the level of r",
+    "pdf_url": "https://arxiv.org/pdf/2605.14889v1",
+    "abs_url": "https://arxiv.org/abs/2605.14889",
+    "published": "2026-05-14T14:34:55Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.14876",
+    "title": "Unlocking Complex Visual Generation via Closed-Loop Verified Reasoning",
+    "authors": [
+      "Hanbo Cheng",
+      "Limin Lin",
+      "Ruo Zhang",
+      "Yicheng Pan",
+      "Jun Du"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Despite rapid advancements, current text-to-image (T2I) models predominantly rely on a single-step generation paradigm, which struggles with complex semantics and faces diminishing returns from parameter scaling.   While recent multi-step reasoning approaches show promise, they are hindered by ungrounded planning hallucinations lacking verification, monolithic post-hoc reflection, long-context optimization instabilities, and prohibitive inference latency. To overcome these bottlenecks, we propose the Closed-Loop Visual Reasoning (CLVR) framework, a comprehensive system that deeply couples visual-language logical planning with pixel-level diffusion generation. CLVR introduces an automated data engine with step-level visual verification to synthesize reliable reasoning trajectories, and proposes Proxy Prompt Reinforcement Learning (PPRL) to resolve long-context optimization instabilities by distilling interleaved multimodal histories into explicit reward signals for accurate causal attri",
+    "pdf_url": "https://arxiv.org/pdf/2605.14876v1",
+    "abs_url": "https://arxiv.org/abs/2605.14876",
+    "published": "2026-05-14T14:22:25Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.15141",
+    "title": "Causal Forcing++: Scalable Few-Step Autoregressive Diffusion Distillation for Real-Time Interactive Video Generation",
+    "authors": [
+      "Min Zhao",
+      "Hongzhou Zhu",
+      "Kaiwen Zheng",
+      "Zihan Zhou",
+      "Bokai Yan"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Real-time interactive video generation requires low-latency, streaming, and controllable rollout. Existing autoregressive (AR) diffusion distillation methods have achieved strong results in the chunk-wise 4-step regime by distilling bidirectional base models into few-step AR students, but they remain limited by coarse response granularity and non-negligible sampling latency. In this paper, we study a more aggressive setting: frame-wise autoregression with only 1--2 sampling steps. In this regime, we identify the initialization of a few-step AR student as the key bottleneck: existing strategies are either target-misaligned, incapable of few-step generation, or too costly to scale. We propose \\textbf{Causal Forcing++}, a principled and scalable pipeline that uses \\emph{causal consistency distillation} (causal CD) for few-step AR initialization. The core idea is that causal CD learns the same AR-conditional flow map as causal ODE distillation, but obtains supervision from a single online ",
+    "pdf_url": "https://arxiv.org/pdf/2605.15141v1",
+    "abs_url": "https://arxiv.org/abs/2605.15141",
+    "published": "2026-05-14T17:46:36Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]
