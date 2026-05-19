@@ -1,0 +1,355 @@
+[
+  {
+    "arxiv_id": "2605.18004",
+    "title": "RL4RLA: Teaching ML to Discover Randomized Linear Algebra Algorithms Through Curriculum Design and Graph-Based Search",
+    "authors": [
+      "Jinglong Xiong",
+      "Xiaotian Liu",
+      "Ruoxin Wang",
+      "Zihang Liu",
+      "Yefan Zhou"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Randomized linear algebra (RLA) algorithms are a modern class of numerical linear algebra techniques that play an essential role in scientific computing and machine learning, with broad and growing adoption. However, their discovery remains mostly a manual process that requires deep expert knowledge and inspiration. While Reinforcement Learning (RL) offers a pathway to automation, standard approaches struggle with sparse reward landscapes and vast search spaces inherent to high-performing RLA algorithms. In this paper, we present RL4RLA, a general RL framework that automates the discovery of interpretable, symbolic RLA algorithms. Unlike black-box approaches, our method builds explicit algorithms from basic linear algebra primitives, ensuring verifiable and implementable representations. To enable efficient discovery, we introduce: (1) a numerical curriculum that progressively increments problem difficulty to encode inductive bias specific to the RLA domain; (2) Monte Carlo Graph Searc",
+    "pdf_url": "https://arxiv.org/pdf/2605.18004v1",
+    "abs_url": "https://arxiv.org/abs/2605.18004",
+    "published": "2026-05-18T07:57:26Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18128",
+    "title": "POST: Prior-Observation Adversarial Learning of Spatio-Temporal Associations for Multivariate Time Series Anomaly Detection",
+    "authors": [
+      "Suofei Zhang",
+      "Yaxuan Zheng",
+      "Haifeng Hu"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Existing Multivariate Time Series Anomaly Detection (MTSAD) frameworks increasingly rely on integrating Graph Neural Networks (GNNs) with sequence models to capture complex spatio-temporal dependencies. However, less attention is paid to the spatial over-generalization problem, where unconstrained structural modeling indiscriminately reconstructs anomalies, inevitably degrading detection recall. To tackle this problem, we propose a novel framework that unifies spatio-temporal modeling through a joint prior-observation adversarial learning paradigm. In the spatial dimension, the model alternately learns adjacency matrices as structural prior and models the association discrepancy between prior and data-driven observation in a minimax manner during training. Such adversarial optimization not only improves the model sensitivity for time-wise detection, but also enables the model to localize anomalies to specific channels. To systematically evaluate this anomaly localization capability, we",
+    "pdf_url": "https://arxiv.org/pdf/2605.18128v1",
+    "abs_url": "https://arxiv.org/abs/2605.18128",
+    "published": "2026-05-18T09:34:14Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18025",
+    "title": "TeleCom-Bench: How Far Are Large Language Models from Industrial Telecommunication Applications?",
+    "authors": [
+      "Jieting Xiao",
+      "Yun Lin",
+      "Huizhen Qiu",
+      "Rui Ma",
+      "Chen Zhong"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "While Large Language Models have achieved remarkable integration in various vertical scenarios, their deployment in the telecommunications domain remains exploratory due to the lack of a standardized evaluation framework. Current telecom benchmarks primarily focus on static, foundational knowledge and isolated atomic skills, neglecting the equipment-specific documentation and end-to-end industrial workflows essential for real-world production systems. To bridge this gap, we present TeleCom-Bench, a comprehensive benchmark comprising 12 evaluation sets with 22,678 curated samples, which evaluates LLMs across a synergistic hierarchy: (1) Multi-dimensional Knowledge Comprehension, which integrates telecommunication fundamentals, 3GPP protocols, and 5G network architecture with proprietary product knowledge across wired, core, and wireless networks via knowledge graph-driven synthesis; and (2)End-to-End Knowledge Application, which formalizes six core tasks on authentic trajectories from l",
+    "pdf_url": "https://arxiv.org/pdf/2605.18025v1",
+    "abs_url": "https://arxiv.org/abs/2605.18025",
+    "published": "2026-05-18T08:14:49Z",
+    "score": 13.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17849",
+    "title": "Generating Pretraining Tokens from Organic Data for Data-Bound Scaling",
+    "authors": [
+      "Zichun Yu",
+      "Chenyan Xiong"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "LLM pretraining is shifting from a compute-bound to a data-bound regime, where available human (organic) text falls far short of scaling demands. However, reaching the data-bound regime does not mean the model has fully utilized its organic corpus. In this paper, we introduce SynPro, a synthetic data generation framework that helps LLMs more thoroughly learn from limited organic data. SynPro applies two operations, rephrasing and reformat, that present the same organic source in diverse forms to facilitate deeper learning without introducing external information. Both generators are optimized via reinforcement learning with quality, faithfulness, and data influence rewards, and are continuously updated as pretraining plateaus to target content the model has yet to absorb. We pretrain 400M and 1.1B models with 10% of their Chinchilla-optimal tokens (0.8B and 2.2B) from DCLM-Baseline, reflecting a realistic data-bound regime in frontier pretraining. Our results reveal that organic data i",
+    "pdf_url": "https://arxiv.org/pdf/2605.17849v1",
+    "abs_url": "https://arxiv.org/abs/2605.17849",
+    "published": "2026-05-18T04:44:40Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18111",
+    "title": "How Good LLMs Are at Answering Bangla Medical Visual Questions? Dataset and Benchmarking",
+    "authors": [
+      "Rafid Ahmed",
+      "Intesar Tahmid",
+      "Mir Sazzat Hossain",
+      "Tasnimul Hossain Tomal",
+      "Md Fahim"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Recent advancements in Large Language Models (LLMs) and Large Vision Language Models (LVLMs) have enabled general-purpose systems to demonstrate promising capabilities in complex reasoning tasks, including those in the medical domain. Medical Visual Question Answering (MedVQA) has particularly benefited from these developments. However, despite Bangla being one of the most widely spoken languages globally, there exists no established MedVQA benchmark for it. To address this gap, we introduce BanglaMedVQA, a dataset comprising clinically validated image-question-answer pairs, along with a comprehensive evaluation of current foundation models on this resource. Consistent with prior findings that report low performance of current models on English MedVQA benchmarks, our analysis reveals that Bangla performance is substantially lower, reflecting the challenges inherent to low-resource languages. Even top-performing models such as Gemini and GPT-4.1 mini fail to accurately answer specialize",
+    "pdf_url": "https://arxiv.org/pdf/2605.18111v1",
+    "abs_url": "https://arxiv.org/abs/2605.18111",
+    "published": "2026-05-18T09:20:32Z",
+    "score": 11.700000000000001,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18079",
+    "title": "The Expressive Power of Low Precision Softmax Transformers with (Summarized) Chain-of-Thought",
+    "authors": [
+      "Moritz Br\u00f6samle",
+      "Stephan Eckstein"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Existing expressivity results for transformers typically rely on hardmax attention, high precision, and other architectural modifications that disconnect them from the models used in practice. We bridge this gap by analyzing standard transformer decoders with softmax attention and rounding of activations and attention weights, while allowing depth and width to grow logarithmically with the context length. As an intermediate step, we construct hardmax transformers with ternary activations and well-separated attention scores that simulate Turing machines using Chain-of-Thought (CoT). This lets us convert the constructions to equivalent softmax transformers without the unrealistic parameter magnitudes or activation precision that prior approaches would require. Using the same technique, we analyze a recently proposed summarized CoT paradigm and show that it simulates Turing machines more efficiently, with model size scaling logarithmically in a space bound rather than a time bound. We emp",
+    "pdf_url": "https://arxiv.org/pdf/2605.18079v1",
+    "abs_url": "https://arxiv.org/abs/2605.18079",
+    "published": "2026-05-18T08:57:53Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18055",
+    "title": "FLAG: Foundation model representation with Latent diffusion Alignment via Graph for spatial gene expression prediction",
+    "authors": [
+      "Qi Si",
+      "Penglei Wang",
+      "Yushuai Wu",
+      "Yifeng Jiao",
+      "Xuyang Liu"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Predicting spatial gene expression from routine H\\&E enables large-scale molecular profiling, yet current models treat this as isolated pointwise tasks, thereby overlooking essential biological structures like gene coordination and spatial distribution. To preserve these relationships, we introduce \\textbf{FLAG}, a diffusion-based framework that redefines this task as structured distribution modeling. At the same time, we identify the critical \\textbf{Gene Dimension Curse}, where joint modeling gene expression and their spatial interactions fail in high-dimensional spaces, and FLAG solves this challenge by integrating a spatial graph encoder for topological consistency and utilizing Gene Foundation Model (GFM) alignment for gene-gene fidelity in the generation process. To rigorously assess model performance, we propose a set of novel structural evaluation metrics, including Gene Structural Correlation (\\textbf{GSC}) and Spatial Structural Correlation (\\textbf{SSC}). Our experiments dem",
+    "pdf_url": "https://arxiv.org/pdf/2605.18055v1",
+    "abs_url": "https://arxiv.org/abs/2605.18055",
+    "published": "2026-05-18T08:43:18Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17946",
+    "title": "SVFSearch: A Multimodal Knowledge-Intensive Benchmark for Short-Video Frame Search in the Gaming Vertical Domain",
+    "authors": [
+      "Lingtao Mao",
+      "Huangyu Dai",
+      "Xinyu Sun",
+      "Zihan Liang",
+      "Ben Chen"
+    ],
+    "primary_category": "cs.AI",
+    "abstract": "Multimodal large language models are increasingly used as agent backbones that understand multimodal inputs, plan retrieval actions, invoke external tools, and reason over retrieved information. Yet existing benchmarks rarely evaluate this ability in short-video applications, where a paused frame is often visually ambiguous and answering requires vertical, long-tail, and fast-evolving domain knowledge. We introduce SVFSearch, the first open benchmark for short-video frame search in the Chinese gaming domain. SVFSearch contains 5,000 four-choice test examples and 4,198 auxiliary training examples, each centered on a paused game scene from a real short-video clip. To support fair and reproducible evaluation, SVFSearch provides a frozen offline retrieval environment with a game-domain text corpus, a topic-linked image gallery, and text, image, and multimodal retrieval interfaces, avoiding reliance on uncontrolled web search APIs. We evaluate representative paradigms ranging from direct QA",
+    "pdf_url": "https://arxiv.org/pdf/2605.17946v1",
+    "abs_url": "https://arxiv.org/abs/2605.17946",
+    "published": "2026-05-18T07:03:48Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17831",
+    "title": "Agentic Cost-Aware Query Planning with Knowledge Distillation for Big Data Analytics",
+    "authors": [
+      "Mahdi Naser-Moghadasi"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Query optimization in big data analytics remains computationally expensive, particularly for resource-constrained environments where traditional optimizers fail to satisfy memory and latency constraints. We present an agentic query planning system that combines a rule-based teacher planner, UCB1 bandit exploration, cost-aware prediction, and knowledge distillation to a lightweight student planner. Our teacher planner generates SQL plans using six key optimization strategies, while UCB1 bandit search efficiently explores the plan space under explicit resource constraints. A Random Forest cost model predicts query latency from plan features, enabling cost-aware decisions. A distilled student planner (Logistic Regression or Gradient Boosting) learns to mimic teacher-bandit decisions for fast inference. Evaluation on NYC Taxi and IMDB datasets demonstrates 23% latency reduction compared to default planners while maintaining 94% constraint satisfaction. The student planner achieves 89% accu",
+    "pdf_url": "https://arxiv.org/pdf/2605.17831v1",
+    "abs_url": "https://arxiv.org/abs/2605.17831",
+    "published": "2026-05-18T04:07:00Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17811",
+    "title": "One Model, Two Roles: Emergent Specialization in a Shared Recurrent Transformer",
+    "authors": [
+      "Jucheng Shen",
+      "Barbara Su",
+      "Anastasios Kyrillidis"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Can a shared-weight recurrent Transformer develop distinct internal roles without being partitioned into separate modules? We study this in Asymmetric Input Recurrence (AIR), a minimal two-state reasoning architecture in which the same Transformer model is reused for both updates (per literature, L and H) and the only built-in difference in the update rule is that the encoded input is injected during L-updates but not H-updates. Across Sudoku-Extreme and Maze, decoded rollouts reveal a consistent split: $\\zH$ behaves like a fully committed proposal state, whereas $\\zL$ retains local uncertainty and shifting intermediate structure. Freeze experiments show that this split is, in practice, related to the model's state dynamics: in Sudoku, freezing $\\zH$ reduces $\\zL$'s content changes whereas freezing $\\zL$ increases $\\zH$'s, while in Maze, freezing either state increases content changes in the other state. Ablations show that to induce specialization, the shared model needs to be able to",
+    "pdf_url": "https://arxiv.org/pdf/2605.17811v1",
+    "abs_url": "https://arxiv.org/abs/2605.17811",
+    "published": "2026-05-18T03:36:58Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17804",
+    "title": "GenTS: A Comprehensive Benchmark Library for Generative Time Series Models",
+    "authors": [
+      "Chenxi Wang",
+      "Xiaorong Wang",
+      "Peiyang Li",
+      "Yi Wang"
+    ],
+    "primary_category": "cs.LG",
+    "abstract": "Generative models have demonstrated remarkable potential in time series analysis tasks, like synthesis, forecasting, imputation, etc. However, offering limited coverage for generative models, existing time series libraries are mainly engineered for discriminative models, with standardized workflows for specific tasks, such as optimizing Mean Squared Errors for time series forecasting. This rigid structure is fundamentally incompatible with the distinct and often complex paradigms of generative models (e.g., adversarial training, diffusion processes), which learn the underlying data distribution rather than a direct input-output mapping. To this end, we proposed GenTS, a comprehensive and extensible benchmark library designed for systematic assessment on generative time series models. GenTS features a unified data preprocessing pipeline, a collection of versatile models, and panoramic evaluation metrics. Its modular design also enables the researchers to flexibly customize beyond our bu",
+    "pdf_url": "https://arxiv.org/pdf/2605.17804v1",
+    "abs_url": "https://arxiv.org/abs/2605.17804",
+    "published": "2026-05-18T03:27:54Z",
+    "score": 10.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17954",
+    "title": "A More Word-like Image Tokenization for MLLMs",
+    "authors": [
+      "Hyun Lee",
+      "Hyemin Jeong",
+      "Yejin Kim",
+      "Hyungwook Choi",
+      "Hyunsoo Cho"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Modern multimodal large language models (MLLMs) typically keep the language model fixed and train a visual projector that maps the pixels into a sequence of tokens in its embedding space, so that images can be presented in essentially the same form as text. However, the language model has been optimized to operate on discrete, semantically meaningful tokens, while prevailing visual projectors transform an image into a long stream of continuous and highly correlated embeddings. This causes the visual tokens to behave differently from the word-like units that LLMs are originally trained to understand. We propose a novel Disentangled Visual Tokenization (DiVT) that clusters patch embeddings into coherent semantic units, so each token corresponds to a distinct visual concept instead of a rigid grid cell. DiVT further adapts its token budget to image complexity, providing an explicit accuracy-compute trade-off modifying neither the vision encoder nor the language model. Across diverse multi",
+    "pdf_url": "https://arxiv.org/pdf/2605.17954v1",
+    "abs_url": "https://arxiv.org/abs/2605.17954",
+    "published": "2026-05-18T07:09:46Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18101",
+    "title": "SENSE: Satellite-based ENergy Synthesis for Sustainable Environment",
+    "authors": [
+      "Kailai Sun",
+      "Mingyi He",
+      "Heye Huang",
+      "Can Rong",
+      "Alok Prakash"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Urban Building Energy Modeling plays a critical role in achieving the United Nations' Sustainable Development Goals 7 and 11. Although existing studies based on satellite imagery and deep learning have achieved remarkable progress, many challenges exist: most existing studies are inherently predictive, failing to reflect the generative nature of urban planning; although generative AI and diffusion models have seen explosive growth in satellite imagery, they lack the urban functional generation (e.g., energy layer); third, aligned high-quality high-resolution building energy data with satellite imagery is limited and scarce. Here we propose SENSE (Satellite-based ENergy Synthesis for Sustainable Environment), a unified generative UBEM framework that jointly synthesizes realistic urban satellite imagery and aligned high-quality building energy consumption and height maps. By conditioning on road networks and urban density metrics, SENSE, based on a controllable diffusion model, leverages",
+    "pdf_url": "https://arxiv.org/pdf/2605.18101v1",
+    "abs_url": "https://arxiv.org/abs/2605.18101",
+    "published": "2026-05-18T09:13:01Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17907",
+    "title": "One Model to Translate Them All: Universal Any-to-Any Translation for Heterogeneous Collaborative Perception",
+    "authors": [
+      "Yang Li",
+      "Weize Li",
+      "Quan Yuan",
+      "Congzhang Shao",
+      "Guiyang Luo"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "By sharing intermediate features, collaborative perception extends each agent's sensing beyond standalone limits, but real-world feature modality heterogeneity remains a key barrier to effective fusion. Most existing methods, including direct adaption and protocol-based transformation, typically rely on training adapters for newly emerging feature modalities and often require additional retraining or fine-tuning. Such repeated training is costly and is often infeasible across manufacturers due to model and data privacy constraints, limiting real-world scalability. To address this issue, we propose UniTrans, a universal any-to-any feature modality translation model that instantiates translators on the fly for arbitrary modalities.   UniTrans pretrains a bank of translator expert parameters and learns their combination coefficients as a function of source-to-target modality mapping. The mapping is measured in a modality-intrinsic latent space, where an intrinsic encoder extracts modality",
+    "pdf_url": "https://arxiv.org/pdf/2605.17907v1",
+    "abs_url": "https://arxiv.org/abs/2605.17907",
+    "published": "2026-05-18T06:14:30Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18115",
+    "title": "WinTok: A Win-Win Hybrid Tokenizer via Decomposing Visual Understanding and Generation with Transferable Tokens",
+    "authors": [
+      "Yiwei Guo",
+      "Shaobin Zhuang",
+      "Zhipeng Huang",
+      "Canmiao Fu",
+      "Chen Li"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Building a unified visual tokenizer is essential for bridging the gap between visual understanding and generation. Yet existing approaches struggle with the inherent conflict between these tasks, as a single token space is forced to support both high-level semantic abstraction and low-level pixel reconstruction. We propose WinTok, a concise hybrid tokenizer that achieves a win-win performance by explicitly decoupling the two objectives. WinTok supplements pixel tokens with a set of learnable semantic tokens, effectively mitigating cross-task interference without incurring the computational overhead of dual tokenizers. To further enhance understanding capability, we introduce an asymmetric token distillation mechanism: the semantic tokens are guided by pretrained semantic embeddings from any visual foundation model, enabling them to inherit strong discriminative power while maintaining flexibility. Across 10 challenging benchmarks, WinTok delivers consistent improvements in reconstructi",
+    "pdf_url": "https://arxiv.org/pdf/2605.18115v1",
+    "abs_url": "https://arxiv.org/abs/2605.18115",
+    "published": "2026-05-18T09:24:39Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18038",
+    "title": "Patch Ensembles for Robust Salmon Re-Identification with Weak Trajectory Labels",
+    "authors": [
+      "Espen Uri H\u00f8gstedt",
+      "Christian Schellewald",
+      "Annette Stahl",
+      "Rudolf Mester"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Salmon re-identification in commercial net-pens is challenging due to large populations, which impose strict accuracy requirements and make large-scale labeled data acquisition infeasible. Trajectory IDs can be used as proxy labels, but this introduces trajectory-ID bias. To address these challenges, we propose a patch-based re-identification framework that fuses patch-level predictions into a salmon identity decision. A key component is the prediction of the salmon's lateral line, enabling extraction of texture-anchored patches and patch slices. To enable realistic evaluation, we introduce an experimental setup using multiple cameras placed 6 m apart, allowing the same fish to be recorded in different trajectories. This enables the construction of a cross-camera test set through manual match confirmation. Our ensemble approach outperforms the full-image baseline in same-trajectory validation (0.932 to 0.965 mAP) and cross-camera testing (0.609 to 0.860 mAP). The substantial improvemen",
+    "pdf_url": "https://arxiv.org/pdf/2605.18038v1",
+    "abs_url": "https://arxiv.org/abs/2605.18038",
+    "published": "2026-05-18T08:30:27Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.18029",
+    "title": "What Matters for Grocery Product Retrieval with Open Source Vision Language Models",
+    "authors": [
+      "Emmanuel G. Maminta",
+      "Rowel O. Atienza"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "Multimodal product retrieval (MPR) underpins checkout-free retail and automated inventory systems, yet it demands fine-grained SKU discrimination that standard vision-language benchmarks fail to capture. We present the first systematic zero-shot evaluation of 190 open-source VLMs on the MPR task of the GroceryVision Challenge, isolating pre-training data, architecture, and input resolution. Our analysis yields three actionable findings. \\textbf{(1) Data quality trumps scale.} Switching from raw web-scrapes to filtered datasets delivers up to 16.6\\% accuracy gains, exceeding the benefit of doubling model parameters. \\textbf{(2) Efficient models can win.} MobileCLIP-B (150M parameters) outperforms 351M counterparts trained on noisy data. We introduce \\textit{semantic power density} ($\u03c6$), an efficiency metric that penalizes sub-threshold accuracy. \\textbf{(3) A precision gap persists.} State-of-the-art models achieve 94.5\\% Recall@5 but suffer a 17.5\\% drop at Recall@1, revealing that co",
+    "pdf_url": "https://arxiv.org/pdf/2605.18029v1",
+    "abs_url": "https://arxiv.org/abs/2605.18029",
+    "published": "2026-05-18T08:20:13Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17869",
+    "title": "PySIFT: GPU-Resident Deterministic SIFT for Deep Learning Vision Pipelines",
+    "authors": [
+      "Sivakumar K. S.",
+      "Mohammad Daniyalur Rahman",
+      "Gopi Raju Matta"
+    ],
+    "primary_category": "cs.CV",
+    "abstract": "A widespread assumption in local feature research holds that classical handcrafted descriptors are accuracy-limited relics best replaced by learned alternatives. We show this is wrong. Through an 8-configuration ablation spanning four benchmarks (HPatches, ROxford5K, IMC Phototourism, MegaDepth), we demonstrate that classical SIFT with DSP multi-scale pooling outperforms neural descriptor and orientation replacements (HardNet, OriNet) on every accuracy metric--while running 2--18$\\times$ faster--and that learned matchers (LightGlue) complement rather than supersede classical features. The conclusion reframes a decade of work: not \"replace SIFT\" but \"compose with SIFT,\" classical extraction paired with learned matching only where geometric context demands it. This finding was invisible because no prior GPU SIFT kept the complete pipeline in VRAM or offered modularity for controlled classical-vs-learned ablations. We present PySIFT, the first fully GPU-resident SIFT, implemented in CuPy/",
+    "pdf_url": "https://arxiv.org/pdf/2605.17869v1",
+    "abs_url": "https://arxiv.org/abs/2605.17869",
+    "published": "2026-05-18T05:24:55Z",
+    "score": 9.1,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17789",
+    "title": "SocialMemBench: Are AI Memory Systems Ready for Social Group Settings?",
+    "authors": [
+      "Olukunle Owolabi"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Memory systems for AI assistants were built for single-user dialogue and fail characteristically when applied to multi-party social group settings. This gap matters for the social assistants being built today: group-acting agents embedded in chat platforms, and proactive personal-assistant agents whose holistic model of a user must include their social context. Existing memory benchmarks evaluate dyadic or workplace dialogue; none targets multi-party social groups, where memory must anchor facts in shared history rather than professional roles, separate group norms from individual exceptions, and correctly attribute even after member departure. We introduce SocialMemBench, a benchmark of human-verified synthetic social group networks across five archetypes (close friends, family, recreational, interest community, acquaintance network) and three group-size tiers (4-30 members), with 430 personas and 7,355 conversation turns, yielding 1,031 QA pairs across nine question categories. Each ",
+    "pdf_url": "https://arxiv.org/pdf/2605.17789v1",
+    "abs_url": "https://arxiv.org/abs/2605.17789",
+    "published": "2026-05-18T03:11:48Z",
+    "score": 9.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  },
+  {
+    "arxiv_id": "2605.17911",
+    "title": "A Pilot Benchmark for NL-to-FOL Translation in Planetary Exploration",
+    "authors": [
+      "Hayden Moore",
+      "Suman Saha",
+      "Mahfuza Farooque"
+    ],
+    "primary_category": "cs.CL",
+    "abstract": "Future planetary exploration envisions autonomous robotic agents operating under severe communication constraints, without global positioning, and with minimal human intervention. In such environments, agents must not only perceive and act, but also reason over mission objectives, operational constraints, and evolving environmental conditions. While prior work has largely focused on perception and control, the translation of high-level mission knowledge into structured, machine-interpretable representations remains underexplored.   We introduce a pilot benchmark for translating natural language (NL) into First-Order Logic (FOL) within the domain of planetary exploration. The dataset is constructed from real mission documentation sourced from NASA's Planetary Data System (PDS), spanning missions from 2003 to 2013. These documents describe mission phases such as launch, boost, coast, cruise, and orbital operations in rich natural language. We manually annotate these documents with corres",
+    "pdf_url": "https://arxiv.org/pdf/2605.17911v1",
+    "abs_url": "https://arxiv.org/abs/2605.17911",
+    "published": "2026-05-18T06:16:42Z",
+    "score": 9.0,
+    "citation_count": null,
+    "influential_citation_count": null
+  }
+]

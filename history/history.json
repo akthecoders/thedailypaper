@@ -48,5 +48,10 @@
     "date": "2026-05-15T02:31:39.808007+00:00",
     "arxiv_id": "2605.14289",
     "title": "MetaMoE: Diversity-Aware Proxy Selection for Privacy-Preserving Mixture-of-Experts Unification"
+  },
+  {
+    "date": "2026-05-19T02:31:31.630318+00:00",
+    "arxiv_id": "2605.14779",
+    "title": "Peng's Q($\u03bb$) for Conservative Value Estimation in Offline Reinforcement Learning"
   }
 ]

@@ -43,5 +43,10 @@
     "date": "2026-05-12T02:30:34.952339+00:00",
     "arxiv_id": "2604.17897",
     "title": "LoReC: Rethinking Large Language Models for Graph Data Analysis"
+  },
+  {
+    "date": "2026-05-15T02:31:39.808007+00:00",
+    "arxiv_id": "2605.14289",
+    "title": "MetaMoE: Diversity-Aware Proxy Selection for Privacy-Preserving Mixture-of-Experts Unification"
   }
 ]
